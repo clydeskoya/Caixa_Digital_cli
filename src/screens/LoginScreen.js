@@ -215,5 +215,7 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     fontSize: 14,
+
+    //'olaaaaa'
   },
 });
