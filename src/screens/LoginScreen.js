@@ -78,7 +78,7 @@ const LoginScreen = ({navigation}) => {
       });
   };
 
-  return (
+  return (  
     <View style={styles.mainBody}>
       <Loader loading={loading} />
       <ScrollView
@@ -94,10 +94,10 @@ const LoginScreen = ({navigation}) => {
               <Image
                 source={require('../img/cd.png')}
                 style={{
-                  width: '50%',
-                  height: 100,
+                  width: '90%',
+                  height: 500,
                   resizeMode: 'contain',
-                  margin: 30,
+                  margin: 10,
                 }}
               />
             </View>
@@ -107,8 +107,8 @@ const LoginScreen = ({navigation}) => {
                 onChangeText={(UserEmail) =>
                   setUserEmail(UserEmail)
                 }
-                placeholder="Enter Email" //dummy@abc.com
-                placeholderTextColor="#8b9cb5"
+                placeholder="Email" //dummy@abc.com
+                placeholderTextColor="#000000"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 returnKeyType="next"
@@ -126,8 +126,8 @@ const LoginScreen = ({navigation}) => {
                 onChangeText={(UserPassword) =>
                   setUserPassword(UserPassword)
                 }
-                placeholder="Enter Password" //12345
-                placeholderTextColor="#8b9cb5"
+                placeholder="Password" //12345
+                placeholderTextColor="#000000"
                 keyboardType="default"
                 ref={passwordInputRef}
                 onSubmitEditing={Keyboard.dismiss}
@@ -151,7 +151,7 @@ const LoginScreen = ({navigation}) => {
             <Text
               style={styles.registerTextStyle}
               onPress={() => navigation.navigate('RegisterScreen')}>
-              New Here ? Register
+              Não tem uma conta? REGISTE-SE!
             </Text>
           </KeyboardAvoidingView>
         </View>
@@ -165,28 +165,28 @@ const styles = StyleSheet.create({
   mainBody: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#FFFFFF',
     alignContent: 'center',
   },
   SectionStyle: {
     flexDirection: 'row',
     height: 40,
-    marginTop: 20,
+    marginTop: 5,
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: '#1C4670',
     borderWidth: 0,
     color: '#FFFFFF',
-    borderColor: '#7DE24E',
+    borderColor: '#1C4670',
     height: 40,
     alignItems: 'center',
     borderRadius: 30,
     marginLeft: 35,
     marginRight: 35,
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 25,
   },
   buttonTextStyle: {
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     borderColor: '#dadae8',
   },
   registerTextStyle: {
-    color: '#FFFFFF',
+    color: '#000000',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 14,
