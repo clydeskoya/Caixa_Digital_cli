@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, ScrollView, Text, View, Image } from "react-native";
 
 export default function Home() {
   return (
@@ -13,7 +13,15 @@ export default function Home() {
           top: 35,
         }}
       />
-      <Text>Mequie tas fixe</Text>
+      <ScrollView style={styles.scrollView}>
+        <Text>Correspondência Enviada</Text>
+      </ScrollView>
+      <ScrollView style={styles.scrollView}>
+        <Text>Correspondência Recebida</Text>
+      </ScrollView>
+      <ScrollView style={styles.scrollView}>
+        <Text>Reservas</Text>
+      </ScrollView>
     </View>
   );
 }
@@ -24,5 +32,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  scrollView: {
+    backgroundColor: "#278AB0",
+    width: "340",
+    height: "125",
   },
 });
