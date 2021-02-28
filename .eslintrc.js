@@ -18,9 +18,6 @@ module.exports = {
     'react',
   ],
   rules: {
+    'import/prefer-default-export': 0,
   },
 };
-
-// https://edusutil.medium.com/eslint-with-prettier-settings-for-react-native-ce13d2aaf500
-// https://www.imaginarycloud.com/blog/how-to-configure-eslint-prettier-in-react/
-// https://www.andrewmin.info/blog/react-setup/
