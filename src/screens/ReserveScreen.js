@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import Calendar from "./reservarLocker/CalendarPage/index";
 
 export default function Reserve() {
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require("../img/txtlogo.png")}
         style={{
           position: "absolute",
@@ -13,7 +14,8 @@ export default function Reserve() {
           top: 35,
         }}
       />
-      <Text>Reserve Screen</Text>
+      <Text>Reserve Screen</Text> */}
+      <Calendar />
     </View>
   );
 }
