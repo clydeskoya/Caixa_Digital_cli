@@ -13,6 +13,7 @@ export default function Home() {
           top: 35,
         }}
       />
+      <TouchableOpacity onPress={() => Actions.dogScreen()}></TouchableOpacity>
       <Card style={styles.cardStilo}>
         <Card.Content>
           <Title>Correspondência Enviada</Title>
@@ -31,7 +32,9 @@ export default function Home() {
         <Card.Content>
           <Title>Reservas</Title>
 
-          <Paragraph>SMAS mm ali a sugar</Paragraph>
+          <Paragraph>
+            27/03/2020-Locker domiciliário reservado para envio
+          </Paragraph>
         </Card.Content>
       </Card>
     </View>

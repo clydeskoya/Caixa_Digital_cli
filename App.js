@@ -1,8 +1,8 @@
 import React from "react";
-import { AppNavigator } from "./AppNavigator";
+import { TabNavigator } from "./TabNavigator";
 
 export default function App() {
-  return <AppNavigator />;
+  return <TabNavigator />;
 }
 
 // // Example of Splash, Login and Sign Up in React Native
