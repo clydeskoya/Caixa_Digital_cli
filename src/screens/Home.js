@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, ScrollView, Text, View, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Image } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
 export default function Home() {
   return (
