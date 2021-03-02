@@ -68,9 +68,10 @@ const LoginForm = (props) => {
       >Login</Button>
 
       <View>
+        <Text>Não tem uma conta?</Text>
         <Text
           onPress={() => props.navigation.navigate('RegisterForm1')}>
-          Não tem uma conta? Registe-se
+          Registe-se
         </Text>
       </View>
 
