@@ -42,10 +42,10 @@ const RegisterForm4 = (props) => {
     }
   }
 
-  const sendToServer = async (body) => {
+  const sendToServer = async (data) => {
     fetch("https://caixa-digital-cms.herokuapp.com/auth/local/register", {
       method: "POST",
-      body,
+      body: data,
     })
     /* .then((response) => response.json())
     .then((responseJson) => {

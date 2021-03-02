@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
-import { Button, Text } from "react-native";
+import { Button, Text, TextInput, View } from "react-native";
 
 const LoginForm = (props) => {
 
-  /*  const [email,setEmail] = useState("");
-   const [pass, setPass] = useState("");
-  */
-  const { register, handleSubmit, errors } = useForm();
+  const [email,setEmail] = useState("");
+  const [pass, setPass] = useState("");
 
-  const onLogin = async (body) => {
-    console.log(body)
+  const login = async () => {
+
+    var dataToSend = {
+      identifier: email,
+      password: pass,
+    };
+
+    console.log(dataToSend)
+    const data = JSON.stringify(dataToSend)
+    console.log(data);
 
     fetch('https://caixa-digital-cms.herokuapp.com/auth/local', {
       method: 'POST',
-      body
+      body: data
     })
       .then((response) => response.json())
       .then((responseJson) => {
@@ -24,6 +30,7 @@ const LoginForm = (props) => {
           console.log(responseJson.data.email);
           props.navigation.navigate("Home")
         } else {
+          alert ('Email ou password inválidos')
           console.log('Email ou password inválidos');
         }
       })
@@ -33,43 +40,41 @@ const LoginForm = (props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onLogin)}>
-      <div>
-        <label>E-mail</label>
-        <input
+    <>
+      <View>
+        <Text>E-mail</Text>
+        <TextInput
           type="email"
           id="inputEmail"
           name="identifier"
-          // onChange ={e => (setEmail = e.target.value)}
-          ref={register({ required: true })}
+          placeholder="Email"
+          onChangeText ={(Email) => setEmail(Email)}
         />
-      </div>
+      </View>
 
-      <div>
-        <label>Password</label>
-        <input
+      <View>
+        <Text>Password</Text>
+        <TextInput
           type="password"
           id="inputPassword"
           name="password"
-          // onChange ={e => (setPass = e.target.value)}
-          ref={register({ required: true })}
+          placeholder="Password"
+          onChangeText={(Pass) => setPass(Pass)}
         />
-      </div>
+      </View>
 
-      <input type="submit" value="Login" />
+      <Button 
+        onPress={login}
+      >Login</Button>
 
-      <div>
-
+      <View>
         <Text
           onPress={() => props.navigation.navigate('RegisterForm1')}>
           Não tem uma conta? Registe-se
         </Text>
+      </View>
 
-
-      </div>
-
-
-    </form>
+    </>
   );
 };
 
