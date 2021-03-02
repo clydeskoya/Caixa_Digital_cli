@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
-import { Button, Text } from "react-native";
+import {StyleSheet, Button, Text } from "react-native";
 
 const LoginForm = (props) => {
 
@@ -74,3 +74,19 @@ const LoginForm = (props) => {
 };
 
 export default LoginForm;
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#0096c7",
+    padding: 8,
+    margin: 10,
+    width: 200,
+    borderRadius: 23,
+  },
+});
