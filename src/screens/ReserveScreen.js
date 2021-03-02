@@ -5,7 +5,7 @@ import { Calendar } from "./reservarLocker/CalendarPage/index";
 export default function Reserve() {
   return (
     <View style={styles.container}>
-      {/* <Header /> */}
+      <Header />
       <Calendar />
     </View>
   );
