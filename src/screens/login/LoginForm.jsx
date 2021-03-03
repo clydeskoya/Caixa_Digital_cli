@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+
 import {StyleSheet, TouchableOpacity, Text, View, TextInput, Image } from "react-native";
 import Icon from 'react-native-ionicons';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,7 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
 
   const login = async () => {
     try {
@@ -18,11 +18,11 @@ const LoginForm = (props) => {
           password: pass,
         }
       );
-     
+
       if (data.jwt) {
         props.navigation.navigate("Home");
       }
-      } catch (error) {
+    } catch (error) {
       if (error.response) {
         // Request made and server responded
         console.log("data", error.response.data);
@@ -36,8 +36,7 @@ const LoginForm = (props) => {
     }
   };
 
-
- /*  const login = async () => {
+  /*  const login = async () => {
     var dataToSend = {
       identifier: email,
       password: pass,
@@ -69,74 +68,76 @@ const LoginForm = (props) => {
   return (
     <>
       <View style={styles.container}>
-      <View style={styles.oval} />
-      <Image
-        source={require("../../img/logowtxt.png")}
-        style={{
-          position: "absolute",
-          width: 390,
-          height: 295,
-          top: 80,
-        }}/>
-      <View></View>  
-      <View style={styles.inputRow}>
-     <Ionicons name="person-outline"  color="#1C4670" size={35}/>
-        <TextInput
-          style={styles.input}
-          type="email"
-          id="inputEmail"
-          name="identifier"
-          placeholder="Email"
-          onChangeText={(Email) => setEmail(Email)}
+        <View style={styles.oval} />
+        <Image
+          source={require("../../img/logowtxt.png")}
+          style={{
+            position: "absolute",
+            width: 390,
+            height: 295,
+            top: 80,
+          }}
         />
-      </View>
-
-     <View style={styles.inputRow}>
-      <Ionicons name="key-outline"
-        color="#1C4670"
-        size={35}/>
-        <TextInput
-          style={styles.input}
-          type="password"
-          id="inputPassword"
-          name="password"
-          placeholder="Password"
-          autoCapitalize="none"
-          secureTextEntry={true}
-          onChangeText={(Pass) => setPass(Pass)}
-        />
-     </View>
-
-     <View style={{
-          marginHorizontal:55,
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop:30,
-          backgroundColor:"#1C4670",
-          paddingVertical:10,
-          borderRadius:45
-        }}> 
-      <TouchableOpacity 
-        onPress={login}>
-        
-        <Text style={{color:'white'}} >         Login         </Text>
-        </TouchableOpacity>
+        <View></View>
+        <View style={styles.inputRow}>
+          <Ionicons name="person-outline" color="#1C4670" size={35} />
+          <TextInput
+            style={styles.input}
+            type="email"
+            id="inputEmail"
+            name="identifier"
+            placeholder="Email"
+            onChangeText={(Email) => setEmail(Email)}
+          />
         </View>
-        <Text style={{
-           padding: 7,
-           marginTop: 25
-        }}>Não tem uma conta?</Text>
-        <Text style={{
-           textDecorationLine: 'underline'
-        }}
-          onPress={() => props.navigation.navigate('RegisterForm1')}>
+
+        <View style={styles.inputRow}>
+          <Ionicons name="key-outline" color="#1C4670" size={35} />
+          <TextInput
+            style={styles.input}
+            type="password"
+            id="inputPassword"
+            name="password"
+            placeholder="Password"
+            autoCapitalize="none"
+            secureTextEntry={true}
+            onChangeText={(Pass) => setPass(Pass)}
+          />
+        </View>
+
+        <View
+          style={{
+            marginHorizontal: 55,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 30,
+            backgroundColor: "#1C4670",
+            paddingVertical: 10,
+            borderRadius: 45,
+          }}
+        >
+          <TouchableOpacity onPress={login}>
+            <Text style={{ color: "white" }}> Login </Text>
+          </TouchableOpacity>
+        </View>
+        <Text
+          style={{
+            padding: 7,
+            marginTop: 25,
+          }}
+        >
+          Não tem uma conta?
+        </Text>
+        <Text
+          style={{
+            textDecorationLine: "underline",
+          }}
+          onPress={() => props.navigation.navigate("RegisterForm1")}
+        >
           Registe-se
         </Text>
-        
       </View>
-      
     </>
-    
   );
 };
 
@@ -154,20 +155,20 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 10,
     width: 200,
-    
+
     // borderRadius: 23,
-    borderBottomColor: '#1C4670',
+    borderBottomColor: "#1C4670",
     borderBottomWidth: 1,
   },
-  inputRow:{
-    flexDirection:"row",
-    marginHorizontal:55, 
+  inputRow: {
+    flexDirection: "row",
+    marginHorizontal: 55,
   },
   oval: {
     width: 500,
     height: 500,
     // left: -120,
-    top:-189,
+    top: -189,
     borderRadius: 700,
     backgroundColor: "#1C4670",
     transform: [{ scaleX: 1 }],

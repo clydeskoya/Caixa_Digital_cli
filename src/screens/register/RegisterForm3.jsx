@@ -1,11 +1,10 @@
-import React, { useState,  useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Text, TextInput, View } from "react-native";
 import { CounterContext2 } from "../../common/context/form.register2";
 
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
 
 const RegisterForm3 = (props) => {
-
   const [bi, setBI] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [nif, setNIF] = useState("");
@@ -21,14 +20,9 @@ const RegisterForm3 = (props) => {
     console.log(dataToSend);
 
     counterContext2.formDispatch(dataToSend);
-
-   /*  counterContext2.formDispatch({key:"bi", payload:bi});
-    counterContext2.formDispatch({key:"phoneNumber", payload:phoneNumber});
-    counterContext2.formDispatch({key:"nif", payload:nif}); */
-
     var hey = counterContext2.formData;
-    console.log("heyy");
-    console.log(hey)
+
+    console.log(hey);
     props.navigation.navigate("RegisterForm4");
   };
 
@@ -43,9 +37,7 @@ const RegisterForm3 = (props) => {
           name="BI"
           onChangeText={(BI) => setBI(BI)}
         />
-      </View>
 
-      <View>
         <Text>Telemóvel </Text>
         <TextInput
           type="text"
@@ -54,9 +46,7 @@ const RegisterForm3 = (props) => {
           keyboardType="numeric"
           onChangeText={(Phone) => setPhoneNumber(Phone)}
         />
-      </View>
 
-      <View>
         <Text>NIF </Text>
         <TextInput
           type="text"
@@ -65,10 +55,11 @@ const RegisterForm3 = (props) => {
           keyboardType="numeric"
           onChangeText={(NIF) => setNIF(NIF)}
         />
-      </View>
 
-      <View>
-        <Button onPress={saveNnavigate}>Seguinte</Button>
+        <TouchableOpacity onPress={saveNnavigate}>
+          <Text style={{ color: "white" }}> Seguinte </Text>
+        </TouchableOpacity>
+        
       </View>
     </>
   );
