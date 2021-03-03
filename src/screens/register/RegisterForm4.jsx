@@ -217,7 +217,7 @@ const RegisterForm4 = (props) => {
         </TouchableOpacity>
 
         <View>
-          <Modal visible={modalVisible}>
+          {/* <Modal visible={modalVisible}>
             <Text>{textModal}</Text>
             <Button
               onPress={
@@ -227,7 +227,7 @@ const RegisterForm4 = (props) => {
             >
               OK
             </Button>
-          </Modal>
+          </Modal> */}
         </View>
       </View>
     </>
