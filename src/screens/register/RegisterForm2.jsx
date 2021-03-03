@@ -14,8 +14,6 @@ const RegisterForm2 = (props) => {
   const [district, setDistrict] = useState("Lisboa");
   const [country, setCountry] = useState("Portugal");
 
-  const [codigo, setCodigo] = useState("");
-
   const counterContext2 = useContext(CounterContext2);
 
   const getZipCode = () => {
@@ -28,7 +26,8 @@ const RegisterForm2 = (props) => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setCodigo(result.rows);
+        //setCodigo(result.rows);
+        setLocality(result);
       });
   };
 
@@ -52,8 +51,8 @@ const RegisterForm2 = (props) => {
     if (!district) {
       alert("Indique o distrito");
       return;
-    } 
- 
+    }
+
     var dataToSend = {
       street: street,
       door: door,
@@ -62,22 +61,13 @@ const RegisterForm2 = (props) => {
       locality: locality,
       district: district,
       country: country,
-    }; 
+    };
 
     console.log(dataToSend);
     counterContext2.formDispatch(dataToSend);
 
-    /* counterContext2.formDispatch({key:"street", payload:street});
-    counterContext2.formDispatch({key:"door", payload:door});
-    counterContext2.formDispatch({key:"floor", payload:floor});
-    counterContext2.formDispatch({key:"postalCode", payload:postalCode});
-    counterContext2.formDispatch({key:"locality", payload:locality});
-    counterContext2.formDispatch({key:"district", payload:district});
-    counterContext2.formDispatch({key:"country", payload:country}); */
-   
     var hey = counterContext2.formData;
-    console.log("heyy");
-    console.log(hey)
+    console.log(hey);
     props.navigation.navigate("RegisterForm3");
   };
 
@@ -107,9 +97,7 @@ const RegisterForm2 = (props) => {
           name="floor"
           onChangeText={(Floor) => setFloor(Floor)}
         />
-      </View>
 
-      <View>
         <Text>Código postal</Text>
         <TextInput
           type="text"
@@ -121,10 +109,8 @@ const RegisterForm2 = (props) => {
           }
         />
 
-        <Text>{codigo}</Text>
-      </View>
+        <Text>{locality}</Text>
 
-      <View>
         <Text>Distrito</Text>
         <TextInput
           type="text"
@@ -133,9 +119,7 @@ const RegisterForm2 = (props) => {
           name="district"
           onChangeText={(District) => setDistrict(District)}
         />
-      </View>
 
-      <View>
         <Text>Pais</Text>
         <TextInput
           type="text"
@@ -145,10 +129,11 @@ const RegisterForm2 = (props) => {
           editable={false}
           //onChangeText={(Country) => setCountry(Country)}
         />
-      </View>
 
-      <View>
-        <Button onPress={saveNnavigate}>Seguinte</Button>
+        <TouchableOpacity onPress={saveNnavigate}>
+          <Text style={{ color: "white" }}> Seguinte </Text>
+        </TouchableOpacity>
+        
       </View>
     </>
   );

@@ -83,14 +83,6 @@ const RegisterForm4 = (props) => {
       );
   };
 
-  function valor(obj, val) {
-    for (var valor in obj) {
-      if (obj[valor] === val && obj.hasOwnProperty(valor)) {
-        return valor;
-      }
-    }
-  }
-
   const saveNnavigate = async () => {
     validateEmails();
     validatePasss();
@@ -111,11 +103,7 @@ const RegisterForm4 = (props) => {
 
     var send = counterContext2.formData;
     console.log(send);
-    /* var send1 = send.toString();
-    console.log(send1);  */
-    console.log(send);
 
-    //var arr = send.values();
     const form1 = send[0];
     const form2 = send[1];
     const form3 = send[2];
@@ -146,8 +134,8 @@ const RegisterForm4 = (props) => {
       password: password,
       user_type: "client",
     };
-
     console.log(hey);
+
     try {
       const { data } = await axios.post(
         "https://caixa-digital-cms.herokuapp.com/auth/local/register",
@@ -181,15 +169,6 @@ const RegisterForm4 = (props) => {
 
   return (
     <>
-      {/*   <View>
-        <Modal visible={modalVisible}>
-          <Text>{textModal}</Text>
-          <Button
-            onPress={props.navigation.navigate("LoginForm"), () => setModalVisible(!modalVisible)}
-          >OK</Button>
-        </Modal>
-      </View> */}
-
       <View>
         <Text>Insira o seu email </Text>
         <TextInput
@@ -232,10 +211,24 @@ const RegisterForm4 = (props) => {
           secureTextEntry={true}
           onChangeText={(Pass) => setPassword(Pass)}
         />
-      </View>
 
-      <View>
-        <Button onPress={saveNnavigate}>Criar conta</Button>
+        <TouchableOpacity onPress={saveNnavigate}>
+          <Text style={{ color: "white" }}> Criar conta </Text>
+        </TouchableOpacity>
+
+        <View>
+          <Modal visible={modalVisible}>
+            <Text>{textModal}</Text>
+            <Button
+              onPress={
+                (props.navigation.navigate("LoginForm"),
+                () => setModalVisible(!modalVisible))
+              }
+            >
+              OK
+            </Button>
+          </Modal>
+        </View>
       </View>
     </>
   );
