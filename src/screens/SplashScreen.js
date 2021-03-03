@@ -24,7 +24,7 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../img/cd.png")}
+        source={require("../img/logowtxt.png")}
         style={{
           position: "absolute",
           width: 580,

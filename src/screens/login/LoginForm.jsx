@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
-import {StyleSheet, Button, Text, View, TextInput } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-
+import {StyleSheet, TouchableOpacity, Text, View, TextInput, Image } from "react-native";
+import Icon from 'react-native-ionicons';
+import { Ionicons } from '@expo/vector-icons';
 const LoginForm = (props) => {
 
   const [email,setEmail] = useState("");
@@ -43,7 +43,16 @@ const LoginForm = (props) => {
   return (
     <>
       <View style={styles.container}>
-      <Icon name="person-outline"></Icon>
+      <Image
+        source={require("../../img/logowtxt.png")}
+        style={{
+          position: "absolute",
+          width: 390,
+          height: 295,
+          top: 0,
+        }}/>
+      <View style={styles.inputRow}>
+     <Ionicons name="person-outline"  color="#1C4670" size={35}/>
         <TextInput
         style={styles.input}
           type="email"
@@ -52,10 +61,12 @@ const LoginForm = (props) => {
           placeholder="Email"
           onChangeText ={(Email) => setEmail(Email)}
         />
-      
+      </View>
 
-     
-      <Icon name="key-outline"></Icon>
+     <View style={styles.inputRow}>
+      <Ionicons name="key-outline"
+        color="#1C4670"
+        size={35}/>
         <TextInput
         style={styles.input}
           type="password"
@@ -64,20 +75,33 @@ const LoginForm = (props) => {
           placeholder="Password"
           onChangeText={(Pass) => setPass(Pass)}
         />
-     
+     </View>
 
-      <Button 
-        onPress={login}
-      >Login</Button>
-
-     
+     <View style={{
+          marginHorizontal:55,
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop:30,
+          backgroundColor:"#1C4670",
+          paddingVertical:10,
+          borderRadius:45
+        }}> 
+      <TouchableOpacity 
+        onPress={login}>
+        
+        <Text style={{color:'white'}} >         Login         </Text>
+        </TouchableOpacity>
+        </View>
+        <Text>Não tem uma conta?</Text>
         <Text
           onPress={() => props.navigation.navigate('RegisterForm1')}>
-          Não tem uma conta? Registe-se
+          Registe-se
         </Text>
+        
       </View>
-
+      
     </>
+    
   );
 };
 
@@ -90,11 +114,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#0096c7",
+    // borderWidth: 1,
+    // borderColor: "#0096c7",
     padding: 8,
     margin: 10,
     width: 200,
-    borderRadius: 23,
+    // borderRadius: 23,
+    borderBottomColor: '#1C4670',
+    borderBottomWidth: 1,
   },
+  inputRow:{
+    flexDirection:"row",
+    marginHorizontal:55, 
+  }
 });
