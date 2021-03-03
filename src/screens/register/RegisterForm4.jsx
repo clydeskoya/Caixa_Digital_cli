@@ -11,6 +11,8 @@ import { CounterContext2 } from "../../common/context/form.register2";
 import axios from "axios";
 import Modal from "react-native-modal";
 
+const REGEX_EMAIL = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/;
+
 const RegisterForm4 = (props) => {
   const [email1, setEmail1] = useState("");
   const [password1, setPassword1] = useState("");
@@ -23,31 +25,16 @@ const RegisterForm4 = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [textModal, setTextModal] = useState("");
 
-/*   function IsEmail(email) {
-    var exclude = /[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/;
-    var check = /@[w-]+./;
-    var checkend = /.[a-zA-Z]{2,3}$/;
-    if (
-      email.search(exclude) != -1 ||
-      email.search(check) == -1 ||
-      email.search(checkend) == -1
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  } */
-
   const validateEmails = () => {
     if (!email || !email1) return alert("Escreva o seu email");
     else if (email1 != email) return alert("Erro de confirmação de emails");
-    //else if (!IsEmail(email)) return alert("Email inválido");
+    else if (!email.match(REGEX_EMAIL)) return alert("Email inválido");
   };
 
   const validatePasss = () => {
     if (!password || !password1) return alert("Crie uma password");
-    else if (password1 != password)
-      return alert("Erro de confirmação de passwords");
+    else if (password1 != password) return alert("Erro de confirmação de passwords");
+    else if (password.length<6) return alert("Password curta! \n Número mínimo de caracteres: 6");
   };
 
   const formSubmitted = (confirmation) => {
@@ -108,8 +95,29 @@ const RegisterForm4 = (props) => {
   };
 
   const saveNnavigate = async () => {
-    validateEmails();
-    validatePasss();
+    /* validateEmails();
+    validatePasss(); */
+    if (!email || !email1) { 
+      alert("Escreva o seu email");
+      return;
+    } else if (email1 != email) { 
+      alert("Erro de confirmação de emails");
+      return ;
+    } else if (!email.match(REGEX_EMAIL)) {
+      alert("Email inválido");
+      return ;
+    }
+
+    if (!password || !password1) {
+      alert("Crie uma password");
+      return;
+    } else if (password1 != password) {
+      alert("Erro de confirmação de passwords");
+      return;
+    } else if (password.length<6) { 
+      alert("Número mínimo de caracteres: 6");
+      return;
+    }
 
     var dataToSend = {
       email: email,
@@ -122,40 +130,14 @@ const RegisterForm4 = (props) => {
 
     var ok = hey.push(dataToSend);
 
-    var send = counterContext2.formData;
-    console.log(send);
+    var forms = counterContext2.formData;
+    console.log(forms);
 
-    const form1 = send[0];
-    const form2 = send[1];
-    const form3 = send[2];
+    var form1Values = Object.values(forms[0]);
+    var form2Values = Object.values(forms[1]);
+    var form3Values = Object.values(forms[2]);
 
-    var form1Values = Object.values(form1);
-    var form2Values = Object.values(form2);
-    var form3Values = Object.values(form3);
-
-    console.log(Object.values(form1));
     console.log(form1Values[0]);
-
-    var hey = {
-      username: form1Values[0],
-      usersurname: form1Values[1],
-      dateofbirth: form1Values[2],
-      gender: form1Values[3],
-      street: form2Values[0],
-      door: form2Values[1],
-      floor: form2Values[2],
-      postalCode: form2Values[3],
-      locality: form2Values[4],
-      district: form2Values[5],
-      country: form2Values[6],
-      bi: form3Values[0],
-      phoneNumber: form3Values[1],
-      nif: form3Values[2],
-      email: email,
-      password: password,
-      user_type: "client",
-    };
-    console.log(hey);
 
     try {
       const { data } = await axios.post(

@@ -16,9 +16,11 @@ const RegisterForm2 = (props) => {
 
   const counterContext2 = useContext(CounterContext2);
 
-  const getZipCode = () => {
-    const zip = document.getElementById("zipcode").value.slice(0, 4);
-    const code = document.getElementById("zipcode").value.slice(5, 8);
+  const getZipCode = (zipcode) => {
+    const zip = zipcode.value.slice(0, 4);
+    console.log(zip)
+    const code = zipcode.value.slice(5, 8);
+    console.log(code)
 
     fetch(
       `https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`
@@ -102,7 +104,7 @@ const RegisterForm2 = (props) => {
           name="postalCode"
           id="zipcode"
           onChangeText={
-            ((e) => getZipCode(), (PostalCode) => setPostalColde(PostalCode))
+            ((ZipCode) => getZipCode(ZipCode), (PostalCode) => setPostalColde(PostalCode))
           }
         />
 

@@ -29,7 +29,7 @@ const RegisterForm1 = (props) => {
       return;
     }
     if (!dateofbirth || !dateofbirth.match(REGEX_DATE_OF_BIRTH)) {
-      alert("Data de nascimento inválida");
+      alert("Data de nascimento inválida! \n Formato DD/MM/AAAA");
       return;
     }
     if (!gender) {

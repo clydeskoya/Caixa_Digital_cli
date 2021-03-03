@@ -1,14 +1,30 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import {StyleSheet, TouchableOpacity, Text, View, TextInput, Image } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  TextInput,
+  Image,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
   const login = async () => {
+    if (!email) {
+      alert("Indique o seu email");
+      return;
+    }
+    if (!pass) {
+      alert("Forneça a sua password");
+      return;
+    }
+
     try {
       const { data } = await axios.post(
         "https://caixa-digital-cms.herokuapp.com/auth/local",
