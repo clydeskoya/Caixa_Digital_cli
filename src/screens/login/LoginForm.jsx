@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import axios from "axios";
 import { StyleSheet, Button, Text, View, TextInput } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -7,19 +7,47 @@ const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
+
   const login = async () => {
+    try {
+      const { data } = await axios.post(
+        "https://caixa-digital-cms.herokuapp.com/auth/local",
+        {
+          identifier: email,
+          password: pass,
+        }
+      );
+     
+      if (data.jwt) {
+        props.navigation.navigate("Home");
+      }
+      } catch (error) {
+      if (error.response) {
+        // Request made and server responded
+        console.log("data", error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log("request", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error.message", error.message);
+      }
+    }
+  };
+
+
+ /*  const login = async () => {
     var dataToSend = {
       identifier: email,
       password: pass,
     };
 
     console.log(dataToSend);
-    const data = JSON.stringify(dataToSend);
-    console.log(data);
+  //  console.log(formBody);
 
     fetch("https://caixa-digital-cms.herokuapp.com/auth/local", {
       method: "POST",
-      body: data,
+      body: formBody,
     })
       .then((response) => response.json())
       .then((responseJson) => {
@@ -35,12 +63,12 @@ const LoginForm = (props) => {
       .catch((error) => {
         console.error(error);
       });
-  };
+  }; */
 
   return (
     <>
       <View style={styles.container}>
-        <Icon name="person-outline"></Icon>
+        {/* <Icon name="person-outline"></Icon> */}
         <TextInput
           style={styles.input}
           type="email"
@@ -50,13 +78,15 @@ const LoginForm = (props) => {
           onChangeText={(Email) => setEmail(Email)}
         />
 
-        <Icon name="key-outline"></Icon>
+        {/* <Icon name="key-outline"></Icon> */}
         <TextInput
           style={styles.input}
           type="password"
           id="inputPassword"
           name="password"
           placeholder="Password"
+          autoCapitalize="none"
+          secureTextEntry={true}
           onChangeText={(Pass) => setPass(Pass)}
         />
 

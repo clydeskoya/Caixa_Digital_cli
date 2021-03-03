@@ -18,14 +18,15 @@ const RegisterForm3 = (props) => {
       phoneNumber: phoneNumber,
       nif: nif,
     };
-
     console.log(dataToSend);
-    const dataJSON = JSON.stringify(dataToSend);
-    console.log(dataJSON);
-    const dataStrapi = dataJSON.slice(1, dataJSON.length - 1);
-    console.log(dataStrapi);
-    counterContext2.formDispatch(dataStrapi);
-    const hey = counterContext2.formData;
+
+    counterContext2.formDispatch(dataToSend);
+
+   /*  counterContext2.formDispatch({key:"bi", payload:bi});
+    counterContext2.formDispatch({key:"phoneNumber", payload:phoneNumber});
+    counterContext2.formDispatch({key:"nif", payload:nif}); */
+
+    var hey = counterContext2.formData;
     console.log("heyy");
     console.log(hey)
     props.navigation.navigate("RegisterForm4");

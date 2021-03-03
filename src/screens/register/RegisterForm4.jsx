@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import { Button, Text, TextInput, View, ViewComponent } from "react-native";
+import { Button, Text, TextInput, View } from "react-native";
 import { CounterContext2 } from "../../common/context/form.register2";
+import axios from "axios";
 import Modal from "react-native-modal";
 
 const RegisterForm4 = (props) => {
@@ -31,23 +32,23 @@ const RegisterForm4 = (props) => {
         setTextModal("A sua conta foi criada com sucesso");
         setModalVisible(!modalVisible);
         return;
-    
+
       case "no":
         setTextModal("Algo de inesperado ocorreu. Por favor tente mais tarde!");
         setModalVisible(!modalVisible);
         return;
-    
+
       default:
         return;
     }
-  }
+  };
 
   const sendToServer = async (data) => {
     fetch("https://caixa-digital-cms.herokuapp.com/auth/local/register", {
       method: "POST",
       body: data,
     })
-    /* .then((response) => response.json())
+      /* .then((response) => response.json())
     .then((responseJson) => {
       //Hide Loader
      // setLoading(false);
@@ -68,7 +69,7 @@ const RegisterForm4 = (props) => {
       setLoading(false);
       console.error(error);
     }); */
-       .then((res) => res.json())
+      .then((res) => res.json())
       .then(
         (result) => {
           console.log("result", result);
@@ -76,40 +77,111 @@ const RegisterForm4 = (props) => {
           formSubmitted("yes");
         },
         (err) => {
-          console.log("error", err)
+          console.log("error", err);
           formSubmitted("yes");
         }
-      ); 
+      );
   };
 
-  const saveNnavigate = () => {
+  function valor(obj, val) {
+    for (var valor in obj) {
+      if (obj[valor] === val && obj.hasOwnProperty(valor)) {
+        return valor;
+      }
+    }
+  }
+
+  const saveNnavigate = async () => {
     validateEmails();
     validatePasss();
 
     var dataToSend = {
       email: email,
       password: password,
+      user_type: "client",
     };
 
     console.log(dataToSend);
-    const dataJSON = JSON.stringify(dataToSend);
-    console.log(dataJSON);
-    const dataStrapi = dataJSON.slice(1, dataJSON.length-1);
-    console.log(dataStrapi);
-    counterContext2.formDispatch(dataStrapi);
-    const hey = (counterContext2.formData);
-    const ok = hey.toString();
-    //const ok = ok.concat(",");
-    const final = ok + dataStrapi + "," + "\"user_type\": \"client\"}";
+    var hey = counterContext2.formData;
     console.log("heyy");
     console.log(hey);
-    console.log(final);
-    sendToServer(final);
+
+    var ok = hey.push(dataToSend);
+    console.log("okkkk");
+
+    var send = counterContext2.formData;
+    console.log(send);
+    /* var send1 = send.toString();
+    console.log(send1);  */
+    console.log(send);
+
+    //var arr = send.values();
+    const form1 = send[0];
+    const form2 = send[1];
+    const form3 = send[2];
+
+    var form1Values = Object.values(form1);
+    var form2Values = Object.values(form2);
+    var form3Values = Object.values(form3);
+
+    console.log(Object.values(form1));
+    console.log(form1Values[0]);
+
+    var hey = {
+      username: form1Values[0],
+      usersurname: form1Values[1],
+      dateofbirth: form1Values[2],
+      gender: form1Values[3],
+      street: form2Values[0],
+      door: form2Values[1],
+      floor: form2Values[2],
+      postalCode: form2Values[3],
+      locality: form2Values[4],
+      district: form2Values[5],
+      country: form2Values[6],
+      bi: form3Values[0],
+      phoneNumber: form3Values[1],
+      nif: form3Values[2],
+      email: email,
+      password: password,
+      user_type: "client",
+    };
+
+    console.log(hey);
+    try {
+      const { data } = await axios.post(
+        "https://caixa-digital-cms.herokuapp.com/auth/local/register",
+        {
+          username: form1Values[0],
+          usersurname: form1Values[1],
+          dateofbirth: form1Values[2],
+          gender: form1Values[3],
+          street: form2Values[0],
+          door: form2Values[1],
+          floor: form2Values[2],
+          postalCode: form2Values[3],
+          locality: form2Values[4],
+          district: form2Values[5],
+          country: form2Values[6],
+          bi: form3Values[0],
+          phoneNumber: form3Values[1],
+          nif: form3Values[2],
+          email: email,
+          password: password,
+          user_type: "client",
+        }
+      );
+      console.table(data);
+      console.log("deu certo");
+    } catch {
+      console.error();
+    }
+    //sendToServer(final);
   };
 
   return (
     <>
-    {/*   <View>
+      {/*   <View>
         <Modal visible={modalVisible}>
           <Text>{textModal}</Text>
           <Button

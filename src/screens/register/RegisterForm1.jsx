@@ -3,7 +3,10 @@ import { CounterContext2 } from "../../common/context/form.register2";
 import { Button, Text, TextInput, View, RadioButton } from "react-native";
 import RadioGroup from "react-native-radio-button-group";
 
-const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/d{4}?$/;
+const REGEX_DATE_OF_BIRTH = /^\d{2}-\d{2}\/d{4}?$/;
+
+const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
+
 
 const RegisterForm1 = (props) => {
   
@@ -37,15 +40,17 @@ const RegisterForm1 = (props) => {
       usersurname: usersurname,
       dateofbirth: dateofbirth,
       gender: gender,
-    };
-
+    }; 
     console.log(dataToSend);
-    const dataJSON = JSON.stringify(dataToSend);
-    console.log(dataJSON);
-    const dataStrapi = dataJSON.slice(0, dataJSON.length - 1);
-    console.log(dataStrapi);
-    counterContext2.formDispatch(dataStrapi);
-    const hey = counterContext2.formData;
+    
+    counterContext2.formDispatch(dataToSend);
+
+    /* counterContext2.formDispatch({key:"username", payload: username});
+    counterContext2.formDispatch({key:"usersurname", payload: usersurname});
+    counterContext2.formDispatch({key:"dateofbirth", payload: dateofbirth});
+    counterContext2.formDispatch({key:"gender", payload: gender}); */
+
+    var hey = counterContext2.formData;
     console.log("heyy");
     console.log(hey)
     props.navigation.navigate("RegisterForm2");
@@ -80,35 +85,8 @@ const RegisterForm1 = (props) => {
           onChangeText={(dateofbirth) => setUserDateofbitrh(dateofbirth)}
         />
       </View>
+     
 
-      {/*  <View>
-        <Text>Género </Text>
-        <View>
-          <RadioButton
-            value="Feminino"
-            onPress={() => setgender("feminino")}
-          />
-          <RadioButton
-            value="Masculino"
-            onPress={() => setgender("masculino")}
-          />
-          <RadioButton
-            value="Outro"
-            onPress={() => setgender("outro")}
-          />
-        </View> */}
-
-      {/* <RadioGroup onValueChange={newValue => setgender(newValue)} gender={label}>
-              horizontal
-              options={[
-                { id: 0, label: 'Feminino', },
-                { id: 1, label: 'Masculino' },
-                { id: 2, label: 'Outro' },
-              ]}
-             
-            </RadioGroup>
-      </View> 
-*/}
       <View>
         <Button onPress={saveNnavigate}>Seguinte</Button>
       </View>

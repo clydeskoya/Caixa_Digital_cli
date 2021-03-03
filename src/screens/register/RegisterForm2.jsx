@@ -62,15 +62,20 @@ const RegisterForm2 = (props) => {
       locality: locality,
       district: district,
       country: country,
-    };
+    }; 
 
     console.log(dataToSend);
-    const dataJSON = JSON.stringify(dataToSend);
-    console.log(dataJSON);
-    const dataStrapi = dataJSON.slice(1, dataJSON.length - 1);
-    console.log(dataStrapi);
-    counterContext2.formDispatch(dataStrapi);
-    const hey = counterContext2.formData;
+    counterContext2.formDispatch(dataToSend);
+
+    /* counterContext2.formDispatch({key:"street", payload:street});
+    counterContext2.formDispatch({key:"door", payload:door});
+    counterContext2.formDispatch({key:"floor", payload:floor});
+    counterContext2.formDispatch({key:"postalCode", payload:postalCode});
+    counterContext2.formDispatch({key:"locality", payload:locality});
+    counterContext2.formDispatch({key:"district", payload:district});
+    counterContext2.formDispatch({key:"country", payload:country}); */
+   
+    var hey = counterContext2.formData;
     console.log("heyy");
     console.log(hey)
     props.navigation.navigate("RegisterForm3");
