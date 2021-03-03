@@ -16,9 +16,11 @@ const RegisterForm2 = (props) => {
 
   const counterContext2 = useContext(CounterContext2);
 
-  const getZipCode = () => {
-    const zip = document.getElementById("zipcode").value.slice(0, 4);
-    const code = document.getElementById("zipcode").value.slice(5, 8);
+  const getZipCode = (zipcode) => {
+    const zip = zipcode.value.slice(0, 4);
+    console.log(zip)
+    const code = zipcode.value.slice(5, 8);
+    console.log(code)
 
     fetch(
       `https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`
@@ -65,9 +67,6 @@ const RegisterForm2 = (props) => {
 
     console.log(dataToSend);
     counterContext2.formDispatch(dataToSend);
-
-    var hey = counterContext2.formData;
-    console.log(hey);
     props.navigation.navigate("RegisterForm3");
   };
 
@@ -105,7 +104,7 @@ const RegisterForm2 = (props) => {
           name="postalCode"
           id="zipcode"
           onChangeText={
-            ((e) => getZipCode(), (PostalCode) => setPostalColde(PostalCode))
+            ((ZipCode) => getZipCode(ZipCode), (PostalCode) => setPostalColde(PostalCode))
           }
         />
 
@@ -130,10 +129,11 @@ const RegisterForm2 = (props) => {
           //onChangeText={(Country) => setCountry(Country)}
         />
 
-        <TouchableOpacity onPress={saveNnavigate}>
-          <Text style={{ color: "white" }}> Seguinte </Text>
-        </TouchableOpacity>
-        
+        <View style={styles.buttonOK}>
+          <TouchableOpacity onPress={saveNnavigate}>
+            <Text style={{ color: "white" }}> Seguinte </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
@@ -147,6 +147,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 30,
+    width: 140,
+    height: 50,
     backgroundColor: "#1DC690",
     paddingVertical: 10,
     borderRadius: 45,
@@ -174,5 +176,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
+  },
+  buttonOK: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    width: 290,
+    height: 45,
+    backgroundColor: "#1C4670",
+    paddingVertical: 10,
+    borderRadius: 45,
   },
 });
