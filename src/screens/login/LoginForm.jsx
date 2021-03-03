@@ -4,41 +4,38 @@ import {StyleSheet, TouchableOpacity, Text, View, TextInput, Image } from "react
 import Icon from 'react-native-ionicons';
 import { Ionicons } from '@expo/vector-icons';
 const LoginForm = (props) => {
-
-  const [email,setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
   const login = async () => {
-
     var dataToSend = {
       identifier: email,
       password: pass,
     };
 
-    console.log(dataToSend)
-    const data = JSON.stringify(dataToSend)
+    console.log(dataToSend);
+    const data = JSON.stringify(dataToSend);
     console.log(data);
 
-    fetch('https://caixa-digital-cms.herokuapp.com/auth/local', {
-      method: 'POST',
-      body: data
+    fetch("https://caixa-digital-cms.herokuapp.com/auth/local", {
+      method: "POST",
+      body: data,
     })
       .then((response) => response.json())
       .then((responseJson) => {
-
-        if (responseJson.status === 'success') {
-          AsyncStorage.setItem('user_id', responseJson.data.email);
+        if (responseJson.status === "success") {
+          AsyncStorage.setItem("user_id", responseJson.data.email);
           console.log(responseJson.data.email);
-          props.navigation.navigate("Home")
+          props.navigation.navigate("Home");
         } else {
-          alert ('Email ou password inválidos')
-          console.log('Email ou password inválidos');
+          alert("Email ou password inválidos");
+          console.log("Email ou password inválidos");
         }
       })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   return (
     <>
@@ -56,12 +53,12 @@ const LoginForm = (props) => {
       <View style={styles.inputRow}>
      <Ionicons name="person-outline"  color="#1C4670" size={35}/>
         <TextInput
-        style={styles.input}
+          style={styles.input}
           type="email"
           id="inputEmail"
           name="identifier"
           placeholder="Email"
-          onChangeText ={(Email) => setEmail(Email)}
+          onChangeText={(Email) => setEmail(Email)}
         />
       </View>
 
@@ -70,7 +67,7 @@ const LoginForm = (props) => {
         color="#1C4670"
         size={35}/>
         <TextInput
-        style={styles.input}
+          style={styles.input}
           type="password"
           id="inputPassword"
           name="password"
