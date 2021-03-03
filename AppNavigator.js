@@ -8,7 +8,7 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 const Tab = createBottomTabNavigator();
 
-export function TabNavigator() {
+export function AppNavigator() {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -37,7 +37,7 @@ export function TabNavigator() {
         })}
         tabBarOptions={{
           activeTintColor: "#1C4670",
-          inactiveTintColor: "grey",
+          inactiveTintColor: "gray",
         }}
       >
         <Tab.Screen name="Início" component={Home} />

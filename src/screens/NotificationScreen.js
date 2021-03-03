@@ -1,10 +1,18 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Header } from "../components/Header";
+
 export default function Notification() {
   return (
     <View style={styles.container}>
-      <Header />
+      <Image
+        source={require("../img/txtlogo.png")}
+        style={{
+          position: "absolute",
+          width: 123,
+          height: 51,
+          top: 35,
+        }}
+      />
       <Text>Notification Screen</Text>
     </View>
   );
