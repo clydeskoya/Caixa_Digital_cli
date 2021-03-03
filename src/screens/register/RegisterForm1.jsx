@@ -104,15 +104,16 @@ export default RegisterForm1;
 
 const styles = StyleSheet.create({
   header: {
-    marginHorizontal: 55,
+   
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 140,
-    height: 50,
+    marginBottom: 50,
+    width: '15%',
+    height: '7%',
     backgroundColor: "#1DC690",
     paddingVertical: 10,
     borderRadius: 45,
+    
   },
   container: {
     height: "100%",
