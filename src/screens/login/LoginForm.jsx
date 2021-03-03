@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import {StyleSheet, TouchableOpacity, Text, View, TextInput, Image } from "react-native";
 import Icon from 'react-native-ionicons';
 import { Ionicons } from '@expo/vector-icons';
@@ -43,14 +43,16 @@ const LoginForm = (props) => {
   return (
     <>
       <View style={styles.container}>
+      <View style={styles.oval} />
       <Image
         source={require("../../img/logowtxt.png")}
         style={{
           position: "absolute",
           width: 390,
           height: 295,
-          top: 0,
+          top: 80,
         }}/>
+      <View></View>  
       <View style={styles.inputRow}>
      <Ionicons name="person-outline"  color="#1C4670" size={35}/>
         <TextInput
@@ -92,8 +94,13 @@ const LoginForm = (props) => {
         <Text style={{color:'white'}} >         Login         </Text>
         </TouchableOpacity>
         </View>
-        <Text>Não tem uma conta?</Text>
-        <Text
+        <Text style={{
+           padding: 7,
+           marginTop: 25
+        }}>Não tem uma conta?</Text>
+        <Text style={{
+           textDecorationLine: 'underline'
+        }}
           onPress={() => props.navigation.navigate('RegisterForm1')}>
           Registe-se
         </Text>
@@ -109,16 +116,17 @@ export default LoginForm;
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   input: {
     // borderWidth: 1,
     // borderColor: "#0096c7",
-    padding: 8,
+    padding: 5,
     margin: 10,
     width: 200,
+    
     // borderRadius: 23,
     borderBottomColor: '#1C4670',
     borderBottomWidth: 1,
@@ -126,5 +134,14 @@ const styles = StyleSheet.create({
   inputRow:{
     flexDirection:"row",
     marginHorizontal:55, 
-  }
+  },
+  oval: {
+    width: 500,
+    height: 500,
+    // left: -120,
+    top:-189,
+    borderRadius: 700,
+    backgroundColor: "#1C4670",
+    transform: [{ scaleX: 1 }],
+  },
 });

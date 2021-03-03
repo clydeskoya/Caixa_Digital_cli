@@ -18,7 +18,7 @@ const SplashScreen = ({ navigation }) => {
       AsyncStorage.getItem("user_id").then((value) =>
         navigation.replace(value === null ? "Auth" : "DrawerNavigationRoutes")
       );
-    }, 5000);
+    }, 1000);
   }, []);
 
   return (
