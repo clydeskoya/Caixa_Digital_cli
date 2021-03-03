@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, TextInput, View } from "react-native";
 import { CounterContext2 } from "../../common/context/form.register2";
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
@@ -140,3 +140,39 @@ const RegisterForm2 = (props) => {
 };
 
 export default RegisterForm2;
+
+const styles = StyleSheet.create({
+  header: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    backgroundColor: "#1DC690",
+    paddingVertical: 10,
+    borderRadius: 45,
+  },
+  container: {
+    height: "100%",
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
+  },
+  TextInputStyle: {  
+      textAlign: 'center',  
+      height: 40,    
+      marginBottom: 10,
+      borderBottomColor: '#726F6F',
+      borderBottomWidth: 1,  
+   } ,
+  inputRow:{
+    flexDirection:"row",
+    marginHorizontal:55, 
+    justifyContent: "space-around",
+    //alignItems:"spaceAround",
+    padding: 10,
+  },
+  title: {
+    fontWeight: "bold",
+  },
+});

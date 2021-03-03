@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CounterContext2 } from "../../common/context/form.register2";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { RadioButton } from "react-native-paper";
 import RadioGroup from "react-native-radio-button-group";
 
@@ -25,14 +25,14 @@ const RegisterForm1 = (props) => {
       alert("Escreva o seu apelido");
       return;
     }
-    /*   if (!dateofbirth || !dateofbirth.match(REGEX_DATE_OF_BIRTH)) {
+       if (!dateofbirth.match(REGEX_DATE_OF_BIRTH)) {
       alert('Data de nascimento inválida');
       return; 
     } 
     if (!gender) {
       alert('Género');
       return;
-    } */
+    } 
 
     var dataToSend = {
       username: username,
@@ -99,6 +99,7 @@ const RegisterForm1 = (props) => {
             <RadioButton.Item label="Feminino" value="Feminino" />
             <RadioButton.Item label="Masculino" value="Masculino" />
             <RadioButton.Item label="Outro" value="Outro" />
+
           </View>
         </RadioButton.Group>
 
