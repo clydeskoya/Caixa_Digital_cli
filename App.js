@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { TabNavigator } from "./TabNavigator";
 
@@ -80,3 +81,11 @@ export default function App() {
 // // };
 
 // // export default App;
+=======
+// Example of Splash, Login and Sign Up in React Native
+// https://aboutreact.com/react-native-login-and-signup/
+import 'react-native-gesture-handler';
+import { AppBase } from './src/components/AppBase';
+
+export default AppBase;
+>>>>>>> US5_autentication_forms
