@@ -1,12 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CounterContext2 } from "../../common/context/form.register2";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { RadioButton } from "react-native-paper";
 
 const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;
@@ -92,6 +86,7 @@ const RegisterForm1 = (props) => {
             <RadioButton.Item label="Feminino" value="Feminino" />
             <RadioButton.Item label="Masculino" value="Masculino" />
             <RadioButton.Item label="Outro" value="Outro" />
+
           </View>
         </RadioButton.Group>
 

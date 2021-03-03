@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Text, TextInput, View, TouchableOpacity, StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, TextInput, View } from "react-native";
 import { CounterContext2 } from "../../common/context/form.register2";
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
@@ -160,16 +160,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 8,
   },
-  TextInputStyle: {
-    textAlign: "center",
-    height: 40,
-    marginBottom: 10,
-    borderBottomColor: "#726F6F",
-    borderBottomWidth: 1,
-  },
-  inputRow: {
-    flexDirection: "row",
-    marginHorizontal: 55,
+  TextInputStyle: {  
+      textAlign: 'center',  
+      height: 40,    
+      marginBottom: 10,
+      borderBottomColor: '#726F6F',
+      borderBottomWidth: 1,  
+   } ,
+  inputRow:{
+    flexDirection:"row",
+    marginHorizontal:55, 
     justifyContent: "space-around",
     //alignItems:"spaceAround",
     padding: 10,
