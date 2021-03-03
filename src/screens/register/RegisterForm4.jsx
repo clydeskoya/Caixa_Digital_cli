@@ -1,5 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { CounterContext2 } from "../../common/context/form.register2";
 import axios from "axios";
 import Modal from "react-native-modal";
@@ -16,14 +23,31 @@ const RegisterForm4 = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [textModal, setTextModal] = useState("");
 
+/*   function IsEmail(email) {
+    var exclude = /[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/;
+    var check = /@[w-]+./;
+    var checkend = /.[a-zA-Z]{2,3}$/;
+    if (
+      email.search(exclude) != -1 ||
+      email.search(check) == -1 ||
+      email.search(checkend) == -1
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  } */
+
   const validateEmails = () => {
     if (!email || !email1) return alert("Escreva o seu email");
-    if (email1 != email) return alert("Erro de confirmação de emails");
+    else if (email1 != email) return alert("Erro de confirmação de emails");
+    //else if (!IsEmail(email)) return alert("Email inválido");
   };
 
   const validatePasss = () => {
     if (!password || !password1) return alert("Crie uma password");
-    if (password1 != password) return alert("Erro de confirmação de passwords");
+    else if (password1 != password)
+      return alert("Erro de confirmação de passwords");
   };
 
   const formSubmitted = (confirmation) => {
@@ -95,11 +119,8 @@ const RegisterForm4 = (props) => {
 
     console.log(dataToSend);
     var hey = counterContext2.formData;
-    console.log("heyy");
-    console.log(hey);
 
     var ok = hey.push(dataToSend);
-    console.log("okkkk");
 
     var send = counterContext2.formData;
     console.log(send);
@@ -212,9 +233,11 @@ const RegisterForm4 = (props) => {
           onChangeText={(Pass) => setPassword(Pass)}
         />
 
-        <TouchableOpacity onPress={saveNnavigate}>
-          <Text style={{ color: "white" }}> Criar conta </Text>
-        </TouchableOpacity>
+        <View style={styles.buttonOK}>
+          <TouchableOpacity onPress={saveNnavigate}>
+            <Text style={{ color: "white" }}> Criar conta </Text>
+          </TouchableOpacity>
+        </View>
 
         <View>
           {/* <Modal visible={modalVisible}>
@@ -235,3 +258,52 @@ const RegisterForm4 = (props) => {
 };
 
 export default RegisterForm4;
+
+const styles = StyleSheet.create({
+  header: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    width: 140,
+    height: 50,
+    backgroundColor: "#1DC690",
+    paddingVertical: 10,
+    borderRadius: 45,
+  },
+  container: {
+    height: "100%",
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
+  },
+  TextInputStyle: {
+    textAlign: "center",
+    height: 40,
+    marginBottom: 10,
+    borderBottomColor: "#726F6F",
+    borderBottomWidth: 1,
+  },
+  inputRow: {
+    flexDirection: "row",
+    marginHorizontal: 55,
+    justifyContent: "space-around",
+    //alignItems:"spaceAround",
+    padding: 10,
+  },
+  title: {
+    fontWeight: "bold",
+  },
+  buttonOK: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    width: 290,
+    height: 45,
+    backgroundColor: "#1C4670",
+    paddingVertical: 10,
+    borderRadius: 45,
+  },
+});

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import {StyleSheet, TouchableOpacity, Text, View, TextInput, Image } from "react-native";
-import Icon from 'react-native-ionicons';
 import { Ionicons } from '@expo/vector-icons';
 
 const LoginForm = (props) => {
@@ -111,6 +110,8 @@ const LoginForm = (props) => {
             alignItems: "center",
             justifyContent: "center",
             marginTop: 30,
+            width: 290,
+            height: 45,
             backgroundColor: "#1C4670",
             paddingVertical: 10,
             borderRadius: 45,

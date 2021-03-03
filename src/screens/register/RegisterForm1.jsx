@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import { CounterContext2 } from "../../common/context/form.register2";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { RadioButton } from "react-native-paper";
-import RadioGroup from "react-native-radio-button-group";
 
-const REGEX_DATE_OF_BIRTH = /^\d{2}-\d{2}\/d{4}?$/;
-
-const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
+const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;
 
 const RegisterForm1 = (props) => {
   const [username, setUserName] = useState("");
@@ -25,14 +28,14 @@ const RegisterForm1 = (props) => {
       alert("Escreva o seu apelido");
       return;
     }
-    /*   if (!dateofbirth || !dateofbirth.match(REGEX_DATE_OF_BIRTH)) {
-      alert('Data de nascimento inválida');
-      return; 
-    } 
-    if (!gender) {
-      alert('Género');
+    if (!dateofbirth || !dateofbirth.match(REGEX_DATE_OF_BIRTH)) {
+      alert("Data de nascimento inválida");
       return;
-    } */
+    }
+    if (!gender) {
+      alert("Género");
+      return;
+    }
 
     var dataToSend = {
       username: username,
@@ -41,17 +44,7 @@ const RegisterForm1 = (props) => {
       gender: gender,
     };
     console.log(dataToSend);
-
     counterContext2.formDispatch(dataToSend);
-
-    /* counterContext2.formDispatch({key:"username", payload: username});
-    counterContext2.formDispatch({key:"usersurname", payload: usersurname});
-    counterContext2.formDispatch({key:"dateofbirth", payload: dateofbirth});
-    counterContext2.formDispatch({key:"gender", payload: gender}); */
-
-    var hey = counterContext2.formData;
-    console.log("heyy");
-    console.log(hey);
     props.navigation.navigate("RegisterForm2");
   };
 
@@ -102,21 +95,26 @@ const RegisterForm1 = (props) => {
           </View>
         </RadioButton.Group>
 
-        <TouchableOpacity onPress={saveNnavigate}>
-          <Text style={{ color: "white" }}> Seguinte </Text>
-        </TouchableOpacity>
+        <View style={styles.buttonOK}>
+          <TouchableOpacity onPress={saveNnavigate}>
+            <Text style={{ color: "white" }}> Seguinte </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
 };
 
 export default RegisterForm1;
+
 const styles = StyleSheet.create({
   header: {
     marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 30,
+    width: 140,
+    height: 50,
     backgroundColor: "#1DC690",
     paddingVertical: 10,
     borderRadius: 45,
@@ -128,21 +126,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 8,
   },
-  TextInputStyle: {  
-      textAlign: 'center',  
-      height: 40,    
-      marginBottom: 10,
-      borderBottomColor: '#726F6F',
-      borderBottomWidth: 1,  
-   } ,
-  inputRow:{
-    flexDirection:"row",
-    marginHorizontal:55, 
+  TextInputStyle: {
+    textAlign: "center",
+    height: 40,
+    marginBottom: 10,
+    borderBottomColor: "#726F6F",
+    borderBottomWidth: 1,
+  },
+  inputRow: {
+    flexDirection: "row",
+    marginHorizontal: 55,
     justifyContent: "space-around",
     //alignItems:"spaceAround",
     padding: 10,
   },
   title: {
     fontWeight: "bold",
+  },
+  buttonOK: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    width: 290,
+    height: 45,
+    backgroundColor: "#1C4670",
+    paddingVertical: 10,
+    borderRadius: 45,
   },
 });
