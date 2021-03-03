@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { StyleSheet, Button, Text, View, TextInput } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import {StyleSheet, TouchableOpacity, Text, View, TextInput, Image } from "react-native";
 import Icon from 'react-native-ionicons';
 import { Ionicons } from '@expo/vector-icons';

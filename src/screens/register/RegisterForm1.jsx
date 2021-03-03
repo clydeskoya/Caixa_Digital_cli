@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
   inputRow:{
     flexDirection:"row",
     marginHorizontal:55, 
-    justifyContent: "spaceAround",
-    alignItems:"spaceAround",
+    justifyContent: "space-around",
+    //alignItems:"spaceAround",
     padding: 10,
     
   },
