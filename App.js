@@ -1,6 +1,10 @@
-// Example of Splash, Login and Sign Up in React Native
-// https://aboutreact.com/react-native-login-and-signup/
-import "react-native-gesture-handler";
-import { AppBase } from "./src/components/AppBase";
+// import "react-native-gesture-handler";
+// import { AppBase } from "./src/components/AppBase";
+// import TabNavigator from "./TabNavigator";
+// export default <TabNavigator>;
+import React from "react";
+import { TabNavigator } from "./TabNavigator";
 
-export default AppBase;
+export default function App() {
+  return <TabNavigator />;
+}
