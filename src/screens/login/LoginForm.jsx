@@ -82,70 +82,50 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <View style={{ height: "100%" }}>
-        {/*  <View style={styles.oval}>
-          <Image
-            source={require("../../img/logowtxt.png")}
-            style={{
-              position: "absolute",
-              width: 100,
-              height: 295,
-              marginTop: 150,
-            }}
-          />
-        </View> */}
+      <View style={styles.container}>
+        <View style={styles.oval} />
         <Image
           source={require("../../img/logowtxt.png")}
           style={{
             position: "absolute",
-            width: 100,
+            width: 390,
             height: 295,
-            marginTop: 150,
+            top: 80,
           }}
         />
-        <View style={styles.inputMainRow}>
-          <View style={styles.inputRow}>
-            <Ionicons
-              name="person-outline"
-              color="#1C4670"
-              size={35}
-              style={{ marginTop: 20 }}
-            />
-            <TextInput
-              style={styles.input}
-              type="email"
-              id="inputEmail"
-              name="identifier"
-              placeholder="Email"
-              onChangeText={(Email) => setEmail(Email)}
-            />
-          </View>
-
-          <View style={styles.inputRow}>
-            <Ionicons
-              name="key-outline"
-              color="#1C4670"
-              size={35}
-              style={{ marginTop: 20 }}
-            />
-            <TextInput
-              style={styles.input}
-              type="password"
-              id="inputPassword"
-              name="password"
-              placeholder="Password"
-              autoCapitalize="none"
-              secureTextEntry={true}
-              onChangeText={(Pass) => setPass(Pass)}
-            />
-          </View>
+        <View></View>
+        <View style={styles.inputRow}>
+          <Ionicons name="person-outline" color="#1C4670" size={35} />
+          <TextInput
+            style={styles.input}
+            type="email"
+            id="inputEmail"
+            name="identifier"
+            placeholder="Email"
+            onChangeText={(Email) => setEmail(Email)}
+          />
         </View>
+
+        <View style={styles.inputRow}>
+          <Ionicons name="key-outline" color="#1C4670" size={35} />
+          <TextInput
+            style={styles.input}
+            type="password"
+            id="inputPassword"
+            name="password"
+            placeholder="Password"
+            autoCapitalize="none"
+            secureTextEntry={true}
+            onChangeText={(Pass) => setPass(Pass)}
+          />
+        </View>
+
         <View
           style={{
             marginHorizontal: 55,
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 50,
+            marginTop: 30,
             width: 290,
             height: 45,
             backgroundColor: "#1C4670",
@@ -180,13 +160,18 @@ const LoginForm = (props) => {
 
 export default LoginForm;
 const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   input: {
     // borderWidth: 1,
     // borderColor: "#0096c7",
     padding: 5,
     margin: 10,
     width: 200,
-    alignItems: "center",
 
     // borderRadius: 23,
     borderBottomColor: "#1C4670",
@@ -196,14 +181,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 55,
   },
-  inputMainRow: {
-    flexDirection: "column",
-    marginHorizontal: "auto",
-  },
   oval: {
-    width: "100%",
-    height: "70%",
-    alignItems: "center",
+    width: 500,
+    height: 500,
     // left: -120,
     top: -189,
     borderRadius: 700,
