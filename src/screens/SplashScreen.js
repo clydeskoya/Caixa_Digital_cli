@@ -18,13 +18,13 @@ const SplashScreen = ({ navigation }) => {
       AsyncStorage.getItem("user_id").then((value) =>
         navigation.replace(value === null ? "Auth" : "DrawerNavigationRoutes")
       );
-    }, 5000);
+    }, 1000);
   }, []);
 
   return (
     <View style={styles.container}>
       <Image
-        source={require("../img/cd.png")}
+        source={require("../img/logowtxt.png")}
         style={{
           position: "absolute",
           width: 580,
