@@ -6,10 +6,10 @@ import { RadioButton } from "react-native-paper";
 const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;
 
 const RegisterForm1 = (props) => {
-  const [username, setUserName] = useState("");
-  const [usersurname, setUserSurname] = useState("");
-  const [dateofbirth, setUserDateofbitrh] = useState("");
-  const [gender, setGender] = useState("");
+  const [username, setUserName] = useState("Irina");
+  const [usersurname, setUserSurname] = useState("Fernandes");
+  const [dateofbirth, setUserDateofbitrh] = useState("07/11/1998");
+  const [gender, setGender] = useState("Feminino");
 
   const counterContext2 = useContext(CounterContext2);
 
@@ -51,6 +51,7 @@ const RegisterForm1 = (props) => {
         <Text style={styles.title}>Qual o seu Nome? </Text>
         <View style={styles.inputRow}>
           <TextInput
+            value={username}
             type="text"
             placeholder="Nome próprio"
             style={styles.TextInputStyle}
@@ -59,6 +60,7 @@ const RegisterForm1 = (props) => {
           />
 
           <TextInput
+            value={usersurname}
             type="text"
             placeholder="Apelido"
             style={styles.TextInputStyle}
@@ -69,6 +71,7 @@ const RegisterForm1 = (props) => {
 
         <Text style={styles.title}>Data de nascimento </Text>
         <TextInput
+          value={dateofbirth}
           type="text"
           placeholder="01/01/2000"
           style={styles.TextInputStyle}

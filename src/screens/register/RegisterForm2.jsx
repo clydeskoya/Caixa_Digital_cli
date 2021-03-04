@@ -1,37 +1,21 @@
-import React, { useState, useContext } from "react";
 import { StyleSheet, TouchableOpacity, Text, TextInput, View } from "react-native";
+import { prop } from "ramda";
+import React, { useState, useContext, useEffect } from "react";
 import { CounterContext2 } from "../../common/context/form.register2";
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
 
 const RegisterForm2 = (props) => {
-  const [street, setStreet] = useState("");
-  const [door, setDoor] = useState("");
-  const [floor, setFloor] = useState("");
-  const [postalCode, setPostalColde] = useState("");
+  const [street, setStreet] = useState("Rua António Janeiro");
+  const [door, setDoor] = useState("1");
+  const [floor, setFloor] = useState("3D");
+  const [postalCode, setPostalColde] = useState("2735-272");
   const [locality, setLocality] = useState("");
   const [district, setDistrict] = useState("Lisboa");
   const [country, setCountry] = useState("Portugal");
 
   const counterContext2 = useContext(CounterContext2);
-
-  const getZipCode = (zipcode) => {
-    const zip = zipcode.value.slice(0, 4);
-    console.log(zip)
-    const code = zipcode.value.slice(5, 8);
-    console.log(code)
-
-    fetch(
-      `https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        //setCodigo(result.rows);
-        setLocality(result);
-      });
-  };
 
   const saveNnavigate = () => {
     if (!street) {
@@ -70,12 +54,39 @@ const RegisterForm2 = (props) => {
     props.navigation.navigate("RegisterForm3");
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      console.log("batatas");
+      const zip = postalCode.slice(0, 4);
+      const code = postalCode.slice(5, 8);
+      const ola = await fetch(
+        `https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`
+      )
+        .then((res) => {
+          return res.json();
+        }, (error) => console.error(error))
+        .then((result) => {
+      console.log('result', result);
+          setLocality(prop('value', result));
+        }, (error) => console.error(error))
+      }
+      if (REGEX_POSTAL_CODE.test(postalCode)) {
+        fetchData()
+      } else if (locality.length ){
+        setLocality("");
+      }
+  }, [postalCode])
+
   return (
     <>
       <View>
+        <View style={styles.header}>
+          <Text style={{ color: "white", fontWeight: "bold" }}> Registo </Text>
+        </View>
         <Text>Qual a sua morada? </Text>
         <Text>Rua, Nº Porta, Andar</Text>
         <TextInput
+          value={street}
           type="text"
           placeholder="Rua"
           name="street"
@@ -83,6 +94,7 @@ const RegisterForm2 = (props) => {
         />
 
         <TextInput
+          value={door}
           type="text"
           placeholder="Porta"
           name="door"
@@ -91,6 +103,7 @@ const RegisterForm2 = (props) => {
         />
 
         <TextInput
+          value={floor}
           type="text"
           placeholder="Andar"
           name="floor"
@@ -99,13 +112,13 @@ const RegisterForm2 = (props) => {
 
         <Text>Código postal</Text>
         <TextInput
+          value={postalCode}
           type="text"
           placeholder="XXXX-XXX"
           name="postalCode"
           id="zipcode"
-          onChangeText={
-            ((ZipCode) => getZipCode(ZipCode), (PostalCode) => setPostalColde(PostalCode))
-          }
+          keyboardType="numeric"
+          onChangeText={(PostalCode) => setPostalColde(PostalCode) }
         />
 
         <Text>{locality}</Text>

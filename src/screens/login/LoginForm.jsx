@@ -84,7 +84,7 @@ const LoginForm = (props) => {
     <>
       <View style={styles.container}>
         <View style={styles.oval} />
-        <Image
+         <Image
           source={require("../../img/logowtxt.png")}
           style={{
             position: "absolute",
@@ -93,7 +93,7 @@ const LoginForm = (props) => {
             top: 80,
           }}
         />
-        <View></View>
+        
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" color="#1C4670" size={35} />
           <TextInput
@@ -105,7 +105,7 @@ const LoginForm = (props) => {
             onChangeText={(Email) => setEmail(Email)}
           />
         </View>
-
+ 
         <View style={styles.inputRow}>
           <Ionicons name="key-outline" color="#1C4670" size={35} />
           <TextInput
@@ -137,6 +137,7 @@ const LoginForm = (props) => {
             <Text style={{ color: "white" }}> Login </Text>
           </TouchableOpacity>
         </View>
+        
         <Text
           style={{
             padding: 7,

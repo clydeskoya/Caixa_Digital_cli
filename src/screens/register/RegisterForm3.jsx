@@ -53,7 +53,7 @@ const RegisterForm3 = (props) => {
           placeholder="Número de telemóvel"
           name="phoneNumber"
           keyboardType="numeric"
-          maxLength="9"
+          //maxLength="9"
           onChangeText={(Phone) => setPhoneNumber(Phone)}
         />
 
@@ -63,7 +63,7 @@ const RegisterForm3 = (props) => {
           placeholder="XXXXXXXXX"
           name="NIF"
           keyboardType="numeric"
-          maxLength="9"
+          //maxLength="9"
           onChangeText={(NIF) => setNIF(NIF)}
         />
 
