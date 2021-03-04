@@ -8,6 +8,7 @@ import {
   View,
   TextInput,
   Image,
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -81,19 +82,16 @@ const LoginForm = (props) => {
   }; */
 
   return (
-    <>
+    <ScrollView>
       <View style={styles.container}>
-        <View style={styles.oval} />
-        <Image
-          source={require("../../img/logowtxt.png")}
-          style={{
-            position: "absolute",
-            width: 390,
-            height: 295,
-            top: 80,
-          }}
-        />
-        <View></View>
+        {/* <View style={styles.oval} /> */}
+        <View style={styles.oval}>
+          <Image
+            source={require("../../img/logowtxt.png")}
+            style={styles.logo}
+          />
+          {/* <View> */}
+        </View>
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" color="#1C4670" size={35} />
           <TextInput
@@ -121,20 +119,10 @@ const LoginForm = (props) => {
         </View>
 
         <View
-          style={{
-            marginHorizontal: 55,
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 30,
-            width: 290,
-            height: 45,
-            backgroundColor: "#1C4670",
-            paddingVertical: 10,
-            borderRadius: 45,
-          }}
+          style={styles.bottomActions}
         >
           <TouchableOpacity onPress={login}>
-            <Text style={{ color: "white" }}> Login </Text>
+            <Text style={styles.textLogin}> Login </Text>
           </TouchableOpacity>
         </View>
         <Text
@@ -146,15 +134,13 @@ const LoginForm = (props) => {
           Não tem uma conta?
         </Text>
         <Text
-          style={{
-            textDecorationLine: "underline",
-          }}
+          style={styles.textRegister}
           onPress={() => props.navigation.navigate("RegisterForm1")}
         >
           Registe-se
         </Text>
       </View>
-    </>
+    </ScrollView>
   );
 };
 
@@ -165,6 +151,28 @@ const styles = StyleSheet.create({
     // flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  oval: {
+    width: 500,
+    height: 500,
+    // left: -120,
+    // top: -189,
+    top: "-30%",
+    borderRadius: 700,
+    backgroundColor: "#1C4670",
+    transform: [{ scaleX: 1 }],
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logo: {
+    // position: "absolute",
+    width: 390,
+    height: 295,
+    top: "25%",
+  },
+  inputRow: {
+    flexDirection: "row",
+    marginHorizontal: 55,
   },
   input: {
     // borderWidth: 1,
@@ -177,17 +185,19 @@ const styles = StyleSheet.create({
     borderBottomColor: "#1C4670",
     borderBottomWidth: 1,
   },
-  inputRow: {
-    flexDirection: "row",
-    marginHorizontal: 55,
+  textRegister: {
+    textDecorationLine: "underline",
   },
-  oval: {
-    width: 500,
-    height: 500,
-    // left: -120,
-    top: -189,
-    borderRadius: 700,
+  textLogin: { color: "white" },
+  bottomActions: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    width: 290,
+    height: 45,
     backgroundColor: "#1C4670",
-    transform: [{ scaleX: 1 }],
+    paddingVertical: 10,
+    borderRadius: 45,
   },
 });

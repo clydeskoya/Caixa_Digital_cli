@@ -72,12 +72,19 @@ const RegisterForm2 = (props) => {
 
   return (
     <>
-      <View>
-        <Text>Qual a sua morada? </Text>
-        <Text>Rua, Nº Porta, Andar</Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={{ color: "white", fontWeight: "bold" }}> Registo </Text>
+        </View>
+        <Text style={styles.title}>Qual a sua morada? </Text>
+        <View style={styles.inputRow}>
+
+        <Text style={styles.title1}>Rua, Porta, Andar</Text>
+
         <TextInput
           type="text"
           placeholder="Rua"
+          style={styles.TextInputStyle}
           name="street"
           onChangeText={(Street) => setStreet(Street)}
         />
@@ -85,6 +92,7 @@ const RegisterForm2 = (props) => {
         <TextInput
           type="text"
           placeholder="Porta"
+          style={styles.TextInputStyle}
           name="door"
           keyboardType="numeric"
           onChangeText={(Door) => setDoor(Door)}
@@ -93,14 +101,18 @@ const RegisterForm2 = (props) => {
         <TextInput
           type="text"
           placeholder="Andar"
+          style={styles.TextInputStyle}
           name="floor"
           onChangeText={(Floor) => setFloor(Floor)}
         />
 
-        <Text>Código postal</Text>
+    </View>
+
+        <Text>Código Postal</Text>
         <TextInput
           type="text"
           placeholder="XXXX-XXX"
+          style={styles.TextInputStyle}
           name="postalCode"
           id="zipcode"
           onChangeText={
@@ -113,28 +125,28 @@ const RegisterForm2 = (props) => {
         <Text>Distrito</Text>
         <TextInput
           type="text"
-          defaultValue="Lisboa"
           placeholder="Distrito"
+          style={styles.TextInputStyle}
           name="district"
           onChangeText={(District) => setDistrict(District)}
         />
 
         <Text>Pais</Text>
+
         <TextInput
           type="text"
-          defaultValue="Portugal"
           placeholder="Pais"
+          style={styles.TextInputStyle}
           name="country"
           editable={false}
-          //onChangeText={(Country) => setCountry(Country)}
+          onChangeText={(Country) => setCountry(Country)}
         />
-
-        <View style={styles.buttonOK}>
+      </View>
+      <View style={styles.buttonOK}>
           <TouchableOpacity onPress={saveNnavigate}>
             <Text style={{ color: "white" }}> Seguinte </Text>
           </TouchableOpacity>
         </View>
-      </View>
     </>
   );
 };
@@ -142,24 +154,25 @@ const RegisterForm2 = (props) => {
 export default RegisterForm2;
 
 const styles = StyleSheet.create({
+
   header: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 140,
-    height: 50,
+    marginBottom: 50,
+    width: '15%',
+    height: '7%',
     backgroundColor: "#1DC690",
     paddingVertical: 10,
     borderRadius: 45,
   },
+
   container: {
     height: "100%",
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 8,
   },
+
   TextInputStyle: {  
       textAlign: 'center',  
       height: 40,    
@@ -167,16 +180,24 @@ const styles = StyleSheet.create({
       borderBottomColor: '#726F6F',
       borderBottomWidth: 1,  
    } ,
+
   inputRow:{
     flexDirection:"row",
     marginHorizontal:55, 
     justifyContent: "space-around",
-    //alignItems:"spaceAround",
     padding: 10,
   },
+
   title: {
     fontWeight: "bold",
+    //fontSize: 22,
   },
+
+  title1: {
+    fontWeight: "bold",
+    fontSize: 13,
+  },
+
   buttonOK: {
     marginHorizontal: 55,
     alignItems: "center",
@@ -188,4 +209,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 45,
   },
+
+
+
 });

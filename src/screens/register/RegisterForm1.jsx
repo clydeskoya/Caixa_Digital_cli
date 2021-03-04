@@ -48,8 +48,9 @@ const RegisterForm1 = (props) => {
         <View style={styles.header}>
           <Text style={{ color: "white", fontWeight: "bold" }}> Registo </Text>
         </View>
-        <Text style={styles.title}>Qual o seu Nome? </Text>
+        <Text style={styles.title}>Qual o seu nome? </Text>
         <View style={styles.inputRow}>
+
           <TextInput
             type="text"
             placeholder="Nome próprio"
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 8,
@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 55,
     justifyContent: "space-around",
-    //alignItems:"spaceAround",
     padding: 10,
   },
   title: {
