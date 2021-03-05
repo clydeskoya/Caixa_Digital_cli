@@ -14,7 +14,6 @@ import RadioForm, {
   RadioButtonLabel,
 } from "react-native-simple-radio-button";
 const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;
-
 const RegisterForm1 = (props) => {
   const [username, setUserName] = useState("Irina");
   const [usersurname, setUserSurname] = useState("Fernandes");
