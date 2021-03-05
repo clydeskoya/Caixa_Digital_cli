@@ -230,6 +230,8 @@ const RegisterForm4 = (props) => {
             </View>
           </TouchableOpacity>
 
+          </View>  
+
           <View>
             <Portal>
               {/* <Button onPress={showDialog}>Show Dialog</Button> */}
@@ -253,7 +255,7 @@ const RegisterForm4 = (props) => {
               </Dialog>
             </Portal>
           </View>
-        </View>
+        
       </Provider>
     </>
   );
@@ -270,11 +272,11 @@ const styles = StyleSheet.create({
     height: "7%",
     marginTop: "15%",
     backgroundColor: "#1DC690",
-    borderRadius: 45,
+    borderRadius: 15,
   },
   container: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   container2: {
     alignItems: "flex-start",
@@ -304,7 +306,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 250,
     height: 40,
-    marginVertical:"10%",
+    //marginVertical:"10%",
+    //marginTop: "10%",
     backgroundColor: "#1C4670",
     borderRadius: 45,
   },

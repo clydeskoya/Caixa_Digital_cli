@@ -119,10 +119,9 @@ const styles = StyleSheet.create({
     height: "7%",
     backgroundColor: "#1DC690",
     paddingVertical: 10,
-    borderRadius: 45,
+    borderRadius: 15,
   },
   container: {
-    height: "100%",
     alignItems: "center",
     justifyContent: "center",
     padding: 8,

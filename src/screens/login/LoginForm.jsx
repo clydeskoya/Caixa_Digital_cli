@@ -151,16 +151,16 @@ const styles = StyleSheet.create({
   },
   oval: {
     width: "130%",
-    height: "100%",
-    //top: "-30%",
+    height: "60%",
+    top: "-30%",
     borderRadius: 700,
     backgroundColor: "#1C4670",
     alignItems: "center",
     justifyContent: "center",
   },
   logo: {
-    width: "82%",
-    height: "85%",
+    width: "70%",
+    //height: "85%",
     top: "25%",
   },
   inputRow: {
