@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, setState } from "react";
 import { CounterContext2 } from "../../common/context/form.register2";
 import {
   StyleSheet,
@@ -7,15 +7,24 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { RadioButton } from "react-native-paper";
-
+// import { RadioButton } from "react-native-paper";
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel,
+} from "react-native-simple-radio-button";
 const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;
-
 const RegisterForm1 = (props) => {
-  const [username, setUserName] = useState("Alberta");
-  const [usersurname, setUserSurname] = useState("Sorriso");
-  const [dateofbirth, setUserDateofbitrh] = useState("15/10/1990");
-  const [gender, setGender] = useState("Feminino");
+  const [username, setUserName] = useState("Irina");
+  const [usersurname, setUserSurname] = useState("Fernandes");
+  const [dateofbirth, setUserDateofbitrh] = useState("07/11/1998");
+  const [gender, setGender] = useState("-1");
+
+  var radio_props = [
+    { label: "Feminino", value: 0 },
+    { label: "Masculino", value: 1 },
+    { label: "Outro", value: 1 }
+  ];
 
   const counterContext2 = useContext(CounterContext2);
 
@@ -52,7 +61,10 @@ const RegisterForm1 = (props) => {
     <>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{ color: "white", fontWeight: "bold", fontSize:22 }}> Registo </Text>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
+            {" "}
+            Registo{" "}
+          </Text>
         </View>
         <Text style={styles.title}>Qual o seu nome? </Text>
         <View style={styles.inputRow}>
@@ -87,21 +99,30 @@ const RegisterForm1 = (props) => {
 
         <Text style={styles.title}>Género</Text>
 
-        <RadioButton.Group
+        <RadioForm
+          radio_props={radio_props}
+          initial={0}
+          onPress={setGender}
+        />
+
+        {/* <RadioButton.Group
           onValueChange={(gender) => setGender(gender)}
           value={gender}
-        >
-          <View style={styles.inputRow}>
-            <RadioButton.Item label="Feminino" value="Feminino" />
+          
+        > 
+        
+           
+            {/* <RadioButton.Item label="Feminino" value="Feminino" />
             <RadioButton.Item label="Masculino" value="Masculino" />
             <RadioButton.Item label="Outro" value="Outro" />
-          </View>
-        </RadioButton.Group>
+
+            
+        </RadioButton.Group> */}
 
         <TouchableOpacity onPress={saveNnavigate}>
-        <View style={styles.buttonOK}>
+          <View style={styles.buttonOK}>
             <Text style={{ color: "white" }}> Seguinte </Text>
-        </View>
+          </View>
         </TouchableOpacity>
       </View>
     </>
@@ -115,7 +136,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 50,
-    width: "15%",
+    width: "50%",
     height: "7%",
     backgroundColor: "#1DC690",
     paddingVertical: 10,
@@ -134,9 +155,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   inputRow: {
+    justifyContent: "center",
     flexDirection: "row",
     marginHorizontal: 55,
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     padding: 10,
   },
   title: {
@@ -147,7 +169,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 250,
     height: 40,
-    marginVertical:"10%",
+    marginVertical: "10%",
     backgroundColor: "#1C4670",
     borderRadius: 45,
   },
