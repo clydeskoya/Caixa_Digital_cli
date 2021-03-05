@@ -1,4 +1,10 @@
-import { StyleSheet, TouchableOpacity, Text, TextInput, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { prop } from "ramda";
 import React, { useState, useContext, useEffect } from "react";
 import { CounterContext2 } from "../../common/context/form.register2";
@@ -56,26 +62,31 @@ const RegisterForm2 = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("batatas");
       const zip = postalCode.slice(0, 4);
       const code = postalCode.slice(5, 8);
       const ola = await fetch(
         `https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`
       )
-        .then((res) => {
-          return res.json();
-        }, (error) => console.error(error))
-        .then((result) => {
-      console.log('result', result);
-          setLocality(prop('value', result));
-        }, (error) => console.error(error))
-      }
-      if (REGEX_POSTAL_CODE.test(postalCode)) {
-        fetchData()
-      } else if (locality.length ){
-        setLocality("");
-      }
-  }, [postalCode])
+        .then(
+          (res) => {
+            return res.json();
+          },
+          (error) => console.error(error)
+        )
+        .then(
+          (result) => {
+            console.log("result", result);
+            setLocality(prop("value", result));
+          },
+          (error) => console.error(error)
+        );
+    }
+    if (REGEX_POSTAL_CODE.test(postalCode)) {
+      fetchData();
+    } else if (locality.length) {
+      setLocality("");
+    }
+  }, [postalCode]);
 
   return (
     <>
@@ -85,38 +96,36 @@ const RegisterForm2 = (props) => {
         </View>
         <Text style={styles.title}>Qual a sua morada? </Text>
         <View style={styles.inputRow}>
+          <Text style={styles.title1}>Rua, Porta, Andar</Text>
 
-        <Text style={styles.title1}>Rua, Porta, Andar</Text>
+          <TextInput
+            value={street}
+            type="text"
+            placeholder="Rua"
+            style={styles.TextInputStyle}
+            name="street"
+            onChangeText={(Street) => setStreet(Street)}
+          />
 
-        <TextInput
-          value={street}
-          type="text"
-          placeholder="Rua"
-          style={styles.TextInputStyle}
-          name="street"
-          onChangeText={(Street) => setStreet(Street)}
-        />
+          <TextInput
+            value={door}
+            type="text"
+            placeholder="Porta"
+            style={styles.TextInputStyle}
+            name="door"
+            keyboardType="numeric"
+            onChangeText={(Door) => setDoor(Door)}
+          />
 
-        <TextInput
-          value={door}
-          type="text"
-          placeholder="Porta"
-          style={styles.TextInputStyle}
-          name="door"
-          keyboardType="numeric"
-          onChangeText={(Door) => setDoor(Door)}
-        />
-
-        <TextInput
-          value={floor}
-          type="text"
-          placeholder="Andar"
-          style={styles.TextInputStyle}
-          name="floor"
-          onChangeText={(Floor) => setFloor(Floor)}
-        />
-
-    </View>
+          <TextInput
+            value={floor}
+            type="text"
+            placeholder="Andar"
+            style={styles.TextInputStyle}
+            name="floor"
+            onChangeText={(Floor) => setFloor(Floor)}
+          />
+        </View>
 
         <Text>Código Postal</Text>
         <TextInput
@@ -127,7 +136,7 @@ const RegisterForm2 = (props) => {
           name="postalCode"
           id="zipcode"
           keyboardType="numeric"
-          onChangeText={(PostalCode) => setPostalColde(PostalCode) }
+          onChangeText={(PostalCode) => setPostalColde(PostalCode)}
         />
 
         <Text>{locality}</Text>
@@ -151,12 +160,13 @@ const RegisterForm2 = (props) => {
           editable={false}
           onChangeText={(Country) => setCountry(Country)}
         />
-      </View>
-      <View style={styles.buttonOK}>
+
+        <View style={styles.buttonOK}>
           <TouchableOpacity onPress={saveNnavigate}>
             <Text style={{ color: "white" }}> Seguinte </Text>
           </TouchableOpacity>
         </View>
+      </View>
     </>
   );
 };
@@ -164,13 +174,12 @@ const RegisterForm2 = (props) => {
 export default RegisterForm2;
 
 const styles = StyleSheet.create({
-
   header: {
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 50,
-    width: '15%',
-    height: '7%',
+    width: "15%",
+    height: "7%",
     backgroundColor: "#1DC690",
     paddingVertical: 10,
     borderRadius: 45,
@@ -183,17 +192,17 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 
-  TextInputStyle: {  
-      textAlign: 'center',  
-      height: 40,    
-      marginBottom: 10,
-      borderBottomColor: '#726F6F',
-      borderBottomWidth: 1,  
-   } ,
+  TextInputStyle: {
+    textAlign: "center",
+    height: 40,
+    marginBottom: 10,
+    borderBottomColor: "#726F6F",
+    borderBottomWidth: 1,
+  },
 
-  inputRow:{
-    flexDirection:"row",
-    marginHorizontal:55, 
+  inputRow: {
+    flexDirection: "row",
+    marginHorizontal: 55,
     justifyContent: "space-around",
     padding: 10,
   },
@@ -219,7 +228,4 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 45,
   },
-
-
-
 });
