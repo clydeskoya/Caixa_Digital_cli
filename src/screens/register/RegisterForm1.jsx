@@ -4,12 +4,13 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-nativ
 // import { RadioButton } from "react-native-paper";
 import RadioGroup from 'react-native-radio-buttons-group';
 const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;
-
 const RegisterForm1 = (props) => {
   const [username, setUserName] = useState("Irina");
   const [usersurname, setUserSurname] = useState("Fernandes");
   const [dateofbirth, setUserDateofbitrh] = useState("07/11/1998");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState();
+  debugger
+  // const [radioButtons, setRadioButtons] = useState(radioButtonsData)
   const radioButtonsData = [{
     id: '1', 
     label: 'Feminino',
@@ -23,10 +24,11 @@ const RegisterForm1 = (props) => {
     label:'Outro',
     value: 'Outro'
 }]
-const [radioButtons, setRadioButtons] = useState(radioButtonsData)
-function onPressRadioButton(gender) {
-   setGender(gender)
-}
+
+// function onPressRadioButton(radioButtonsArray) {
+//   setRadioButtons(radioButtonsArray);
+// }
+
   const counterContext2 = useContext(CounterContext2);
 
   const saveNnavigate = () => {
@@ -98,7 +100,7 @@ function onPressRadioButton(gender) {
         <Text style={styles.title}>Género</Text>
  
         <RadioGroup
-            radioButtons={radioButtons} 
+            radioButtons={radioButtonsData} 
             onPress={(gender) => setGender(gender)}
             layout="row" />
             
