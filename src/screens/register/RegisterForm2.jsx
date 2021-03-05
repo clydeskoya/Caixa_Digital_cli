@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 50,
-    width: '15%',
+    width: '50%',
     height: '7%',
     backgroundColor: "#1DC690",
     paddingVertical: 10,
@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
 
   container: {
     height: "100%",
-    alignItems: "left",
-    justifyContent: "left",
+    alignItems: "center",
+    justifyContent: "center",
     padding: 8,
   },
 
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   title1: {
     fontWeight: "bold",
     fontSize: 13,
-    alignItems: "left",
+    alignItems: "center",
     justifyContent: "center",
   },
 
