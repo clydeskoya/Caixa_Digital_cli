@@ -81,7 +81,7 @@ const RegisterForm2 = (props) => {
     <>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{ color: "white", fontWeight: "bold" }}> Registo </Text>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize:22 }}> Registo </Text>
         </View>
         <Text style={styles.title}>Qual a sua morada? </Text>
         <View style={styles.inputRow}>

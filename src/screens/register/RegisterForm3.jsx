@@ -40,7 +40,7 @@ const RegisterForm3 = (props) => {
       <View style={styles.container}>
 
       <View style={styles.header}>
-         <Text style={{ color: "white", fontWeight: "bold", fontSize:'20' }}> Registo </Text>
+         <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}> Registo </Text>
       </View>
 
       <Text style={{ color: "black", fontWeight:"bold" }}> Dados adicionais: </Text>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: '3%',
-    width: '15%',
+    width: '50%',
     height: '7%',
     backgroundColor: "#1DC690",
     paddingVertical: 10,
