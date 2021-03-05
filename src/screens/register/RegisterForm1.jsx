@@ -66,6 +66,8 @@ const RegisterForm1 = (props) => {
             Registo{" "}
           </Text>
         </View>
+
+        <View style={styles.container2}>
         <Text style={styles.title}>Qual o seu nome? </Text>
         <View style={styles.inputRow}>
           <TextInput
@@ -76,6 +78,7 @@ const RegisterForm1 = (props) => {
             name="username"
             onChangeText={(UserName) => setUserName(UserName)}
           />
+        
 
           <TextInput
             value={usersurname}
@@ -86,7 +89,10 @@ const RegisterForm1 = (props) => {
             onChangeText={(UserSurname) => setUserSurname(UserSurname)}
           />
         </View>
+        </View>
 
+
+        <View style={styles.container2}>
         <Text style={styles.title}>Data de nascimento </Text>
         <TextInput
           value={dateofbirth}
@@ -96,28 +102,21 @@ const RegisterForm1 = (props) => {
           name="dateofbirth"
           onChangeText={(dateofbirth) => setUserDateofbitrh(dateofbirth)}
         />
+        </View>
 
+
+        <View style={styles.container2}>
         <Text style={styles.title}>Género</Text>
 
         <RadioForm
           radio_props={radio_props}
+          buttonColor="#000000"
+          formHorizontal={true}
+          
           initial={0}
           onPress={setGender}
         />
-
-        {/* <RadioButton.Group
-          onValueChange={(gender) => setGender(gender)}
-          value={gender}
-          
-        > 
-        
-           
-            {/* <RadioButton.Item label="Feminino" value="Feminino" />
-            <RadioButton.Item label="Masculino" value="Masculino" />
-            <RadioButton.Item label="Outro" value="Outro" />
-
-            
-        </RadioButton.Group> */}
+        </View>
 
         <TouchableOpacity onPress={saveNnavigate}>
           <View style={styles.buttonOK}>
@@ -135,18 +134,24 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 50,
+    marginBottom: "8%",
     width: "50%",
     height: "7%",
+    marginTop: "15%",
     backgroundColor: "#1DC690",
-    paddingVertical: 10,
     borderRadius: 15,
   },
   container: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 8,
+    //padding: 8,
   },
+  container2: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "5%",
+  },
+
   TextInputStyle: {
     textAlign: "center",
     height: 40,
@@ -157,6 +162,7 @@ const styles = StyleSheet.create({
   inputRow: {
     justifyContent: "center",
     flexDirection: "row",
+    
     marginHorizontal: 55,
     justifyContent: "space-between",
     padding: 10,

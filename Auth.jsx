@@ -12,7 +12,7 @@ const Auth = () => (
   <Stack.Navigator initialRouteName="LoginScreen">
     <Stack.Screen
       name="LoginForm"
-      component={RegisterForm3}
+      component={LoginForm}
      /*  component={LoginForm} */
       options={{ headerShown: false }}
     />
