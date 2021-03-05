@@ -36,31 +36,40 @@ const RegisterForm3 = (props) => {
   };
 
   return (
-    <>
-      <View>
-        <Text>Dados adicionais: </Text>
-        <Text>Número de BI/CC </Text>
+    <> 
+      <View style={styles.container}>
+
+      <View style={styles.header}>
+         <Text style={{ color: "white", fontWeight: "bold" }}> Registo </Text>
+      </View>
+
+      <Text style={{ color: "black", fontWeight:"bold" }}> Dados adicionais: </Text>
+
+      <Text style={{ color: "black", fontWeight:"bold" }}> Número de BI/CC </Text>
         <TextInput
           type="text"
           placeholder="Número de BI/CC"
+          style={styles.TextInputStyle}
           name="BI"
           onChangeText={(BI) => setBI(BI)}
         />
 
-        <Text>Telemóvel </Text>
+        <Text style={{ color: "black", fontWeight:"bold" }}> Telemóvel </Text>
         <TextInput
           type="text"
           placeholder="Número de telemóvel"
+          style={styles.TextInputStyle}
           name="phoneNumber"
           keyboardType="numeric"
           //maxLength="9"
           onChangeText={(Phone) => setPhoneNumber(Phone)}
         />
 
-        <Text>NIF </Text>
+        <Text style={{ color: "black", fontWeight:"bold" }}> NIF </Text>
         <TextInput
           type="text"
           placeholder="XXXXXXXXX"
+          style={styles.TextInputStyle}
           name="NIF"
           keyboardType="numeric"
           //maxLength="9"
@@ -72,6 +81,7 @@ const RegisterForm3 = (props) => {
             <Text style={{ color: "white" }}> Seguinte </Text>
           </TouchableOpacity>
         </View>
+
       </View>
     </>
   );
@@ -80,6 +90,7 @@ const RegisterForm3 = (props) => {
 export default RegisterForm3;
 
 const styles = StyleSheet.create({
+  
   header: {
     marginHorizontal: 55,
     alignItems: "center",
