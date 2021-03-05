@@ -81,7 +81,7 @@ const RegisterForm2 = (props) => {
     <>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{ color: "white", fontWeight: "bold" }}> Registo </Text>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize:22 }}> Registo </Text>
         </View>
         <Text style={styles.title}>Qual a sua morada? </Text>
         <View style={styles.inputRow}>
@@ -151,11 +151,11 @@ const RegisterForm2 = (props) => {
           editable={false}
           onChangeText={(Country) => setCountry(Country)}
         />
-      </View>
       <View style={styles.buttonOK}>
           <TouchableOpacity onPress={saveNnavigate}>
             <Text style={{ color: "white" }}> Seguinte </Text>
           </TouchableOpacity>
+        </View>
         </View>
     </>
   );
@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
 
   container: {
     height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "left",
+    justifyContent: "left",
     padding: 8,
   },
 
@@ -201,11 +201,15 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     //fontSize: 22,
+    alignItems: "center",
+    justifyContent: "center"
   },
 
   title1: {
     fontWeight: "bold",
     fontSize: 13,
+    alignItems: "left",
+    justifyContent: "center",
   },
 
   buttonOK: {
