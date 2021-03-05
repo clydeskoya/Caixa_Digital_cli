@@ -1,4 +1,10 @@
-import { StyleSheet, TouchableOpacity, Text, TextInput, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { prop } from "ramda";
 import React, { useState, useContext, useEffect } from "react";
 import { CounterContext2 } from "../../common/context/form.register2";
@@ -56,26 +62,31 @@ const RegisterForm2 = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("batatas");
       const zip = postalCode.slice(0, 4);
       const code = postalCode.slice(5, 8);
       const ola = await fetch(
         `https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`
       )
-        .then((res) => {
-          return res.json();
-        }, (error) => console.error(error))
-        .then((result) => {
-      console.log('result', result);
-          setLocality(prop('value', result));
-        }, (error) => console.error(error))
-      }
-      if (REGEX_POSTAL_CODE.test(postalCode)) {
-        fetchData()
-      } else if (locality.length ){
-        setLocality("");
-      }
-  }, [postalCode])
+        .then(
+          (res) => {
+            return res.json();
+          },
+          (error) => console.error(error)
+        )
+        .then(
+          (result) => {
+            console.log("result", result);
+            setLocality(prop("value", result));
+          },
+          (error) => console.error(error)
+        );
+    }
+    if (REGEX_POSTAL_CODE.test(postalCode)) {
+      fetchData();
+    } else if (locality.length) {
+      setLocality("");
+    }
+  }, [postalCode]);
 
   return (
     <>
@@ -85,38 +96,36 @@ const RegisterForm2 = (props) => {
         </View>
         <Text style={styles.title}>Qual a sua morada? </Text>
         <View style={styles.inputRow}>
+          <Text style={styles.title1}>Rua, Porta, Andar</Text>
 
-        <Text style={styles.title1}>Rua, Porta, Andar</Text>
+          <TextInput
+            value={street}
+            type="text"
+            placeholder="Rua"
+            style={styles.TextInputStyle}
+            name="street"
+            onChangeText={(Street) => setStreet(Street)}
+          />
 
-        <TextInput
-          value={street}
-          type="text"
-          placeholder="Rua"
-          style={styles.TextInputStyle}
-          name="street"
-          onChangeText={(Street) => setStreet(Street)}
-        />
+          <TextInput
+            value={door}
+            type="text"
+            placeholder="Porta"
+            style={styles.TextInputStyle}
+            name="door"
+            keyboardType="numeric"
+            onChangeText={(Door) => setDoor(Door)}
+          />
 
-        <TextInput
-          value={door}
-          type="text"
-          placeholder="Porta"
-          style={styles.TextInputStyle}
-          name="door"
-          keyboardType="numeric"
-          onChangeText={(Door) => setDoor(Door)}
-        />
-
-        <TextInput
-          value={floor}
-          type="text"
-          placeholder="Andar"
-          style={styles.TextInputStyle}
-          name="floor"
-          onChangeText={(Floor) => setFloor(Floor)}
-        />
-
-    </View>
+          <TextInput
+            value={floor}
+            type="text"
+            placeholder="Andar"
+            style={styles.TextInputStyle}
+            name="floor"
+            onChangeText={(Floor) => setFloor(Floor)}
+          />
+        </View>
 
         <Text>Código Postal</Text>
         <TextInput
@@ -127,7 +136,7 @@ const RegisterForm2 = (props) => {
           name="postalCode"
           id="zipcode"
           keyboardType="numeric"
-          onChangeText={(PostalCode) => setPostalColde(PostalCode) }
+          onChangeText={(PostalCode) => setPostalColde(PostalCode)}
         />
 
         <Text>{locality}</Text>
@@ -164,43 +173,42 @@ const RegisterForm2 = (props) => {
 export default RegisterForm2;
 
 const styles = StyleSheet.create({
-
   header: {
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 50,
-    width: '15%',
-    height: '7%',
+    marginBottom: "8%",
+    width: "50%",
+    height: "7%",
+    marginTop: "15%",
     backgroundColor: "#1DC690",
-    paddingVertical: 10,
     borderRadius: 45,
   },
 
   container: {
-    height: "100%",
-    alignItems: "left",
-    justifyContent: "left",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     padding: 8,
   },
 
-  TextInputStyle: {  
-      textAlign: 'center',  
-      height: 40,    
-      marginBottom: 10,
-      borderBottomColor: '#726F6F',
-      borderBottomWidth: 1,  
-   } ,
+  TextInputStyle: {
+    textAlign: "left",
+    height: "65%",
+    width: "100%",
+    marginBottom: "3%",
+    borderBottomColor: "#726F6F",
+    borderBottomWidth: 1,
+  },
 
-  inputRow:{
-    flexDirection:"row",
-    marginHorizontal:55, 
+  inputRow: {
+    textAlign: "left",
+    flexDirection: "row",
     justifyContent: "space-around",
-    padding: 10,
+    padding: "2.5%",
   },
 
   title: {
     fontWeight: "bold",
-    //fontSize: 22,
+    fontSize: 15,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -208,22 +216,17 @@ const styles = StyleSheet.create({
   title1: {
     fontWeight: "bold",
     fontSize: 13,
-    alignItems: "left",
+    alignItems: "flex-start",
     justifyContent: "center",
   },
 
   buttonOK: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 290,
-    height: 45,
+    width: 250,
+    height: 40,
+    marginVertical:"10%",
     backgroundColor: "#1C4670",
-    paddingVertical: 10,
     borderRadius: 45,
   },
-
-
-
 });

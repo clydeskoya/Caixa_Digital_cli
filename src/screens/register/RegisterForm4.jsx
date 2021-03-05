@@ -56,32 +56,34 @@ const RegisterForm4 = (props) => {
     }
   };
 
-  const sendToServer = async (data) => {
-    fetch("https://caixa-digital-cms.herokuapp.com/auth/local/register", {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(data),
-    })
+  const sendToServer = async (formData) => {
+    const ola = await fetch(
+      "https://caixa-digital-cms.herokuapp.com/auth/local/register",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
           console.log("result", result);
           setData(result.rows);
+          console.log(data);
           formSubmitted("yes");
         },
         (err) => {
-          console.log("error", err);
+          console.error("error", err);
           formSubmitted("yes");
         }
       );
   };
 
-  
   const saveNnavigate = () => {
-    
     if (!email || !email1) {
       alert("Escreva o seu email");
       return;
@@ -122,7 +124,7 @@ const RegisterForm4 = (props) => {
     var form2Values = Object.values(forms[1]);
     var form3Values = Object.values(forms[2]);
 
-   // console.log(form1Values[0]);
+    // console.log(form1Values[0]);
 
     const data = {
       username: form1Values[0],
@@ -143,72 +145,100 @@ const RegisterForm4 = (props) => {
       password: password,
       user_type: "client",
     };
-    
-   sendToServer(data);
-    
+
+    console.log(data);
+    sendToServer(data);
   };
 
   return (
     <>
       <Provider>
-        <View>
-          <Text>Insira o seu email </Text>
-          <TextInput
-            type="email"
-            placeholder="Email"
-            id="email"
-            name="email1"
-            autoCapitalize="none"
-            onChangeText={(Email) => setEmail1(Email)}
-          />
-
-          <Text>Confirme o seu email </Text>
-          <TextInput
-            type="email"
-            placeholder="Email"
-            id="email_confirm"
-            name="email2"
-            autoCapitalize="none"
-            onChangeText={(Email) => setEmail(Email)}
-          />
-
-          <Text>Crie uma palavra-passe </Text>
-          <TextInput
-            type="password"
-            placeholder="Password"
-            id="pass"
-            name="password1"
-            autoCapitalize="none"
-            secureTextEntry={true}
-            onChangeText={(Pass) => setPassword1(Pass)}
-          />
-
-          <Text>Confirme a palavra-passe </Text>
-          <TextInput
-            type="password"
-            placeholder="Password"
-            id="pass_confirm"
-            name="password2"
-            autoCapitalize="none"
-            secureTextEntry={true}
-            onChangeText={(Pass) => setPassword(Pass)}
-          />
-
-          <View style={styles.buttonOK}>
-            <TouchableOpacity onPress={saveNnavigate}>
-              <Text style={{ color: "white" }}> Criar conta </Text>
-            </TouchableOpacity>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
+              {" "}
+              Registo{" "}
+            </Text>
           </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Insira o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email"
+                name="email1"
+                autoCapitalize="none"
+                onChangeText={(Email) => setEmail1(Email)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email_confirm"
+                name="email2"
+                autoCapitalize="none"
+                onChangeText={(Email) => setEmail(Email)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Crie uma palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass"
+                name="password1"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                onChangeText={(Pass) => setPassword1(Pass)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme a palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass_confirm"
+                name="password2"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                onChangeText={(Pass) => setPassword(Pass)}
+              />
+            </View>
+          </View>
+
+         
+          <TouchableOpacity onPress={saveNnavigate}>
+            <View style={styles.buttonOK}>
+              <Text style={{ color: "white" }}> Criar conta </Text>
+            </View>
+          </TouchableOpacity>
 
           <View>
             <Portal>
               {/* <Button onPress={showDialog}>Show Dialog</Button> */}
               <Dialog visible={visible} dismissable={false}>
-               {/*  <Dialog.Title>Heyy</Dialog.Title> */}
-                 <Dialog.Title>{dialogTextTitle}</Dialog.Title> 
+                {/*  <Dialog.Title>Heyy</Dialog.Title> */}
+                <Dialog.Title>{dialogTextTitle}</Dialog.Title>
                 <Dialog.Content>
                   {/* <Paragraph>Sou a Irina</Paragraph> */}
-                   <Paragraph>{dialogTextContent}</Paragraph> 
+                  <Paragraph>{dialogTextContent}</Paragraph>
                 </Dialog.Content>
                 <Dialog.Actions>
                   <Button
@@ -216,7 +246,9 @@ const RegisterForm4 = (props) => {
                     onPress={
                       (hideDialog, () => props.navigation.navigate("LoginForm"))
                     }
-                  >OK </Button>
+                  >
+                    OK{" "}
+                  </Button>
                 </Dialog.Actions>
               </Dialog>
             </Portal>
@@ -231,49 +263,49 @@ export default RegisterForm4;
 
 const styles = StyleSheet.create({
   header: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 140,
-    height: 50,
+    marginBottom: "8%",
+    width: "50%",
+    height: "7%",
+    marginTop: "15%",
     backgroundColor: "#1DC690",
-    paddingVertical: 10,
     borderRadius: 45,
   },
   container: {
-    height: "100%",
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 8,
+  },
+  container2: {
+    alignItems: "flex-start",
+    justifyContent: "center",
+    padding: "3%",
   },
   TextInputStyle: {
-    textAlign: "center",
-    height: 40,
-    marginBottom: 10,
+    textAlign: "left",
+    height: "65%",
+    width: "100%",
+    marginBottom: "3%",
     borderBottomColor: "#726F6F",
     borderBottomWidth: 1,
   },
   inputRow: {
+    textAlign: "left",
     flexDirection: "row",
-    marginHorizontal: 55,
     justifyContent: "space-around",
-    //alignItems:"spaceAround",
-    padding: 10,
+    padding: "2.5%",
   },
   title: {
     fontWeight: "bold",
+    fontSize: 15,
   },
   buttonOK: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 290,
-    height: 45,
+    width: 250,
+    height: 40,
+    marginVertical:"10%",
     backgroundColor: "#1C4670",
-    paddingVertical: 10,
     borderRadius: 45,
   },
 });
