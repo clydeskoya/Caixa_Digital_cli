@@ -265,16 +265,10 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     justifyContent: "center",
-<<<<<<< HEAD
-    marginTop: 30,
-    width: '50%',
-    height: '7%',
-=======
     marginBottom: "8%",
     width: "50%",
     height: "7%",
     marginTop: "15%",
->>>>>>> 902b0001c03a0bf8121676b3bd702fbb9e2be004
     backgroundColor: "#1DC690",
     borderRadius: 45,
   },
