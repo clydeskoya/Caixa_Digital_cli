@@ -144,14 +144,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonOK: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 290,
-    height: 45,
+    width: 250,
+    height: 40,
+    marginVertical:"10%",
     backgroundColor: "#1C4670",
-    paddingVertical: 10,
     borderRadius: 45,
   },
 });

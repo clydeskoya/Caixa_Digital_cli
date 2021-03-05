@@ -176,39 +176,39 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 50,
-    width: "15%",
+    marginBottom: "8%",
+    width: "50%",
     height: "7%",
+    marginTop: "15%",
     backgroundColor: "#1DC690",
-    paddingVertical: 10,
     borderRadius: 45,
   },
 
   container: {
-    height: "100%",
-    alignItems: "left",
-    justifyContent: "left",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     padding: 8,
   },
 
   TextInputStyle: {
-    textAlign: "center",
-    height: 40,
-    marginBottom: 10,
+    textAlign: "left",
+    height: "65%",
+    width: "100%",
+    marginBottom: "3%",
     borderBottomColor: "#726F6F",
     borderBottomWidth: 1,
   },
 
   inputRow: {
+    textAlign: "left",
     flexDirection: "row",
-    marginHorizontal: 55,
     justifyContent: "space-around",
-    padding: 10,
+    padding: "2.5%",
   },
 
   title: {
     fontWeight: "bold",
-    //fontSize: 22,
+    fontSize: 15,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -216,19 +216,17 @@ const styles = StyleSheet.create({
   title1: {
     fontWeight: "bold",
     fontSize: 13,
-    alignItems: "left",
+    alignItems: "flex-start",
     justifyContent: "center",
   },
 
   buttonOK: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 290,
-    height: 45,
+    width: 250,
+    height: 40,
+    marginVertical:"10%",
     backgroundColor: "#1C4670",
-    paddingVertical: 10,
     borderRadius: 45,
   },
 });

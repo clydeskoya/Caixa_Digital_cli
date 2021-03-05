@@ -92,7 +92,6 @@ export default RegisterForm3;
 const styles = StyleSheet.create({
   
   header: {
-    //marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
     marginBottom: '3%',
@@ -104,8 +103,6 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    height: "100%",
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 8,
@@ -113,7 +110,8 @@ const styles = StyleSheet.create({
 
   TextInputStyle: {
     textAlign: "center",
-    height: 40,
+    height: "65%",
+    width: "100%",
     marginBottom: '1%',
     borderBottomColor: "#726F6F",
     borderBottomWidth: 1,
@@ -121,10 +119,9 @@ const styles = StyleSheet.create({
 
   inputRow: {
     flexDirection: "row",
-    marginHorizontal: 55,
     justifyContent: "space-around",
     //alignItems:"spaceAround",
-    padding: 10,
+    padding: "2.5%",
   },
 
   title: {
@@ -132,14 +129,12 @@ const styles = StyleSheet.create({
   },
 
   buttonOK: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 290,
-    height: 45,
+    width: 250,
+    height: 40,
+    marginVertical:"10%",
     backgroundColor: "#1C4670",
-    paddingVertical: 10,
     borderRadius: 45,
   },
 

@@ -84,13 +84,11 @@ const LoginForm = (props) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {/* <View style={styles.oval} /> */}
         <View style={styles.oval}>
           <Image
             source={require("../../img/logowtxt.png")}
             style={styles.logo}
           />
-          {/* <View> */}
         </View>
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" color="#1C4670" size={35} />
@@ -118,18 +116,18 @@ const LoginForm = (props) => {
           />
         </View>
 
-        <View
-          style={styles.bottomActions}
-        >
+       
           <TouchableOpacity onPress={login}>
+          <View style={styles.bottomActions}>
             <Text style={styles.textLogin}> Login </Text>
+            </View>
           </TouchableOpacity>
-        </View>
+        
         
         <Text
           style={{
-            padding: 7,
-            marginTop: 25,
+            //padding: 7,
+           // marginTop: 25,
           }}
         >
           Não tem uma conta?
@@ -148,27 +146,21 @@ const LoginForm = (props) => {
 export default LoginForm;
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   oval: {
-    width: 500,
-    height: 500,
-    // left: -120,
-    // top: -189,
-    top: "-30%",
+    width: "130%",
+    height: "100%",
+    //top: "-30%",
     borderRadius: 700,
     backgroundColor: "#1C4670",
-    transform: [{ scaleX: 1 }],
     alignItems: "center",
     justifyContent: "center",
   },
   logo: {
-    // position: "absolute",
-    width: 390,
-    height: 295,
+    width: "82%",
+    height: "85%",
     top: "25%",
   },
   inputRow: {
@@ -176,13 +168,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 55,
   },
   input: {
-    // borderWidth: 1,
-    // borderColor: "#0096c7",
-    padding: 5,
-    margin: 10,
-    width: 200,
-
-    // borderRadius: 23,
+    margin: "3%",
+    width: "80%",
     borderBottomColor: "#1C4670",
     borderBottomWidth: 1,
   },
@@ -191,14 +178,12 @@ const styles = StyleSheet.create({
   },
   textLogin: { color: "white" },
   bottomActions: {
-    marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 290,
-    height: 45,
+    width: 250,
+    height: 40,
+    marginVertical:"10%",
     backgroundColor: "#1C4670",
-    paddingVertical: 10,
     borderRadius: 45,
   },
 });
