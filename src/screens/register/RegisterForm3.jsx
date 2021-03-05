@@ -36,42 +36,52 @@ const RegisterForm3 = (props) => {
   };
 
   return (
-    <>
-      <View>
-        <Text>Dados adicionais: </Text>
-        <Text>Número de BI/CC </Text>
+    <> 
+      <View style={styles.container}>
+
+      <View style={styles.header}>
+         <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}> Registo </Text>
+      </View>
+
+      <Text style={{ color: "black", fontWeight:"bold" }}> Dados adicionais: </Text>
+
+
+      <Text style={{ color: "black", fontWeight:"bold" }}> Número de BI/CC </Text>
         <TextInput
           type="text"
           placeholder="Número de BI/CC"
+          style={styles.TextInputStyle}
           name="BI"
           onChangeText={(BI) => setBI(BI)}
         />
 
-        <Text>Telemóvel </Text>
+        <Text style={{ color: "black", fontWeight:"bold" }}> Telemóvel </Text>
         <TextInput
           type="text"
           placeholder="Número de telemóvel"
+          style={styles.TextInputStyle}
           name="phoneNumber"
           keyboardType="numeric"
           //maxLength="9"
           onChangeText={(Phone) => setPhoneNumber(Phone)}
         />
 
-        <Text>NIF </Text>
+        <Text style={{ color: "black", fontWeight:"bold" }}> NIF </Text>
         <TextInput
           type="text"
           placeholder="XXXXXXXXX"
+          style={styles.TextInputStyle}
           name="NIF"
           keyboardType="numeric"
           //maxLength="9"
           onChangeText={(NIF) => setNIF(NIF)}
         />
 
-        <View style={styles.buttonOK}>
           <TouchableOpacity onPress={saveNnavigate}>
+          <View style={styles.buttonOK}>
             <Text style={{ color: "white" }}> Seguinte </Text>
+            </View>
           </TouchableOpacity>
-        </View>
       </View>
     </>
   );
@@ -80,17 +90,19 @@ const RegisterForm3 = (props) => {
 export default RegisterForm3;
 
 const styles = StyleSheet.create({
+  
   header: {
-    marginHorizontal: 55,
+    //marginHorizontal: 55,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-    width: 140,
-    height: 50,
+    marginBottom: '3%',
+    width: '50%',
+    height: '7%',
     backgroundColor: "#1DC690",
     paddingVertical: 10,
     borderRadius: 45,
   },
+
   container: {
     height: "100%",
     // flex: 1,
@@ -98,13 +110,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 8,
   },
+
   TextInputStyle: {
     textAlign: "center",
     height: 40,
-    marginBottom: 10,
+    marginBottom: '1%',
     borderBottomColor: "#726F6F",
     borderBottomWidth: 1,
   },
+
   inputRow: {
     flexDirection: "row",
     marginHorizontal: 55,
@@ -112,9 +126,11 @@ const styles = StyleSheet.create({
     //alignItems:"spaceAround",
     padding: 10,
   },
+
   title: {
     fontWeight: "bold",
   },
+
   buttonOK: {
     marginHorizontal: 55,
     alignItems: "center",
@@ -126,4 +142,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 45,
   },
+
 });

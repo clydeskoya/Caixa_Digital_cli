@@ -52,7 +52,7 @@ const RegisterForm1 = (props) => {
     <>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{ color: "white", fontWeight: "bold" }}> Registo </Text>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize:22 }}> Registo </Text>
         </View>
         <Text style={styles.title}>Qual o seu nome? </Text>
         <View style={styles.inputRow}>
@@ -98,11 +98,11 @@ const RegisterForm1 = (props) => {
           </View>
         </RadioButton.Group>
 
+        <TouchableOpacity onPress={saveNnavigate}>
         <View style={styles.buttonOK}>
-          <TouchableOpacity onPress={saveNnavigate}>
             <Text style={{ color: "white" }}> Seguinte </Text>
-          </TouchableOpacity>
         </View>
+        </TouchableOpacity>
       </View>
     </>
   );
