@@ -125,8 +125,6 @@ const RegisterForm4 = (props) => {
     var form2Values = Object.values(forms[1]);
     var form3Values = Object.values(forms[2]);
 
-    // console.log(form1Values[0]);
-
     const data = {
       username: form1Values[0],
       usersurname: form1Values[1],
