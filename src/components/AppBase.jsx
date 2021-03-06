@@ -5,10 +5,7 @@ import SplashScreen from '../screens/SplashScreen';
 import Auth from '../../Auth';
 import { Stack } from '../common/stack';
 // import { CounterContext, formReducerInitialState, registerFormReducer } from '../common/context/form.register';
-import {
-  CounterContext2,
-  // formReducerInitialState2, registerFormReducer2
-} from '../common/context/form.register2';
+import { CounterContext2, dispatch2, state2 } from '../common/context/form.register2';
 
 const AppBase = () => (
   <CounterContext2.Provider
