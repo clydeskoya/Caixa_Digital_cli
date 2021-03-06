@@ -63,7 +63,7 @@ const RegisterForm4 = (props) => {
   const sendToServer = async (formData) => {
     setLoading(true);
     const ola = await fetch(
-      "https://caixa-digital-cms.herokuapp.com/auth/local/register",
+      "http://25586195f342.ngrok.io/auth/local/register",
       {
         method: "POST",
         headers: {
@@ -84,7 +84,7 @@ const RegisterForm4 = (props) => {
         },
         (err) => {
           console.error("error", err);
-          formSubmitted("yes");
+          formSubmitted("no");
           setLoading(false);
         }
       );
@@ -132,8 +132,8 @@ const RegisterForm4 = (props) => {
     var form3Values = Object.values(forms[2]);
 
     const data = {
-      username: form1Values[0],
-      usersurname: form1Values[1],
+      name: form1Values[0] + " " + form1Values[1],
+      username: "chachada",
       dateofbirth: form1Values[2],
       gender: form1Values[3],
       street: form2Values[0],
@@ -141,7 +141,7 @@ const RegisterForm4 = (props) => {
       floor: form2Values[2],
       postalCode: form2Values[3],
       locality: form2Values[4],
-      district: form2Values[5],
+      city: form2Values[5],
       country: form2Values[6],
       bi: form3Values[0],
       phoneNumber: form3Values[1],
@@ -245,10 +245,14 @@ const RegisterForm4 = (props) => {
               {/* <Button onPress={showDialog}>Show Dialog</Button> */}
               <Dialog visible={visible} dismissable={false}>
                 {/*  <Dialog.Title>Heyy</Dialog.Title> */}
-                <Dialog.Title>{dialogTextTitle}</Dialog.Title>
+                <Dialog.Title>
+                  <Text>{dialogTextTitle}</Text>
+                </Dialog.Title>
                 <Dialog.Content>
                   {/* <Paragraph>Sou a Irina</Paragraph> */}
-                  <Paragraph>{dialogTextContent}</Paragraph>
+                  <Paragraph>
+                    <Text>{dialogTextContent}</Text>
+                  </Paragraph>
                 </Dialog.Content>
                 <Dialog.Actions>
                   <Button

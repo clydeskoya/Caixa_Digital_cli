@@ -28,7 +28,7 @@ const LoginForm = (props) => {
 
     try {
       const { data } = await axios.post(
-        "https://caixa-digital-cms.herokuapp.com/auth/local",
+        "http://25586195f342.ngrok.io/auth/local",
         {
           identifier: email,
           password: pass,
