@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  ScrollView,
   View,
 } from "react-native";
 // import { RadioButton } from "react-native-paper";
@@ -59,17 +60,18 @@ const RegisterForm1 = (props) => {
 
   return (
     <>
-       <View style={styles.container}> 
-        <View style={styles.header}>
-          <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
-            {" "}
-            Registo{" "}
-          </Text>
-        </View>
-         
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
+              {" "}
+              Registo{" "}
+            </Text>
+          </View>
 
-        {/* <View style={styles.container}> */}
-          <Text style={styles.title}>Qual o seu nome? </Text>{/*</View>*/}
+          {/* <View style={styles.container}> */}
+          <Text style={styles.title}>Qual o seu nome? </Text>
+          {/*</View>*/}
           <View style={styles.inputRow}>
             <TextInput
               value={username}
@@ -89,43 +91,44 @@ const RegisterForm1 = (props) => {
               onChangeText={(UserSurname) => setUserSurname(UserSurname)}
             />
           </View>
-        {/* </View> */}
+          {/* </View> */}
 
-        <View style={styles.container2}>
-          <Text style={styles.title}>Data de nascimento </Text>
-          <View style= {styles.inputRow}>
-          <TextInput
-            value={dateofbirth}
-            type="text"
-            placeholder="01/01/2000"
-            style={styles.TextInputStyleDate}
-            name="dateofbirth"
-            onChangeText={(dateofbirth) => setUserDateofbitrh(dateofbirth)}
-          />
+          <View style={styles.container2}>
+            <Text style={styles.title}>Data de nascimento </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                value={dateofbirth}
+                type="text"
+                placeholder="01/01/2000"
+                style={styles.TextInputStyleDate}
+                name="dateofbirth"
+                onChangeText={(dateofbirth) => setUserDateofbitrh(dateofbirth)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title1}>Género</Text>
+            <RadioForm
+              radio_props={radio_props}
+              buttonColor="#000000"
+              formHorizontal={true}
+              animation={true}
+              selectedButtonColor="#1DC690"
+              initial={0}
+              onPress={setGender}
+            />
+          </View>
+
+          <View style={styles.container}>
+            <TouchableOpacity onPress={saveNnavigate}>
+              <View style={styles.buttonOK}>
+                <Text style={{ color: "white" }}> Seguinte </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
-
-        <View style={styles.container2}>
-          <Text style={styles.title1}>Género</Text>
-          <RadioForm
-            radio_props={radio_props}
-            buttonColor="#000000"
-            formHorizontal={true}
-            animation={true}
-            selectedButtonColor="#1DC690"
-            initial={0}
-            onPress={setGender}
-          />
-        </View>
-
-        <View style={styles.container}>
-        <TouchableOpacity onPress={saveNnavigate}>
-          <View style={styles.buttonOK}>
-            <Text style={{ color: "white" }}> Seguinte </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      </View> 
+      </ScrollView>
     </>
   );
 };
@@ -164,14 +167,14 @@ const styles = StyleSheet.create({
   TextInputStyleSurname: {
     height: "65%",
     width: "45%",
-    marginLeft:"4%",
+    marginLeft: "4%",
     borderBottomColor: "#726F6F",
     borderBottomWidth: 1,
   },
   TextInputStyleDate: {
     // /* height: "65%",*/
     width: "25%",
-    marginLeft:"4%", 
+    marginLeft: "4%",
     borderBottomColor: "#726F6F",
     borderBottomWidth: 1,
   },
@@ -180,7 +183,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: "2.5%",
-    marginLeft:"2%"
+    marginLeft: "2%",
   },
   inputRowDate: {
     textAlign: "left",
@@ -196,7 +199,7 @@ const styles = StyleSheet.create({
   title1: {
     fontWeight: "bold",
     fontSize: 15,
-    marginBottom: '3%'
+    marginBottom: "3%",
   },
   buttonOK: {
     alignItems: "center",

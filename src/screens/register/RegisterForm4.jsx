@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import { CounterContext2 } from "../../common/context/form.register2";
 import axios from "axios";
@@ -152,85 +153,86 @@ const RegisterForm4 = (props) => {
 
   return (
     <>
-      <Provider>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
-              {" "}
-              Registo{" "}
-            </Text>
-          </View>
-
-          <View style={styles.container2}>
-            <Text style={styles.title}>Insira o seu email </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="email"
-                placeholder="Email"
-                id="email"
-                name="email1"
-                autoCapitalize="none"
-                onChangeText={(Email) => setEmail1(Email)}
-              />
+      <ScrollView>
+        <Provider>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <Text
+                style={{ color: "white", fontWeight: "bold", fontSize: 22 }}
+              >
+                {" "}
+                Registo{" "}
+              </Text>
             </View>
-          </View>
 
-          <View style={styles.container2}>
-            <Text style={styles.title}>Confirme o seu email </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="email"
-                placeholder="Email"
-                id="email_confirm"
-                name="email2"
-                autoCapitalize="none"
-                onChangeText={(Email) => setEmail(Email)}
-              />
+            <View style={styles.container2}>
+              <Text style={styles.title}>Insira o seu email </Text>
+              <View style={styles.inputRow}>
+                <TextInput
+                  style={styles.TextInputStyle}
+                  type="email"
+                  placeholder="Email"
+                  id="email"
+                  name="email1"
+                  autoCapitalize="none"
+                  onChangeText={(Email) => setEmail1(Email)}
+                />
+              </View>
             </View>
-          </View>
 
-          <View style={styles.container2}>
-            <Text style={styles.title}>Crie uma palavra-passe </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="password"
-                placeholder="Password"
-                id="pass"
-                name="password1"
-                autoCapitalize="none"
-                secureTextEntry={true}
-                onChangeText={(Pass) => setPassword1(Pass)}
-              />
+            <View style={styles.container2}>
+              <Text style={styles.title}>Confirme o seu email </Text>
+              <View style={styles.inputRow}>
+                <TextInput
+                  style={styles.TextInputStyle}
+                  type="email"
+                  placeholder="Email"
+                  id="email_confirm"
+                  name="email2"
+                  autoCapitalize="none"
+                  onChangeText={(Email) => setEmail(Email)}
+                />
+              </View>
             </View>
-          </View>
 
-          <View style={styles.container2}>
-            <Text style={styles.title}>Confirme a palavra-passe </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="password"
-                placeholder="Password"
-                id="pass_confirm"
-                name="password2"
-                autoCapitalize="none"
-                secureTextEntry={true}
-                onChangeText={(Pass) => setPassword(Pass)}
-              />
+            <View style={styles.container2}>
+              <Text style={styles.title}>Crie uma palavra-passe </Text>
+              <View style={styles.inputRow}>
+                <TextInput
+                  style={styles.TextInputStyle}
+                  type="password"
+                  placeholder="Password"
+                  id="pass"
+                  name="password1"
+                  autoCapitalize="none"
+                  secureTextEntry={true}
+                  onChangeText={(Pass) => setPassword1(Pass)}
+                />
+              </View>
             </View>
-          </View>
 
-         
-          <TouchableOpacity onPress={saveNnavigate}>
-            <View style={styles.buttonOK}>
-              <Text style={{ color: "white" }}> Criar conta </Text>
+            <View style={styles.container2}>
+              <Text style={styles.title}>Confirme a palavra-passe </Text>
+              <View style={styles.inputRow}>
+                <TextInput
+                  style={styles.TextInputStyle}
+                  type="password"
+                  placeholder="Password"
+                  id="pass_confirm"
+                  name="password2"
+                  autoCapitalize="none"
+                  secureTextEntry={true}
+                  onChangeText={(Pass) => setPassword(Pass)}
+                />
+              </View>
             </View>
-          </TouchableOpacity>
 
-          </View>  
+            <TouchableOpacity onPress={saveNnavigate}>
+              <View style={styles.buttonOK}>
+                <Text style={{ color: "white" }}> Criar conta </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
 
           <View>
             <Portal>
@@ -255,8 +257,8 @@ const RegisterForm4 = (props) => {
               </Dialog>
             </Portal>
           </View>
-        
-      </Provider>
+        </Provider>
+      </ScrollView>
     </>
   );
 };

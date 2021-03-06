@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import { CounterContext2 } from "../../common/context/form.register2";
 
@@ -44,68 +45,69 @@ const RegisterForm3 = (props) => {
 
   return (
     <>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
-            {" "}
-            Registo{" "}
-          </Text>
-        </View>
-
-        <View style={styles.container2}>
-          <Text style={styles.title1}> Dados adicionais: </Text>
-         </View>
-
-        <View style={styles.container2}> 
-          <Text style={styles.title}> Número de BI/CC </Text>
-          <View style={styles.inputRow}>
-            <TextInput
-              type="text"
-              placeholder="Número de BI/CC"
-              style={styles.TextInputStyle}
-              name="BI"
-              onChangeText={(BI) => setBI(BI)}
-            />
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
+              {" "}
+              Registo{" "}
+            </Text>
           </View>
-        </View>
 
-        <View style={styles.container2}>
-          <Text style={styles.title}> Telemóvel </Text>
-          <View style={styles.inputRow}>
-            <TextInput
-              type="text"
-              placeholder="Número de telemóvel"
-              style={styles.TextInputStyle}
-              name="phoneNumber"
-              keyboardType="numeric"
-              //maxLength="9"
-              onChangeText={(Phone) => setPhoneNumber(Phone)}
-            />
+          <View style={styles.container2}>
+            <Text style={styles.title1}> Dados adicionais: </Text>
           </View>
-        </View>
 
-        <View style={styles.container2}>
-          <Text style={styles.title}> NIF </Text>
-          <View style={styles.inputRow}>
-            <TextInput
-              type="text"
-              placeholder="XXXXXXXXX"
-              style={styles.TextInputStyle}
-              name="NIF"
-              keyboardType="numeric"
-              //maxLength="9"
-              onChangeText={(NIF) => setNIF(NIF)}
-            />
+          <View style={styles.container2}>
+            <Text style={styles.title}> Número de BI/CC </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                type="text"
+                placeholder="Número de BI/CC"
+                style={styles.TextInputStyle}
+                name="BI"
+                onChangeText={(BI) => setBI(BI)}
+              />
+            </View>
           </View>
-        </View>
 
-        <TouchableOpacity onPress={saveNnavigate}>
-          <View style={styles.buttonOK}>
-            <Text style={{ color: "white" }}> Seguinte </Text>
+          <View style={styles.container2}>
+            <Text style={styles.title}> Telemóvel </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                type="text"
+                placeholder="Número de telemóvel"
+                style={styles.TextInputStyle}
+                name="phoneNumber"
+                keyboardType="numeric"
+                //maxLength="9"
+                onChangeText={(Phone) => setPhoneNumber(Phone)}
+              />
+            </View>
           </View>
-        </TouchableOpacity>
 
-      </View>
+          <View style={styles.container2}>
+            <Text style={styles.title}> NIF </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                type="text"
+                placeholder="XXXXXXXXX"
+                style={styles.TextInputStyle}
+                name="NIF"
+                keyboardType="numeric"
+                //maxLength="9"
+                onChangeText={(NIF) => setNIF(NIF)}
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity onPress={saveNnavigate}>
+            <View style={styles.buttonOK}>
+              <Text style={{ color: "white" }}> Seguinte </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </>
   );
 };
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
     height: "7%",
     marginTop: "15%",
     backgroundColor: "#1DC690",
-    borderRadius:15,
+    borderRadius: 15,
   },
 
   container: {
@@ -169,10 +171,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 250,
     height: 40,
-   // marginVertical: "10%",
+    // marginVertical: "10%",
     //marginEnd: "5%",
     //bottom:"1%",
-   // marginTop: "50%",
+    // marginTop: "50%",
     backgroundColor: "#1C4670",
     borderRadius: 45,
   },

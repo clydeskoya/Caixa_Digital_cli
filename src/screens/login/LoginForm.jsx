@@ -82,7 +82,7 @@ const LoginForm = (props) => {
   }; */
 
   return (
-    //<ScrollView>
+    <ScrollView>
       <View style={styles.container}>
         <View style={styles.oval}>
           <Image
@@ -139,7 +139,7 @@ const LoginForm = (props) => {
           Registe-se
         </Text>
       </View>
-    //</ScrollView>
+    </ScrollView>
   );
 };
 
