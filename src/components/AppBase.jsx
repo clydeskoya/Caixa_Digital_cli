@@ -4,17 +4,22 @@ import SplashScreen from "../screens/SplashScreen";
 import Auth from "../../Auth";
 import { Stack } from "../common/stack";
 import {
+  CounterContext,
+  formReducerInitialState,
+  registerFormReducer,
+} from "../common/context/form.register";
+import { Button } from "react-native";
+import {
   CounterContext2,
   formReducerInitialState2,
   registerFormReducer2,
 } from "../common/context/form.register2";
 
-const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
-
 class AppBase extends React.Component {
   render() {
     return (
       <CounterContext2.Provider
+        //value={{ counterCount: state, counterDispatch: dispatch }}
         value={{ formData: state2, formDispatch: dispatch2 }}
       >
         <NavigationContainer>
