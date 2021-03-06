@@ -18,12 +18,12 @@ const RegisterForm1 = (props) => {
   const [username, setUserName] = useState("Irina");
   const [usersurname, setUserSurname] = useState("Fernandes");
   const [dateofbirth, setUserDateofbitrh] = useState("07/11/1998");
-  const [gender, setGender] = useState("-1");
+  const [gender, setGender] = useState("Feminino");
 
   var radio_props = [
-    { label: "Feminino", value: 0 },
-    { label: "Masculino", value: 1 },
-    { label: "Outro", value: 1 }
+    { label: "Feminino   ", value: 0 },
+    { label: "Masculino   ", value: 1 },
+    { label: "Outro", value: 1 },
   ];
 
   const counterContext2 = useContext(CounterContext2);
@@ -59,71 +59,73 @@ const RegisterForm1 = (props) => {
 
   return (
     <>
-      <View style={styles.container}>
+       <View style={styles.container}> 
         <View style={styles.header}>
           <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
             {" "}
             Registo{" "}
           </Text>
         </View>
+         
+
+        {/* <View style={styles.container}> */}
+          <Text style={styles.title}>Qual o seu nome? </Text>{/*</View>*/}
+          <View style={styles.inputRow}>
+            <TextInput
+              value={username}
+              type="text"
+              placeholder="Nome próprio"
+              style={styles.TextInputStyleName}
+              name="username"
+              onChangeText={(UserName) => setUserName(UserName)}
+            />
+
+            <TextInput
+              value={usersurname}
+              type="text"
+              placeholder="Apelido"
+              style={styles.TextInputStyleSurname}
+              name="usersurname"
+              onChangeText={(UserSurname) => setUserSurname(UserSurname)}
+            />
+          </View>
+        {/* </View> */}
 
         <View style={styles.container2}>
-        <Text style={styles.title}>Qual o seu nome? </Text>
-        <View style={styles.inputRow}>
+          <Text style={styles.title}>Data de nascimento </Text>
+          <View style= {styles.inputRow}>
           <TextInput
-            value={username}
+            value={dateofbirth}
             type="text"
-            placeholder="Nome próprio"
-            style={styles.TextInputStyle}
-            name="username"
-            onChangeText={(UserName) => setUserName(UserName)}
+            placeholder="01/01/2000"
+            style={styles.TextInputStyleDate}
+            name="dateofbirth"
+            onChangeText={(dateofbirth) => setUserDateofbitrh(dateofbirth)}
           />
-        
-
-          <TextInput
-            value={usersurname}
-            type="text"
-            placeholder="Apelido"
-            style={styles.TextInputStyle}
-            name="usersurname"
-            onChangeText={(UserSurname) => setUserSurname(UserSurname)}
-          />
+          </View>
         </View>
-        </View>
-
 
         <View style={styles.container2}>
-        <Text style={styles.title}>Data de nascimento </Text>
-        <TextInput
-          value={dateofbirth}
-          type="text"
-          placeholder="01/01/2000"
-          style={styles.TextInputStyle}
-          name="dateofbirth"
-          onChangeText={(dateofbirth) => setUserDateofbitrh(dateofbirth)}
-        />
+          <Text style={styles.title}>Género</Text>
+          <RadioForm
+            radio_props={radio_props}
+            buttonColor="#000000"
+            formHorizontal={true}
+            animation={true}
+            selectedButtonColor="#1DC690"
+            initial={0}
+            onPress={setGender}
+          />
         </View>
 
-
-        <View style={styles.container2}>
-        <Text style={styles.title}>Género</Text>
-
-        <RadioForm
-          radio_props={radio_props}
-          buttonColor="#000000"
-          formHorizontal={true}
-          
-          initial={0}
-          onPress={setGender}
-        />
-        </View>
-
+        <View style={styles.container}>
         <TouchableOpacity onPress={saveNnavigate}>
           <View style={styles.buttonOK}>
             <Text style={{ color: "white" }}> Seguinte </Text>
           </View>
         </TouchableOpacity>
       </View>
+      </View> 
     </>
   );
 };
@@ -144,7 +146,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    //padding: 8,
+    padding: "5%",
   },
   container2: {
     alignItems: "center",
@@ -152,23 +154,44 @@ const styles = StyleSheet.create({
     padding: "5%",
   },
 
-  TextInputStyle: {
-    textAlign: "center",
-    height: 40,
-    marginBottom: 10,
+  TextInputStyleName: {
+    height: "65%",
+    width: "45%",
+    marginRight: "4%",
+    borderBottomColor: "#726F6F",
+    borderBottomWidth: 1,
+  },
+  TextInputStyleSurname: {
+    height: "65%",
+    width: "45%",
+    marginLeft:"4%",
+    borderBottomColor: "#726F6F",
+    borderBottomWidth: 1,
+  },
+  TextInputStyleDate: {
+    // /* height: "65%",*/
+    width: "25%",
+    marginLeft:"4%", 
     borderBottomColor: "#726F6F",
     borderBottomWidth: 1,
   },
   inputRow: {
-    justifyContent: "center",
+    textAlign: "left",
     flexDirection: "row",
-    
-    marginHorizontal: 55,
-    justifyContent: "space-between",
-    padding: 10,
+    justifyContent: "space-around",
+    padding: "2.5%",
+    marginLeft:"2%"
+  },
+  inputRowDate: {
+    textAlign: "left",
+    //flexDirection: "row",
+    justifyContent: "space-around",
+    padding: "2.5%",
+    //marginLeft:"2%"
   },
   title: {
     fontWeight: "bold",
+    fontSize: 15,
   },
   buttonOK: {
     alignItems: "center",
