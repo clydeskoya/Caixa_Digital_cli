@@ -8,6 +8,7 @@ import {
   View,
   TextInput,
   Image,
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,17 +18,17 @@ const LoginForm = (props) => {
 
   const login = async () => {
     if (!email) {
-      alert("Indique o seu email");
+     Alert.alert("Indique o seu email");
       return;
     }
     if (!pass) {
-      alert("Forneça a sua password");
+     Alert.alert("Forneça a sua password");
       return;
     }
 
     try {
       const { data } = await axios.post(
-        "https://caixa-digital-cms.herokuapp.com/auth/local",
+        "http://25586195f342.ngrok.io/auth/local",
         {
           identifier: email,
           password: pass,
@@ -71,7 +72,7 @@ const LoginForm = (props) => {
           console.log(responseJson.data.email);
           props.navigation.navigate("Home");
         } else {
-          alert("Email ou password inválidos");
+         Alert.alert("Email ou password inválidos");
           console.log("Email ou password inválidos");
         }
       })
@@ -81,19 +82,14 @@ const LoginForm = (props) => {
   }; */
 
   return (
-    <>
+    <ScrollView>
       <View style={styles.container}>
-        <View style={styles.oval} />
-        <Image
-          source={require("../../img/logowtxt.png")}
-          style={{
-            position: "absolute",
-            width: 390,
-            height: 295,
-            top: 80,
-          }}
-        />
-        <View></View>
+        <View style={styles.oval}>
+          <Image
+            source={require("../../img/logowtxt.png")}
+            style={styles.logo}
+          />
+        </View>
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" color="#1C4670" size={35} />
           <TextInput
@@ -105,7 +101,7 @@ const LoginForm = (props) => {
             onChangeText={(Email) => setEmail(Email)}
           />
         </View>
-
+ 
         <View style={styles.inputRow}>
           <Ionicons name="key-outline" color="#1C4670" size={35} />
           <TextInput
@@ -120,74 +116,74 @@ const LoginForm = (props) => {
           />
         </View>
 
-        <View
-          style={{
-            marginHorizontal: 55,
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 30,
-            width: 290,
-            height: 45,
-            backgroundColor: "#1C4670",
-            paddingVertical: 10,
-            borderRadius: 45,
-          }}
-        >
+       
           <TouchableOpacity onPress={login}>
-            <Text style={{ color: "white" }}> Login </Text>
+          <View style={styles.bottomActions}>
+            <Text style={styles.textLogin}> Login </Text>
+            </View>
           </TouchableOpacity>
-        </View>
+        
+        
         <Text
           style={{
-            padding: 7,
-            marginTop: 25,
+            //padding: 7,
+           // marginTop: 25,
           }}
         >
           Não tem uma conta?
         </Text>
         <Text
-          style={{
-            textDecorationLine: "underline",
-          }}
+          style={styles.textRegister}
           onPress={() => props.navigation.navigate("RegisterForm1")}
         >
           Registe-se
         </Text>
       </View>
-    </>
+    </ScrollView>
   );
 };
 
 export default LoginForm;
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  input: {
-    // borderWidth: 1,
-    // borderColor: "#0096c7",
-    padding: 5,
-    margin: 10,
-    width: 200,
-
-    // borderRadius: 23,
-    borderBottomColor: "#1C4670",
-    borderBottomWidth: 1,
+  oval: {
+    width: "130%",
+    height: "60%",
+    top: "-20%",
+    borderRadius: 700,
+    backgroundColor: "#1C4670",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logo: {
+    width: "70%",
+    //height: "85%",
+    top: "20%",
   },
   inputRow: {
     flexDirection: "row",
     marginHorizontal: 55,
   },
-  oval: {
-    width: 500,
-    height: 500,
-    // left: -120,
-    top: -189,
-    borderRadius: 700,
+  input: {
+    margin: "3%",
+    width: "80%",
+    borderBottomColor: "#1C4670",
+    borderBottomWidth: 1,
+  },
+  textRegister: {
+    textDecorationLine: "underline",
+  },
+  textLogin: { color: "white" },
+  bottomActions: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 250,
+    height: 40,
+    marginVertical:"10%",
     backgroundColor: "#1C4670",
-    transform: [{ scaleX: 1 }],
+    borderRadius: 45,
   },
 });

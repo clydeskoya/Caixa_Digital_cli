@@ -13,29 +13,30 @@ const Auth = () => (
     <Stack.Screen
       name="LoginForm"
       component={LoginForm}
+     /*  component={LoginForm} */
       options={{ headerShown: false }}
     />
     
     <Stack.Screen
       name="RegisterForm1"
       component={RegisterForm1}
-      options={{ title: 'Registo' }}
+      options={{  headerShown: false }}
     />
 
     <Stack.Screen
       name="RegisterForm2"
       component={RegisterForm2}
-      options={{ title: 'Registo' }} />
+      options={{  headerShown: false }} />
 
     <Stack.Screen
       name="RegisterForm3"
       component={RegisterForm3}
-      options={{ title: 'Registo' }} />
+      options={{  headerShown: false }} />
 
     <Stack.Screen
       name="RegisterForm4"
       component={RegisterForm4}
-      options={{ title: 'Registo' }} />
+      options={{ headerShown: false}} />
 
   </Stack.Navigator>
 );

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 export const CounterContext2 = React.createContext();
 
-export const formReducerInitialState2 = "";
+export const formReducerInitialState2 = '';
 
 /* export const formReducerInitialState2 = {
   username: "",
@@ -20,13 +20,12 @@ export const formReducerInitialState2 = "";
   phoneNumber: "",
   nif: ""
 }; */
-    
+
 export const registerFormReducer2 = (state, action) => {
   console.log(state);
-  const formData = [...state, action]
-  console.log(formData)
-  return formData
-
+  const formData = [...state, action];
+  console.log(formData);
+  return formData;
 };
 
 /* export const registerFormReducer = (state, action) => {
