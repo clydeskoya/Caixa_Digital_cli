@@ -53,11 +53,15 @@ const RegisterForm4 = (props) => {
         return;
 
       default:
+        /*
+          throw Error('Bad usade of "formSubmitted")
+        */
         return;
     }
   };
-
+  const [loading, setLoading] = useState(false)
   const sendToServer = async (formData) => {
+    setLoading(true);
     const ola = await fetch(
       "https://caixa-digital-cms.herokuapp.com/auth/local/register",
       {
@@ -76,10 +80,12 @@ const RegisterForm4 = (props) => {
           setData(result.rows);
           console.log(data);
           formSubmitted("yes");
+          setLoading(false);
         },
         (err) => {
           console.error("error", err);
           formSubmitted("yes");
+          setLoading(false);
         }
       );
   };
@@ -164,6 +170,8 @@ const RegisterForm4 = (props) => {
                 Registo{" "}
               </Text>
             </View>
+            
+            {loading && (<View>A registar o user ... boneco de loader às voltas a aparecer em vez do texto</View>)}
 
             <View style={styles.container2}>
               <Text style={styles.title}>Insira o seu email </Text>
