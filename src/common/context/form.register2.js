@@ -28,10 +28,6 @@ export const registerFormReducer2 = (state, action) => {
   return formData;
 };
 
-const [state2Local, dispatch2Local] = useReducer(registerFormReducer2, formReducerInitialState2);
-
-export const state2 = state2Local;
-export const dispatch2 = dispatch2Local;
 /* export const registerFormReducer = (state, action) => {
   switch (action.key) {
     case "username":
