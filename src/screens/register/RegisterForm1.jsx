@@ -106,7 +106,7 @@ const RegisterForm1 = (props) => {
         </View>
 
         <View style={styles.container2}>
-          <Text style={styles.title}>Género</Text>
+          <Text style={styles.title1}>Género</Text>
           <RadioForm
             radio_props={radio_props}
             buttonColor="#000000"
@@ -192,6 +192,11 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 15,
+  },
+  title1: {
+    fontWeight: "bold",
+    fontSize: 15,
+    marginBottom: '3%'
   },
   buttonOK: {
     alignItems: "center",
