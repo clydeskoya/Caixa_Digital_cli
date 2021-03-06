@@ -82,7 +82,7 @@ const LoginForm = (props) => {
   }; */
 
   return (
-    <ScrollView>
+    //<ScrollView>
       <View style={styles.container}>
         <View style={styles.oval}>
           <Image
@@ -139,7 +139,7 @@ const LoginForm = (props) => {
           Registe-se
         </Text>
       </View>
-    </ScrollView>
+    //</ScrollView>
   );
 };
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   oval: {
     width: "130%",
     height: "60%",
-    top: "-30%",
+    top: "-20%",
     borderRadius: 700,
     backgroundColor: "#1C4670",
     alignItems: "center",
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   logo: {
     width: "70%",
     //height: "85%",
-    top: "25%",
+    top: "20%",
   },
   inputRow: {
     flexDirection: "row",
