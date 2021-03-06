@@ -1,13 +1,22 @@
 import React from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 import Home from '../../TabNavigator';
-import About from './AppBase';
+import Payment from '../screens/reservarLocker/PaymentPage';
+import SendOrReceive from '../screens/reservarLocker/SendOrReceive';
+import Card from '../screens/reservarLocker/CardPage';
+import Success from '../screens/reservarLocker/SuccessPage'
+import Login from './AppBase';
+
 
 const Routes = () => (
   <Router>
     <Scene key="root">
       <Scene key="home" component={Home} title="Home" initial={true} hideNavBar={true} />
-      <Scene key="about" component={About} title="About" hideNavBar={true} />
+      <Scene key="login" component={Login} title="Login" hideNavBar={true} />
+      <Scene key="sendReceive" component={SendOrReceive} title="SendOrReceive" hideNavBar={true} />
+      <Scene key="payment" component={Payment} title="Payment" hideNavBar={true} />
+      <Scene key="card" component={Card} title="Card" hideNavBar={true} />
+      <Scene key="success" component={Success} title="Success" hideNavBar={true} />
     </Scene>
   </Router>
 );

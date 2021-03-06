@@ -1,45 +1,44 @@
 import React from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { OrangeTest, ButtonNext } from './PaymentPageStyles';
 import Header from '../../../components/HeaderReservarLocker';
 
-const PaymentPage = () => {
+const SuccessPage = () => {
   return (
     <View>
       <Header />
-      <Text>Payment</Text>
+
+      <Text>Success Page</Text>
+
       <TouchableOpacity
         onPress={() => {
-          Actions.card();
+          Actions.home();
         }}
       >
-        <ButtonNext>
-          <Text style={styles.textr}>Seguinte</Text>
-        </ButtonNext>
+        <View style={styles.button}>
+          <Text style={styles.textr}>Sucesso </Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    marginTop: 20,
-    fontSize: 22,
+  button: {
+    alignItems: 'center',
+    width: 290,
+    height: 45,
+    marginTop: 200,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    backgroundColor: 'grey',
+    borderRadius: 45,
   },
   textr: {
-    color: 'white',
+    color: 'green',
     marginVertical: 5,
     fontSize: 22,
   },
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  red: {
-    color: 'red',
-  },
 });
 
-export default PaymentPage;
+export default SuccessPage;
