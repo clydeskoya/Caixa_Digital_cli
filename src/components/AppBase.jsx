@@ -1,15 +1,22 @@
-import React, { useReducer } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import SplashScreen from '../screens/SplashScreen';
-import Auth from '../../Auth';
-import { Stack } from '../common/stack';
-import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/context/form.register2';
+import React, { useReducer } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import SplashScreen from "../screens/SplashScreen";
+import Auth from "../../Auth";
+import { Stack } from "../common/stack";
+import {
+  CounterContext2,
+  formReducerInitialState2,
+  registerFormReducer2,
+} from "../common/context/form.register2";
+
+const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
 
 class AppBase extends React.Component {
   render() {
-    const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
     return (
-      <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
+      <CounterContext2.Provider
+        value={{ formData: state2, formDispatch: dispatch2 }}
+      >
         <NavigationContainer>
           <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
@@ -19,7 +26,11 @@ class AppBase extends React.Component {
               options={{ headerShown: false }}
             />
 
-            <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
+            <Stack.Screen
+              name="Auth"
+              component={Auth}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </CounterContext2.Provider>
@@ -27,4 +38,4 @@ class AppBase extends React.Component {
   }
 }
 // import DrawerNavigationRoutes from './screens/DrawerNavigationRoutes';
-export default AppBase;
+export default AppBase
