@@ -18,11 +18,11 @@ const LoginForm = (props) => {
 
   const login = async () => {
     if (!email) {
-      alert("Indique o seu email");
+     Alert.alert("Indique o seu email");
       return;
     }
     if (!pass) {
-      alert("Forneça a sua password");
+     Alert.alert("Forneça a sua password");
       return;
     }
 
@@ -72,7 +72,7 @@ const LoginForm = (props) => {
           console.log(responseJson.data.email);
           props.navigation.navigate("Home");
         } else {
-          alert("Email ou password inválidos");
+         Alert.alert("Email ou password inválidos");
           console.log("Email ou password inválidos");
         }
       })

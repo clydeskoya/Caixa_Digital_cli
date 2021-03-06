@@ -31,19 +31,19 @@ const RegisterForm1 = (props) => {
 
   const saveNnavigate = () => {
     if (!username) {
-      alert("Escreva o seu nome");
+     Alert.alert("Escreva o seu nome");
       return;
     }
     if (!usersurname) {
-      alert("Escreva o seu apelido");
+     Alert.alert("Escreva o seu apelido");
       return;
     }
     if (!dateofbirth || !dateofbirth.match(REGEX_DATE_OF_BIRTH)) {
-      alert("Data de nascimento inválida! \n Formato DD/MM/AAAA");
+     Alert.alert("Data de nascimento inválida! \n Formato DD/MM/AAAA");
       return;
     }
     if (!gender) {
-      alert("Género");
+     Alert.alert("Género");
       return;
     }
 

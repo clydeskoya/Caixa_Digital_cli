@@ -26,23 +26,23 @@ const RegisterForm2 = (props) => {
 
   const saveNnavigate = () => {
     if (!street) {
-      alert("Indique a sua rua");
+     Alert.alert("Indique a sua rua");
       return;
     }
     if (!door || !door.match(REGEX_ONLY_NUMBERS)) {
-      alert("Número de porta inválido");
+     Alert.alert("Número de porta inválido");
       return;
     }
     if (!floor) {
-      alert("Indique o seu andar");
+     Alert.alert("Indique o seu andar");
       return;
     }
     if (!postalCode || !postalCode.match(REGEX_POSTAL_CODE)) {
-      alert("Código postal inválido");
+     Alert.alert("Código postal inválido");
       return;
     }
     if (!district) {
-      alert("Indique o distrito");
+     Alert.alert("Indique o distrito");
       return;
     }
 

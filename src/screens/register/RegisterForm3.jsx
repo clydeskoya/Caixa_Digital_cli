@@ -21,15 +21,15 @@ const RegisterForm3 = (props) => {
 
   const saveNnavigate = () => {
     if (!bi) {
-      alert("Número de BI/CC");
+     Alert.alert("Número de BI/CC");
       return;
     }
     if (!phoneNumber || !phoneNumber.match(REGEX_ONLY_NUMBERS)) {
-      alert("Número de telefone inválido");
+     Alert.alert("Número de telefone inválido");
       return;
     }
     if (!nif || !nif.match(REGEX_ONLY_NUMBERS)) {
-      alert("NIF inválido");
+     Alert.alert("NIF inválido");
       return;
     }
 
