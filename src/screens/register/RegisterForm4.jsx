@@ -123,28 +123,28 @@ const RegisterForm4 = (props) => {
 
   const saveNnavigate = () => {
     if (!email || !email1) {
-     Alert.alert('Escreva o seu email');
+      Alert.alert('Escreva o seu email');
       return;
     }
     if (email1 !== email) {
-     Alert.alert('Erro de confirmação de emails');
+      Alert.alert('Erro de confirmação de emails');
       return;
     }
     if (!email.match(REGEX_EMAIL)) {
-     Alert.alert('Email inválido');
+      Alert.alert('Email inválido');
       return;
     }
 
     if (!password || !password1) {
-     Alert.alert('Crie uma password');
+      Alert.alert('Crie uma password');
       return;
     }
     if (password1 !== password) {
-     Alert.alert('Erro de confirmação de passwords');
+      Alert.alert('Erro de confirmação de passwords');
       return;
     }
     if (password.length < 6) {
-     Alert.alert('Número mínimo de caracteres: 6');
+      Alert.alert('Número mínimo de caracteres: 6');
       return;
     }
 
@@ -193,107 +193,106 @@ const RegisterForm4 = (props) => {
   return (
     <>
       <ScrollView>
-        <Provider>
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
-            </View>
-
-            {loading && <View>A registar o user ... boneco de loader às voltas a aparecer em vez do texto</View>}
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Insira o seu email </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="email"
-                  placeholder="Email"
-                  id="email"
-                  name="email1"
-                  autoCapitalize="none"
-                  onChangeText={(Email) => setEmail1(Email)}
-                />
-              </View>
-            </View>
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Confirme o seu email </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="email"
-                  placeholder="Email"
-                  id="email_confirm"
-                  name="email2"
-                  autoCapitalize="none"
-                  onChangeText={(Email) => setEmail(Email)}
-                />
-              </View>
-            </View>
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Crie uma palavra-passe </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="password"
-                  placeholder="Password"
-                  id="pass"
-                  name="password1"
-                  autoCapitalize="none"
-                  secureTextEntry
-                  onChangeText={(Pass) => setPassword1(Pass)}
-                />
-              </View>
-            </View>
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Confirme a palavra-passe </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="password"
-                  placeholder="Password"
-                  id="pass_confirm"
-                  name="password2"
-                  autoCapitalize="none"
-                  secureTextEntry
-                  onChangeText={(Pass) => setPassword(Pass)}
-                />
-              </View>
-            </View>
-
-            <TouchableOpacity onPress={saveNnavigate}>
-              <View style={styles.buttonOK}>
-                <Text style={{ color: 'white' }}> Criar conta </Text>
-              </View>
-            </TouchableOpacity>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>
 
-          <View>
-            <Portal>
-              {/* <Button onPress={showDialog}>Show Dialog</Button> */}
-              <Dialog visible={visible} dismissable={false}>
-                {/*  <Dialog.Title>Heyy</Dialog.Title> */}
-                <Dialog.Title>
-                  <Text>{dialogTextTitle}</Text>
-                </Dialog.Title>
-                <Dialog.Content>
-                  {/* <Paragraph>Sou a Irina</Paragraph> */}
-                  <Paragraph>
-                    <Text>{dialogTextContent}</Text>
-                  </Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                  <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
-                    OK{' '}
-                  </Button>
-                </Dialog.Actions>
-              </Dialog>
-            </Portal>
+          {loading && <View>A registar o user ... boneco de loader às voltas a aparecer em vez do texto</View>}
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Insira o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email"
+                name="email1"
+                autoCapitalize="none"
+                onChangeText={(Email) => setEmail1(Email)}
+              />
+            </View>
           </View>
-        </Provider>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email_confirm"
+                name="email2"
+                autoCapitalize="none"
+                onChangeText={(Email) => setEmail(Email)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Crie uma palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass"
+                name="password1"
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={(Pass) => setPassword1(Pass)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme a palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass_confirm"
+                name="password2"
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={(Pass) => setPassword(Pass)}
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity onPress={saveNnavigate}>
+            <View style={styles.buttonOK}>
+              <Text style={{ color: 'white' }}> Criar conta </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
+      <Provider>
+        <View>
+          <Portal>
+            {/* <Button onPress={showDialog}>Show Dialog</Button> */}
+            <Dialog visible={visible} dismissable={false}>
+              {/*  <Dialog.Title>Heyy</Dialog.Title> */}
+              <Dialog.Title>
+                <Text>{dialogTextTitle}</Text>
+              </Dialog.Title>
+              <Dialog.Content>
+                {/* <Paragraph>Sou a Irina</Paragraph> */}
+                <Paragraph>
+                  <Text>{dialogTextContent}</Text>
+                </Paragraph>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
+                  OK{' '}
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
+      </Provider>
     </>
   );
 };

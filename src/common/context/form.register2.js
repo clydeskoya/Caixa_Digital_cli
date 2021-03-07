@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 
 export const CounterContext2 = React.createContext();
 
-export const formReducerInitialState2 = {};
+export const formReducerInitialState2 = '';
 
 /* export const formReducerInitialState2 = {
   username: "",

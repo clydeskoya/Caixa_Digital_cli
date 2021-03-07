@@ -1,28 +1,20 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  TextInput,
-  Image,
-  ScrollView,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, TouchableOpacity, Text, View, TextInput, Image, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
 
   const login = async () => {
     if (!email) {
-     Alert.alert("Indique o seu email");
+      Alert.alert('Indique o seu email');
       return;
     }
     if (!pass) {
-     Alert.alert("Forneça a sua password");
+      Alert.alert('Forneça a sua password');
       return;
     }
 
@@ -101,7 +93,7 @@ const LoginForm = (props) => {
             onChangeText={(Email) => setEmail(Email)}
           />
         </View>
- 
+
         <View style={styles.inputRow}>
           <Ionicons name="key-outline" color="#1C4670" size={35} />
           <TextInput
@@ -111,7 +103,7 @@ const LoginForm = (props) => {
             name="password"
             placeholder="Password"
             autoCapitalize="none"
-            secureTextEntry={true}
+            secureTextEntry
             onChangeText={(Pass) => setPass(Pass)}
           />
         </View>
@@ -124,19 +116,9 @@ const LoginForm = (props) => {
           </TouchableOpacity>
         
         
-        <Text
-          style={{
-            //padding: 7,
-           // marginTop: 25,
-          }}
-        >
-          Não tem uma conta?
-        </Text>
-        <Text
-          style={styles.textRegister}
-          onPress={() => props.navigation.navigate("RegisterForm1")}
-        >
-          Registe-se
+        <Text>Não tem uma conta?</Text>
+        <Text style={styles.textRegister} onPress={() => props.navigation.navigate('RegisterForm1')}>
+        Registe-se
         </Text>
       </View>
     </ScrollView>

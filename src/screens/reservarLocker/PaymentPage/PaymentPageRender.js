@@ -5,7 +5,7 @@ import { withTheme } from 'styled-components/native';
 import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
 
 const CalendarPage = () => {
-  var date;
+  let date;
   return (
     <View>
       <OrangeTest>Escolha uma data</OrangeTest>

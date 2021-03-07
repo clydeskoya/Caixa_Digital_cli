@@ -84,9 +84,9 @@ const RegisterForm2 = (props) => {
     }
     if (REGEX_POSTAL_CODE.test(postalCode)) {
       fetchData();
-    } else if (locality.length) {
-      setLocality("");
-    }
+    // } else if (locality.length) {
+    //   setLocality("");
+ }
   }, [postalCode]);
 
   return (
@@ -155,12 +155,12 @@ const RegisterForm2 = (props) => {
           </View>
 
           <View style={styles.container2}>
-            <Text style={styles.title1}>Distrito</Text>
+            <Text style={styles.title1}>Cidade</Text>
             <View style={styles.inputRow}>
               <TextInput
                 type="text"
-                placeholder="Distrito"
-                value="Lisboa"
+                placeholder="Cidade"
+                value={district}
                 style={styles.TextInputStyle}
                 name="district"
                 onChangeText={(District) => setDistrict(District)}

@@ -3,8 +3,8 @@
 // import TabNavigator from "./TabNavigator";
 // export default <TabNavigator>;
 import React from 'react';
-import Routes from './src/components/Routes';
+import AppBase from './src/components/AppBase';
 
 export default function App() {
-  return <Routes />;
+  return <AppBase />;
 }
