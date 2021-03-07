@@ -6,6 +6,7 @@ import Auth from '../../Auth';
 import { Stack } from '../common/stack';
 // import { CounterContext, formReducerInitialState, registerFormReducer } from '../common/context/form.register';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/context/form.register2';
+import Home from '../screens/Home';
 
 const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
@@ -25,6 +26,7 @@ const AppBase = () => {
           />
 
           <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
+          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </CounterContext2.Provider>

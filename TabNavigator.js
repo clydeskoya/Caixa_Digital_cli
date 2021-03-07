@@ -10,7 +10,7 @@ import ProfileScreen from './src/screens/ProfileScreen';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => (
-  <NavigationContainer>
+  <NavigationContainer independent>
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={({ route }) => ({

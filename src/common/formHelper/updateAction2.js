@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const formDataReducer = (data) => {
-  const [formData, setformData] = useState(null);
+  const [formData, setformData] = useState('null');
   console.log('data2');
   setformData = data;
   console.log(formData);
