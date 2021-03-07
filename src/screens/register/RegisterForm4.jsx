@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { Button, Paragraph, Dialog, Portal, Provider } from 'react-native-paper';
+import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator } from 'react-native-paper';
 import { CounterContext2 } from '../../common/context/form.register2';
 
 // eslint-disable-next-line no-control-regex
@@ -49,8 +49,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 250,
     height: 40,
-    // marginVertical:"10%",
-    // marginTop: "10%",
     backgroundColor: '#1C4670',
     borderRadius: 45,
   },
@@ -199,7 +197,10 @@ const RegisterForm4 = (props) => {
               <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
             </View>
 
-            {loading && <View>A registar o user ... boneco de loader às voltas a aparecer em vez do texto</View>}
+            {loading 
+            && <View>
+                <ActivityIndicator animating={true} color={Colors.blue800} size={'large'}/>
+              </View>}
 
             <View style={styles.container2}>
               <Text style={styles.title}>Insira o seu email </Text>
@@ -272,17 +273,10 @@ const RegisterForm4 = (props) => {
 
           <View>
             <Portal>
-              {/* <Button onPress={showDialog}>Show Dialog</Button> */}
               <Dialog visible={visible} dismissable={false}>
-                {/*  <Dialog.Title>Heyy</Dialog.Title> */}
-                <Dialog.Title>
-                  <Text>{dialogTextTitle}</Text>
-                </Dialog.Title>
+                <Dialog.Title>{dialogTextTitle}</Dialog.Title>
                 <Dialog.Content>
-                  {/* <Paragraph>Sou a Irina</Paragraph> */}
-                  <Paragraph>
-                    <Text>{dialogTextContent}</Text>
-                  </Paragraph>
+                  <Paragraph>{dialogTextContent}</Paragraph>
                 </Dialog.Content>
                 <Dialog.Actions>
                   <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>

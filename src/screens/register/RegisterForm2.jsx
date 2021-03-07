@@ -19,7 +19,7 @@ const RegisterForm2 = (props) => {
   const [floor, setFloor] = useState("3D");
   const [postalCode, setPostalColde] = useState("2735-272");
   const [locality, setLocality] = useState("");
-  const [district, setDistrict] = useState("Lisboa");
+  const [city, setCity] = useState("Lisboa");
   const [country, setCountry] = useState("Portugal");
 
   const counterContext2 = useContext(CounterContext2);
@@ -41,7 +41,7 @@ const RegisterForm2 = (props) => {
      Alert.alert("Código postal inválido");
       return;
     }
-    if (!district) {
+    if (!city) {
      Alert.alert("Indique o distrito");
       return;
     }
@@ -52,7 +52,7 @@ const RegisterForm2 = (props) => {
       floor: floor,
       postalCode: postalCode,
       locality: locality,
-      district: district,
+      city: city,
       country: country,
     };
 
@@ -155,15 +155,15 @@ const RegisterForm2 = (props) => {
           </View>
 
           <View style={styles.container2}>
-            <Text style={styles.title1}>Distrito</Text>
+            <Text style={styles.title1}>Cidade</Text>
             <View style={styles.inputRow}>
               <TextInput
                 type="text"
-                placeholder="Distrito"
-                value="Lisboa"
+                placeholder="Cidade"
+                value={city}
                 style={styles.TextInputStyle}
-                name="district"
-                onChangeText={(District) => setDistrict(District)}
+                name="city"
+                onChangeText={(City) => setCity(City)}
               />
             </View>
           </View>

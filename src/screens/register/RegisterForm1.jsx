@@ -8,7 +8,7 @@ import {
   ScrollView,
   View,
 } from "react-native";
-// import { RadioButton } from "react-native-paper";
+import { ProgressBar, Colors } from "react-native-paper";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -24,7 +24,7 @@ const RegisterForm1 = (props) => {
   var radio_props = [
     { label: "Feminino   ", value: 0 },
     { label: "Masculino   ", value: 1 },
-    { label: "Outro", value: 1 },
+    { label: "Outro", value: 2 },
   ];
 
   const counterContext2 = useContext(CounterContext2);
@@ -68,6 +68,12 @@ const RegisterForm1 = (props) => {
               Registo{" "}
             </Text>
           </View>
+          {/* <View style={styles.progressBar}></View> */}
+
+          {/* <View>
+          <ProgressBar progress={0.5} color={Colors.blue700} />
+          </View> */}
+          
 
           {/* <View style={styles.container}> */}
           <Text style={styles.title}>Qual o seu nome? </Text>
@@ -210,4 +216,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#1C4670",
     borderRadius: 45,
   },
+  progressBar: {
+    height: "1.5%",
+    width: '100%',
+    backgroundColor: 'white',
+    borderColor: '#000',
+    borderWidth: 0,
+    borderRadius: 5,
+   // marginTop: 30,
+    marginBottom: "8%",
+  }
 });
