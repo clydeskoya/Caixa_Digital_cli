@@ -43,6 +43,7 @@
     "react-navigation-stack": "^2.10.3",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
+    "tipsi-stripe": "^8.0.2",
     "use-state-machine": "^3.0.5",
     "write-json-file": "^4.3.0",
     "yup": "^0.32.9"
