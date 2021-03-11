@@ -1,6 +1,7 @@
 import React from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Icon } from 'react-native-elements'
 import Header from '../../../components/HeaderReservarLocker';
 
 const SuccessPage = () => {

@@ -11,7 +11,7 @@ const PaymentPage = () => {
       <Text>Payment</Text>
       <TouchableOpacity
         onPress={() => {
-          Actions.card();
+          Actions.success();
         }}
       >
         <ButtonNext>
