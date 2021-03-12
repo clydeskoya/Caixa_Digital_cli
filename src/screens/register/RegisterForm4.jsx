@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator } from 'react-native-paper';
 import { CounterContext2 } from '../../common/context/form.register2';
 
@@ -94,7 +94,7 @@ const RegisterForm4 = (props) => {
   const [loading, setLoading] = useState(false);
   const sendToServer = async (formData) => {
     setLoading(true);
-    await fetch('http://25586195f342.ngrok.io/auth/local/register', {
+    await fetch('https://caixa-digital-cms.herokuapp.com/auth/local/register', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -121,28 +121,28 @@ const RegisterForm4 = (props) => {
 
   const saveNnavigate = () => {
     if (!email || !email1) {
-     Alert.alert('Escreva o seu email');
+      Alert.alert('Escreva o seu email');
       return;
     }
     if (email1 !== email) {
-     Alert.alert('Erro de confirmação de emails');
+      Alert.alert('Erro de confirmação de emails');
       return;
     }
     if (!email.match(REGEX_EMAIL)) {
-     Alert.alert('Email inválido');
+      Alert.alert('Email inválido');
       return;
     }
 
     if (!password || !password1) {
-     Alert.alert('Crie uma password');
+      Alert.alert('Crie uma password');
       return;
     }
     if (password1 !== password) {
-     Alert.alert('Erro de confirmação de passwords');
+      Alert.alert('Erro de confirmação de passwords');
       return;
     }
     if (password.length < 6) {
-     Alert.alert('Número mínimo de caracteres: 6');
+      Alert.alert('Número mínimo de caracteres: 6');
       return;
     }
 
@@ -197,10 +197,11 @@ const RegisterForm4 = (props) => {
               <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
             </View>
 
-            {loading 
-            && <View>
-                <ActivityIndicator animating={true} color={Colors.blue800} size={'large'}/>
-              </View>}
+            {loading && (
+              <View>
+                <ActivityIndicator animating color={Colors.blue800} size="large" />
+              </View>
+            )}
 
             <View style={styles.container2}>
               <Text style={styles.title}>Insira o seu email </Text>

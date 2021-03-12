@@ -21,9 +21,15 @@ module.exports = {
   },
   plugins: ['react', 'react-native', 'react-hooks', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
-    'linebreak-style': ['error', 'unix'],
-    'files.eol': '\n',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+    'linebreak-style': ['error', 'windows'],
+    //'eslint eol-last': ['error', 'always'],
+    // 'files.eol': ['\n'],
     'react/jsx-filename-extension': [
       'warn',
       {
