@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { OrangeTest, ButtonNext } from './PaymentPageStyles';
 import Header from '../../../components/HeaderReservarLocker';
 
-const PaymentPage = () => {
+function PaymentPage() {
   return (
     <View>
       <Header />
-      <Text>Payment</Text>
+
       <TouchableOpacity
         onPress={() => {
           Actions.success();
@@ -20,12 +20,22 @@ const PaymentPage = () => {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   header: {
     marginTop: 20,
     fontSize: 22,
+  },
+  scan: {
+    height: '100%',
+    width: '100%',
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
   textr: {
     color: 'white',
@@ -39,6 +49,11 @@ const styles = StyleSheet.create({
   },
   red: {
     color: 'red',
+  },
+  barCodeView: {
+    width: '100%',
+    height: '50%',
+    marginBottom: 40,
   },
 });
 
