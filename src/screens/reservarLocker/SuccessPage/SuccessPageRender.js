@@ -11,7 +11,7 @@ const SuccessPage = () => {
       <View style={styles.maindiv}>
         <TouchableOpacity
           onPress={() => {
-            Actions.home();
+            Actions.scanqrcode();
           }}
         >
           <View style={styles.boxwradius}>
