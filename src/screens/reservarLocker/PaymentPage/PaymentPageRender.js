@@ -3,8 +3,35 @@ import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity }
 import { Actions } from 'react-native-router-flux';
 import { OrangeTest, ButtonNext } from './PaymentPageStyles';
 import Header from '../../../components/HeaderReservarLocker';
+import { PaymentsStripe as Stripe } from 'expo-payments-stripe';
 
 function PaymentPage() {
+  Stripe.setOptionsAsync({
+    publishableKey:
+      'pk_test_51IUdQ5LbLB9ED9AWswPvcdu6TKAwDEGoRSwzhVOoyRcJFz36NchUvdYWt7jaH0R8y5XdHt7zNprb5fAKVySPxFBQ007bWMDejH', // Your key
+    androidPayMode: 'test', // [optional] used to set wallet environment (AndroidPay)
+    merchantId: 'your_merchant_id', // [optional] used for payments with ApplePay
+  });
+
+  const options = {
+    requiredBillingAddressFields: 'full',
+    prefilledInformation: {
+      billingAddress: {
+        name: 'Gunilla Haugeh',
+        line1: 'Canary Place',
+        line2: '3',
+        city: 'Macon',
+        state: 'Georgia',
+        country: 'US',
+        postalCode: '31217',
+      },
+    },
+  };
+
+  const token = async () => {
+    await stripe.paymentRequestWithCardFormAsync(options);
+  };
+
   return (
     <View>
       <Header />
@@ -12,6 +39,7 @@ function PaymentPage() {
       <TouchableOpacity
         onPress={() => {
           Actions.success();
+        
         }}
       >
         <ButtonNext>
