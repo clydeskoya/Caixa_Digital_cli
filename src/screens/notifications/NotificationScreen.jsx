@@ -83,8 +83,6 @@ const Notification = (props) => {
 
   const goToReservas = () => {
     props.navigation.navigate('......'); // não se fez ainda o ecrã das reservas (NÃO É o reservar locker)
-    console.log(new Date());
-    console.log(new Date().getTime());
   };
 
   const goToScanLocker = () => {
