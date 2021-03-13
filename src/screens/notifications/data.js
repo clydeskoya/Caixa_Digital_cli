@@ -1,7 +1,7 @@
 export default [
   {
     type: 'reminder',
-    details: { when: '2021-03-08', datetimeNotification: '2021-03-08T20:21:46.742Z' },
+    details: { when: '2021-03-08', datetimeNotification: '2021-03-12T20:21:46.742Z' },
   },
   {
     type: 'newCorresp',

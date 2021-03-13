@@ -22,6 +22,7 @@
     "expo-notifications": "~0.8.2",
     "expo-status-bar": "~1.0.3",
     "little-state-machine-devtools": "^2.0.0",
+    "moment": "^2.29.1",
     "ramda": "^0.27.1",
     "react": "16.13.1",
     "react-dom": "^17.0.1",

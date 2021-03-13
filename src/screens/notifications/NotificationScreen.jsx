@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import data from './data';
+import moment from 'moment';
+import data from './data';    //como gostava de receber os dados do server :)
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF',
     alignItems: 'center',
-    // justifyContent: 'center',
     padding: '3%',
     height: '100%',
   },
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFEFEF',
     borderBottomWidth: 3,
     borderColor: '#D6CFCF',
-    // borderTopWidth:2,
     alignItems: 'flex-start',
     justifyContent: 'center',
     height: '13.5%',
@@ -27,21 +26,22 @@ const styles = StyleSheet.create({
   },
 
   cardContentText: {
-    fontSize: 15,
-    // fontWeight: 'bold',
+    fontSize: 14,
     width: '80%',
-    // alignSelf: 'stretch',
+    lineHeight: 18.5,
+  },
+
+  cardContentText2: {
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
 
   cardTitleText: {
-    fontSize: 25,
-    // fontWeight: 'bold',
-    // width: '80%',
-    // alignSelf: 'stretch',
+    fontSize: 23,
   },
 
   cardTimeText: {
-    fontSize: 12,
+    fontSize: 10.5,
   },
 
   cardContent: {
@@ -95,12 +95,14 @@ const Notification = (props) => {
     props.navigation.navigate('correspondenciaEnviada');
   };
 
-  const daysP = (date) => {
-    const now = new Date(); // 2021-03-12T22:18:37.672Z
-    const diff = Math.abs(now.getTime() - date.getTime());
-    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.ceil(diff / (1000 * 60 * 60));
-    if (now.getDay === date.getDay && now.getMonth === date.getMonth && now.getFullYear === date.getFullYear) {
+  const diffDates = (date) => {
+    const now = moment(new Date()); // 2021-03-12T22:18:37.672Z
+    const date2 = moment(date);
+    const duration = moment.duration(now.diff(date2));
+    const days = `há ${Math.ceil(duration.asDays()) - 1} dias`;
+    const hours = `há ${Math.ceil(duration.asHours()) - 1} horas`;
+
+    if (duration.asHours() < 24) {
       return hours;
     }
     return days;
@@ -115,7 +117,10 @@ const Notification = (props) => {
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}>LEMBRETE: {'\n'}</Text>
               Tem uma reserva para hoje
-              {/* <Text style={styles.cardTimeText}>há {'\n'}</Text> */}
+              <Text style={styles.cardTimeText}>
+                {'\n'}
+                {diffDates(dataa.details.datetimeNotification)}
+              </Text>
             </Text>
 
             <TouchableOpacity style={{ marginLeft: '14%' }} onPress={goToReservas}>
@@ -134,7 +139,12 @@ const Notification = (props) => {
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}>CORRESPONDÊNCIA NOVA: {'\n'}</Text>
-              Tem uma correspondência nova no locker de {dataa.details.from}
+              Tem uma correspondência nova no locker de <Text> </Text>
+              <Text style={styles.cardContentText2}>{dataa.details.from}</Text>
+              <Text style={styles.cardTimeText}>
+                {'\n'}
+                {diffDates(dataa.details.datetimeNotification)}
+              </Text>
             </Text>
 
             <TouchableOpacity style={{ marginLeft: '10%' }} onPress={goToScanLocker}>
@@ -152,8 +162,15 @@ const Notification = (props) => {
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}>CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A sua correspondência
-              depositada no dia {dataa.details.when} para {dataa.details.to} foi levantada para envio
+              <Text style={{ fontWeight: 'bold' }}>CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A correspondência de
+              <Text> </Text>
+              <Text style={styles.cardContentText2}>{dataa.details.when}</Text> <Text> </Text>
+              para <Text> </Text>
+              <Text style={styles.cardContentText2}>{dataa.details.to}</Text> foi levantada para envio
+              <Text style={styles.cardTimeText}>
+                {'\n'}
+                {diffDates(dataa.details.datetimeNotification)}
+              </Text>
             </Text>
             <TouchableOpacity style={{ marginLeft: '14%' }} onPress={goToCorrespondenciasEnviadas}>
               <View style={styles.viewIconNText}>
