@@ -28,8 +28,12 @@ function PaymentPage() {
     },
   };
 
-  const token = async () => {
-    await stripe.paymentRequestWithCardFormAsync(options);
+  const payment = async () => {
+    try {
+      const { token } = await Stripe.createTokenWithCardAsync(params);
+
+      return token;
+    } catch (error) {}
   };
 
   return (
@@ -39,7 +43,7 @@ function PaymentPage() {
       <TouchableOpacity
         onPress={() => {
           Actions.success();
-        
+          payment;
         }}
       >
         <ButtonNext>
