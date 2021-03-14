@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Card } from 'react-native-paper';
+import { Card, Colors } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
-import data from './data';    //como gostava de receber os dados do server :)
+import data from './data'; // como gostava de receber os dados do server :)
 
 const styles = StyleSheet.create({
   container: {
@@ -53,33 +53,41 @@ const styles = StyleSheet.create({
   viewIconNText: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: 60,
+    height: 60,
+    borderRadius: 100 / 2,
+    // backgroundColor: '#D6CFCF',
+    backgroundColor: 'rgba(214, 207, 207, 0.6)',
+  },
+
+  touchableOpacityView: {
+    marginLeft: '8%',
   },
 });
 
 const Notification = (props) => {
   const [dataFromServer, setDataFromServer] = useState('');
 
-  // const receiveFromServer = async () => {
-  /* await */
-  fetch('https://caixa-digital-cms.herokuapp.com/....................', {
-    method: 'GET',
-    headers: {
-      // ???????
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => res.json())
-    .then(
-      (result) => {
-        console.log('result', result);
-        setDataFromServer(result.rows);
+  const receiveFromServer = async () => {
+    await fetch('https://caixa-digital-cms.herokuapp.com/....................', {
+      method: 'GET',
+      headers: {
+        // ???????
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      (err) => {
-        console.error('error', err);
-      }
-    );
-  // };
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log('result', result);
+          setDataFromServer(result.rows);
+        },
+        (err) => {
+          console.error('error', err);
+        }
+      );
+  };
 
   const goToReservas = () => {
     props.navigation.navigate('......'); // não se fez ainda o ecrã das reservas (NÃO É o reservar locker)
@@ -106,22 +114,26 @@ const Notification = (props) => {
     return days;
   };
 
+  const getIsReminder = (dataArg) => dataArg.type === 'reminder';
+  const getIsNewCorresp = (dataArg) => dataArg.type === 'newCorresp';
+  const getIsCorrespSent = (dataArg) => dataArg.type === 'correspSent';
+
   // o data deve ser substituído por dataFromServer
-  const cards = data.map((dataa) => {
-    if (dataa.type === 'reminder') {
+  const cards = data.map((dataEntry) => {
+    if (getIsReminder(dataEntry)) {
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}>LEMBRETE: {'\n'}</Text>
+              <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
               Tem uma reserva para hoje
               <Text style={styles.cardTimeText}>
                 {'\n'}
-                {diffDates(dataa.details.datetimeNotification)}
+                {diffDates(dataEntry.details.datetimeNotification)}
               </Text>
             </Text>
 
-            <TouchableOpacity style={{ marginLeft: '14%' }} onPress={goToReservas}>
+            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
               <View style={styles.viewIconNText}>
                 <Ionicons name="business-outline" color="#000" size={23} />
                 <Text style={{ fontSize: 11 }}>Ver</Text>
@@ -131,21 +143,21 @@ const Notification = (props) => {
         </Card>
       );
     }
-    if (dataa.type === 'newCorresp') {
+    if (getIsNewCorresp(dataEntry)) {
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}>CORRESPONDÊNCIA NOVA: {'\n'}</Text>
+              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA NOVA: {'\n'}</Text>
               Tem uma correspondência nova no locker de <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataa.details.from}</Text>
+              <Text style={styles.cardContentText2}>{dataEntry.details.from}</Text>
               <Text style={styles.cardTimeText}>
                 {'\n'}
-                {diffDates(dataa.details.datetimeNotification)}
+                {diffDates(dataEntry.details.datetimeNotification)}
               </Text>
             </Text>
 
-            <TouchableOpacity style={{ marginLeft: '10%' }} onPress={goToScanLocker}>
+            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToScanLocker}>
               <View style={styles.viewIconNText}>
                 <Ionicons name="arrow-up-outline" color="#000" size={23} />
                 <Text style={{ fontSize: 11 }}>Levantar</Text>
@@ -155,22 +167,22 @@ const Notification = (props) => {
         </Card>
       );
     }
-    if (dataa.type === 'correspSent') {
+    if (getIsCorrespSent(dataEntry)) {
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}>CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A correspondência de
+              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A correspondência de
               <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataa.details.when}</Text> <Text> </Text>
+              <Text style={styles.cardContentText2}>{dataEntry.details.when}</Text> <Text> </Text>
               para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataa.details.to}</Text> foi levantada para envio
+              <Text style={styles.cardContentText2}>{dataEntry.details.to}</Text> foi levantada para envio
               <Text style={styles.cardTimeText}>
                 {'\n'}
-                {diffDates(dataa.details.datetimeNotification)}
+                {diffDates(dataEntry.details.datetimeNotification)}
               </Text>
             </Text>
-            <TouchableOpacity style={{ marginLeft: '14%' }} onPress={goToCorrespondenciasEnviadas}>
+            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToCorrespondenciasEnviadas}>
               <View style={styles.viewIconNText}>
                 <Ionicons name="mail-outline" color="#000" size={23} />
                 <Text style={{ fontSize: 11 }}>Ver</Text>

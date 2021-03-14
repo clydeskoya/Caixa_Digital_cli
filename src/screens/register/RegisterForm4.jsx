@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator } from 'react-native-paper';
-import { CounterContext2 } from '../../common/context/form.register2';
+import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 // eslint-disable-next-line no-control-regex
 const REGEX_EMAIL = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/;
@@ -142,7 +142,7 @@ const RegisterForm4 = (props) => {
       return;
     }
     if (password.length < 6) {
-      Alert.alert('Número mínimo de caracteres: 6');
+      Alert.alert('Número mínimo de caracteres da password: 6');
       return;
     }
 
@@ -214,6 +214,7 @@ const RegisterForm4 = (props) => {
                 id="email"
                 name="email1"
                 autoCapitalize="none"
+                keyboardType="email-address"
                 onChangeText={(Email) => setEmail1(Email)}
               />
             </View>
@@ -229,6 +230,7 @@ const RegisterForm4 = (props) => {
                 id="email_confirm"
                 name="email2"
                 autoCapitalize="none"
+                keyboardType="email-address"
                 onChangeText={(Email) => setEmail(Email)}
               />
             </View>

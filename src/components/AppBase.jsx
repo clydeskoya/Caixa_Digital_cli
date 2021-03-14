@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from '../screens/SplashScreen';
 import Auth from '../../Auth';
 import { Stack } from '../common/stack';
-import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/context/form.register2';
+import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 import Notification from '../screens/notifications/NotificationScreen';
 import Home from '../screens/Home';
 
@@ -17,7 +17,7 @@ const AppBase = () => {
         <Stack.Navigator initialRouteName="SplashScreen">
           <Stack.Screen
             name="SplashScreen"
-            component={Notification}
+            component={SplashScreen}
             // Hiding header for Splash Screen
             options={{ headerShown: false }}
           />

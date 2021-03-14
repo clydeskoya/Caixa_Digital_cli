@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView, Alert } from 'react-native';
 import { prop } from 'ramda';
 import React, { useState, useContext, useEffect } from 'react';
-import { CounterContext2 } from '../../common/context/form.register2';
+import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;

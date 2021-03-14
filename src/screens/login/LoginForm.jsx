@@ -56,6 +56,8 @@ const LoginForm = (props) => {
             id="inputEmail"
             name="identifier"
             placeholder="Email"
+            autoCapitalize="none"
+            keyboardType="email-address"
             onChangeText={(Email) => setEmail(Email)}
           />
         </View>

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
-import { CounterContext2 } from '../../common/context/form.register2';
+import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
 
