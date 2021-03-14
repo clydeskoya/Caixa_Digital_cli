@@ -155,7 +155,7 @@ const RegisterForm4 = (props) => {
     console.log(dataToSend);
     const hey = counterContext2.formData;
 
-    const ok = hey.push(dataToSend);
+    hey.push(dataToSend);
 
     const forms = counterContext2.formData;
     console.log(forms);
@@ -191,103 +191,104 @@ const RegisterForm4 = (props) => {
   return (
     <>
       <ScrollView>
-        <Provider>
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
-            </View>
-
-            {loading && (
-              <View>
-                <ActivityIndicator animating color={Colors.blue800} size="large" />
-              </View>
-            )}
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Insira o seu email </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="email"
-                  placeholder="Email"
-                  id="email"
-                  name="email1"
-                  autoCapitalize="none"
-                  onChangeText={(Email) => setEmail1(Email)}
-                />
-              </View>
-            </View>
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Confirme o seu email </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="email"
-                  placeholder="Email"
-                  id="email_confirm"
-                  name="email2"
-                  autoCapitalize="none"
-                  onChangeText={(Email) => setEmail(Email)}
-                />
-              </View>
-            </View>
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Crie uma palavra-passe </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="password"
-                  placeholder="Password"
-                  id="pass"
-                  name="password1"
-                  autoCapitalize="none"
-                  secureTextEntry
-                  onChangeText={(Pass) => setPassword1(Pass)}
-                />
-              </View>
-            </View>
-
-            <View style={styles.container2}>
-              <Text style={styles.title}>Confirme a palavra-passe </Text>
-              <View style={styles.inputRow}>
-                <TextInput
-                  style={styles.TextInputStyle}
-                  type="password"
-                  placeholder="Password"
-                  id="pass_confirm"
-                  name="password2"
-                  autoCapitalize="none"
-                  secureTextEntry
-                  onChangeText={(Pass) => setPassword(Pass)}
-                />
-              </View>
-            </View>
-
-            <TouchableOpacity onPress={saveNnavigate}>
-              <View style={styles.buttonOK}>
-                <Text style={{ color: 'white' }}> Criar conta </Text>
-              </View>
-            </TouchableOpacity>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>
 
-          <View>
-            <Portal>
-              <Dialog visible={visible} dismissable={false}>
-                <Dialog.Title>{dialogTextTitle}</Dialog.Title>
-                <Dialog.Content>
-                  <Paragraph>{dialogTextContent}</Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                  <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
-                    OK{' '}
-                  </Button>
-                </Dialog.Actions>
-              </Dialog>
-            </Portal>
+          {loading && (
+            <View>
+              <ActivityIndicator animating color={Colors.blue800} size="large" />
+            </View>
+          )}
+
+          {loading}
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Insira o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email"
+                name="email1"
+                autoCapitalize="none"
+                onChangeText={(Email) => setEmail1(Email)}
+              />
+            </View>
           </View>
-        </Provider>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email_confirm"
+                name="email2"
+                autoCapitalize="none"
+                onChangeText={(Email) => setEmail(Email)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Crie uma palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass"
+                name="password1"
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={(Pass) => setPassword1(Pass)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme a palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass_confirm"
+                name="password2"
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={(Pass) => setPassword(Pass)}
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity onPress={saveNnavigate}>
+            <View style={styles.buttonOK}>
+              <Text style={{ color: 'white' }}> Criar conta </Text>
+            </View>
+          </TouchableOpacity>
+          <Provider>
+            <View>
+              <Portal>
+                <Dialog visible={visible} dismissable={false}>
+                  <Dialog.Title>{dialogTextTitle}</Dialog.Title>
+                  <Dialog.Content>
+                    <Paragraph>{dialogTextContent}</Paragraph>
+                  </Dialog.Content>
+                  <Dialog.Actions>
+                    <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
+                      OK{' '}
+                    </Button>
+                  </Dialog.Actions>
+                </Dialog>
+              </Portal>
+            </View>
+          </Provider>
+        </View>
       </ScrollView>
     </>
   );

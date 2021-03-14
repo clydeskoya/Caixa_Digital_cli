@@ -42,35 +42,6 @@ const LoginForm = (props) => {
     }
   };
 
-  /*  const login = async () => {
-    var dataToSend = {
-      identifier: email,
-      password: pass,
-    };
-
-    console.log(dataToSend);
-  //  console.log(formBody);
-
-    fetch("https://caixa-digital-cms.herokuapp.com/auth/local", {
-      method: "POST",
-      body: formBody,
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        if (responseJson.status === "success") {
-          AsyncStorage.setItem("user_id", responseJson.data.email);
-          console.log(responseJson.data.email);
-          props.navigation.navigate("Home");
-        } else {
-         Alert.alert("Email ou password inválidos");
-          console.log("Email ou password inválidos");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }; */
-
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -109,16 +80,7 @@ const LoginForm = (props) => {
           </View>
         </TouchableOpacity>
 
-        <Text
-          style={
-            {
-              // padding: 7,
-              // marginTop: 25,
-            }
-          }
-        >
-          Não tem uma conta?
-        </Text>
+        <Text>Não tem uma conta?</Text>
         <Text style={styles.textRegister} onPress={() => props.navigation.navigate('RegisterForm1')}>
           Registe-se
         </Text>
