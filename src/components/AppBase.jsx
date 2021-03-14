@@ -7,6 +7,10 @@ import { Stack } from '../common/stack';
 // import { CounterContext, formReducerInitialState, registerFormReducer } from '../common/context/form.register';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/context/form.register2';
 import Home from '../screens/Home';
+import Profile from '../screens/profile/ProfileScreen';
+import EditProfile from '../screens/profile/EditProfile';
+import MyQR from '../screens/profile/MyQR';
+import Definicoes from '../screens/profile/Definicoes';
 
 const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
