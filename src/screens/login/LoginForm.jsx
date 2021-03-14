@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import { StyleSheet, TouchableOpacity, Text, View, TextInput, Image, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const LoginForm = (props) => {
@@ -26,58 +26,27 @@ const LoginForm = (props) => {
 
       if (data.jwt) {
         props.navigation.navigate('Home');
+        console.log('data', data);
       }
     } catch (error) {
       if (error.response) {
         // Request made and server responded
-        console.log("data", error.response.data);
+        console.log('data', error.response.data);
       } else if (error.request) {
         // The request was made but no response was received
-        console.log("request", error.request);
+        console.log('request', error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
-        console.log("Error.message", error.message);
+        console.log('Error.message', error.message);
       }
     }
   };
-
-  /*  const login = async () => {
-    var dataToSend = {
-      identifier: email,
-      password: pass,
-    };
-
-    console.log(dataToSend);
-  //  console.log(formBody);
-
-    fetch("https://caixa-digital-cms.herokuapp.com/auth/local", {
-      method: "POST",
-      body: formBody,
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        if (responseJson.status === "success") {
-          AsyncStorage.setItem("user_id", responseJson.data.email);
-          console.log(responseJson.data.email);
-          props.navigation.navigate("Home");
-        } else {
-         Alert.alert("Email ou password inválidos");
-          console.log("Email ou password inválidos");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }; */
 
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.oval}>
-          <Image
-            source={require("../../img/logowtxt.png")}
-            style={styles.logo}
-          />
+          <Image source={require('../../img/logowtxt.png')} style={styles.logo} />
         </View>
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" color="#1C4670" size={35} />
@@ -87,6 +56,8 @@ const LoginForm = (props) => {
             id="inputEmail"
             name="identifier"
             placeholder="Email"
+            autoCapitalize="none"
+            keyboardType="email-address"
             onChangeText={(Email) => setEmail(Email)}
           />
         </View>
@@ -105,17 +76,15 @@ const LoginForm = (props) => {
           />
         </View>
 
-       
-          <TouchableOpacity onPress={login}>
+        <TouchableOpacity onPress={login}>
           <View style={styles.bottomActions}>
             <Text style={styles.textLogin}> Login </Text>
-            </View>
-          </TouchableOpacity>
-        
-        
+          </View>
+        </TouchableOpacity>
+
         <Text>Não tem uma conta?</Text>
         <Text style={styles.textRegister} onPress={() => props.navigation.navigate('RegisterForm1')}>
-        Registe-se
+          Registe-se
         </Text>
       </View>
     </ScrollView>
@@ -125,44 +94,44 @@ const LoginForm = (props) => {
 export default LoginForm;
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   oval: {
-    width: "130%",
-    height: "60%",
-    top: "-20%",
+    width: '130%',
+    height: '60%',
+    top: '-20%',
     borderRadius: 700,
-    backgroundColor: "#1C4670",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#1C4670',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
-    width: "70%",
-    //height: "85%",
-    top: "20%",
+    width: '70%',
+    // height: "85%",
+    top: '20%',
   },
   inputRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginHorizontal: 55,
   },
   input: {
-    margin: "3%",
-    width: "80%",
-    borderBottomColor: "#1C4670",
+    margin: '3%',
+    width: '80%',
+    borderBottomColor: '#1C4670',
     borderBottomWidth: 1,
   },
   textRegister: {
-    textDecorationLine: "underline",
+    textDecorationLine: 'underline',
   },
-  textLogin: { color: "white" },
+  textLogin: { color: 'white' },
   bottomActions: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 250,
     height: 40,
-    marginVertical:"10%",
-    backgroundColor: "#1C4670",
+    marginVertical: '10%',
+    backgroundColor: '#1C4670',
     borderRadius: 45,
   },
 });
