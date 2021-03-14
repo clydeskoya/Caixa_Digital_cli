@@ -7,6 +7,7 @@ import { Stack } from '../common/stack';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 import Notification from '../screens/notifications/NotificationScreen';
 import Home from '../screens/Home';
+import levantarCorrespondencia from '../screens/correspondenciaLevantada';
 
 const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
@@ -17,7 +18,7 @@ const AppBase = () => {
         <Stack.Navigator initialRouteName="SplashScreen">
           <Stack.Screen
             name="SplashScreen"
-            component={SplashScreen}
+            component={levantarCorrespondencia}
             // Hiding header for Splash Screen
             options={{ headerShown: false }}
           />
