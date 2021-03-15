@@ -23,15 +23,24 @@ const styles = StyleSheet.create({
     padding: '8%',
   },
 
+  container2: {
+    height: '100%',
+    backgroundColor: '#fff',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginBottom:'20%',
+    marginVertical: '5%',
+  },
+
   text: {
-   marginVertical: '4%',
-   fontSize: 14,
-   textDecorationLine: 'underline',
+    marginVertical: '4%',
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
 
   inputRow: {
     flexDirection: 'row',
-     marginBottom: '3%',
+    marginBottom: '3%',
   },
 
   mambo: {
@@ -60,23 +69,29 @@ export default function Profile() {
         <View style={styles.circle}>
           <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> AS </Text>
         </View>
-        <Text style={styles.mambo}>  Alberta Sorriso</Text>
+        <Text style={styles.mambo}> Alberta Sorriso</Text>
+      </View>
+
+      <View style={styles.container2}>
+      <View style={styles.inputRow}>
+        <Ionicons name="person-circle-outline" color="#000000" size={25} />
+        <Text style={styles.text}> Editar Perfil</Text>
       </View>
 
       <View style={styles.inputRow}>
-        <Ionicons name="person-circle-outline" color="#000000" size={42} />
-        <Text style={styles.text}>   Editar Perfil</Text>
+        <Ionicons name="qr-code-outline" color="#000000" size={25} />
+        <Text style={styles.text}> My QR Code</Text>
       </View>
 
       <View style={styles.inputRow}>
-        <Ionicons name="qr-code-outline" color="#000000" size={42} />
-        <Text style={styles.text}>   My QR Code</Text>
+        <Ionicons name="settings-outline" color="#000000" size={25} />
+        <Text style={styles.text}> Definições</Text>
       </View>
-
       <View style={styles.inputRow}>
-        <Ionicons name="settings-outline" color="#000000" size={42} />
-        <Text style={styles.text}>   Definições</Text>
+        <Ionicons name="log-out-outline" color="#000000" size={25} />
+        <Text style={styles.text}> Terminar Sessão</Text>
       </View>
+    </View>
     </View>
   );
 }

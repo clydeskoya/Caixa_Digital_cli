@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     marginBottom: '3%',
     borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
-    multilines: 'true',
     textAlignVertical: 'top',
   },
 
