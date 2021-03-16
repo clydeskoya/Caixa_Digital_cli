@@ -33,7 +33,7 @@ const SendReceivePage = () => {
           </View>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('payment')}>
+        <TouchableOpacity onPress={() => navigation.navigate('PaymentReservarLocker')}>
           <View style={styles.button}>
             <Text style={styles.textr}>Seguinte</Text>
           </View>

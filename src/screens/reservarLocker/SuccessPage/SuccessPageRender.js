@@ -12,7 +12,7 @@ const SuccessPage = () => {
     <View>
       <Header />
       <View style={styles.maindiv}>
-        <TouchableOpacity onPress={() => navigation.navigate('scanqrcode')}>
+        <TouchableOpacity /* onPress={() => navigation.navigate('S')} */>
           <View style={styles.boxwradius}>
             <Text style={styles.boxtext}>Reserva para envio de correspondências efetuada com sucesso.</Text>
             <View style={styles.check}>

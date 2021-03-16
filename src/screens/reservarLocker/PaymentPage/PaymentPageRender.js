@@ -9,8 +9,8 @@ function PaymentPage() {
   return (
     <View>
       <Header />
-
-      <TouchableOpacity onPress={() => navigation.navigate('success')}>
+      <Text style={{marginTop: 20}}>Payment page</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('SucessReservarLocker')}>
         <ButtonNext>
           <Text style={styles.textr}>Seguinte</Text>
         </ButtonNext>

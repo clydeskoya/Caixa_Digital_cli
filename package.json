@@ -19,6 +19,7 @@
     "axios": "^0.21.1",
     "browserify-fs": "^1.0.0",
     "expo": "~40.0.0",
+    "expo-barcode-scanner": "~9.1.0",
     "expo-notifications": "~0.8.2",
     "expo-status-bar": "~1.0.3",
     "little-state-machine-devtools": "^2.0.0",

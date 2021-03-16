@@ -6,12 +6,14 @@ import { Calendar } from 'react-native-calendars';
 import { withTheme } from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
+import Header from '../../../components/HeaderReservarLocker'
 
 const CalendarPage = () => {
   var date;
   const navigation = useNavigation();
   return (
     <View>
+      <Header/>
       <OrangeTest>Escolha uma data</OrangeTest>
       <CalendarWrapper>
         <Calendar
@@ -20,7 +22,7 @@ const CalendarPage = () => {
           }}
         />
       </CalendarWrapper>
-      <TouchableOpacity onPress={() => navigation.navigate('sendReceive')}>
+      <TouchableOpacity onPress={() => navigation.navigate('SendReceiveReservarLocker')}>
         <ButtonNext>
           <Text style={styles.textr}>Seguinte</Text>
         </ButtonNext>

@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 export const OrangeTest = styled.Text`
-  margin-top: 100px;
+  margin-top: 30px;
   margin-left: 30px;
 
   font-style: normal;
