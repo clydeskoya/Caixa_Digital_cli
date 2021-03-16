@@ -4,11 +4,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // eslint-disable-next-line import/no-cycle
 // eslint-disable-next-line import/no-cycle
 
-import NotificationScreen from '../NotificationScreen';
+import NotificationScreen from '../notifications/NotificationScreen';
 import ReserveScreen from '../ReserveScreen';
-import ProfileScreen from '../ProfileScreen';
 // eslint-disable-next-line import/no-cycle
 import HomeStack from './HomeStack';
+import ProfileNavigation from '../../ProfileNavigation';
 // eslint-disable-next-line import/no-cycle
 
 const Tab = createBottomTabNavigator();
@@ -42,7 +42,7 @@ const TabNavigator = () => (
     <Tab.Screen name="Início" component={HomeStack} />
     <Tab.Screen name="Reservar" component={ReserveScreen} />
     <Tab.Screen name="Notificações" component={NotificationScreen} />
-    <Tab.Screen name="Perfil" component={ProfileScreen} />
+    <Tab.Screen name="Perfil" component={ProfileNavigation} />
   </Tab.Navigator>
 );
 

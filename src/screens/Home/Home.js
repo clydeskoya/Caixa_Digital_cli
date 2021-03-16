@@ -2,14 +2,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Header } from '../../components/Header';
 
 // eslint-disable-next-line import/no-cycle
-import NotificationScreen from '../NotificationScreen';
+/* import NotificationScreen from '../NotificationScreen';
 import ReserveScreen from '../ReserveScreen';
 import ProfileScreen from '../ProfileScreen';
-import TabNavigator from './TabNavigator';
+import TabNavigator from './TabNavigator'; */
 // eslint-disable-next-line import/no-cycle
 
 const styles = StyleSheet.create({
