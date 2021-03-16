@@ -1,11 +1,13 @@
 import React from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+
+import { useNavigation } from '@react-navigation/native';
 import Header from '../../../components/HeaderReservarLocker';
 import { RadioButton } from 'react-native-paper';
 
 const SendReceivePage = () => {
   const [checked, setChecked] = React.useState('first');
+  const navigation = useNavigation();
   return (
     <View>
       <Header />
@@ -32,11 +34,7 @@ const SendReceivePage = () => {
           </View>
         </View>
 
-        <TouchableOpacity
-          onPress={() => {
-            Actions.payment();
-          }}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate('payment')}>
           <View style={styles.button}>
             <Text style={styles.textr}>Seguinte</Text>
           </View>

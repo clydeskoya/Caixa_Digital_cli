@@ -26,14 +26,11 @@ function Scanner() {
   }
 
   return (
-    <View style={styles.scan}>
+    <View>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      >
-        <View style={styles.container}> <Text>Scan Qr Code</Text></View>
-      </BarCodeScanner>
-
+        style={styles.scan}
+      ></BarCodeScanner>
       {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
     </View>
   );

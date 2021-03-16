@@ -1,19 +1,17 @@
 import React from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 import Header from '../../../components/HeaderReservarLocker';
 
 const SuccessPage = () => {
+  const navigation = useNavigation();
   return (
     <View>
       <Header />
       <View style={styles.maindiv}>
-        <TouchableOpacity
-          onPress={() => {
-            Actions.scanqrcode();
-          }}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate('scanqrcode')}>
           <View style={styles.boxwradius}>
             <Text style={styles.boxtext}>Reserva para envio de correspondências efetuada com sucesso.</Text>
             <View style={styles.check}></View>

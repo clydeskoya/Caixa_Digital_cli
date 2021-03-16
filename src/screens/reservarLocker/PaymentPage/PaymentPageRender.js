@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { useNavigation } from '@react-navigation/native';
 import { OrangeTest, ButtonNext } from './PaymentPageStyles';
 import Header from '../../../components/HeaderReservarLocker';
 
 function PaymentPage() {
+  const navigation = useNavigation();
   return (
     <View>
       <Header />
 
-      <TouchableOpacity
-        onPress={() => {
-          Actions.success();
-        }}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate('success')}>
         <ButtonNext>
           <Text style={styles.textr}>Seguinte</Text>
         </ButtonNext>
