@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { MaskedViewComponent, StyleSheet, Text, View, Button } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-
+import { Actions } from 'react-native-router-flux';
 import { withTheme } from 'styled-components/native';
 import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
 
@@ -20,7 +20,7 @@ const CalendarPage = () => {
       </CalendarWrapper>
       <TouchableOpacity
         onPress={() => {
-       
+          Actions.sendReceive();
         }}
       >
         <ButtonNext>

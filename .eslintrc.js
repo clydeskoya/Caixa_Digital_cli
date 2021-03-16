@@ -1,15 +1,16 @@
 module.exports = {
   env: {
     es6: true,
-    jest: true,
-    'react-native/react-native': true,
   },
-  extends: ['airbnb', 'prettier'],
+  extends: [
+    'airbnb',
+    'prettier',
+    'prettier/react',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     __DEV__: 'readonly',
-    fetch: false,
   },
   parser: 'babel-eslint',
   parserOptions: {
@@ -19,17 +20,12 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'react-native', 'react-hooks', 'prettier'],
+  plugins: [
+    'react',
+    'prettier',
+  ],
   rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
-    'linebreak-style': ['error', 'windows'],
-    //'eslint eol-last': ['error', 'always'],
-    // 'files.eol': ['\n'],
+    'prettier/prettier': 'error',
     'react/jsx-filename-extension': [
       'warn',
       {

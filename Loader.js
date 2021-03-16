@@ -3,7 +3,34 @@
 
 // Import React and Component
 import React from 'react';
-import { StyleSheet, View, Modal, ActivityIndicator } from 'react-native';
+import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
+
+const Loader = (props) => {
+  const {loading, ...attributes} = props;
+
+  return (
+    <Modal
+      transparent={true}
+      animationType={'none'}
+      visible={loading}
+      onRequestClose={() => {
+        console.log('close modal');
+      }}>
+      <View style={styles.modalBackground}>
+        <View style={styles.activityIndicatorWrapper}>
+          <ActivityIndicator
+            animating={true}
+            color="#000000"
+            size="large"
+            style={styles.activityIndicator}
+          />
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
+export default Loader;
 
 const styles = StyleSheet.create({
   modalBackground: {
@@ -27,26 +54,3 @@ const styles = StyleSheet.create({
     height: 80,
   },
 });
-
-const Loader = (props) => {
-  const { loading } = props;
-
-  return (
-    <Modal
-      transparent
-      animationType="none"
-      visible={loading}
-      onRequestClose={() => {
-        console.log('close modal');
-      }}
-    >
-      <View style={styles.modalBackground}>
-        <View style={styles.activityIndicatorWrapper}>
-          <ActivityIndicator animating color="#000000" size="large" style={styles.activityIndicator} />
-        </View>
-      </View>
-    </Modal>
-  );
-};
-
-export default Loader;

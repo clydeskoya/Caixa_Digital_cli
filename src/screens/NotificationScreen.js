@@ -1,12 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Header } from "../components/Header";
-export default function Profile() {
+export default function Notification() {
   return (
     <View style={styles.container}>
       <Header />
-
-      <Text>Profile Screen</Text>
+      <Text>Notification Screen</Text>
     </View>
   );
 }

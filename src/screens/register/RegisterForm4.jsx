@@ -1,299 +1,291 @@
-import React, { useState, useContext } from 'react';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator } from 'react-native-paper';
-import { CounterContext2 } from '../../common/formHelper/form.register2';
+import React, { useState, useContext } from "react";
+import {
+  Button,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { CounterContext2 } from "../../common/context/form.register2";
+import axios from "axios";
+import Modal from "react-native-modal";
 
-// eslint-disable-next-line no-control-regex
 const REGEX_EMAIL = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/;
 
-const styles = StyleSheet.create({
-  header: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '8%',
-    width: '50%',
-    height: '7%',
-    marginTop: '15%',
-    backgroundColor: '#1DC690',
-    borderRadius: 15,
-  },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  container2: {
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    padding: '3%',
-  },
-  TextInputStyle: {
-    textAlign: 'left',
-    height: '65%',
-    width: '100%',
-    marginBottom: '3%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-  },
-  inputRow: {
-    textAlign: 'left',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: '2.5%',
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 15,
-  },
-  buttonOK: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    height: 40,
-    backgroundColor: '#1C4670',
-    borderRadius: 45,
-  },
-});
-
 const RegisterForm4 = (props) => {
-  const [email1, setEmail1] = useState('');
-  const [password1, setPassword1] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email1, setEmail1] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [data, setData] = useState(null);
 
   const counterContext2 = useContext(CounterContext2);
 
-  const [visible, setVisible] = useState(false);
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [textModal, setTextModal] = useState("");
 
-  const [dialogTextTitle, setDialogTextTitle] = useState('');
-  const [dialogTextContent, setDialogTextContent] = useState('');
+  const validateEmails = () => {
+    if (!email || !email1) return alert("Escreva o seu email");
+    else if (email1 != email) return alert("Erro de confirmação de emails");
+    else if (!email.match(REGEX_EMAIL)) return alert("Email inválido");
+  };
+
+  const validatePasss = () => {
+    if (!password || !password1) return alert("Crie uma password");
+    else if (password1 != password) return alert("Erro de confirmação de passwords");
+    else if (password.length<6) return alert("Password curta! \n Número mínimo de caracteres: 6");
+  };
 
   const formSubmitted = (confirmation) => {
     switch (confirmation) {
-      case 'yes':
-        setDialogTextTitle('Sucesso!');
-        setDialogTextContent('A sua conta foi criada com sucesso');
-        showDialog();
+      case "yes":
+        setTextModal("A sua conta foi criada com sucesso");
+        setModalVisible(!modalVisible);
         return;
 
-      case 'no':
-        setDialogTextTitle('Erro!');
-        setDialogTextContent('Algo de inesperado ocorreu. Por favor tente mais tarde!');
-        showDialog();
-        break;
+      case "no":
+        setTextModal("Algo de inesperado ocorreu. Por favor tente mais tarde!");
+        setModalVisible(!modalVisible);
+        return;
 
       default:
-        /*
-            throw Error('Bad usade of "formSubmitted")
-          */
-        break;
+        return;
     }
   };
-  const [loading, setLoading] = useState(false);
-  const sendToServer = async (formData) => {
-    setLoading(true);
-    await fetch('https://caixa-digital-cms.herokuapp.com/auth/local/register', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
+
+  const sendToServer = async (data) => {
+    fetch("https://caixa-digital-cms.herokuapp.com/auth/local/register", {
+      method: "POST",
+      body: data,
     })
+      /* .then((response) => response.json())
+    .then((responseJson) => {
+      //Hide Loader
+     // setLoading(false);
+      console.log(responseJson);
+      // If server response message same as Data Matched
+      if (responseJson.status === 'success') {
+        formSubmitted("yes");
+        console.log(
+          'Registration Successful. Please Login to proceed'
+        );
+      } else {
+        console.log(responseJson.msg);
+        formSubmitted("no");
+      }
+    })
+    .catch((error) => {
+      //Hide Loader
+      setLoading(false);
+      console.error(error);
+    }); */
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log('result', result);
+          console.log("result", result);
           setData(result.rows);
-          console.log(data);
-          formSubmitted('yes');
-          setLoading(false);
+          formSubmitted("yes");
         },
         (err) => {
-          console.error('error', err);
-          formSubmitted('no');
-          setLoading(false);
+          console.log("error", err);
+          formSubmitted("yes");
         }
       );
   };
 
-  const saveNnavigate = () => {
-    if (!email || !email1) {
-      Alert.alert('Escreva o seu email');
+  const saveNnavigate = async () => {
+    /* validateEmails();
+    validatePasss(); */
+    if (!email || !email1) { 
+      alert("Escreva o seu email");
       return;
-    }
-    if (email1 !== email) {
-      Alert.alert('Erro de confirmação de emails');
-      return;
-    }
-    if (!email.match(REGEX_EMAIL)) {
-      Alert.alert('Email inválido');
-      return;
+    } else if (email1 != email) { 
+      alert("Erro de confirmação de emails");
+      return ;
+    } else if (!email.match(REGEX_EMAIL)) {
+      alert("Email inválido");
+      return ;
     }
 
     if (!password || !password1) {
-      Alert.alert('Crie uma password');
+      alert("Crie uma password");
       return;
-    }
-    if (password1 !== password) {
-      Alert.alert('Erro de confirmação de passwords');
+    } else if (password1 != password) {
+      alert("Erro de confirmação de passwords");
       return;
-    }
-    if (password.length < 6) {
-      Alert.alert('Número mínimo de caracteres da password: 6');
+    } else if (password.length<6) { 
+      alert("Número mínimo de caracteres: 6");
       return;
     }
 
-    const dataToSend = {
-      email,
-      password,
-      user_type: 'client',
+    var dataToSend = {
+      email: email,
+      password: password,
+      user_type: "client",
     };
 
     console.log(dataToSend);
-    const hey = counterContext2.formData;
+    var hey = counterContext2.formData;
 
-    hey.push(dataToSend);
+    var ok = hey.push(dataToSend);
 
-    const forms = counterContext2.formData;
+    var forms = counterContext2.formData;
     console.log(forms);
 
-    const form1Values = Object.values(forms[0]);
-    const form2Values = Object.values(forms[1]);
-    const form3Values = Object.values(forms[2]);
+    var form1Values = Object.values(forms[0]);
+    var form2Values = Object.values(forms[1]);
+    var form3Values = Object.values(forms[2]);
 
-    const dataToSend2 = {
-      name: `${form1Values[0]} ${form1Values[1]}`,
-      username: 'chachada',
-      dateofbirth: form1Values[2],
-      gender: form1Values[3],
-      street: form2Values[0],
-      door: form2Values[1],
-      floor: form2Values[2],
-      postalCode: form2Values[3],
-      locality: form2Values[4],
-      city: form2Values[5],
-      country: form2Values[6],
-      bi: form3Values[0],
-      phoneNumber: form3Values[1],
-      nif: form3Values[2],
-      email,
-      password,
-      user_type: 'client',
-    };
+    console.log(form1Values[0]);
 
-    console.log(dataToSend2);
-    sendToServer(dataToSend2);
+    try {
+      const { data } = await axios.post(
+        "https://caixa-digital-cms.herokuapp.com/auth/local/register",
+        {
+          username: form1Values[0],
+          usersurname: form1Values[1],
+          dateofbirth: form1Values[2],
+          gender: form1Values[3],
+          street: form2Values[0],
+          door: form2Values[1],
+          floor: form2Values[2],
+          postalCode: form2Values[3],
+          locality: form2Values[4],
+          district: form2Values[5],
+          country: form2Values[6],
+          bi: form3Values[0],
+          phoneNumber: form3Values[1],
+          nif: form3Values[2],
+          email: email,
+          password: password,
+          user_type: "client",
+        }
+      );
+      console.table(data);
+      console.log("deu certo");
+    } catch {
+      console.error();
+    }
+    //sendToServer(final);
   };
 
   return (
     <>
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
-          </View>
+      <View>
+        <Text>Insira o seu email </Text>
+        <TextInput
+          type="email"
+          placeholder="Email"
+          id="email"
+          name="email1"
+          autoCapitalize="none"
+          onChangeText={(Email) => setEmail1(Email)}
+        />
 
-          {loading && (
-            <View>
-              <ActivityIndicator animating color={Colors.blue800} size="large" />
-            </View>
-          )}
+        <Text>Confirme o seu email </Text>
+        <TextInput
+          type="email"
+          placeholder="Email"
+          id="email_confirm"
+          name="email2"
+          autoCapitalize="none"
+          onChangeText={(Email) => setEmail(Email)}
+        />
 
-          {loading}
+        <Text>Crie uma palavra-passe </Text>
+        <TextInput
+          type="password"
+          placeholder="Password"
+          id="pass"
+          name="password1"
+          autoCapitalize="none"
+          secureTextEntry={true}
+          onChangeText={(Pass) => setPassword1(Pass)}
+        />
 
-          <View style={styles.container2}>
-            <Text style={styles.title}>Insira o seu email </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="email"
-                placeholder="Email"
-                id="email"
-                name="email1"
-                autoCapitalize="none"
-                keyboardType="email-address"
-                onChangeText={(Email) => setEmail1(Email)}
-              />
-            </View>
-          </View>
+        <Text>Confirme a palavra-passe </Text>
+        <TextInput
+          type="password"
+          placeholder="Password"
+          id="pass_confirm"
+          name="password2"
+          autoCapitalize="none"
+          secureTextEntry={true}
+          onChangeText={(Pass) => setPassword(Pass)}
+        />
 
-          <View style={styles.container2}>
-            <Text style={styles.title}>Confirme o seu email </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="email"
-                placeholder="Email"
-                id="email_confirm"
-                name="email2"
-                autoCapitalize="none"
-                keyboardType="email-address"
-                onChangeText={(Email) => setEmail(Email)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.container2}>
-            <Text style={styles.title}>Crie uma palavra-passe </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="password"
-                placeholder="Password"
-                id="pass"
-                name="password1"
-                autoCapitalize="none"
-                secureTextEntry
-                onChangeText={(Pass) => setPassword1(Pass)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.container2}>
-            <Text style={styles.title}>Confirme a palavra-passe </Text>
-            <View style={styles.inputRow}>
-              <TextInput
-                style={styles.TextInputStyle}
-                type="password"
-                placeholder="Password"
-                id="pass_confirm"
-                name="password2"
-                autoCapitalize="none"
-                secureTextEntry
-                onChangeText={(Pass) => setPassword(Pass)}
-              />
-            </View>
-          </View>
-
+        <View style={styles.buttonOK}>
           <TouchableOpacity onPress={saveNnavigate}>
-            <View style={styles.buttonOK}>
-              <Text style={{ color: 'white' }}> Criar conta </Text>
-            </View>
+            <Text style={{ color: "white" }}> Criar conta </Text>
           </TouchableOpacity>
-          <Provider>
-            <View>
-              <Portal>
-                <Dialog visible={visible} dismissable={false}>
-                  <Dialog.Title>{dialogTextTitle}</Dialog.Title>
-                  <Dialog.Content>
-                    <Paragraph>{dialogTextContent}</Paragraph>
-                  </Dialog.Content>
-                  <Dialog.Actions>
-                    <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
-                      OK{' '}
-                    </Button>
-                  </Dialog.Actions>
-                </Dialog>
-              </Portal>
-            </View>
-          </Provider>
         </View>
-      </ScrollView>
+
+        <View>
+          {/* <Modal visible={modalVisible}>
+            <Text>{textModal}</Text>
+            <Button
+              onPress={
+                (props.navigation.navigate("LoginForm"),
+                () => setModalVisible(!modalVisible))
+              }
+            >
+              OK
+            </Button>
+          </Modal> */}
+        </View>
+      </View>
     </>
   );
 };
 
 export default RegisterForm4;
+
+const styles = StyleSheet.create({
+  header: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    width: 140,
+    height: 50,
+    backgroundColor: "#1DC690",
+    paddingVertical: 10,
+    borderRadius: 45,
+  },
+  container: {
+    height: "100%",
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
+  },
+  TextInputStyle: {
+    textAlign: "center",
+    height: 40,
+    marginBottom: 10,
+    borderBottomColor: "#726F6F",
+    borderBottomWidth: 1,
+  },
+  inputRow: {
+    flexDirection: "row",
+    marginHorizontal: 55,
+    justifyContent: "space-around",
+    //alignItems:"spaceAround",
+    padding: 10,
+  },
+  title: {
+    fontWeight: "bold",
+  },
+  buttonOK: {
+    marginHorizontal: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+    width: 290,
+    height: 45,
+    backgroundColor: "#1C4670",
+    paddingVertical: 10,
+    borderRadius: 45,
+  },
+});
