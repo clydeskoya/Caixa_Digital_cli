@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
@@ -11,7 +12,6 @@ const styles = StyleSheet.create({
     marginBottom: '8%',
     width: '50%',
     height: '7%',
-    marginTop: '15%',
     backgroundColor: '#1DC690',
     borderRadius: 15,
   },
@@ -19,12 +19,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '5%',
   },
 
   container2: {
     alignItems: 'flex-start',
     justifyContent: 'center',
-    padding: '3%',
+    marginVertical: '3%',
   },
 
   TextInputStyle: {
@@ -53,6 +54,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     // marginBottom: "9%",
+  },
+
+  goBack: {
+    alignSelf: 'flex-start',
+    marginTop: '7%',
   },
 
   buttonOK: {
@@ -104,6 +110,11 @@ const RegisterForm3 = (props) => {
     <>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.goBack}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Ionicons name="arrow-back-outline" size={37} />
+            </TouchableOpacity>
+          </View>
           <View style={styles.header}>
             <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>

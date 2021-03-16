@@ -30,6 +30,7 @@ const LoginForm = (props) => {
       if (data.jwt) {
         props.navigation.navigate('Home');
         console.log('data', data);
+        console.log('heyyyyyyyyyyyyyyyyyyyyyyy');
         setLoading(false);
       }
     } catch (error) {
@@ -89,7 +90,8 @@ const LoginForm = (props) => {
           />
         </View>
 
-        <TouchableOpacity onPress={login}>
+        {/* <TouchableOpacity onPress={login}> */}
+        <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
           <View style={styles.bottomActions}>
             <Text style={styles.textLogin}> Login </Text>
           </View>

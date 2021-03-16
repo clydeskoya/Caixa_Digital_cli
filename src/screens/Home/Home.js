@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 12,
     alignSelf: 'center',
-    marginBottom: 10,
+    marginBottom: '3%',
     backgroundColor: '#C5DFEA',
     borderColor: '#2C8DB2',
   },
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
 const Home = (props) => (
   <View style={styles.container}>
     <Header />
+
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaEnviada')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
@@ -46,6 +47,7 @@ const Home = (props) => (
         </Card.Content>
       </Card>
     </TouchableOpacity>
+
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaRecebida')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
@@ -55,6 +57,7 @@ const Home = (props) => (
         </Card.Content>
       </Card>
     </TouchableOpacity>
+
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
       <Card style={styles.cardStilo}>
         <Card.Content>

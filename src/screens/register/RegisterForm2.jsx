@@ -1,6 +1,7 @@
 import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView, Alert } from 'react-native';
 import { prop } from 'ramda';
 import React, { useState, useContext, useEffect } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
@@ -82,6 +83,11 @@ const RegisterForm2 = (props) => {
     <>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.goBack}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Ionicons name="arrow-back-outline" size={37} />
+            </TouchableOpacity>
+          </View>
           <View style={styles.header}>
             <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>
@@ -189,7 +195,6 @@ const styles = StyleSheet.create({
     marginBottom: '8%',
     width: '50%',
     height: '7%',
-    marginTop: '15%',
     backgroundColor: '#1DC690',
     borderRadius: 45,
   },
@@ -197,12 +202,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '5%',
   },
 
   container2: {
     alignItems: 'flex-start',
     justifyContent: 'center',
-    padding: '3%',
   },
 
   TextInputStyle: {
@@ -278,6 +283,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: '2.5%',
     marginRight: '41%',
+  },
+
+  goBack: {
+    alignSelf: 'flex-start',
+    marginTop: '7%',
   },
 
   buttonOK: {
