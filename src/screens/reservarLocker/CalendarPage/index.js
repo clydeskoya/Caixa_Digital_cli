@@ -1,10 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import CalendarPageRender from './CalendarPageRender';
+import CalendarPageRender from "./CalendarPageRender";
 
-class CalendarPage extends React.Component {
-  render() {
-    return <CalendarPageRender />;
-  }
+function CalendarPage() {
+  return <CalendarPageRender />;
 }
+
 export default CalendarPage;

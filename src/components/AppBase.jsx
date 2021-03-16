@@ -13,7 +13,7 @@ const AppBase = () => {
   return (
     <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={ProfileNavigation} options={{ headerShown: false }} />
