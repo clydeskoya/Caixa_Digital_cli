@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // eslint-disable-next-line import/no-cycle
 
 import NotificationScreen from '../notifications/NotificationScreen';
-import ReserveScreen from '../ReserveScreen';
+import ReserveScreen from '../reservarLocker/CalendarPage';
 // eslint-disable-next-line import/no-cycle
 import HomeStack from './HomeStack';
 import ProfileNavigation from '../../ProfileNavigation';

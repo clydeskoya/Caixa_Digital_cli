@@ -1,29 +1,39 @@
-import React from 'react';
-import { MaskedViewComponent, StyleSheet, Text, View, Button } from 'react-native';
-import { Calendar } from 'react-native-calendars';
-import { withTheme } from 'styled-components/native';
-import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
+import React, { useState, useEffect } from 'react';
+import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { OrangeTest, ButtonNext } from './PaymentPageStyles';
+import Header from '../../../components/HeaderReservarLocker';
 
-const CalendarPage = () => {
-  let date;
+function PaymentPage() {
+  const navigation = useNavigation();
   return (
     <View>
-      <OrangeTest>Escolha uma data</OrangeTest>
-      <CalendarWrapper>
-        <Calendar
-          onDayPress={(day) => {
-            console.log('selected day', day);
-          }}
-        />
-      </CalendarWrapper>
-      <ButtonNext onPress={() => Alert.alert('Simple ButtonNext pressed')}>
-        <Text style={styles.textr}>Seguinte</Text>
-      </ButtonNext>
+      <Header />
+      <Text style={{marginTop: 20}}>Payment page</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('SucessReservarLocker')}>
+        <ButtonNext>
+          <Text style={styles.textr}>Seguinte</Text>
+        </ButtonNext>
+      </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
+  header: {
+    marginTop: 20,
+    fontSize: 22,
+  },
+  scan: {
+    height: '100%',
+    width: '100%',
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
   textr: {
     color: 'white',
     marginVertical: 5,
@@ -37,6 +47,11 @@ const styles = StyleSheet.create({
   red: {
     color: 'red',
   },
+  barCodeView: {
+    width: '100%',
+    height: '50%',
+    marginBottom: 40,
+  },
 });
 
-export default CalendarPage;
+export default PaymentPage;

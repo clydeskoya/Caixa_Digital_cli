@@ -1,7 +1,35 @@
 import React from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { MaskedViewComponent, StyleSheet, Text, View, Button } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+
+import { withTheme } from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
 import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
+import Header from '../../../components/HeaderReservarLocker'
+
+const CalendarPage = () => {
+  var date;
+  const navigation = useNavigation();
+  return (
+    <View>
+      <Header/>
+      <OrangeTest>Escolha uma data</OrangeTest>
+      <CalendarWrapper>
+        <Calendar
+          onDayPress={(day) => {
+            console.log('selected day', day);
+          }}
+        />
+      </CalendarWrapper>
+      <TouchableOpacity onPress={() => navigation.navigate('SendReceiveReservarLocker')}>
+        <ButtonNext>
+          <Text style={styles.textr}>Seguinte</Text>
+        </ButtonNext>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   textr: {
@@ -18,21 +46,5 @@ const styles = StyleSheet.create({
     color: 'red',
   },
 });
-
-const CalendarPage = () => (
-  <View>
-    <OrangeTest>Escolha uma data</OrangeTest>
-    <CalendarWrapper>
-      <Calendar
-        onDayPress={(day) => {
-          console.log('selected day', day);
-        }}
-      />
-    </CalendarWrapper>
-    <ButtonNext onPress={() => Alert.alert.alert('Simple ButtonNext pressed')}>
-      <Text style={styles.textr}>Seguinte</Text>
-    </ButtonNext>
-  </View>
-);
 
 export default CalendarPage;
