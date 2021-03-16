@@ -1,29 +1,19 @@
 import React, { useReducer } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-// import { Button } from 'react-native';
 import SplashScreen from '../screens/SplashScreen';
 import Auth from '../../Auth';
 import { Stack } from '../common/stack';
-// import { CounterContext, formReducerInitialState, registerFormReducer } from '../common/context/form.register';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/context/form.register2';
-import HomeStack from '../screens/Home/HomeStack';
 import TabNavigator from '../screens/Home/TabNavigator';
-import correspondenciaEnviada from '../screens/correspondenciaEnviada';
-import correspondenciaRecebida from '../screens/correspondenciaRecebida';
-import reservasMarcadas from '../screens/reservasMarcadas';
-import Home from '../screens/Home/Home';
-// import correspEnviada from '../screens/correspEnviada';
-// import correspRecebida from '../screens/correspRecebida';
-// import reservasMarcadas from '../screens/reservasMarcadas';
+
+
+import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 
 const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
 
   return (
-    <CounterContext2.Provider
-      // value={{ counterCount: state, counterDispatch: dispatch }}
-      value={{ formData: state2, formDispatch: dispatch2 }}
-    >
+    <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen

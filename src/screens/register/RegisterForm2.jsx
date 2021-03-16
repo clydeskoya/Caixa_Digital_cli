@@ -1,7 +1,7 @@
-import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView, Alert } from 'react-native';
 import { prop } from 'ramda';
 import React, { useState, useContext, useEffect } from 'react';
-import { CounterContext2 } from '../../common/context/form.register2';
+import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
@@ -12,7 +12,7 @@ const RegisterForm2 = (props) => {
   const [floor, setFloor] = useState('3D');
   const [postalCode, setPostalColde] = useState('2735-272');
   const [locality, setLocality] = useState('');
-  const [district, setDistrict] = useState('Lisboa');
+  const [city, setCity] = useState('Lisboa');
   const [country, setCountry] = useState('Portugal');
 
   const counterContext2 = useContext(CounterContext2);
@@ -34,7 +34,7 @@ const RegisterForm2 = (props) => {
       Alert.alert('Código postal inválido');
       return;
     }
-    if (!district) {
+    if (!city) {
       Alert.alert('Indique o distrito');
       return;
     }
@@ -45,7 +45,7 @@ const RegisterForm2 = (props) => {
       floor,
       postalCode,
       locality,
-      district,
+      city,
       country,
     };
 
@@ -58,7 +58,7 @@ const RegisterForm2 = (props) => {
     async function fetchData() {
       const zip = postalCode.slice(0, 4);
       const code = postalCode.slice(5, 8);
-      const ola = await fetch(`https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`)
+      await fetch(`https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`)
         .then(
           (res) => res.json(),
           (error) => console.error(error)
@@ -73,8 +73,8 @@ const RegisterForm2 = (props) => {
     }
     if (REGEX_POSTAL_CODE.test(postalCode)) {
       fetchData();
-      // } else if (locality.length) {
-      //   setLocality("");
+    } else if (locality.length) {
+      setLocality('');
     }
   }, [postalCode]);
 
@@ -146,10 +146,10 @@ const RegisterForm2 = (props) => {
               <TextInput
                 type="text"
                 placeholder="Cidade"
-                value={district}
+                value={city}
                 style={styles.TextInputStyle}
-                name="district"
-                onChangeText={(District) => setDistrict(District)}
+                name="city"
+                onChangeText={(City) => setCity(City)}
               />
             </View>
           </View>
@@ -276,7 +276,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     textAlign: 'left',
     flexDirection: 'row',
-    justifyContent: 'space-around',
     padding: '2.5%',
     marginRight: '41%',
   },
