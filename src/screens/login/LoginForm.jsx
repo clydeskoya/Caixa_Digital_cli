@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import { StyleSheet, TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { styles } from './styles';
+
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [email, setEmail] = useState('albertasorriso@gmail.com');
+  const [pass, setPass] = useState('strapiPassword');
 
   const login = async () => {
     if (!email) {
@@ -59,6 +61,7 @@ const LoginForm = (props) => {
             autoCapitalize="none"
             keyboardType="email-address"
             onChangeText={(Email) => setEmail(Email)}
+            value={email}
           />
         </View>
 
@@ -73,6 +76,7 @@ const LoginForm = (props) => {
             autoCapitalize="none"
             secureTextEntry
             onChangeText={(Pass) => setPass(Pass)}
+            value={pass}
           />
         </View>
 
@@ -92,46 +96,4 @@ const LoginForm = (props) => {
 };
 
 export default LoginForm;
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  oval: {
-    width: '130%',
-    height: '60%',
-    top: '-20%',
-    borderRadius: 700,
-    backgroundColor: '#1C4670',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logo: {
-    width: '70%',
-    // height: "85%",
-    top: '20%',
-  },
-  inputRow: {
-    flexDirection: 'row',
-    marginHorizontal: 55,
-  },
-  input: {
-    margin: '3%',
-    width: '80%',
-    borderBottomColor: '#1C4670',
-    borderBottomWidth: 1,
-  },
-  textRegister: {
-    textDecorationLine: 'underline',
-  },
-  textLogin: { color: 'white' },
-  bottomActions: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    height: 40,
-    marginVertical: '10%',
-    backgroundColor: '#1C4670',
-    borderRadius: 45,
-  },
-});
+

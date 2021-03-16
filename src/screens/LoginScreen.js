@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = ({ navigation }) => {
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
+  const [userEmail, setUserEmail] = useState('albertasorriso@gmail.com');
+  const [userPassword, setUserPassword] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
 

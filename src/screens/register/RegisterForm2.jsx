@@ -276,7 +276,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     textAlign: 'left',
     flexDirection: 'row',
-    //justifyContent: 'space-around',
     padding: '2.5%',
     marginRight: '41%',
   },

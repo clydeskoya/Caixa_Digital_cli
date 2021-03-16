@@ -2,10 +2,10 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Home from './src/screens/Home';
 import NotificationScreen from './src/screens/notifications/NotificationScreen';
 import ReserveScreen from './src/screens/ReserveScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
+import ProfileScreen from './src/screens/profile/ProfileScreen';
+import Home from './src/screens/Home/Home';
 
 const Tab = createBottomTabNavigator();
 
