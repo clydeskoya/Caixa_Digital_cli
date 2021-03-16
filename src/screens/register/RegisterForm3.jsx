@@ -1,8 +1,73 @@
 import React, { useState, useContext } from 'react';
-import { Button, Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
-import { CounterContext2 } from '../../common/context/form.register2';
+import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
+
+const styles = StyleSheet.create({
+  header: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '8%',
+    width: '50%',
+    height: '7%',
+    marginTop: '15%',
+    backgroundColor: '#1DC690',
+    borderRadius: 15,
+  },
+
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  container2: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    padding: '3%',
+  },
+
+  TextInputStyle: {
+    textAlign: 'left',
+    height: '65%',
+    width: '100%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  inputRow: {
+    flexDirection: 'row',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+    padding: '2.5%',
+  },
+
+  title: {
+    textAlign: 'left',
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+
+  title1: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    // marginBottom: "9%",
+  },
+
+  buttonOK: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 250,
+    height: 40,
+    // marginVertical: "10%",
+    // marginEnd: "5%",
+    // bottom:"1%",
+    // marginTop: "50%",
+    backgroundColor: '#1C4670',
+    borderRadius: 45,
+  },
+});
 
 const RegisterForm3 = (props) => {
   const [bi, setBI] = useState('');
@@ -102,6 +167,7 @@ const RegisterForm3 = (props) => {
 };
 
 export default RegisterForm3;
+<<<<<<< HEAD
 
 const styles = StyleSheet.create({
   header: {
@@ -168,3 +234,5 @@ const styles = StyleSheet.create({
     borderRadius: 45,
   },
 });
+=======
+>>>>>>> develop

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet} from 'react-native';
-import { Button, Paragraph, Dialog, Portal, Provider } from 'react-native-paper';
-import { CounterContext2 } from '../../common/context/form.register2';
+import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator } from 'react-native-paper';
+import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 // eslint-disable-next-line no-control-regex
 const REGEX_EMAIL = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/;
@@ -49,8 +49,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 250,
     height: 40,
-    // marginVertical:"10%",
-    // marginTop: "10%",
     backgroundColor: '#1C4670',
     borderRadius: 45,
   },
@@ -99,7 +97,7 @@ const RegisterForm4 = (props) => {
     await fetch('https://caixa-digital-cms.herokuapp.com/auth/local/register', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
@@ -144,7 +142,7 @@ const RegisterForm4 = (props) => {
       return;
     }
     if (password.length < 6) {
-      Alert.alert('Número mínimo de caracteres: 6');
+      Alert.alert('Número mínimo de caracteres da password: 6');
       return;
     }
 
@@ -157,7 +155,7 @@ const RegisterForm4 = (props) => {
     console.log(dataToSend);
     const hey = counterContext2.formData;
 
-    const ok = hey.push(dataToSend);
+    hey.push(dataToSend);
 
     const forms = counterContext2.formData;
     console.log(forms);
@@ -192,104 +190,108 @@ const RegisterForm4 = (props) => {
 
   return (
     <>
-      {/* <ScrollView> */}
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
+          </View>
+
+          {loading && (
+            <View>
+              <ActivityIndicator animating color={Colors.blue800} size="large" />
+            </View>
+          )}
+
+          {loading}
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Insira o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email"
+                name="email1"
+                autoCapitalize="none"
+                keyboardType="email-address"
+                onChangeText={(Email) => setEmail1(Email)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme o seu email </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="email"
+                placeholder="Email"
+                id="email_confirm"
+                name="email2"
+                autoCapitalize="none"
+                keyboardType="email-address"
+                onChangeText={(Email) => setEmail(Email)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Crie uma palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass"
+                name="password1"
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={(Pass) => setPassword1(Pass)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.container2}>
+            <Text style={styles.title}>Confirme a palavra-passe </Text>
+            <View style={styles.inputRow}>
+              <TextInput
+                style={styles.TextInputStyle}
+                type="password"
+                placeholder="Password"
+                id="pass_confirm"
+                name="password2"
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={(Pass) => setPassword(Pass)}
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity onPress={saveNnavigate}>
+            <View style={styles.buttonOK}>
+              <Text style={{ color: 'white' }}> Criar conta </Text>
+            </View>
+          </TouchableOpacity>
+          <Provider>
+            <View>
+              <Portal>
+                <Dialog visible={visible} dismissable={false}>
+                  <Dialog.Title>{dialogTextTitle}</Dialog.Title>
+                  <Dialog.Content>
+                    <Paragraph>{dialogTextContent}</Paragraph>
+                  </Dialog.Content>
+                  <Dialog.Actions>
+                    <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
+                      OK{' '}
+                    </Button>
+                  </Dialog.Actions>
+                </Dialog>
+              </Portal>
+            </View>
+          </Provider>
         </View>
-
-        {loading}
-
-        <View style={styles.container2}>
-          <Text style={styles.title}>Insira o seu email </Text>
-          <View style={styles.inputRow}>
-            <TextInput
-              style={styles.TextInputStyle}
-              type="email"
-              placeholder="Email"
-              id="email"
-              name="email1"
-              autoCapitalize="none"
-              onChangeText={(Email) => setEmail1(Email)}
-            />
-          </View>
-        </View>
-
-        <View style={styles.container2}>
-          <Text style={styles.title}>Confirme o seu email </Text>
-          <View style={styles.inputRow}>
-            <TextInput
-              style={styles.TextInputStyle}
-              type="email"
-              placeholder="Email"
-              id="email_confirm"
-              name="email2"
-              autoCapitalize="none"
-              onChangeText={(Email) => setEmail(Email)}
-            />
-          </View>
-        </View>
-
-        <View style={styles.container2}>
-          <Text style={styles.title}>Crie uma palavra-passe </Text>
-          <View style={styles.inputRow}>
-            <TextInput
-              style={styles.TextInputStyle}
-              type="password"
-              placeholder="Password"
-              id="pass"
-              name="password1"
-              autoCapitalize="none"
-              secureTextEntry
-              onChangeText={(Pass) => setPassword1(Pass)}
-            />
-          </View>
-        </View>
-
-        <View style={styles.container2}>
-          <Text style={styles.title}>Confirme a palavra-passe </Text>
-          <View style={styles.inputRow}>
-            <TextInput
-              style={styles.TextInputStyle}
-              type="password"
-              placeholder="Password"
-              id="pass_confirm"
-              name="password2"
-              autoCapitalize="none"
-              secureTextEntry
-              onChangeText={(Pass) => setPassword(Pass)}
-            />
-          </View>
-        </View>
-
-        <TouchableOpacity onPress={saveNnavigate}>
-          <View style={styles.buttonOK}>
-            <Text style={{ color: 'white' }}> Criar conta </Text>
-          </View>
-        </TouchableOpacity>
-        <Provider>
-          <View>
-            <Portal>
-              <Dialog visible={visible} dismissable={false}>
-                <Dialog.Title>
-                  <Text>{dialogTextTitle}</Text>
-                </Dialog.Title>
-                <Dialog.Content>
-                  <Paragraph>
-                    <Text>{dialogTextContent}</Text>
-                  </Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                  <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
-                    OK{' '}
-                  </Button>
-                </Dialog.Actions>
-              </Dialog>
-            </Portal>
-          </View>
-        </Provider>
-      </View>
-      {/* </ScrollView> */}
+      </ScrollView>
     </>
   );
 };

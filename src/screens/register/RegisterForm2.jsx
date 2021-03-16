@@ -1,92 +1,81 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  TextInput,
-  View,
-  ScrollView,
-} from "react-native";
-import { prop } from "ramda";
-import React, { useState, useContext, useEffect } from "react";
-import { CounterContext2 } from "../../common/context/form.register2";
+import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView, Alert } from 'react-native';
+import { prop } from 'ramda';
+import React, { useState, useContext, useEffect } from 'react';
+import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
 
 const RegisterForm2 = (props) => {
-  const [street, setStreet] = useState("Rua António Janeiro");
-  const [door, setDoor] = useState("1");
-  const [floor, setFloor] = useState("3D");
-  const [postalCode, setPostalColde] = useState("2735-272");
-  const [locality, setLocality] = useState("");
-  const [district, setDistrict] = useState("Lisboa");
-  const [country, setCountry] = useState("Portugal");
+  const [street, setStreet] = useState('Rua António Janeiro');
+  const [door, setDoor] = useState('1');
+  const [floor, setFloor] = useState('3D');
+  const [postalCode, setPostalColde] = useState('2735-272');
+  const [locality, setLocality] = useState('');
+  const [city, setCity] = useState('Lisboa');
+  const [country, setCountry] = useState('Portugal');
 
   const counterContext2 = useContext(CounterContext2);
 
   const saveNnavigate = () => {
     if (!street) {
-     Alert.alert("Indique a sua rua");
+      Alert.alert('Indique a sua rua');
       return;
     }
     if (!door || !door.match(REGEX_ONLY_NUMBERS)) {
-     Alert.alert("Número de porta inválido");
+      Alert.alert('Número de porta inválido');
       return;
     }
     if (!floor) {
-     Alert.alert("Indique o seu andar");
+      Alert.alert('Indique o seu andar');
       return;
     }
     if (!postalCode || !postalCode.match(REGEX_POSTAL_CODE)) {
-     Alert.alert("Código postal inválido");
+      Alert.alert('Código postal inválido');
       return;
     }
-    if (!district) {
-     Alert.alert("Indique o distrito");
+    if (!city) {
+      Alert.alert('Indique o distrito');
       return;
     }
 
-    var dataToSend = {
-      street: street,
-      door: door,
-      floor: floor,
-      postalCode: postalCode,
-      locality: locality,
-      district: district,
-      country: country,
+    const dataToSend = {
+      street,
+      door,
+      floor,
+      postalCode,
+      locality,
+      city,
+      country,
     };
 
     console.log(dataToSend);
     counterContext2.formDispatch(dataToSend);
-    props.navigation.navigate("RegisterForm3");
+    props.navigation.navigate('RegisterForm3');
   };
 
   useEffect(() => {
     async function fetchData() {
       const zip = postalCode.slice(0, 4);
       const code = postalCode.slice(5, 8);
-      const ola = await fetch(
-        `https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`
-      )
+      await fetch(`https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`)
         .then(
-          (res) => {
-            return res.json();
-          },
+          (res) => res.json(),
           (error) => console.error(error)
         )
         .then(
           (result) => {
-            console.log("result", result);
-            setLocality(prop("value", result));
+            console.log('result', result);
+            setLocality(prop('value', result));
           },
           (error) => console.error(error)
         );
     }
     if (REGEX_POSTAL_CODE.test(postalCode)) {
       fetchData();
-    // } else if (locality.length) {
-    //   setLocality("");
- }
+    } else if (locality.length) {
+      setLocality('');
+    }
   }, [postalCode]);
 
   return (
@@ -94,10 +83,7 @@ const RegisterForm2 = (props) => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={{ color: "white", fontWeight: "bold", fontSize: 22 }}>
-              {" "}
-              Registo{" "}
-            </Text>
+            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>
 
           <View style={styles.container2}>
@@ -160,10 +146,10 @@ const RegisterForm2 = (props) => {
               <TextInput
                 type="text"
                 placeholder="Cidade"
-                value={district}
+                value={city}
                 style={styles.TextInputStyle}
-                name="district"
-                onChangeText={(District) => setDistrict(District)}
+                name="city"
+                onChangeText={(City) => setCity(City)}
               />
             </View>
           </View>
@@ -185,7 +171,7 @@ const RegisterForm2 = (props) => {
 
           <View style={styles.buttonOK}>
             <TouchableOpacity onPress={saveNnavigate}>
-              <Text style={{ color: "white" }}> Seguinte </Text>
+              <Text style={{ color: 'white' }}> Seguinte </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -198,110 +184,110 @@ export default RegisterForm2;
 
 const styles = StyleSheet.create({
   header: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: "8%",
-    width: "50%",
-    height: "7%",
-    marginTop: "15%",
-    backgroundColor: "#1DC690",
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '8%',
+    width: '50%',
+    height: '7%',
+    marginTop: '15%',
+    backgroundColor: '#1DC690',
     borderRadius: 45,
   },
 
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   container2: {
-    alignItems: "flex-start",
-    justifyContent: "center",
-    padding: "3%",
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    padding: '3%',
   },
 
   TextInputStyle: {
-    textAlign: "left",
-    width: "100%",
-    marginBottom: "3%",
-    borderBottomColor: "#726F6F",
+    textAlign: 'left',
+    width: '100%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
   },
 
   TextInputStyleStreet: {
-    textAlign: "left",
-    width: "50%",
-    marginBottom: "3%",
-    marginRight: "5%",
-    borderBottomColor: "#726F6F",
+    textAlign: 'left',
+    width: '50%',
+    marginBottom: '3%',
+    marginRight: '5%',
+    borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
   },
 
   TextInputStyleDoor: {
-    textAlign: "left",
-    width: "20%",
-    marginRight: "5%",
-    marginBottom: "3%",
-    borderBottomColor: "#726F6F",
+    textAlign: 'left',
+    width: '20%',
+    marginRight: '5%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
   },
 
   TextInputStyleFloor: {
-    textAlign: "left",
-    width: "20%",
-    marginBottom: "3%",
-    borderBottomColor: "#726F6F",
+    textAlign: 'left',
+    width: '20%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
   },
 
   TextInputStyleZipcode: {
-    textAlign: "left",
-    width: "22%",
-    marginBottom: "3%",
-    borderBottomColor: "#726F6F",
+    textAlign: 'left',
+    width: '22%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
   },
 
   inputRow: {
-    textAlign: "left",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: "2.5%",
+    textAlign: 'left',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: '2.5%',
   },
 
   title: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 17,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    padding: "2%",
-    paddingBottom: "6.5%",
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    padding: '2%',
+    paddingBottom: '6.5%',
   },
 
   title1: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 13,
-    alignItems: "flex-start",
-    justifyContent: "center",
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
 
   titleLocality: {
     fontSize: 12.5,
-    alignItems: "flex-start",
-    justifyContent: "flex-end",
-    textAlign: "left",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: "2.5%",
-    marginRight: "41%",
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    textAlign: 'left',
+    flexDirection: 'row',
+    //justifyContent: 'space-around',
+    padding: '2.5%',
+    marginRight: '41%',
   },
 
   buttonOK: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 250,
     height: 40,
-    marginVertical: "10%",
-    backgroundColor: "#1C4670",
+    marginVertical: '10%',
+    backgroundColor: '#1C4670',
     borderRadius: 45,
   },
 });

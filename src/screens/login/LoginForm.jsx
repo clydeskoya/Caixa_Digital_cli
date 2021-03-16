@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import { StyleSheet, TouchableOpacity, Text, View, TextInput, Image, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const LoginForm = (props) => {
@@ -26,6 +26,7 @@ const LoginForm = (props) => {
 
       if (data.jwt) {
         props.navigation.navigate('Home');
+        console.log('data', data);
       }
     } catch (error) {
       if (error.response) {
@@ -41,35 +42,6 @@ const LoginForm = (props) => {
     }
   };
 
-  /*  const login = async () => {
-    var dataToSend = {
-      identifier: email,
-      password: pass,
-    };
-
-    console.log(dataToSend);
-  //  console.log(formBody);
-
-    fetch("https://caixa-digital-cms.herokuapp.com/auth/local", {
-      method: "POST",
-      body: formBody,
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        if (responseJson.status === "success") {
-          AsyncStorage.setItem("user_id", responseJson.data.email);
-          console.log(responseJson.data.email);
-          props.navigation.navigate("Home");
-        } else {
-         Alert.alert("Email ou password inválidos");
-          console.log("Email ou password inválidos");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }; */
-
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -84,6 +56,8 @@ const LoginForm = (props) => {
             id="inputEmail"
             name="identifier"
             placeholder="Email"
+            autoCapitalize="none"
+            keyboardType="email-address"
             onChangeText={(Email) => setEmail(Email)}
           />
         </View>
