@@ -1,6 +1,5 @@
 import React from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
-
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../../components/HeaderReservarLocker';
 import { RadioButton } from 'react-native-paper';

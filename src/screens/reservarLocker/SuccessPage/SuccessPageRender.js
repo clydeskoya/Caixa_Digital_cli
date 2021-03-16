@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../../components/HeaderReservarLocker';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const SuccessPage = () => {
   const navigation = useNavigation();
@@ -14,7 +15,9 @@ const SuccessPage = () => {
         <TouchableOpacity onPress={() => navigation.navigate('scanqrcode')}>
           <View style={styles.boxwradius}>
             <Text style={styles.boxtext}>Reserva para envio de correspondências efetuada com sucesso.</Text>
-            <View style={styles.check}></View>
+            <View style={styles.check}>
+              <Ionicons name="checkmark" size={50} color='white'/>
+            </View>
             <Text style={styles.boxtext}>Dia 20/02/2021 - Compartimento 1</Text>
           </View>
           <View style={styles.button}>

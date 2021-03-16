@@ -9,7 +9,7 @@ import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
 
 const CalendarPage = () => {
   var date;
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
   return (
     <View>
       <OrangeTest>Escolha uma data</OrangeTest>
