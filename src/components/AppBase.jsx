@@ -22,7 +22,7 @@ class AppBase extends React.Component {
         //value={{ counterCount: state, counterDispatch: dispatch }}
         value={{ formData: state2, formDispatch: dispatch2 }}
       >
-        <NavigationContainer>
+       {/*  <NavigationContainer> */}
           <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
               name="SplashScreen"
@@ -37,7 +37,7 @@ class AppBase extends React.Component {
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
-        </NavigationContainer>
+      {/*   </NavigationContainer> */}
       </CounterContext2.Provider>
     );
   }

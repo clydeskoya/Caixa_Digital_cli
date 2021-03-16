@@ -4,10 +4,12 @@ import { MaskedViewComponent, StyleSheet, Text, View, Button } from 'react-nativ
 import { Calendar } from 'react-native-calendars';
 import { Actions } from 'react-native-router-flux';
 import { withTheme } from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
 import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
 
 const CalendarPage = () => {
   var date;
+  const navigation = useNavigation(); 
   return (
     <View>
       <OrangeTest>Escolha uma data</OrangeTest>
@@ -18,11 +20,7 @@ const CalendarPage = () => {
           }}
         />
       </CalendarWrapper>
-      <TouchableOpacity
-        onPress={() => {
-          Actions.sendReceive();
-        }}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate('sendReceive')}>
         <ButtonNext>
           <Text style={styles.textr}>Seguinte</Text>
         </ButtonNext>
