@@ -1,7 +1,7 @@
-import React, { useContext, useState, setState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, View } from 'react-native';
 // import { RadioButton } from "react-native-paper";
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 import { CounterContext2 } from '../../common/context/form.register2';
 
 const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;

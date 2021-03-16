@@ -1,16 +1,11 @@
 import React, { useReducer } from 'react'; // , { useReducer }
 import { NavigationContainer } from '@react-navigation/native';
-// import { Button } from 'react-native';
 import SplashScreen from '../screens/SplashScreen';
 import Auth from '../../Auth';
 import { Stack } from '../common/stack';
-// import { CounterContext, formReducerInitialState, registerFormReducer } from '../common/context/form.register';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/context/form.register2';
 import Home from '../screens/Home';
-import Profile from '../screens/profile/ProfileScreen';
-import EditProfile from '../screens/profile/EditProfile';
-import MyQR from '../screens/profile/MyQR';
-import Definicoes from '../screens/profile/Definicoes';
+import ProfileNavigation from '../ProfileNavigation';
 
 const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
@@ -24,13 +19,13 @@ const AppBase = () => {
         <Stack.Navigator initialRouteName="SplashScreen">
           <Stack.Screen
             name="SplashScreen"
-            component={SplashScreen}
-            // Hiding header for Splash Screen
+            component={ProfileNavigation}
             options={{ headerShown: false }}
           />
 
           <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name="Perfil" component={ProfileNavigation} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </CounterContext2.Provider>
