@@ -1,10 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import CalendarPageRender from './CalendarPageRender';
+import PaymentPageRender from "./PaymentPageRender";
 
-class CalendarPage extends React.Component {
-  render() {
-    return <CalendarPageRender />;
-  }
+function PaymentPage() {
+  return <PaymentPageRender />;
 }
-export default CalendarPage;
+
+export default PaymentPage;

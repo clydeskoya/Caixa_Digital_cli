@@ -13,15 +13,6 @@ export const OrangeTest = styled.Text`
   color: black;
 `;
 
-export const CalendarWrapper = styled.View`
-  width: 240px;
-  height: 211px;
-  margin-top: 10px;
-  margin-right: auto;
-  margin-left: auto;
-  background: black;
-`;
-
 export const ButtonNext = styled.View`
 alignItems: center;
   width: 290px;
