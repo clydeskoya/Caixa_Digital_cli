@@ -18,7 +18,7 @@ const AppBase = () => {
         <Stack.Navigator initialRouteName="SplashScreen">
           <Stack.Screen
             name="SplashScreen"
-            component={levantarCorrespondencia}
+            component={SplashScreen}
             // Hiding header for Splash Screen
             options={{ headerShown: false }}
           />

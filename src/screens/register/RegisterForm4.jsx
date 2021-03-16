@@ -58,7 +58,7 @@ const RegisterForm4 = (props) => {
   const [email1, setEmail1] = useState('');
   const [password1, setPassword1] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [pass, setPassword] = useState('');
   const [data, setData] = useState(null);
 
   const counterContext2 = useContext(CounterContext2);
@@ -133,22 +133,22 @@ const RegisterForm4 = (props) => {
       return;
     }
 
-    if (!password || !password1) {
+    if (!pass || !password1) {
       Alert.alert('Crie uma password');
       return;
     }
-    if (password1 !== password) {
+    if (password1 !== pass) {
       Alert.alert('Erro de confirmação de passwords');
       return;
     }
-    if (password.length < 6) {
+    if (pass.length < 6) {
       Alert.alert('Número mínimo de caracteres da password: 6');
       return;
     }
 
     const dataToSend = {
-      email,
-      password,
+      identifier: email,
+      password: pass,
       user_type: 'client',
     };
 
@@ -166,7 +166,7 @@ const RegisterForm4 = (props) => {
 
     const dataToSend2 = {
       name: `${form1Values[0]} ${form1Values[1]}`,
-      username: 'chachada',
+      username: email,
       dateofbirth: form1Values[2],
       gender: form1Values[3],
       street: form2Values[0],
@@ -179,8 +179,8 @@ const RegisterForm4 = (props) => {
       bi: form3Values[0],
       phoneNumber: form3Values[1],
       nif: form3Values[2],
-      email,
-      password,
+      identifier: email,
+      password: pass,
       user_type: 'client',
     };
 
@@ -201,8 +201,6 @@ const RegisterForm4 = (props) => {
               <ActivityIndicator animating color={Colors.blue800} size="large" />
             </View>
           )}
-
-          {loading}
 
           <View style={styles.container2}>
             <Text style={styles.title}>Insira o seu email </Text>
@@ -273,6 +271,7 @@ const RegisterForm4 = (props) => {
               <Text style={{ color: 'white' }}> Criar conta </Text>
             </View>
           </TouchableOpacity>
+
           <Provider>
             <View>
               <Portal>

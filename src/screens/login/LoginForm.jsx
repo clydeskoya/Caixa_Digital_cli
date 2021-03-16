@@ -3,10 +3,12 @@ import axios from 'axios';
 
 import { StyleSheet, TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Colors, ActivityIndicator } from 'react-native-paper';
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const login = async () => {
     if (!email) {
@@ -17,7 +19,7 @@ const LoginForm = (props) => {
       Alert.alert('Forneça a sua password');
       return;
     }
-
+    setLoading(true);
     try {
       const { data } = await axios.post('https://caixa-digital-cms.herokuapp.com/auth/local', {
         identifier: email,
@@ -27,14 +29,17 @@ const LoginForm = (props) => {
       if (data.jwt) {
         props.navigation.navigate('Home');
         console.log('data', data);
+        setLoading(false);
       }
     } catch (error) {
       if (error.response) {
         // Request made and server responded
         console.log('data', error.response.data);
+        setLoading(false);
       } else if (error.request) {
         // The request was made but no response was received
         console.log('request', error.request);
+        setLoading(false);
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error.message', error.message);
@@ -48,6 +53,11 @@ const LoginForm = (props) => {
         <View style={styles.oval}>
           <Image source={require('../../img/logowtxt.png')} style={styles.logo} />
         </View>
+        {loading && (
+          <View>
+            <ActivityIndicator animating color={Colors.blue800} size="large" />
+          </View>
+        )}
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" color="#1C4670" size={35} />
           <TextInput
@@ -83,9 +93,9 @@ const LoginForm = (props) => {
         </TouchableOpacity>
 
         <Text>Não tem uma conta?</Text>
-        <Text style={styles.textRegister} onPress={() => props.navigation.navigate('RegisterForm1')}>
-          Registe-se
-        </Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForm1')}>
+          <Text style={styles.textRegister}>Registe-se</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
