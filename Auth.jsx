@@ -7,12 +7,14 @@ import RegisterForm4 from './src/screens/register/RegisterForm4';
 import LoginForm from './src/screens/login/LoginForm';
 
 // Stack Navigator for Login and Sign up Screen
+
 const Auth = () => (
   <Stack.Navigator initialRouteName="LoginScreen">
     <Stack.Screen
       name="LoginForm"
       component={LoginForm}
       /*  component={LoginForm} */
+
       options={{ headerShown: false }}
     />
 
