@@ -177,6 +177,17 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
   },
+
+  titleLocality: {
+    fontSize: 12.5,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    textAlign: 'left',
+    flexDirection: 'row',
+    padding: '2.5%',
+    marginRight: '41%',
+  },
+
   buttonOK: {
     marginHorizontal: 55,
     alignItems: "center",

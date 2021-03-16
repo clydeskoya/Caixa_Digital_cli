@@ -8,6 +8,7 @@ import LoginForm from './src/screens/login/LoginForm';
 
 
 // Stack Navigator for Login and Sign up Screen
+
 const Auth = () => (
   <Stack.Navigator initialRouteName="LoginScreen">
     <Stack.Screen

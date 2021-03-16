@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  TextInput,
-  Image,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { styles } from './styles';
+
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [email, setEmail] = useState('albertasorriso@gmail.com');
+  const [pass, setPass] = useState('strapiPassword');
 
   const login = async () => {
     if (!email) {
@@ -103,6 +98,7 @@ const LoginForm = (props) => {
             name="identifier"
             placeholder="Email"
             onChangeText={(Email) => setEmail(Email)}
+            value={email}
           />
         </View>
 
@@ -117,6 +113,7 @@ const LoginForm = (props) => {
             autoCapitalize="none"
             secureTextEntry={true}
             onChangeText={(Pass) => setPass(Pass)}
+            value={pass}
           />
         </View>
 
@@ -159,35 +156,3 @@ const LoginForm = (props) => {
 };
 
 export default LoginForm;
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    // flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    // borderWidth: 1,
-    // borderColor: "#0096c7",
-    padding: 5,
-    margin: 10,
-    width: 200,
-
-    // borderRadius: 23,
-    borderBottomColor: "#1C4670",
-    borderBottomWidth: 1,
-  },
-  inputRow: {
-    flexDirection: "row",
-    marginHorizontal: 55,
-  },
-  oval: {
-    width: 500,
-    height: 500,
-    // left: -120,
-    top: -189,
-    borderRadius: 700,
-    backgroundColor: "#1C4670",
-    transform: [{ scaleX: 1 }],
-  },
-});
