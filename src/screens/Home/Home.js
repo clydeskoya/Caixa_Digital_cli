@@ -1,4 +1,3 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
@@ -25,35 +24,44 @@ const styles = StyleSheet.create({
     height: '125',
   },
   cardStilo: {
-    width: '90%',
+    width: '80%',
     borderRadius: 12,
     alignSelf: 'center',
     marginBottom: '3%',
     backgroundColor: '#C5DFEA',
     borderColor: '#2C8DB2',
+    flexGrow: 0,
+    flexShrink: 1,
+  },
+  cardStilo1: {
+    width: '80%',
+    borderRadius: 12,
+    alignSelf: 'center',
+    marginBottom: 10,
+    backgroundColor: '#C5DFEA',
+    borderColor: '#2C8DB2',
+    flexGrow: 0,
   },
 });
 
 const Home = (props) => (
   <View style={styles.container}>
     <Header />
-
-    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaEnviada')}>
-      <Card style={styles.cardStilo}>
-        <Card.Content>
-          <Title>Correspondência Enviada</Title>
-
-          <Paragraph>Batatas com lenha</Paragraph>
-        </Card.Content>
-      </Card>
-    </TouchableOpacity>
-
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaRecebida')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
           <Title>Correspondência Recebida</Title>
 
-          <Paragraph>Foste buscar</Paragraph>
+          <Paragraph>Finanças - Autoridade Tributária</Paragraph>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaEnviada')}>
+      <Card style={styles.cardStilo}>
+        <Card.Content>
+          <Title>Correspondência Enviada</Title>
+
+          <Paragraph>GPU - Ben-Hur Fidalgo</Paragraph>
         </Card.Content>
       </Card>
     </TouchableOpacity>
@@ -61,9 +69,9 @@ const Home = (props) => (
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
-          <Title>Reservas</Title>
+          <Title> Reservas </Title>
 
-          <Paragraph>27/03/2020-Locker domiciliário reservado para envio</Paragraph>
+          <Paragraph>15/02/2020-Locker para envio</Paragraph>
         </Card.Content>
       </Card>
     </TouchableOpacity>
