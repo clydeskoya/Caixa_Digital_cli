@@ -8,7 +8,7 @@ const SendReceivePage = () => {
   const [checked, setChecked] = React.useState('first');
   const navigation = useNavigation();
   return (
-    <View>
+    <View style={styles.container}>
       <Header />
       <View style={styles.maindiv}>
         <View style={styles.viewT}>
@@ -86,6 +86,10 @@ const styles = StyleSheet.create({
   viewT: {
     marginLeft: '6%',
   },
+  container: {
+    backgroundColor: '#fff',
+    height: '100%',
+  }
 });
 
 export default SendReceivePage;

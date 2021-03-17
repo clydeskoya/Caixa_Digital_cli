@@ -9,7 +9,7 @@ import Header from '../../../components/HeaderReservarLocker';
 const SuccessPage = () => {
   const navigation = useNavigation();
   return (
-    <View>
+    <View style= {styles.container}>
       <Header />
       <View style={styles.maindiv}>
         <View style={styles.boxwradius}>
@@ -69,6 +69,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  container: {
+    backgroundColor: '#fff',
+    height: '100%',
+  }
 });
 
 export default SuccessPage;

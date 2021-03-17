@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
+    height: '100%',
   },
   buttonText: {
     color: 'white',
