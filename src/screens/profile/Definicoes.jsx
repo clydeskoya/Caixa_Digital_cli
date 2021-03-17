@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
 });
 
 const Definicoes = (props) => {
-  const [idioma, setIdioma] = useState('Português');
-  const [notificacoes, setNotificacoes] = useState('Ativado');
+  const [portugues, setPortugues] = useState(true);
+  const [ativado, setAtivado] = useState(true);
 
   return (
     <>
@@ -73,24 +73,46 @@ const Definicoes = (props) => {
             <Text style={styles.text}> Idioma</Text>
           </View>
 
-          <List.Section>
-            <List.Accordion title={idioma} theme={{ colors: { primary: '#1DC690' } }}>
-              <List.Item title="Português" />
-              <List.Item title="Inglês" />
-            </List.Accordion>
-          </List.Section>
+          {portugues && (
+            <List.Section>
+              <List.Accordion title="Português" theme={{ colors: { primary: '#D6CFCF' } }}>
+                <List.Item title="Português" onPress={() => setPortugues(true)} />
+                <List.Item title="Inglês" onPress={() => setPortugues(false)} />
+              </List.Accordion>
+            </List.Section>
+          )}
+
+          {!portugues && (
+            <List.Section>
+              <List.Accordion title="Inglês" theme={{ colors: { primary: '#D6CFCF' } }}>
+                <List.Item title="Português" onPress={() => setPortugues(true)} />
+                <List.Item title="Inglês" onPress={() => setPortugues(false)} />
+              </List.Accordion>
+            </List.Section>
+          )}
 
           <View style={styles.inputRow1}>
             <Ionicons name="notifications" size={23} />
             <Text style={styles.text}> Notificações</Text>
           </View>
 
-          <List.Section>
-            <List.Accordion title={notificacoes} theme={{ colors: { primary: '#1DC690' } }}>
-              <List.Item title="Ativado" />
-              <List.Item title="Desativado" />
-            </List.Accordion>
-          </List.Section>
+          {ativado && (
+            <List.Section>
+              <List.Accordion title="Ativado" theme={{ colors: { primary: '#D6CFCF' } }}>
+                <List.Item title="Ativado" onPress={() => setAtivado(true)} />
+                <List.Item title="Desativado" onPress={() => setAtivado(false)} />
+              </List.Accordion>
+            </List.Section>
+          )}
+
+          {!ativado && (
+            <List.Section>
+              <List.Accordion title="Desativado" theme={{ colors: { primary: '#D6CFCF' } }}>
+                <List.Item title="Ativado" onPress={() => setAtivado(true)} />
+                <List.Item title="Desativado" onPress={() => setAtivado(false)} />
+              </List.Accordion>
+            </List.Section>
+          )}
 
           <View style={styles.inputRow1}>
             <Ionicons name="phone-portrait-outline" size={23} />
