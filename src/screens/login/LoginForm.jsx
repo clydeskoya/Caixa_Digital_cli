@@ -22,7 +22,7 @@ const LoginForm = (props) => {
     }
     setLoading(true);
     try {
-      const { data } = await axios.post('http://localhost:1337/auth/local', {
+      const { data } = await axios.post('http://caixa-digital-cms.herokuapp.com/auth/local', {
         identifier: email,
         password: pass,
       });
