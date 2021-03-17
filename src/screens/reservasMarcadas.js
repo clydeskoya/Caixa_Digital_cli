@@ -1,29 +1,59 @@
 import React from 'react';
-import { StyleSheet, Text, FlatList, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
 
-const reservasMarcadas = () => (
-  <View style={styles.container}>
-    <Text style={styles.input}>Correspondência Enviada</Text>
-    <FlatList
-      data={[{ key: 'SMAS Sintra, 20/11/2020' }, { key: 'Finanças, 19/11/2020' }]}
-      renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
-    />
-  </View>
-);
 const styles = StyleSheet.create({
+  header: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '8%',
+    width: '50%',
+    height: '7%',
+    marginTop: '15%',
+    backgroundColor: '#7DE24E',
+    borderColor: '#7DE24E',
+    borderRadius: 15,
+  },
   container: {
+    flex: 3,
     height: '100%',
-    flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#0096c7',
-    padding: 8,
-    margin: 10,
-    width: 200,
-    borderRadius: 23,
+  cardStilo: {
+    width: '90%',
+    borderRadius: 12,
+    alignSelf: 'center',
+    marginBottom: 10,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#7DE24E',
   },
 });
+
+const reservasMarcadas = (props) => (
+  <View style={styles.container}>
+    <View style={styles.header}>
+      <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Reserva Cacifos </Text>
+    </View>
+    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('detalhesCarta1')}>
+      <Card style={styles.cardStilo}>
+        <Card.Content>
+          <Title>Reserva para entrega</Title>
+
+          <Paragraph>15/02/2021</Paragraph>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('detalhesCarta2')}>
+      <Card style={styles.cardStilo}>
+        <Card.Content>
+          <Title>Reserva para entrada</Title>
+
+          <Paragraph>19/02/2021</Paragraph>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
+  </View>
+);
 export default reservasMarcadas;
