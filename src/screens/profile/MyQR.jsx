@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import QRCode from 'react-native-qrcode-svg';
+import data from './data';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,31 +42,46 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
     marginLeft: '5%',
-    marginTop: '2%',
-   // fontWeight: 'bold',
+    marginTop: '7%',
     textAlign: 'center',
     lineHeight: 25,
   },
 });
 
-const MyQR = (props) => (
-  <>
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => props.navigation.navigate('ProfileScreen')}>
-          <Ionicons name="close" size={37} />
-        </TouchableOpacity>
-        <Text style={styles.titlePerf}> My QR Code </Text>
-      </View>
+const MyQR = (props) => {
+  // const dataa = data.map((dataEntry) => {
+  const dataa = `${data.map((dataEntry) => dataEntry.street)} ${data.map((dataEntry) => dataEntry.door)} ${data.map(
+    (dataEntry) => dataEntry.floor
+  )} ${data.map((dataEntry) => dataEntry.postalCode)} ${data.map((dataEntry) => dataEntry.locality)} ${data.map(
+    (dataEntry) => dataEntry.city
+  )}, ${data.map((dataEntry) => dataEntry.country)}
+   ${data.map((dataEntry) => dataEntry.names.id1)}`;
 
-      <View style={styles.boxSimple}>
-        <Ionicons name="qr-code-sharp" size={85} style={{marginBottom: '5%'}}/>
-        <Text style={styles.text}>
-          Rua Elias Garcia, 2 4D {'\n'}2751-729 São Marcos {'\n'} Lisboa, Portugal {'\n'} Alberta Sorriso{' '}
-        </Text>
+  console.log(dataa);
+
+  return (
+    <>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('ProfileScreen')}>
+            <Ionicons name="close" size={37} />
+          </TouchableOpacity>
+          <Text style={styles.titlePerf}> My QR Code </Text>
+        </View>
+
+        <View style={styles.boxSimple}>
+          <QRCode value={dataa} />
+          <Text style={styles.text}>
+            {data.map((dataEntry) => dataEntry.street)} {data.map((dataEntry) => dataEntry.door)}{' '}
+            {data.map((dataEntry) => dataEntry.floor)}
+            {'\n'} {data.map((dataEntry) => dataEntry.postalCode)} {data.map((dataEntry) => dataEntry.locality)}
+            {'\n'} {data.map((dataEntry) => dataEntry.city)}, {data.map((dataEntry) => dataEntry.country)}
+            {'\n'} {data.map((dataEntry) => dataEntry.names.id1)}{' '}
+          </Text>
+        </View>
       </View>
-    </View>
-  </>
-);
+    </>
+  );
+};
 
 export default MyQR;
