@@ -177,7 +177,7 @@ const RegisterForm2 = (props) => {
 
           <View style={styles.buttonOK}>
             <TouchableOpacity onPress={saveNnavigate}>
-              <Text style={{ color: 'white' }}> Seguinte </Text>
+              <Text style={styles.buttonText}> Seguinte </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -288,6 +288,12 @@ const styles = StyleSheet.create({
   goBack: {
     alignSelf: 'flex-start',
     marginTop: '7%',
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 
   buttonOK: {

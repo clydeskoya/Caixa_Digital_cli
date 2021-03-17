@@ -3,8 +3,8 @@ import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity }
 
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import Header from '../../../components/HeaderReservarLocker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Header from '../../../components/HeaderReservarLocker';
 
 const SuccessPage = () => {
   const navigation = useNavigation();
@@ -12,16 +12,15 @@ const SuccessPage = () => {
     <View>
       <Header />
       <View style={styles.maindiv}>
+        <View style={styles.boxwradius}>
+          <Text style={styles.title}>Reserva para envio de correspondências efetuada com sucesso.</Text>
+          <Ionicons name="checkbox" color="#1DC690" size={40} />
+          <Text style={styles.text}>Dia 20/02/2021 - Compartimento 1</Text>
+        </View>
+
         <TouchableOpacity /* onPress={() => navigation.navigate('S')} */>
-          <View style={styles.boxwradius}>
-            <Text style={styles.boxtext}>Reserva para envio de correspondências efetuada com sucesso.</Text>
-            <View style={styles.check}>
-              <Ionicons name="checkmark" size={50} color="white" />
-            </View>
-            <Text style={styles.boxtext}>Dia 20/02/2021 - Compartimento 1</Text>
-          </View>
           <View style={styles.button}>
-            <Text style={styles.textr}>Sair </Text>
+            <Text style={styles.buttonText}>Sair </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -32,41 +31,43 @@ const SuccessPage = () => {
 const styles = StyleSheet.create({
   maindiv: {
     alignItems: 'center',
+    // height: '100%',
   },
-  check: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'green',
-    marginVertical: 10,
+
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: '8%',
+    marginTop: '8%',
   },
-  boxtext: {
-    fontSize: 18,
-    marginTop: 20,
-    marginHorizontal: 10,
+  text: {
+    fontSize: 16,
+    marginTop: '8%',
+    textAlign: 'center',
   },
   boxwradius: {
-    marginTop: 50,
-    width: 345,
-    height: 240,
-    borderRadius: 40,
+    marginTop: '20%',
+    width: '80%',
+    height: '48%',
+    borderRadius: 15,
     borderWidth: 5,
     borderColor: '#D6CFCF',
     alignItems: 'center',
   },
   button: {
     alignItems: 'center',
-    width: 290,
-    height: 45,
-    marginTop: 200,
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    justifyContent: 'center',
+    width: 250,
+    height: 40,
+    marginTop: '30%',
     backgroundColor: '#D6CFCF',
     borderRadius: 45,
   },
-  textr: {
+  buttonText: {
     color: 'black',
-    marginVertical: 5,
-    fontSize: 22,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

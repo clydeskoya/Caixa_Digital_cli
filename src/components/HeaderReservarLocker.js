@@ -1,7 +1,6 @@
 import React from 'react';
-import { MaskedViewComponent, StyleSheet, Text, View, Button } from 'react-native';
+import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -16,7 +15,7 @@ function HeaderReserve() {
       >
         <Text>
           <Ionicons name="arrow-back" size={30} style={styles.icon} />
-          Go Back
+          {/* Go Back */}
         </Text>
       </TouchableOpacity>
 
@@ -25,7 +24,10 @@ function HeaderReserve() {
           navigation.navigate('ScanQrCode');
         }}
       >
-        <Ionicons name="barcode" size={30} style={{marginRight: 20}} />
+        <View style={styles.viewStyle}>
+          <Ionicons name="scan-outline" size={30} />
+          <Text style={styles.textT}>Scan Locker</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -42,6 +44,15 @@ const styles = StyleSheet.create({
   icon: {
     marginTop: 10,
     marginRight: 30,
+  },
+  viewStyle: {
+    alignItems: 'center',
+    marginRight: 20,
+  },
+  textT: {
+    fontSize: 10,
+    backgroundColor: 'rgba(214, 207, 207, 0.6)',
+    borderRadius: 5,
   },
 });
 

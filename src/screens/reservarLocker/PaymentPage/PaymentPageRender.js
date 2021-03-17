@@ -9,10 +9,10 @@ function PaymentPage() {
   return (
     <View>
       <Header />
-      <Text style={{marginTop: 20}}>Payment page</Text>
+      <Text style={{marginTop: '8%'}}>Payment page</Text>
       <TouchableOpacity onPress={() => navigation.navigate('SucessReservarLocker')}>
         <ButtonNext>
-          <Text style={styles.textr}>Seguinte</Text>
+          <Text style={styles.buttonText}>Seguinte</Text>
         </ButtonNext>
       </TouchableOpacity>
     </View>
@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
-  textr: {
+  buttonText: {
     color: 'white',
-    marginVertical: 5,
-    fontSize: 22,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   bigBlue: {
     color: 'blue',

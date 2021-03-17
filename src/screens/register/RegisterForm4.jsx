@@ -49,6 +49,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
   },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   buttonOK: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -278,7 +283,7 @@ const RegisterForm4 = (props) => {
 
           <TouchableOpacity onPress={saveNnavigate}>
             <View style={styles.buttonOK}>
-              <Text style={{ color: 'white' }}> Criar conta </Text>
+              <Text style={styles.buttonText}> Criar conta </Text>
             </View>
           </TouchableOpacity>
 

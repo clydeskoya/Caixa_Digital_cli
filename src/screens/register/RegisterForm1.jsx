@@ -85,6 +85,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C4670',
     borderRadius: 45,
   },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   progressBar: {
     height: '1.5%',
     width: '100%',
@@ -211,7 +216,7 @@ const RegisterForm1 = (props) => {
           <View style={styles.container}>
             <TouchableOpacity onPress={saveNnavigate}>
               <View style={styles.buttonOK}>
-                <Text style={{ color: 'white' }}> Seguinte </Text>
+                <Text style={styles.buttonText}> Seguinte </Text>
               </View>
             </TouchableOpacity>
           </View>
