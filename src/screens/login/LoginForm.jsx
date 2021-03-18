@@ -3,13 +3,17 @@ import axios from 'axios';
 
 import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors, ActivityIndicator } from 'react-native-paper';
+import { Colors, ActivityIndicator, Dialog, Portal, Provider, Paragraph, Button } from 'react-native-paper';
 import { styles } from './styles';
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const [visible, setVisible] = useState(false);
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   const login = async () => {
     if (!email) {
@@ -38,10 +42,12 @@ const LoginForm = (props) => {
         // Request made and server responded
         console.log('data', error.response.data);
         setLoading(false);
+        showDialog();
       } else if (error.request) {
         // The request was made but no response was received
         console.log('request', error.request);
         setLoading(false);
+        showDialog();
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error.message', error.message);
@@ -90,8 +96,25 @@ const LoginForm = (props) => {
           />
         </View>
 
-        {/* <TouchableOpacity onPress={login}> */}
-        <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
+        <Provider>
+          <View>
+            <Portal>
+              <Dialog visible={visible} dismissable={false}>
+                <Dialog.Title>Erro!</Dialog.Title>
+                <Dialog.Content>
+                  <Paragraph>Algo de inesperado ocorreu. Por favor tente mais tarde!</Paragraph>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button color="#1C4670" onPress={hideDialog}>
+                    OK{' '}
+                  </Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
+          </View>
+        </Provider>
+
+        <TouchableOpacity onPress={login}>
           <View style={styles.bottomActions}>
             <Text style={styles.textLogin}> Login </Text>
           </View>
@@ -107,4 +130,3 @@ const LoginForm = (props) => {
 };
 
 export default LoginForm;
-
