@@ -9,6 +9,7 @@ import SendReceiveReservarLocker from '../screens/reservarLocker/SendOrReceive';
 import PaymentReservarLocker from '../screens/reservarLocker/PaymentPage';
 import SucessReservarLocker from '../screens/reservarLocker/SuccessPage';
 import ScanQrCode from './ScanQrCode';
+import StripeCard from '../screens/StripePayNewCard';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 import ProfileNavigation from './ProfileNavigation';
 
@@ -18,7 +19,7 @@ const AppBase = () => {
   return (
     <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
           <Stack.Screen
@@ -38,6 +39,7 @@ const AppBase = () => {
           />
           <Stack.Screen name="SucessReservarLocker" component={SucessReservarLocker} options={{ headerShown: false }} />
           <Stack.Screen name="ScanQrCode" component={ScanQrCode} options={{ headerShown: false }} />
+          <Stack.Screen name="StripeCard" component={StripeCard} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={ProfileNavigation} options={{ headerShown: false }} />
           <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
         </Stack.Navigator>
@@ -47,3 +49,4 @@ const AppBase = () => {
 };
 // import DrawerNavigationRoutes from './screens/DrawerNavigationRoutes';
 export default AppBase;
+    
