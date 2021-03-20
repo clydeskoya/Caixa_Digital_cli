@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 
    cardStilo: {
     width: 280,
-    height: '50%',
+    height: '100%',
     borderRadius: 40,
     borderWidth: 4,
     borderColor: '#D6CFCF',
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
    },
 
   text: {
-    fontSize: 15,
+    fontSize: 17,
     alignSelf: 'flex-start',
   },
 
