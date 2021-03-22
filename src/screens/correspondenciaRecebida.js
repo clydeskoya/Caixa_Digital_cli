@@ -1,38 +1,52 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '8%',
-    width: '50%',
+    width: '77%',
     height: '7%',
-    marginTop: '15%',
-    backgroundColor: '#7DE24E',
-    borderColor: '#7DE24E',
+    backgroundColor: '#1DC690',
     borderRadius: 15,
+    marginBottom: '10%',
+    marginTop: '15%',
   },
   container: {
     flex: 3,
     height: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   scrollView: {
     backgroundColor: '#278AB0',
     width: '340',
     height: '125',
   },
-  cardStilo: {
-    width: '90%',
-    borderRadius: 12,
-    alignSelf: 'center',
-    marginBottom: 10,
-    backgroundColor: '#FFFFFF',
-    borderColor: '#7DE24E',
+
+   cardStilo: {
+    width: 280,
+    height: '100%',
+    borderRadius: 40,
+    borderWidth: 4,
+    borderColor: '#D6CFCF',
+  //   marginTop: '5%',
+   },
+
+  text: {
+    fontSize: 13,
+    alignSelf: 'flex-start',
+  },
+
+  inputRow: {
+    flexDirection: 'row',
+    marginHorizontal: '6%',
+    // justifyContent:'flex-start',
+    width: '100%',
+    justifyContent: 'space-between',
   },
 });
 
@@ -41,21 +55,13 @@ const correspondenciaRecebida = (props) => (
     <View style={styles.header}>
       <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Correspondência Recebida </Text>
     </View>
-    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('detalhesCarta1')}>
-      <Card style={styles.cardStilo}>
-        <Card.Content>
-          <Title>Finanças - Autoridade Tributária</Title>
-
-          <Paragraph>15/02/2021</Paragraph>
-        </Card.Content>
-      </Card>
-    </TouchableOpacity>
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('detalhesCarta2')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
-          <Title>Conta MEO</Title>
-
-          <Paragraph>12/02/2021</Paragraph>
+          <View style={styles.inputRow}>
+            <Title style = {styles.text}> Finanças - Autoridade Tributária </Title>
+            <Ionicons name="chevron-forward-outline" size={30} />
+          </View>
         </Card.Content>
       </Card>
     </TouchableOpacity>

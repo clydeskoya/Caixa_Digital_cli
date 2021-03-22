@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '75%',
+    width: '77%',
     height: '7%',
     backgroundColor: '#1DC690',
     borderRadius: 15,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
    },
 
   text: {
-    fontSize: 17,
+    fontSize: 13,
     alignSelf: 'flex-start',
   },
 
@@ -59,21 +59,12 @@ const correspondenciaEnviada = (props) => (
       <Card style={styles.cardStilo}>
         <Card.Content>
           <View style={styles.inputRow}>
-            <Title style = {styles.text}> GPU 12/02/2021 </Title>
+            <Title style = {styles.text}> GPU - Ben-Hur Fidalgo </Title>
             <Ionicons name="chevron-forward-outline" size={30} />
           </View>
         </Card.Content>
       </Card>
     </TouchableOpacity>
-    {/* <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('detalhesCarta1')}>
-      <Card style={styles.cardStilo}>
-        <Card.Content>
-          <Title>Cabaz de Ano Novo atrasado</Title>
-
-          <Paragraph>15/01/2021</Paragraph>
-        </Card.Content>
-      </Card>
-    </TouchableOpacity> */}
   </View>
 );
 export default correspondenciaEnviada;
