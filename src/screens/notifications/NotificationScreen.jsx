@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Card, Colors } from 'react-native-paper';
+import { Card, Badge, Colors } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
 import data from './data';
 import dataFromServer from './dataFromServer';
+import serverResponse from '../login/serverResponse';
 
 const styles = StyleSheet.create({
   container: {
@@ -70,10 +71,18 @@ const styles = StyleSheet.create({
     marginTop: '15%',
     textAlign: 'center',
   },
+
+  badgeStyle: {
+    backgroundColor: '#1DC690',
+    alignSelf: 'flex-start',
+    marginTop: '-1.5%',
+    marginLeft: '-1.5%',
+  },
 });
 
 const Notification = (props) => {
-  // const [dataFromServer, setDataFromServer] = useState('');
+  // const [dataFromServer, setDataFromServer] = useState([]);
+  // const dataFromServer = [];
 
   const receiveFromServer = async () => {
     await fetch('https://caixa-digital-cms.herokuapp.com/orders/....ID....', {
@@ -88,6 +97,7 @@ const Notification = (props) => {
         (result) => {
           console.log('result', result);
           //  setDataFromServer(result.rows);
+          // dataFromServer.push(result.rows);
         },
         (err) => {
           console.error('error', err);
@@ -137,13 +147,28 @@ const Notification = (props) => {
   const getCorrespondenciasEmTransito = (dataArg) =>
     dataArg.orderType === 'send' && dataArg.isDeposited === true && dataArg.isWithdrawn === true;
 
+  const getCorrespondenciasEntreguesAClientesComApp = (dataArg) =>
+    dataArg.orderType === 'send' &&
+    dataArg.isDeposited === true &&
+    dataArg.isWithdrawn === true &&
+    dataArg.matching_receive_order === true;
+
+  const newNot = (date) => {
+    const dateLastLogin = serverResponse.map((row) => row.user.lastLogin);
+    if (moment(date).isAfter(moment(dateLastLogin))) {
+      return true;
+    }
+    return false;
+  };
+
   const cards = dataFromServer.map((dataEntry) => {
     if (getReservaEnvio(dataEntry)) {
       const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
-      console.log(date);
       if (date === moment(new Date()).format('YYYY-MM-DD')) {
+        // if (newNot(dataEntry.created_at)) {
         return (
           <Card style={styles.cardStyle}>
+            <Badge size={15} style={styles.badgeStyle} />
             <Card.Content style={styles.cardContent}>
               <Text style={styles.cardContentText}>
                 <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
@@ -151,7 +176,7 @@ const Notification = (props) => {
                 <Text style={styles.cardContentText2}> {date} </Text>
                 <Text style={styles.cardTimeText}>
                   {'\n'}
-                  {diffDates(dataEntry.created_at)}
+                  {diffDates(dataEntry.dateRequested)}
                 </Text>
               </Text>
 
@@ -165,12 +190,38 @@ const Notification = (props) => {
           </Card>
         );
       }
-    } else if (getReservaRecebimentoPrePago(dataEntry)) {
+      return (
+        <Card style={styles.cardStyle}>
+          <Card.Content style={styles.cardContent}>
+            <Text style={styles.cardContentText}>
+              <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
+              Tem uma reserva de envio para hoje:
+              <Text style={styles.cardContentText2}> {date} </Text>
+              <Text style={styles.cardTimeText}>
+                {'\n'}
+                {diffDates(dataEntry.dateRequested)}
+              </Text>
+            </Text>
+
+            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
+              <View style={styles.viewIconNText}>
+                <Ionicons name="business-outline" color="#000" size={23} />
+                <Text style={{ fontSize: 11 }}>Ver</Text>
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+      // }
+    }
+    if (getReservaRecebimentoPrePago(dataEntry)) {
       const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
       console.log(date);
       if (date === moment(new Date()).format('YYYY-MM-DD')) {
+        // if (newNot(dataEntry.created_at)) {
         return (
           <Card style={styles.cardStyle}>
+            <Badge size={15} style={styles.badgeStyle} />
             <Card.Content style={styles.cardContent}>
               <Text style={styles.cardContentText}>
                 <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
@@ -178,7 +229,7 @@ const Notification = (props) => {
                 <Text style={styles.cardContentText2}> {date} </Text>
                 <Text style={styles.cardTimeText}>
                   {'\n'}
-                  {diffDates(dataEntry.created_at)}
+                  {diffDates(dataEntry.dateRequested)}
                 </Text>
               </Text>
 
@@ -192,24 +243,50 @@ const Notification = (props) => {
           </Card>
         );
       }
-    } else if (getReservaRecebimentoNaoPago(dataEntry)) {
+      return (
+        <Card style={styles.cardStyle}>
+          <Card.Content style={styles.cardContent}>
+            <Text style={styles.cardContentText}>
+              <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
+              Tem uma reserva de recebimento para hoje:
+              <Text style={styles.cardContentText2}> {date} </Text>
+              <Text style={styles.cardTimeText}>
+                {'\n'}
+                {diffDates(dataEntry.dateRequested)}
+              </Text>
+            </Text>
+
+            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
+              <View style={styles.viewIconNText}>
+                <Ionicons name="business-outline" color="#000" size={23} />
+                <Text style={{ fontSize: 11 }}>Ver</Text>
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+      // }
+    }
+    if (getReservaRecebimentoNaoPago(dataEntry)) {
       const date = moment(dataEntry.dateRequested);
       const now = moment(new Date());
       const duration = moment.duration(now.diff(date));
       console.log(duration.asDays());
 
       if (Math.abs(duration.asDays()) === 1) {
+        // if (newNot(dataEntry.created_at)) {
         return (
           <Card style={styles.cardStyle}>
+            <Badge size={15} style={styles.badgeStyle} />
             <Card.Content style={styles.cardContent}>
               <Text style={styles.cardContentText}>
                 <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
-                Tem uma reserva de recebimento para hoje:
+                Tem uma reserva de recebimento para amanhã:
                 <Text style={styles.cardContentText2}> {date.format('YYYY-MM-DD')} </Text> Tem de efetuar o pagamento
                 senão perde a reserva.
                 <Text style={styles.cardTimeText}>
                   {'\n'}
-                  {diffDates(dataEntry.created_at)}
+                  {diffDates(moment(dataEntry.dateRequested).subtract(1, 'days'))}
                 </Text>
               </Text>
 
@@ -223,7 +300,57 @@ const Notification = (props) => {
           </Card>
         );
       }
-    } else if (getRecebimentosPorLevantar(dataEntry)) {
+      return (
+        <Card style={styles.cardStyle}>
+          <Card.Content style={styles.cardContent}>
+            <Text style={styles.cardContentText}>
+              <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
+              Tem uma reserva de recebimento para amanhã:
+              <Text style={styles.cardContentText2}> {date.format('YYYY-MM-DD')} </Text> Tem de efetuar o pagamento
+              senão perde a reserva.
+              <Text style={styles.cardTimeText}>
+                {'\n'}
+                {diffDates(moment(dataEntry.dateRequested).subtract(1, 'days'))}
+              </Text>
+            </Text>
+
+            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
+              <View style={styles.viewIconNText}>
+                <Ionicons name="business-outline" color="#000" size={23} />
+                <Text style={{ fontSize: 11 }}>Ver</Text>
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+      // }
+    }
+    if (getRecebimentosPorLevantar(dataEntry)) {
+      if (newNot(dataEntry.created_at)) {
+        return (
+          <Card style={styles.cardStyle}>
+            <Badge size={15} style={styles.badgeStyle} />
+            <Card.Content style={styles.cardContent}>
+              <Text style={styles.cardContentText}>
+                <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA NOVA: {'\n'}</Text>
+                Tem uma correspondência nova no locker de <Text> </Text>
+                <Text style={styles.cardContentText2}>{dataEntry.from}</Text>
+                <Text style={styles.cardTimeText}>
+                  {'\n'}
+                  {diffDates(dataEntry.created_at)}
+                </Text>
+              </Text>
+
+              <TouchableOpacity style={styles.touchableOpacityView} onPress={goToScanLocker}>
+                <View style={styles.viewIconNText}>
+                  <Ionicons name="arrow-up-outline" color="#000" size={23} />
+                  <Text style={{ fontSize: 11 }}>Levantar</Text>
+                </View>
+              </TouchableOpacity>
+            </Card.Content>
+          </Card>
+        );
+      }
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
@@ -246,7 +373,34 @@ const Notification = (props) => {
           </Card.Content>
         </Card>
       );
-    } else if (getCorrespondenciasEmTransito(dataEntry)) {
+    }
+    if (getCorrespondenciasEmTransito(dataEntry)) {
+      if (newNot(dataEntry.created_at)) {
+        return (
+          <Card style={styles.cardStyle}>
+            <Badge size={15} style={styles.badgeStyle} />
+            <Card.Content style={styles.cardContent}>
+              <Text style={styles.cardContentText}>
+                <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A correspondência de
+                <Text> </Text>
+                <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
+                para <Text> </Text>
+                <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi levantada para envio.
+                <Text style={styles.cardTimeText}>
+                  {'\n'}
+                  {diffDates(dataEntry.created_at)}
+                </Text>
+              </Text>
+              <TouchableOpacity style={styles.touchableOpacityView} onPress={goToCorrespondenciasEnviadas}>
+                <View style={styles.viewIconNText}>
+                  <Ionicons name="mail-outline" color="#000" size={23} />
+                  <Text style={{ fontSize: 11 }}>Ver</Text>
+                </View>
+              </TouchableOpacity>
+            </Card.Content>
+          </Card>
+        );
+      }
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
@@ -255,7 +409,7 @@ const Notification = (props) => {
               <Text> </Text>
               <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
               para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi levantada para envio
+              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi levantada para envio.
               <Text style={styles.cardTimeText}>
                 {'\n'}
                 {diffDates(dataEntry.created_at)}
@@ -270,14 +424,67 @@ const Notification = (props) => {
           </Card.Content>
         </Card>
       );
-    } else if (
+    }
+    if (getCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
+      if (newNot(dataEntry.created_at)) {
+        return (
+          <Card style={styles.cardStyle}>
+            <Badge size={15} style={styles.badgeStyle} />
+            <Card.Content style={styles.cardContent}>
+              <Text style={styles.cardContentText}>
+                <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA ENTREGUE: {'\n'}</Text>A correspondência de
+                <Text> </Text>
+                <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
+                para <Text> </Text>
+                <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi entregue ao destinatário.
+                <Text style={styles.cardTimeText}>
+                  {'\n'}
+                  {diffDates(dataEntry.created_at)}
+                </Text>
+              </Text>
+              <TouchableOpacity style={styles.touchableOpacityView} onPress={goToCorrespondenciasEnviadas}>
+                <View style={styles.viewIconNText}>
+                  <Ionicons name="mail-outline" color="#000" size={23} />
+                  <Text style={{ fontSize: 11 }}>Ver</Text>
+                </View>
+              </TouchableOpacity>
+            </Card.Content>
+          </Card>
+        );
+      }
+      return (
+        <Card style={styles.cardStyle}>
+          <Card.Content style={styles.cardContent}>
+            <Text style={styles.cardContentText}>
+              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA ENTREGUE: {'\n'}</Text>A correspondência de
+              <Text> </Text>
+              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
+              para <Text> </Text>
+              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi entregue ao destinatário.
+              <Text style={styles.cardTimeText}>
+                {'\n'}
+                {diffDates(dataEntry.created_at)}
+              </Text>
+            </Text>
+            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToCorrespondenciasEnviadas}>
+              <View style={styles.viewIconNText}>
+                <Ionicons name="mail-outline" color="#000" size={23} />
+                <Text style={{ fontSize: 11 }}>Ver</Text>
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+    }
+    if (
       !getReservaEnvio &&
       !getCorrespondenciasEmTransito &&
       !getRecebimentosPorLevantar &&
       !getReservaRecebimentoNaoPago &&
-      !getReservaRecebimentoPrePago
+      !getReservaRecebimentoPrePago &&
+      !getCorrespondenciasEntreguesAClientesComApp
     ) {
-      return <Text style={styles.semNotif}>Sem notificações no momento</Text>;
+      return <Text style={styles.semNotif}>Sem notificações</Text>;
     }
   });
 

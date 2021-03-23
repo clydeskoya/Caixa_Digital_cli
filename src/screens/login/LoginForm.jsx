@@ -26,7 +26,7 @@ const LoginForm = (props) => {
     }
     setLoading(true);
     try {
-      const { data } = await axios.post('http://282e6bbdb1dc.ngrok.io/auth/local', {
+      const { data } = await axios.post('http://localhost:1337/auth/local', {
         identifier: email,
         password: pass,
       });
