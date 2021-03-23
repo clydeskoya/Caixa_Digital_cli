@@ -26,28 +26,25 @@ const LoginForm = (props) => {
     }
     setLoading(true);
     try {
-      const { data } = await axios.post('http://caixa-digital-cms.herokuapp.com/auth/local', {
+      const { data } = await axios.post('http://282e6bbdb1dc.ngrok.io/auth/local', {
         identifier: email,
         password: pass,
       });
-
+      console.log('heyyyyyyyyyy');
       if (data.jwt) {
-        props.navigation.navigate('Home');
         console.log('data', data);
-        console.log('heyyyyyyyyyyyyyyyyyyyyyyy');
         setLoading(false);
+        props.navigation.navigate('Home');
       }
     } catch (error) {
+      setLoading(false);
+      showDialog();
       if (error.response) {
         // Request made and server responded
-        console.log('data', error.response.data);
-        setLoading(false);
-        showDialog();
+        console.log('error.response', error.response.data);
       } else if (error.request) {
         // The request was made but no response was received
-        console.log('request', error.request);
-        setLoading(false);
-        showDialog();
+        console.log('error.request', error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error.message', error.message);

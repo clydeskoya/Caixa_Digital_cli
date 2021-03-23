@@ -3,7 +3,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Colors } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
-import data from './data'; // como gostava de receber os dados do server :)
+import data from './data';
+import dataFromServer from './dataFromServer';
 
 const styles = StyleSheet.create({
   container: {
@@ -63,16 +64,21 @@ const styles = StyleSheet.create({
   touchableOpacityView: {
     marginLeft: '8%',
   },
+
+  semNotif: {
+    fontSize: 20,
+    marginTop: '15%',
+    textAlign: 'center',
+  },
 });
 
 const Notification = (props) => {
-  const [dataFromServer, setDataFromServer] = useState('');
+  // const [dataFromServer, setDataFromServer] = useState('');
 
   const receiveFromServer = async () => {
-    await fetch('https://caixa-digital-cms.herokuapp.com/....................', {
+    await fetch('https://caixa-digital-cms.herokuapp.com/orders/....ID....', {
       method: 'GET',
       headers: {
-        // ???????
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -81,7 +87,7 @@ const Notification = (props) => {
       .then(
         (result) => {
           console.log('result', result);
-          setDataFromServer(result.rows);
+          //  setDataFromServer(result.rows);
         },
         (err) => {
           console.error('error', err);
@@ -90,11 +96,11 @@ const Notification = (props) => {
   };
 
   const goToReservas = () => {
-    props.navigation.navigate('......'); // não se fez ainda o ecrã das reservas (NÃO É o reservar locker)
+    props.navigation.navigate('reservasMarcadas');
   };
 
   const goToScanLocker = () => {
-    props.navigation.navigate('......'); // não se fez ainda o ecrã para scannear o qr code do locker
+    props.navigation.navigate('ScanQrCode');
   };
 
   const goToCorrespondenciasEnviadas = () => {
@@ -114,46 +120,120 @@ const Notification = (props) => {
     return days;
   };
 
-  const getIsReminder = (dataArg) => dataArg.type === 'reminder';
-  const getIsNewCorresp = (dataArg) => dataArg.type === 'newCorresp';
-  const getIsCorrespSent = (dataArg) => dataArg.type === 'correspSent';
+  const getReservaEnvio = (dataArg) => dataArg.orderType === 'send' && dataArg.isDeposited === false;
 
-  // o data deve ser substituído por dataFromServer
-  const cards = data.map((dataEntry) => {
-    if (getIsReminder(dataEntry)) {
-      return (
-        <Card style={styles.cardStyle}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
-              Tem uma reserva para hoje
-              <Text style={styles.cardTimeText}>
-                {'\n'}
-                {diffDates(dataEntry.details.datetimeNotification)}
+  const getReservaRecebimentoPrePago = (dataArg) =>
+    dataArg.orderType === 'receive' && dataArg.isDeposited === false && dataArg.state === 'paid';
+
+  const getReservaRecebimentoNaoPago = (dataArg) =>
+    dataArg.orderType === 'receive' && dataArg.isDeposited === false && dataArg.state === 'unpaid';
+
+  const getRecebimentosPorLevantar = (dataArg) =>
+    dataArg.orderType === 'receive' &&
+    dataArg.isDeposited === true &&
+    dataArg.state === 'paid' &&
+    dataArg.isWithdrawn === false;
+
+  const getCorrespondenciasEmTransito = (dataArg) =>
+    dataArg.orderType === 'send' && dataArg.isDeposited === true && dataArg.isWithdrawn === true;
+
+  const cards = dataFromServer.map((dataEntry) => {
+    if (getReservaEnvio(dataEntry)) {
+      const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
+      console.log(date);
+      if (date === moment(new Date()).format('YYYY-MM-DD')) {
+        return (
+          <Card style={styles.cardStyle}>
+            <Card.Content style={styles.cardContent}>
+              <Text style={styles.cardContentText}>
+                <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
+                Tem uma reserva de envio para hoje:
+                <Text style={styles.cardContentText2}> {date} </Text>
+                <Text style={styles.cardTimeText}>
+                  {'\n'}
+                  {diffDates(dataEntry.created_at)}
+                </Text>
               </Text>
-            </Text>
 
-            <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
-              <View style={styles.viewIconNText}>
-                <Ionicons name="business-outline" color="#000" size={23} />
-                <Text style={{ fontSize: 11 }}>Ver</Text>
-              </View>
-            </TouchableOpacity>
-          </Card.Content>
-        </Card>
-      );
-    }
-    if (getIsNewCorresp(dataEntry)) {
+              <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
+                <View style={styles.viewIconNText}>
+                  <Ionicons name="business-outline" color="#000" size={23} />
+                  <Text style={{ fontSize: 11 }}>Ver</Text>
+                </View>
+              </TouchableOpacity>
+            </Card.Content>
+          </Card>
+        );
+      }
+    } else if (getReservaRecebimentoPrePago(dataEntry)) {
+      const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
+      console.log(date);
+      if (date === moment(new Date()).format('YYYY-MM-DD')) {
+        return (
+          <Card style={styles.cardStyle}>
+            <Card.Content style={styles.cardContent}>
+              <Text style={styles.cardContentText}>
+                <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
+                Tem uma reserva de recebimento para hoje:
+                <Text style={styles.cardContentText2}> {date} </Text>
+                <Text style={styles.cardTimeText}>
+                  {'\n'}
+                  {diffDates(dataEntry.created_at)}
+                </Text>
+              </Text>
+
+              <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
+                <View style={styles.viewIconNText}>
+                  <Ionicons name="business-outline" color="#000" size={23} />
+                  <Text style={{ fontSize: 11 }}>Ver</Text>
+                </View>
+              </TouchableOpacity>
+            </Card.Content>
+          </Card>
+        );
+      }
+    } else if (getReservaRecebimentoNaoPago(dataEntry)) {
+      const date = moment(dataEntry.dateRequested);
+      const now = moment(new Date());
+      const duration = moment.duration(now.diff(date));
+      console.log(duration.asDays());
+
+      if (Math.abs(duration.asDays()) === 1) {
+        return (
+          <Card style={styles.cardStyle}>
+            <Card.Content style={styles.cardContent}>
+              <Text style={styles.cardContentText}>
+                <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
+                Tem uma reserva de recebimento para hoje:
+                <Text style={styles.cardContentText2}> {date.format('YYYY-MM-DD')} </Text> Tem de efetuar o pagamento
+                senão perde a reserva.
+                <Text style={styles.cardTimeText}>
+                  {'\n'}
+                  {diffDates(dataEntry.created_at)}
+                </Text>
+              </Text>
+
+              <TouchableOpacity style={styles.touchableOpacityView} onPress={goToReservas}>
+                <View style={styles.viewIconNText}>
+                  <Ionicons name="business-outline" color="#000" size={23} />
+                  <Text style={{ fontSize: 11 }}>Ver</Text>
+                </View>
+              </TouchableOpacity>
+            </Card.Content>
+          </Card>
+        );
+      }
+    } else if (getRecebimentosPorLevantar(dataEntry)) {
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA NOVA: {'\n'}</Text>
               Tem uma correspondência nova no locker de <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.details.from}</Text>
+              <Text style={styles.cardContentText2}>{dataEntry.from}</Text>
               <Text style={styles.cardTimeText}>
                 {'\n'}
-                {diffDates(dataEntry.details.datetimeNotification)}
+                {diffDates(dataEntry.created_at)}
               </Text>
             </Text>
 
@@ -166,20 +246,19 @@ const Notification = (props) => {
           </Card.Content>
         </Card>
       );
-    }
-    if (getIsCorrespSent(dataEntry)) {
+    } else if (getCorrespondenciasEmTransito(dataEntry)) {
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A correspondência de
               <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.details.when}</Text> <Text> </Text>
+              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
               para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.details.to}</Text> foi levantada para envio
+              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi levantada para envio
               <Text style={styles.cardTimeText}>
                 {'\n'}
-                {diffDates(dataEntry.details.datetimeNotification)}
+                {diffDates(dataEntry.created_at)}
               </Text>
             </Text>
             <TouchableOpacity style={styles.touchableOpacityView} onPress={goToCorrespondenciasEnviadas}>
@@ -191,6 +270,14 @@ const Notification = (props) => {
           </Card.Content>
         </Card>
       );
+    } else if (
+      !getReservaEnvio &&
+      !getCorrespondenciasEmTransito &&
+      !getRecebimentosPorLevantar &&
+      !getReservaRecebimentoNaoPago &&
+      !getReservaRecebimentoPrePago
+    ) {
+      return <Text style={styles.semNotif}>Sem notificações no momento</Text>;
     }
   });
 
