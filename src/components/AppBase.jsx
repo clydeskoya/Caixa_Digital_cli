@@ -6,6 +6,7 @@ import { Stack } from '../common/stack';
 import TabNavigator from '../screens/Home/TabNavigator';
 import CalendarReservarLocker from '../screens/reservarLocker/CalendarPage';
 import SendReceiveReservarLocker from '../screens/reservarLocker/SendOrReceive';
+import ReservationInfo from '../screens/reservarLocker/ReservationInfo';
 import PaymentReservarLocker from '../screens/reservarLocker/PaymentPage';
 import SucessReservarLocker from '../screens/reservarLocker/SuccessPage';
 import ScanQrCode from './ScanQrCode';
@@ -32,6 +33,7 @@ const AppBase = () => {
             component={SendReceiveReservarLocker}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="ReservationInfo" component={ReservationInfo} options={{ headerShown: false }} />
           <Stack.Screen
             name="PaymentReservarLocker"
             component={PaymentReservarLocker}
@@ -49,4 +51,3 @@ const AppBase = () => {
 };
 // import DrawerNavigationRoutes from './screens/DrawerNavigationRoutes';
 export default AppBase;
-    
