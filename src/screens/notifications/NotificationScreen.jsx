@@ -491,6 +491,7 @@ const Notification = (props) => {
   return (
     <View style={styles.container}>
       <View style={{ marginTop: '12%' }} />
+      {/* {receiveFromServer} */}
       {cards}
     </View>
   );
