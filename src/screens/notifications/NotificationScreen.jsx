@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Badge, Colors } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
-import data from './data';
 import notificationStyles from './styles';
-import dataFromServer from './dataFromServer';
+//import dataFromServer from './dataFromServer';
 import serverResponse from '../login/serverResponse';
 import { API_URL } from '../../common/constants/api';
 import { diffDates } from './helper';
@@ -18,12 +17,15 @@ import {
   getIsReservaRecebimentoPrePago,
 } from '../../common/businesslogic';
 import ButtonNotificationAction from './ButtonNotificationAction';
+import { LoginContext } from '../../common/loginHelper/responseData';
 
 const styles = StyleSheet.create(notificationStyles);
 
 const Notification = (props) => {
-  // const [dataFromServer, setDataFromServer] = useState([]);
+  const [dataFromServer, setDataFromServer] = useState([]);
   // const dataFromServer = [];
+
+  const loginContext = useContext(LoginContext);
 
   // routing functions
   const goToReservas = () => {
@@ -39,26 +41,35 @@ const Notification = (props) => {
   };
   //
 
-  const receiveFromServer = async () => {
-    await fetch(`${API_URL}/orders/user`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+  // const getToken = () => {
+  console.log('dados context', loginContext.loginData);
+  const token = loginContext.loginData.map((row) => row.jwt);
+  const finalToken = Object.values(token); 
+  const ola = finalToken.toString();
+  console.log(token);
+  console.log(finalToken[0]);
+  console.log(ola);
+
+
+  fetch(`${API_URL}/orders/user`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${ola}`,
+    },
+  })
+    .then((res) => res.json())
+    .then(
+      (result) => {
+        console.log('result', result);
+        setDataFromServer(result);
+        console.log('dataUseState', dataFromServer);
+        // dataFromServer.push(result.rows);
       },
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log('result', result);
-          //  setDataFromServer(result.rows);
-          // dataFromServer.push(result.rows);
-        },
-        (err) => {
-          console.error('error', err);
-        }
-      );
-  };
+      (err) => {
+        console.error('error', err);
+      }
+    );
+  // };
 
   const getIsNewNotification = (date) => {
     const dateLastLogin = serverResponse.map((row) => row.user.lastLogin);
@@ -101,6 +112,7 @@ const Notification = (props) => {
     if (getIsReservaRecebimentoPrePago(dataEntry)) {
       const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
       console.log(date);
+      // console.log('dados context', loginContext.loginData);
       const isNotification = date === moment(new Date()).format('YYYY-MM-DD');
       // if (newNot(dataEntry.created_at)) {
       return (
@@ -154,7 +166,7 @@ const Notification = (props) => {
       // }
     }
     if (getIsRecebimentosPorLevantar(dataEntry)) {
-      // shouldRenderBadge, textTitle, 
+      // shouldRenderBadge, textTitle,
       return (
         <Card style={styles.cardStyle}>
           {getIsNewNotification(dataEntry.created_at) && <Badge size={15} style={styles.badgeStyle} />}
@@ -231,7 +243,8 @@ const Notification = (props) => {
   return (
     <View style={styles.container}>
       <View style={{ marginTop: '12%' }} />
-      {/* {receiveFromServer} */}
+      {/* {receiveFromServer()} */}
+      {/* {getToken()} */}
       {cards}
     </View>
   );
