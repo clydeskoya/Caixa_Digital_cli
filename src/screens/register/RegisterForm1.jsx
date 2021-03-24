@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, View, Alert } from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
+import { Ionicons } from '@expo/vector-icons';
 import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_DATE_OF_BIRTH = /^\d{2}\/\d{2}\/\d{4}?$/;
@@ -12,9 +13,9 @@ const styles = StyleSheet.create({
     marginBottom: '8%',
     width: '50%',
     height: '7%',
-    marginTop: '15%',
     backgroundColor: '#1DC690',
     borderRadius: 15,
+    flexDirection: 'row',
   },
   container: {
     alignItems: 'center',
@@ -71,6 +72,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: '3%',
   },
+  goBack: {
+    alignSelf: 'flex-start',
+    marginTop: '7%',
+  },
   buttonOK: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -79,6 +84,11 @@ const styles = StyleSheet.create({
     marginVertical: '10%',
     backgroundColor: '#1C4670',
     borderRadius: 45,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   progressBar: {
     height: '1.5%',
@@ -139,6 +149,11 @@ const RegisterForm1 = (props) => {
     <>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.goBack}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Ionicons name="arrow-back-outline" size={37} />
+            </TouchableOpacity>
+          </View>
           <View style={styles.header}>
             <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>
@@ -201,7 +216,7 @@ const RegisterForm1 = (props) => {
           <View style={styles.container}>
             <TouchableOpacity onPress={saveNnavigate}>
               <View style={styles.buttonOK}>
-                <Text style={{ color: 'white' }}> Seguinte </Text>
+                <Text style={styles.buttonText}> Seguinte </Text>
               </View>
             </TouchableOpacity>
           </View>

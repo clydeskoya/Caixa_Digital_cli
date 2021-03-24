@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
@@ -11,7 +12,6 @@ const styles = StyleSheet.create({
     marginBottom: '8%',
     width: '50%',
     height: '7%',
-    marginTop: '15%',
     backgroundColor: '#1DC690',
     borderRadius: 15,
   },
@@ -19,12 +19,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '5%',
   },
 
   container2: {
     alignItems: 'flex-start',
     justifyContent: 'center',
-    padding: '3%',
+    marginVertical: '3%',
   },
 
   TextInputStyle: {
@@ -55,15 +56,22 @@ const styles = StyleSheet.create({
     // marginBottom: "9%",
   },
 
+  goBack: {
+    alignSelf: 'flex-start',
+    marginTop: '7%',
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
   buttonOK: {
     alignItems: 'center',
     justifyContent: 'center',
     width: 250,
     height: 40,
-    // marginVertical: "10%",
-    // marginEnd: "5%",
-    // bottom:"1%",
-    // marginTop: "50%",
     backgroundColor: '#1C4670',
     borderRadius: 45,
   },
@@ -81,11 +89,11 @@ const RegisterForm3 = (props) => {
       Alert.alert('Número de BI/CC');
       return;
     }
-    if (!phoneNumber || !phoneNumber.match(REGEX_ONLY_NUMBERS)) {
+    if (!phoneNumber || !phoneNumber.match(REGEX_ONLY_NUMBERS || phoneNumber.length() !== 9)) {
       Alert.alert('Número de telefone inválido');
       return;
     }
-    if (!nif || !nif.match(REGEX_ONLY_NUMBERS)) {
+    if (!nif || !nif.match(REGEX_ONLY_NUMBERS || nif.length() !== 9)) {
       Alert.alert('NIF inválido');
       return;
     }
@@ -104,6 +112,11 @@ const RegisterForm3 = (props) => {
     <>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.goBack}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Ionicons name="arrow-back-outline" size={37} />
+            </TouchableOpacity>
+          </View>
           <View style={styles.header}>
             <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>
@@ -120,6 +133,7 @@ const RegisterForm3 = (props) => {
                 placeholder="Número de BI/CC"
                 style={styles.TextInputStyle}
                 name="BI"
+                value={bi}
                 onChangeText={(BI) => setBI(BI)}
               />
             </View>
@@ -134,7 +148,7 @@ const RegisterForm3 = (props) => {
                 style={styles.TextInputStyle}
                 name="phoneNumber"
                 keyboardType="numeric"
-                // maxLength="9"
+                value={phoneNumber}
                 onChangeText={(Phone) => setPhoneNumber(Phone)}
               />
             </View>
@@ -149,7 +163,7 @@ const RegisterForm3 = (props) => {
                 style={styles.TextInputStyle}
                 name="NIF"
                 keyboardType="numeric"
-                // maxLength="9"
+                value={nif}
                 onChangeText={(NIF) => setNIF(NIF)}
               />
             </View>
@@ -157,7 +171,7 @@ const RegisterForm3 = (props) => {
 
           <TouchableOpacity onPress={saveNnavigate}>
             <View style={styles.buttonOK}>
-              <Text style={{ color: 'white' }}> Seguinte </Text>
+              <Text style={styles.buttonText}> Seguinte </Text>
             </View>
           </TouchableOpacity>
         </View>

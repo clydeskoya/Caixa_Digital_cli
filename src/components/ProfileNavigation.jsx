@@ -1,9 +1,9 @@
 import React from 'react';
-import ProfileScreen from './screens/profile/ProfileScreen';
-import MyQR from './screens/profile/MyQR';
-import EditProfile from './screens/profile/EditProfile';
-import Definicoes from './screens/profile/Definicoes';
-import { Stack } from './common/stack';
+import ProfileScreen from '../screens/profile/ProfileScreen';
+import MyQR from '../screens/profile/MyQR';
+import EditProfile from '../screens/profile/EditProfile';
+import Definicoes from '../screens/profile/Definicoes';
+import { Stack } from '../common/stack';
 
 const ProfileNavigation = () => (
   <Stack.Navigator initialRouteName="Perfil">

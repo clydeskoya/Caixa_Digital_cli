@@ -15,8 +15,9 @@ export const OrangeTest = styled.Text`
 
 export const ButtonNext = styled.View`
 alignItems: center;
-  width: 290px;
-  height: 45px;
+justifyContent: center;
+  width: 250px;
+  height: 40px;
   margin-top: 200px;
   margin-right: auto;
   margin-left: auto;

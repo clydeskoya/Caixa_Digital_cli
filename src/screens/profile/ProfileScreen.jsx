@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Button, Paragraph, Dialog, Portal, Provider } from 'react-native-paper';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
     marginLeft: '6%',
     borderBottomWidth: 2,
     borderBottomColor: '#D6CFCF',
-
   },
 
   inputRow: {
@@ -49,10 +49,12 @@ const styles = StyleSheet.create({
 });
 
 const ProfileScreen = (props) => {
-  const hey = '';
+  const [visible, setVisible] = useState(false);
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+
   return (
     <View style={styles.container}>
-
       <View style={styles.nameNCircle}>
         <View style={styles.circle}>
           <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> AS </Text>
@@ -81,12 +83,33 @@ const ProfileScreen = (props) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => '.....'}>
+      <TouchableOpacity onPress={() => showDialog()}>
         <View style={styles.inputRow}>
           <Ionicons name="log-out-outline" color="#000000" size={25} />
           <Text style={styles.text}>Terminar Sessão</Text>
         </View>
       </TouchableOpacity>
+
+      <Provider>
+        <View>
+          <Portal>
+            <Dialog visible={visible} >
+              <Dialog.Title>Terminar sessão</Dialog.Title>
+              <Dialog.Content>
+                <Paragraph>Tem a certeza que quer terminar a sessão?</Paragraph>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('Auth'))}>
+                  Sim{' '}
+                </Button>
+                <Button color="#1C4670" onPress={hideDialog}>
+                  Cancelar{' '}
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
+      </Provider>
     </View>
   );
 };

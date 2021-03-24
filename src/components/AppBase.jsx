@@ -4,13 +4,13 @@ import SplashScreen from '../screens/SplashScreen';
 import Auth from '../../Auth';
 import { Stack } from '../common/stack';
 import TabNavigator from '../screens/Home/TabNavigator';
-import CalendarReservarLocker from '../screens/reservarLocker/CalendarPage'
-import SendReceiveReservarLocker from '../screens/reservarLocker/SendOrReceive'
-import PaymentReservarLocker from '../screens/reservarLocker/PaymentPage'
-import SucessReservarLocker from '../screens/reservarLocker/SuccessPage'
-import ScanQrCode from './ScanQrCode'
+import CalendarReservarLocker from '../screens/reservarLocker/CalendarPage';
+import SendReceiveReservarLocker from '../screens/reservarLocker/SendOrReceive';
+import PaymentReservarLocker from '../screens/reservarLocker/PaymentPage';
+import SucessReservarLocker from '../screens/reservarLocker/SuccessPage';
+import ScanQrCode from './ScanQrCode';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
-import ProfileNavigation from '../ProfileNavigation';
+import ProfileNavigation from './ProfileNavigation';
 
 const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
@@ -21,9 +21,21 @@ const AppBase = () => {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
-          <Stack.Screen name="CalendarReservarLocker" component={CalendarReservarLocker} options={{ headerShown: false }} />
-          <Stack.Screen name="SendReceiveReservarLocker" component={SendReceiveReservarLocker} options={{ headerShown: false }} />
-          <Stack.Screen name="PaymentReservarLocker" component={PaymentReservarLocker} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="CalendarReservarLocker"
+            component={CalendarReservarLocker}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SendReceiveReservarLocker"
+            component={SendReceiveReservarLocker}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PaymentReservarLocker"
+            component={PaymentReservarLocker}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="SucessReservarLocker" component={SucessReservarLocker} options={{ headerShown: false }} />
           <Stack.Screen name="ScanQrCode" component={ScanQrCode} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={ProfileNavigation} options={{ headerShown: false }} />

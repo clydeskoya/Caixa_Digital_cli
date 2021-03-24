@@ -50,17 +50,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const correspondenciaRecebida = (props) => {
+const correspondenciaRecebida = () => {
   // const [visible, setVisible] = useState(false);
   // const showDialog = () => setVisible(true);
   // const hideDialog = () => setVisible(false);
   // const [dialogTextTitle, setDialogTextTitle] = useState('');
   // const [dialogTextContent, setDialogTextContent] = useState('');
+
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Correspondência Recebida </Text>
     </View>
-    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigate.Home}>
+    <TouchableOpacity activeOpacity={0.1} /* onPress={() => props.navigate.Home} */>
       <Card style={styles.cardStilo}>
         <Card.Content>
           <View style={styles.inputRow}>
