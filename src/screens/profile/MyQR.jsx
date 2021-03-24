@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
 });
 
 const MyQR = (props) => {
-  // const dataa = data.map((dataEntry) => {
   const dataa = `${data.map((dataEntry) => dataEntry.street)} ${data.map((dataEntry) => dataEntry.door)} ${data.map(
     (dataEntry) => dataEntry.floor
   )} ${data.map((dataEntry) => dataEntry.postalCode)} ${data.map((dataEntry) => dataEntry.locality)} ${data.map(
