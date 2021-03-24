@@ -18,29 +18,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   scrollView: {
     backgroundColor: '#278AB0',
     width: '340',
     height: '125',
   },
+
   cardStilo: {
-    width: '80%',
+    width: 280,
     borderRadius: 12,
-    alignSelf: 'center',
-    marginBottom: 10,
+    marginBottom: '8%',
     backgroundColor: '#C5DFEA',
+    borderWidth: 4,
     borderColor: '#2C8DB2',
-    flexGrow: 0,
-    flexShrink: 1,
+    alignSelf: 'center',
   },
-  cardStilo1: {
-    width: '80%',
-    borderRadius: 12,
+
+  text: {
+    fontSize: 17,
     alignSelf: 'center',
-    marginBottom: 10,
-    backgroundColor: '#C5DFEA',
-    borderColor: '#2C8DB2',
-    flexGrow: 0,
   },
 });
 
@@ -50,7 +47,7 @@ const Home = (props) => (
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaRecebida')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
-          <Title>Correspondência Recebida</Title>
+          <Title style={styles.text}>Correspondência Recebida</Title>
 
           <Paragraph>Finanças - Autoridade Tributária</Paragraph>
         </Card.Content>
@@ -59,7 +56,7 @@ const Home = (props) => (
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaEnviada')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
-          <Title>Correspondência Enviada</Title>
+          <Title style={styles.text}>Correspondência Enviada</Title>
 
           <Paragraph>GPU - Ben-Hur Fidalgo</Paragraph>
         </Card.Content>
@@ -68,12 +65,13 @@ const Home = (props) => (
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
-          <Title> Reservas </Title>
+          <Title style={styles.text}>Reservas</Title>
 
-          <Paragraph>15/02/2020-Locker para envio</Paragraph>
+          <Paragraph>15/02/2020 - Locker para envio</Paragraph>
         </Card.Content>
       </Card>
     </TouchableOpacity>
   </View>
 );
+
 export default Home;
