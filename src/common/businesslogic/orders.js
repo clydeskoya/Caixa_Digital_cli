@@ -15,6 +15,9 @@ export const getIsRecebimentosPorLevantar = (dataArg) =>
 export const getIsCorrespondenciasEmTransito = (dataArg) =>
   dataArg.orderType === 'send' && dataArg.isDeposited === true && dataArg.isWithdrawn === true;
 
+export const getIsCorrespondenciasEmEspera = (dataArg) =>
+  dataArg.orderType === 'send' && dataArg.isDeposited === true && dataArg.isWithdrawn === false;
+
 export const getIsCorrespondenciasEntreguesAClientesComApp = (dataArg) =>
   dataArg.orderType === 'send' &&
   dataArg.isDeposited === true &&

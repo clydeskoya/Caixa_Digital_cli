@@ -27,7 +27,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    'linebreak-style': ['error', 'windows'],
+    'linebreak-style': ['error', 'unix'],
     //'eslint eol-last': ['error', 'always'],
     // 'files.eol': ['\n'],
     'react/jsx-filename-extension': [
