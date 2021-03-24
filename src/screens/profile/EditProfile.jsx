@@ -85,6 +85,18 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     marginLeft: '17%',
   },
+
+  buttonTextOK: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  buttonTextSair: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 const EditProfile = (props) => {
@@ -167,13 +179,13 @@ const EditProfile = (props) => {
 
       <TouchableOpacity>
         <View style={styles.buttonOK}>
-          <Text style={{ color: 'white' }}> Guardar </Text>
+          <Text style={styles.buttonTextOK}> Guardar </Text>
         </View>
       </TouchableOpacity>
 
       <TouchableOpacity>
         <View style={styles.buttonSair}>
-          <Text style={{ color: 'black' }}> Cancelar </Text>
+          <Text style={styles.buttonTextSair}> Cancelar </Text>
         </View>
       </TouchableOpacity>
     </>

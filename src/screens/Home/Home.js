@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
   cardStilo: {
     width: 280,
     borderRadius: 12,
-    marginBottom: '8%',
+    alignSelf: 'center',
+    marginBottom: '3%',
     backgroundColor: '#C5DFEA',
     borderWidth: 4,
     borderColor: '#2C8DB2',
@@ -62,6 +63,7 @@ const Home = (props) => (
         </Card.Content>
       </Card>
     </TouchableOpacity>
+
     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
       <Card style={styles.cardStilo}>
         <Card.Content>

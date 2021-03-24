@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Card, Title, Paragraph, Dialog, Portal, Provider, Button } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
@@ -29,11 +29,13 @@ const styles = StyleSheet.create({
 
   cardStilo: {
     width: 280,
-    height: '100%',
+    height: '30%',
     borderRadius: 40,
     borderWidth: 4,
     borderColor: '#D6CFCF',
     //   marginTop: '5%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 
   text: {
@@ -46,47 +48,29 @@ const styles = StyleSheet.create({
     marginHorizontal: '6%',
     // justifyContent:'flex-start',
     width: '100%',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
 });
 
-const correspondenciaRecebida = (props) => {
-  // const [visible, setVisible] = useState(false);
-  // const showDialog = () => setVisible(true);
-  // const hideDialog = () => setVisible(false);
-  // const [dialogTextTitle, setDialogTextTitle] = useState('');
-  // const [dialogTextContent, setDialogTextContent] = useState('');
+const correspondenciaRecebida = (props) => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Correspondência Recebida </Text>
     </View>
-    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigate.Home}>
+    <TouchableOpacity activeOpacity={0.1} /* onPress={() => props.navigate.Home} */>
       <Card style={styles.cardStilo}>
         <Card.Content>
           <View style={styles.inputRow}>
-            <Title style={styles.text}> Finanças - Autoridade Tributária </Title>
-            <Ionicons name="chevron-forward-outline" size={30} />
+            <Text style={styles.text}>
+              {' '}
+              Finanças - Autoridade Tributária
+              <Ionicons name="chevron-forward-outline" size={30} />
+            </Text>
           </View>
         </Card.Content>
       </Card>
     </TouchableOpacity>
-    {/* <Provider>
-      <View>
-        <Portal>
-          <Dialog visible={visible}>
-            <Dialog.Title>Mensagem</Dialog.Title>
-            <Dialog.Content>
-              <Paragraph>Detalhes</Paragraph>
-            </Dialog.Content>
-            <Dialog.Actions>
-              <Button color="#1C4670" onPress={hideDialog}>
-                OK{' '}
-              </Button>
-            </Dialog.Actions>
-          </Dialog>
-        </Portal>
-      </View>
-    </Provider> */}
-  </View>;
-};
+  </View>
+);
 export default correspondenciaRecebida;

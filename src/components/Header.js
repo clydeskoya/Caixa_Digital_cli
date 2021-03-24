@@ -7,9 +7,9 @@ export function Header() {
       source={require('../img/txtlogo.png')}
       style={{
         position: 'absolute',
-        width: 123,
-        height: 51,
-        top: 35,
+        width: '35%',
+        height: '10%',
+        top: '7%',
       }}
     />
   );

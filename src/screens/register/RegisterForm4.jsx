@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator } from 'react-native-paper';
+import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator, Checkbox } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
+import { set } from 'ramda';
 import { CounterContext2 } from '../../common/formHelper/form.register2';
+import terms from './terms';
 
 // eslint-disable-next-line no-control-regex
 const REGEX_EMAIL = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/;
@@ -13,18 +16,18 @@ const styles = StyleSheet.create({
     marginBottom: '8%',
     width: '50%',
     height: '7%',
-    marginTop: '15%',
     backgroundColor: '#1DC690',
     borderRadius: 15,
   },
   container: {
     alignItems: 'center',
     justifyContent: 'space-between',
+    padding: '5%',
   },
   container2: {
     alignItems: 'flex-start',
     justifyContent: 'center',
-    padding: '3%',
+    marginVertical: '3%',
   },
   TextInputStyle: {
     textAlign: 'left',
@@ -40,9 +43,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: '2.5%',
   },
+  goBack: {
+    alignSelf: 'flex-start',
+    marginTop: '7%',
+  },
   title: {
     fontWeight: 'bold',
     fontSize: 15,
+  },
+  termos: {
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginRight: '1.5%',
+  },
+  verTermos: {
+    fontWeight: 'bold',
+    fontSize: 12,
+    textDecorationLine: 'underline',
+    backgroundColor: '#D6CFCF',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '10%',
   },
   buttonOK: {
     alignItems: 'center',
@@ -58,7 +87,7 @@ const RegisterForm4 = (props) => {
   const [email1, setEmail1] = useState('');
   const [password1, setPassword1] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [pass, setPassword] = useState('');
   const [data, setData] = useState(null);
 
   const counterContext2 = useContext(CounterContext2);
@@ -67,8 +96,14 @@ const RegisterForm4 = (props) => {
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
+  const [visib, setVisib] = useState(false);
+  const showTermsDialog = () => setVisib(true);
+  const hideTermsDialog = () => setVisib(false);
+
   const [dialogTextTitle, setDialogTextTitle] = useState('');
   const [dialogTextContent, setDialogTextContent] = useState('');
+
+  const [checked, setChecked] = useState(false);
 
   const formSubmitted = (confirmation) => {
     switch (confirmation) {
@@ -133,22 +168,26 @@ const RegisterForm4 = (props) => {
       return;
     }
 
-    if (!password || !password1) {
+    if (!pass || !password1) {
       Alert.alert('Crie uma password');
       return;
     }
-    if (password1 !== password) {
+    if (password1 !== pass) {
       Alert.alert('Erro de confirmação de passwords');
       return;
     }
-    if (password.length < 6) {
+    if (pass.length < 6) {
       Alert.alert('Número mínimo de caracteres da password: 6');
+      return;
+    }
+    if (checked === false) {
+      Alert.alert('Aceite os termos e condições');
       return;
     }
 
     const dataToSend = {
-      email,
-      password,
+      identifier: email,
+      password: pass,
       user_type: 'client',
     };
 
@@ -166,7 +205,7 @@ const RegisterForm4 = (props) => {
 
     const dataToSend2 = {
       name: `${form1Values[0]} ${form1Values[1]}`,
-      username: 'chachada',
+      username: email,
       dateofbirth: form1Values[2],
       gender: form1Values[3],
       street: form2Values[0],
@@ -179,8 +218,8 @@ const RegisterForm4 = (props) => {
       bi: form3Values[0],
       phoneNumber: form3Values[1],
       nif: form3Values[2],
-      email,
-      password,
+      identifier: email,
+      password: pass,
       user_type: 'client',
     };
 
@@ -192,6 +231,11 @@ const RegisterForm4 = (props) => {
     <>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.goBack}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Ionicons name="arrow-back-outline" size={37} />
+            </TouchableOpacity>
+          </View>
           <View style={styles.header}>
             <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Registo </Text>
           </View>
@@ -201,8 +245,6 @@ const RegisterForm4 = (props) => {
               <ActivityIndicator animating color={Colors.blue800} size="large" />
             </View>
           )}
-
-          {loading}
 
           <View style={styles.container2}>
             <Text style={styles.title}>Insira o seu email </Text>
@@ -268,11 +310,26 @@ const RegisterForm4 = (props) => {
             </View>
           </View>
 
+          <View style={styles.checkboxContainer}>
+            <Checkbox
+              color="#1DC690"
+              status={checked ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+            <Text style={styles.termos}>Aceita os termos e condições da ABAJI? </Text>
+            <TouchableOpacity onPress={showTermsDialog}>
+              <Text style={styles.verTermos}>VER</Text>
+            </TouchableOpacity>
+          </View>
+
           <TouchableOpacity onPress={saveNnavigate}>
             <View style={styles.buttonOK}>
-              <Text style={{ color: 'white' }}> Criar conta </Text>
+              <Text style={styles.buttonText}> Criar conta </Text>
             </View>
           </TouchableOpacity>
+
           <Provider>
             <View>
               <Portal>
@@ -283,6 +340,22 @@ const RegisterForm4 = (props) => {
                   </Dialog.Content>
                   <Dialog.Actions>
                     <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
+                      OK{' '}
+                    </Button>
+                  </Dialog.Actions>
+                </Dialog>
+              </Portal>
+            </View>
+
+            <View>
+              <Portal>
+                <Dialog visible={visib} dismissable={false}>
+                  <Dialog.Title>Termos e condições ABAJI</Dialog.Title>
+                  <Dialog.Content>
+                    <Paragraph>{terms}</Paragraph>
+                  </Dialog.Content>
+                  <Dialog.Actions>
+                    <Button color="#1C4670" onPress={() => hideTermsDialog()}>
                       OK{' '}
                     </Button>
                   </Dialog.Actions>

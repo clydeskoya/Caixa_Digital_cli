@@ -8,7 +8,7 @@ import NotificationScreen from '../notifications/NotificationScreen';
 import ReserveScreen from '../reservarLocker/CalendarPage';
 // eslint-disable-next-line import/no-cycle
 import HomeStack from './HomeStack';
-import ProfileNavigation from '../../ProfileNavigation';
+import ProfileNavigation from '../../components/ProfileNavigation';
 // eslint-disable-next-line import/no-cycle
 
 const Tab = createBottomTabNavigator();

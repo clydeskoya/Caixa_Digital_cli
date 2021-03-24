@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
   textRegister: {
     textDecorationLine: 'underline',
   },
-  textLogin: { color: 'white' },
+  textLogin: { color: 'white', fontSize: 16, fontWeight: 'bold' },
   bottomActions: {
     alignItems: 'center',
     justifyContent: 'center',

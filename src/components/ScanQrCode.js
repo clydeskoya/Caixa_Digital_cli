@@ -27,11 +27,8 @@ function Scanner() {
 
   return (
     <View>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={styles.scan}
-      ></BarCodeScanner>
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={styles.scan} />
+      {scanned && <Button title="Tap to Scan Again" onPress={() => setScanned(false)} />}
     </View>
   );
 }
