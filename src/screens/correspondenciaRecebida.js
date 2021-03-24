@@ -28,11 +28,12 @@ const styles = StyleSheet.create({
   },
 
   cardStilo: {
-    width: 280,
-    height: '100%',
-    borderRadius: 40,
+    width: 300,
+    height: 50,
+    borderRadius: 20,
     borderWidth: 4,
     borderColor: '#D6CFCF',
+    alignItems: 'center',
     //   marginTop: '5%',
   },
 
@@ -43,14 +44,12 @@ const styles = StyleSheet.create({
 
   inputRow: {
     flexDirection: 'row',
-    marginHorizontal: '6%',
-    // justifyContent:'flex-start',
     width: '100%',
     justifyContent: 'space-between',
   },
 });
 
-const correspondenciaRecebida = () => {
+const correspondenciaRecebida = () => (
   // const [visible, setVisible] = useState(false);
   // const showDialog = () => setVisible(true);
   // const hideDialog = () => setVisible(false);
@@ -88,6 +87,6 @@ const correspondenciaRecebida = () => {
         </Portal>
       </View>
     </Provider> */}
-  </View>;
-};
+  </View>
+);
 export default correspondenciaRecebida;
