@@ -28,16 +28,16 @@ const styles = StyleSheet.create({
   cardStilo: {
     width: 280,
     borderRadius: 12,
-    marginBottom: '7%',
+    marginBottom: '8%',
     backgroundColor: '#C5DFEA',
     borderWidth: 4,
     borderColor: '#2C8DB2',
-    alignSelf:'center',
+    alignSelf: 'center',
   },
 
   text: {
     fontSize: 17,
-    alignSelf:'center',
+    alignSelf: 'center',
   },
 });
 

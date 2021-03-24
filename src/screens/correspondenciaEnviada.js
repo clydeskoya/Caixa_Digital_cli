@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   header: {
@@ -12,14 +13,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#1DC690',
     borderRadius: 15,
     marginBottom: '10%',
-    marginTop: '15%',
+    marginTop: '5%',
   },
   container: {
     flex: 3,
     height: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    // justifyContent: 'flex-start',
   },
   scrollView: {
     backgroundColor: '#278AB0',
@@ -27,14 +28,16 @@ const styles = StyleSheet.create({
     height: '125',
   },
 
-   cardStilo: {
+  cardStilo: {
     width: 280,
     height: '100%',
     borderRadius: 40,
     borderWidth: 4,
     borderColor: '#D6CFCF',
-  //   marginTop: '5%',
-   },
+    //   marginTop: '5%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
   text: {
     fontSize: 13,
@@ -42,11 +45,9 @@ const styles = StyleSheet.create({
   },
 
   inputRow: {
-    flexDirection: 'row',
-    marginHorizontal: '6%',
-    // justifyContent:'flex-start',
-    width: '100%',
-    justifyContent: 'space-between',
+    marginTop: '5%',
+    marginLeft: '5%',
+    justifyContent: 'flex-start',
   },
 });
 
@@ -59,7 +60,7 @@ const correspondenciaEnviada = (props) => (
       <Card style={styles.cardStilo}>
         <Card.Content>
           <View style={styles.inputRow}>
-            <Title style = {styles.text}> GPU - Ben-Hur Fidalgo </Title>
+            <Title style={styles.text}> GPU - Ben-Hur Fidalgo </Title>
             <Ionicons name="chevron-forward-outline" size={30} />
           </View>
         </Card.Content>
