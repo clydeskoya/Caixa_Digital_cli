@@ -10,7 +10,7 @@ import ReservationInfo from '../screens/reservarLocker/ReservationInfo';
 import PaymentReservarLocker from '../screens/reservarLocker/PaymentPage';
 import SucessReservarLocker from '../screens/reservarLocker/SuccessPage';
 import ScanQrCode from './ScanQrCode';
-import StripeCard from '../screens/StripePayNewCard';
+
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 import ProfileNavigation from './ProfileNavigation';
 
@@ -41,7 +41,7 @@ const AppBase = () => {
           />
           <Stack.Screen name="SucessReservarLocker" component={SucessReservarLocker} options={{ headerShown: false }} />
           <Stack.Screen name="ScanQrCode" component={ScanQrCode} options={{ headerShown: false }} />
-          <Stack.Screen name="StripeCard" component={StripeCard} options={{ headerShown: false }} />
+
           <Stack.Screen name="Perfil" component={ProfileNavigation} options={{ headerShown: false }} />
           <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
         </Stack.Navigator>
