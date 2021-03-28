@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Badge, Colors } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
 import notificationStyles from './styles';
-//import dataFromServer from './dataFromServer';
+// import dataFromServer from './dataFromServer';
 import serverResponse from '../login/serverResponse';
 import { API_URL } from '../../common/constants/api';
 import { diffDates } from './helper';
@@ -43,32 +43,31 @@ const Notification = (props) => {
 
   // const getToken = () => {
   console.log('dados context', loginContext.loginData);
-  const token = loginContext.loginData.map((row) => row.jwt);
-  const finalToken = Object.values(token); 
-  const ola = finalToken.toString();
+  const token = loginContext.loginData.jwt;
+
   console.log(token);
-  console.log(finalToken[0]);
-  console.log(ola);
 
-
-  fetch(`${API_URL}/orders/user`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${ola}`,
-    },
-  })
-    .then((res) => res.json())
-    .then(
-      (result) => {
-        console.log('result', result);
-        setDataFromServer(result);
-        console.log('dataUseState', dataFromServer);
-        // dataFromServer.push(result.rows);
+  useEffect(() => {
+    fetch(`${API_URL}/orders/user`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      (err) => {
-        console.error('error', err);
-      }
-    );
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log('result', result);
+          setDataFromServer(result);
+          console.log('dataUseState', dataFromServer);
+          // dataFromServer.push(result.rows);
+        },
+        (err) => {
+          console.error('error', err);
+        }
+      );
+  }, []);
+
   // };
 
   const getIsNewNotification = (date) => {
