@@ -20,7 +20,7 @@ const AppBase = () => {
 
   return (
     <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
-    {/*   <NavigationContainer>
+      {/*   <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
@@ -62,6 +62,7 @@ const AppBase = () => {
               component={SendReceiveReservarLocker}
               options={{ headerShown: false }}
             />
+            <Stack.Screen name="ReservationInfo" component={ReservationInfo} options={{ headerShown: false }} />
             <Stack.Screen
               name="PaymentReservarLocker"
               component={PaymentReservarLocker}
