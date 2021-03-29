@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 
 import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, ActivityIndicator, Dialog, Portal, Provider, Paragraph, Button } from 'react-native-paper';
 import { styles } from './styles';
+import { LoginContext } from '../../common/loginHelper/responseData';
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,8 @@ const LoginForm = (props) => {
   const [visible, setVisible] = useState(false);
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
+
+  const loginContext = useContext(LoginContext);
 
   const login = async () => {
     if (!email) {
@@ -26,28 +29,25 @@ const LoginForm = (props) => {
     }
     setLoading(true);
     try {
-      const { data } = await axios.post('http://caixa-digital-cms.herokuapp.com/auth/local', {
+      const { data } = await axios.post('http://localhost:1337/auth/local', {
         identifier: email,
         password: pass,
       });
-
       if (data.jwt) {
-        props.navigation.navigate('Home');
         console.log('data', data);
-        console.log('heyyyyyyyyyyyyyyyyyyyyyyy');
+        loginContext.loginDispatch(data);
         setLoading(false);
+        props.navigation.navigate('Home');
       }
     } catch (error) {
+      setLoading(false);
+      showDialog();
       if (error.response) {
         // Request made and server responded
-        console.log('data', error.response.data);
-        setLoading(false);
-        showDialog();
+        console.log('error.response', error.response.data);
       } else if (error.request) {
         // The request was made but no response was received
-        console.log('request', error.request);
-        setLoading(false);
-        showDialog();
+        console.log('error.request', error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error.message', error.message);

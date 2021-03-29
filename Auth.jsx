@@ -10,13 +10,7 @@ import LoginForm from './src/screens/login/LoginForm';
 
 const Auth = () => (
   <Stack.Navigator initialRouteName="LoginScreen">
-    <Stack.Screen
-      name="LoginForm"
-      component={LoginForm}
-      /*  component={LoginForm} */
-
-      options={{ headerShown: false }}
-    />
+    <Stack.Screen name="LoginForm" component={LoginForm} options={{ headerShown: false }} />
 
     <Stack.Screen name="RegisterForm1" component={RegisterForm1} options={{ headerShown: false }} />
 
