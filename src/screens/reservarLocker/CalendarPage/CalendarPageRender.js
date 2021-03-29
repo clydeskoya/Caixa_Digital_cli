@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, MaskedViewComponent, StyleSheet, Text, View, Button } from 'react-native';
 
 import { Calendar } from 'react-native-calendars';
-
+import axios from 'axios';
 import { withTheme } from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 import { OrangeTest, CalendarWrapper, ButtonNext } from './CalendarPageStyles';
@@ -12,6 +12,19 @@ const CalendarPage = () => {
   let date;
   const navigation = useNavigation();
   const [selectedDate, setSelectedDate] = useState('');
+
+  const reservation = async () => {
+    const { data } = await axios.get('http://10.0.2.2:1337/orders',{
+      dateRequested: "2021-03-21",
+      orderType: "send"
+    });
+    console.log(data);
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Header />
@@ -55,7 +68,12 @@ const CalendarPage = () => {
           }
         />
       </CalendarWrapper>
-      <TouchableOpacity onPress={() => navigation.navigate('SendReceiveReservarLocker')}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('SendReceiveReservarLocker');
+          reservation()
+        }}
+      >
         <ButtonNext>
           <Text style={styles.buttonText}>Seguinte</Text>
         </ButtonNext>

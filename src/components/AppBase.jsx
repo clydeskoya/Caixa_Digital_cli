@@ -10,7 +10,6 @@ import ReservationInfo from '../screens/reservarLocker/ReservationInfo';
 import PaymentReservarLocker from '../screens/reservarLocker/PaymentPage';
 import SucessReservarLocker from '../screens/reservarLocker/SuccessPage';
 import ScanQrCode from './ScanQrCode';
-
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 import ProfileNavigation from './ProfileNavigation';
 

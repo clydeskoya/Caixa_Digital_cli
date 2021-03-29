@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CreditCardInput } from 'react-native-credit-card-input';
+import { PaymentsStripe as Stripe } from 'expo-payments-stripe';
 import { OrangeTest, ButtonNext } from './PaymentPageStyles';
 import Header from '../../../components/HeaderReservarLocker';
 
@@ -31,11 +32,11 @@ function PaymentPage() {
     addressZip: '55555',
   };
 
-  try{
+ /*  try{
     const token = await Stripe.createTokenWithCardAsync(params);
   }catch(error){
 
-  }
+  } */
 
  
 
@@ -46,7 +47,7 @@ function PaymentPage() {
       <Text>One time payment card</Text>
       <View style={{ height: 20 }} />
       <CreditCardInput requiresName onChange={(cardData) => this.setState({ cardData })} />
-      <TouchableOpacity onPress={() => navigation.navigate('StripeCard')}>
+      <TouchableOpacity onPress={() => navigation.navigate('SucessReservarLocker')}>
         <ButtonNext>
           <Text style={styles.buttonText}>Seguinte</Text>
         </ButtonNext>
