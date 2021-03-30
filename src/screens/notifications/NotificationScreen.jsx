@@ -23,7 +23,6 @@ const styles = StyleSheet.create(notificationStyles);
 
 const Notification = (props) => {
   const [dataFromServer, setDataFromServer] = useState([]);
-  // const dataFromServer = [];
 
   const loginContext = useContext(LoginContext);
 
@@ -39,12 +38,9 @@ const Notification = (props) => {
   const goToCorrespondenciasEnviadas = () => {
     props.navigation.navigate('correspondenciaEnviada');
   };
-  //
 
-  // const getToken = () => {
   console.log('dados context', loginContext.loginData);
   const token = loginContext.loginData.jwt;
-
   console.log(token);
 
   useEffect(() => {
@@ -59,8 +55,9 @@ const Notification = (props) => {
         (result) => {
           console.log('result', result);
           setDataFromServer(result);
-          console.log('dataUseState', dataFromServer);
-          // dataFromServer.push(result.rows);
+          console.log('dataUseState', dataFromServer.entries());
+          // dataFromServer = result;
+          //  console.log('dataUseState', dataFromServer);
         },
         (err) => {
           console.error('error', err);
@@ -79,7 +76,9 @@ const Notification = (props) => {
   };
 
   const cards = dataFromServer.map((dataEntry) => {
+    console.log('hey there', dataEntry);
     if (getIsReservaEnvio(dataEntry)) {
+      console.log('hellllooooo');
       const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
       const isNotification = date === moment(new Date()).format('YYYY-MM-DD');
       // if (newNot(dataEntry.created_at)) {
