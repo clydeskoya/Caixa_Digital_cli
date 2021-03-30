@@ -330,41 +330,41 @@ const RegisterForm4 = (props) => {
               <Text style={styles.buttonText}> Criar conta </Text>
             </View>
           </TouchableOpacity>
-
-          <Provider>
-            <View>
-              <Portal>
-                <Dialog visible={visible} dismissable={false}>
-                  <Dialog.Title>{dialogTextTitle}</Dialog.Title>
-                  <Dialog.Content>
-                    <Paragraph>{dialogTextContent}</Paragraph>
-                  </Dialog.Content>
-                  <Dialog.Actions>
-                    <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
-                      OK{' '}
-                    </Button>
-                  </Dialog.Actions>
-                </Dialog>
-              </Portal>
-            </View>
-
-            <View>
-              <Portal>
-                <Dialog visible={visib} dismissable={false}>
-                  <Dialog.Title>Termos e condições ABAJI</Dialog.Title>
-                  <Dialog.Content>
-                    <Paragraph>{terms}</Paragraph>
-                  </Dialog.Content>
-                  <Dialog.Actions>
-                    <Button color="#1C4670" onPress={() => hideTermsDialog()}>
-                      OK{' '}
-                    </Button>
-                  </Dialog.Actions>
-                </Dialog>
-              </Portal>
-            </View>
-          </Provider>
         </View>
+
+        <Provider>
+          <View>
+            <Portal>
+              <Dialog visible={visible} dismissable={false}>
+                <Dialog.Title>{dialogTextTitle}</Dialog.Title>
+                <Dialog.Content>
+                  <Paragraph>{dialogTextContent}</Paragraph>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
+                    OK{' '}
+                  </Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
+          </View>
+
+          <View>
+            <Portal>
+              <Dialog visible={visib} dismissable={false}>
+                <Dialog.Title>Termos e condições ABAJI</Dialog.Title>
+                <Dialog.Content>
+                  <Paragraph>{terms}</Paragraph>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button color="#1C4670" onPress={() => hideTermsDialog()}>
+                    OK{' '}
+                  </Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
+          </View>
+        </Provider>
       </ScrollView>
     </>
   );

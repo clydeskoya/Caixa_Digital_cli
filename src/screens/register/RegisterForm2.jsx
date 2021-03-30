@@ -2,6 +2,7 @@ import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView, Alert 
 import { prop } from 'ramda';
 import React, { useState, useContext, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { Picker } from '@react-native-community/picker';
 import { CounterContext2 } from '../../common/formHelper/form.register2';
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
@@ -36,7 +37,7 @@ const RegisterForm2 = (props) => {
       return;
     }
     if (!city) {
-      Alert.alert('Indique o distrito');
+      Alert.alert('Selecione a sua cidade');
       return;
     }
 
@@ -149,14 +150,18 @@ const RegisterForm2 = (props) => {
           <View style={styles.container2}>
             <Text style={styles.title1}>Cidade</Text>
             <View style={styles.inputRow}>
-              <TextInput
-                type="text"
-                placeholder="Cidade"
-                value={city}
-                style={styles.TextInputStyle}
-                name="city"
-                onChangeText={(City) => setCity(City)}
-              />
+              <Picker
+                selectedValue={city}
+                // style={{ height: 50, width: 150 }}
+                style={styles.TextInputStyleCity}
+                onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
+              >
+                <Picker.Item label="Lisboa" value="Lisboa" />
+                <Picker.Item label="Porto" value="Porto" />
+                <Picker.Item label="Algarve" value="Algarve" />
+                <Picker.Item label="Braga" value="Braga" />
+                <Picker.Item label="Coimbra" value="Coimbra" />
+              </Picker>
             </View>
           </View>
 
@@ -208,9 +213,18 @@ const styles = StyleSheet.create({
   container2: {
     alignItems: 'flex-start',
     justifyContent: 'center',
+    marginBottom: '2.5%',
   },
 
   TextInputStyle: {
+    textAlign: 'left',
+    width: '100%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleCity: {
     textAlign: 'left',
     width: '100%',
     marginBottom: '3%',
