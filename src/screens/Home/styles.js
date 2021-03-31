@@ -31,7 +31,8 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: '#D6CFCF',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+
     marginBottom: '10%',
   },
 
@@ -43,10 +44,8 @@ export const styles = StyleSheet.create({
   inputRow: {
     flexDirection: 'row',
     marginHorizontal: '6%',
-    // justifyContent:'flex-start',
-    width: '80%',
-
     justifyContent: 'space-between',
+    width: '90%',
   },
   badgeStyle: {
     backgroundColor: '#1DC690',

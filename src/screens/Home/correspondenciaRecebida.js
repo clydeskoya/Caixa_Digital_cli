@@ -7,6 +7,8 @@ import dataFromServer from '../notifications/dataFromServer';
 import {
   getIsCorrespondenciasEmTransito,
   getIsCorrespondenciasEntreguesAClientesComApp,
+  getIsCorrespondenciasLevantadas,
+  getIsRecebimentosPorLevantar,
 } from '../../common/businesslogic';
 import { API_URL } from '../../common/constants/api';
 import { diffDates } from '../notifications/helper';
@@ -15,54 +17,34 @@ import serverResponse from '../login/serverResponse';
 import { styles } from './styles';
 
 const correspondenciaRecebida = () => {
-  const getIsNewNotification = (date) => {
-    const dateLastLogin = serverResponse.map((row) => row.user.lastLogin);
-    if (moment(date).isAfter(moment(dateLastLogin))) {
-      return true;
-    }
-    return false;
-  };
-
   const cards = dataFromServer.map((dataEntry) => {
-    if (getIsCorrespondenciasEmTransito(dataEntry)) {
+    const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
+    if (getIsRecebimentosPorLevantar(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
-              para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi levantada para envio.
-              <Text style={styles.cardTimeText}>
-                {'\n'}
-                {diffDates(dataEntry.created_at)}
-              </Text>
-            </Text>
+          <Card.Content>
+            <View style={styles.inputRow}>
+              <Text style={{ fontWeight: 'bold' }}> {`Descrição e emissor  ${date}`}</Text>
+              <Ionicons name="chevron-forward-outline" size={30} />
+            </View>
           </Card.Content>
         </Card>
       );
     }
-    if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
+    if (getIsCorrespondenciasLevantadas(dataEntry)) {
       return (
-        <Card style={styles.cardStyle}>
-          {getIsNewNotification(dataEntry.created_at) && <Badge size={15} style={styles.badgeStyle} />}
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA ENTREGUE: {'\n'}</Text>A correspondência de
-              <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
-              para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi entregue ao destinatário.
-              <Text style={styles.cardTimeText}>
-                {'\n'}
-                {diffDates(dataEntry.created_at)}
-              </Text>
-            </Text>
+        <Card style={styles.cardStilo}>
+          <Card.Content>
+            <View style={styles.inputRow}>
+              <Text style={{ fontWeight: 'bold' }}> {`Descrição e emissor  ${date}`}</Text>
+              <Ionicons name="chevron-forward-outline" size={30} />
+            </View>
           </Card.Content>
         </Card>
       );
     }
-    if (!getIsCorrespondenciasEmTransito && !getIsCorrespondenciasEntreguesAClientesComApp) {
-      return <Text style={styles.semNotif}>Sem notificações</Text>;
+    if (!getIsRecebimentosPorLevantar && !getIsCorrespondenciasLevantadas) {
+      return <Text>Sem notificações</Text>;
     }
     return null;
   });

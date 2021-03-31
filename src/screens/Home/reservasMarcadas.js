@@ -7,6 +7,8 @@ import dataFromServer from '../notifications/dataFromServer';
 import {
   getIsCorrespondenciasEmTransito,
   getIsCorrespondenciasEntreguesAClientesComApp,
+  getIsReservaEnvio,
+  getIsReservaRecebimentoPrePago,
 } from '../../common/businesslogic';
 import { API_URL } from '../../common/constants/api';
 import { diffDates } from '../notifications/helper';
@@ -15,16 +17,9 @@ import serverResponse from '../login/serverResponse';
 import { styles } from './styles';
 
 const reservasMarcadas = () => {
-  const getIsNewNotification = (date) => {
-    const dateLastLogin = serverResponse.map((row) => row.user.lastLogin);
-    if (moment(date).isAfter(moment(dateLastLogin))) {
-      return true;
-    }
-    return false;
-  };
-
+  const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
   const cards = dataFromServer.map((dataEntry) => {
-    if (getIsCorrespondenciasEmTransito(dataEntry)) {
+    if (getIsReservaEnvio(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
           <Card.Content style={styles.cardContent}>
@@ -43,7 +38,7 @@ const reservasMarcadas = () => {
         </Card>
       );
     }
-    if (dataEntry) {
+    if (getIsReservaRecebimentoPrePago(dataEntry)) {
       return (
         <Card style={styles.cardStyle}>
           <Card.Content style={styles.cardContent}>
