@@ -21,7 +21,7 @@ const correspondenciaEnviada = () => {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <View style={styles.inputRow}>
-              <Text style={{ fontWeight: 'bold' }}> {`Descrição e ${names[].toString}  ${date}`}</Text>
+              <Text style={{ fontWeight: 'bold' }}> {`Descrição e .toString}  ${date}`}</Text>
               <Ionicons name="chevron-forward-outline" size={30} />
             </View>
           </Card.Content>
