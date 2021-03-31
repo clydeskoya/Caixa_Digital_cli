@@ -211,8 +211,6 @@ const EditProfile = (props) => {
   const [city, setCity] = useState('Lisboa');
   const [phone, setPhoneNumber] = useState('999888777');
 
-  const [pass, setPass] = useState('');
-
   const [dialogTitle, setDialogTitle] = useState('');
 
   useEffect(() => {
@@ -247,17 +245,33 @@ const EditProfile = (props) => {
   const dadosMoradaOn = () => setDadosMorada(true);
   const dadosMoradaOff = () => setDadosMorada(false);
 
-  const [alterarPassword, setAlterarPass] = useState(false);
-  const alterarPasswordOn = () => setAlterarPass(true);
-  const alterarPasswordOff = () => setAlterarPass(false);
-
   const [dialogVisibility, setDialogVisibility] = useState(false);
   const showDialog = () => setDialogVisibility(true);
   const hideDialog = () => {
     setDialogVisibility(false);
     dadosPessoaisOff();
     dadosMoradaOff();
-    alterarPasswordOff();
+  };
+
+  const hideDialogNSendData = () => {
+    setDialogVisibility(false);
+    /* if (dadosPessoais || dadosMorada) {
+      sendDataToServer();*/
+    dadosPessoaisOff();
+    dadosMoradaOff();
+  };
+
+  const [passDialogVisibility, setPassDialogVisibility] = useState(false);
+  const showPassDialog = () => {
+    setPassDialogVisibility(true);
+  };
+  const hidePassDialog = () => {
+    setPassDialogVisibility(false);
+  };
+
+  const hidePassDialogNNavigate = () => {
+    setPassDialogVisibility(false);
+    props.navigation.navigate('AlterarPass');
   };
 
   const showDadosPessoaisDialog = () => {
@@ -269,11 +283,6 @@ const EditProfile = (props) => {
   const showDadosMoradaDialog = () => {
     setDialogTitle('Editar Dados de Morada');
     dadosMoradaOn();
-    showDialog();
-  };
-  const showAlterarPassDialog = () => {
-    setDialogTitle('Alterar Password');
-    alterarPasswordOn();
     showDialog();
   };
 
@@ -375,7 +384,7 @@ const EditProfile = (props) => {
         </View>
 
         <View>
-          <TouchableOpacity onPress={showAlterarPassDialog}>
+          <TouchableOpacity onPress={showPassDialog}>
             <View style={styles.inputRow}>
               <Ionicons name="key-outline" color="#000000" size={27} />
               <Text style={styles.title}>Alterar password</Text>
@@ -484,7 +493,6 @@ const EditProfile = (props) => {
                       <View style={styles.inputRow}>
                         <Picker
                           selectedValue={city}
-                          // style={{ height: 50, width: 150 }}
                           style={styles.TextInputStyleCity}
                           onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
                         >
@@ -498,31 +506,30 @@ const EditProfile = (props) => {
                     </View>
                   </>
                 )}
-
-                {alterarPassword && (
-                  <View style={styles.inputRow1}>
-                    <TextInput
-                      style={styles.TextInputStyle1}
-                      value={pass}
-                      type="password"
-                      id="pass"
-                      name="password"
-                      placeholder="********"
-                      autoCapitalize="none"
-                      secureTextEntry
-                      onChangeText={(Pass) => setPass(Pass)}
-                    />
-                    <TouchableOpacity>
-                      <Ionicons name="eye" size={20} />
-                    </TouchableOpacity>
-                  </View>
-                )}
               </Dialog.Content>
               <Dialog.Actions>
-                <Button color="#1C4670" onPress={(hideDialog, () => sendDataToServer)}>
+                <Button color="#1C4670" onPress={hideDialogNSendData}>
                   Guardar{' '}
                 </Button>
                 <Button color="#1C4670" onPress={hideDialog}>
+                  Cancelar{' '}
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
+        <View>
+          <Portal>
+            <Dialog visible={passDialogVisibility} dismissable={false}>
+              <Dialog.Title>Alterar Password</Dialog.Title>
+              <Dialog.Content>
+                <Text>Quer alterar a sua password?</Text>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button color="#1C4670" onPress={hidePassDialogNNavigate}>
+                  OK{' '}
+                </Button>
+                <Button color="#1C4670" onPress={hidePassDialog}>
                   Cancelar{' '}
                 </Button>
               </Dialog.Actions>
