@@ -105,7 +105,7 @@ const Home = (props) => {
   );
 };
 
-    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
+/*     <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
       <Card style={styles.cardStilo}>
         <Card.Content>
           <Title style={styles.text}>Reservas</Title>
@@ -114,7 +114,7 @@ const Home = (props) => {
         </Card.Content>
       </Card>
     </TouchableOpacity>
-  </View>
-);
+ // </View>
+); */
 
 export default Home;

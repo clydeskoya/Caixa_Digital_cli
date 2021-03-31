@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
-import { Button, Paragraph, Dialog, Portal, Provider, Colors, ActivityIndicator, Checkbox } from 'react-native-paper';
+import { Button, Dialog, Portal, Provider, Colors, ActivityIndicator } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { Picker } from '@react-native-community/picker';
 import { prop } from 'ramda';
 import { LoginContext } from '../../common/loginHelper/responseData';
+import { API_URL } from '../../common/constants/api';
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
@@ -193,9 +194,9 @@ const styles = StyleSheet.create({
 });
 
 const EditProfile = (props) => {
-  // const loginContext = useContext(LoginContext);
+  const loginContext = useContext(LoginContext);
 
-  // const name = loginContext.loginData.user.entity;
+  // const name = loginContext.loginData.user.entity.name;
   // const names = name.split(' ');
 
   // const [username, setUserName] = useState(names[0]);
@@ -212,6 +213,8 @@ const EditProfile = (props) => {
   const [phone, setPhoneNumber] = useState('999888777');
 
   const [dialogTitle, setDialogTitle] = useState('');
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -255,40 +258,16 @@ const EditProfile = (props) => {
 
   const hideDialogNSendData = () => {
     setDialogVisibility(false);
-    /* if (dadosPessoais || dadosMorada) {
-      sendDataToServer();*/
+    if (dadosPessoais || dadosMorada) {
+      sendDataToServer();
+    }
     dadosPessoaisOff();
     dadosMoradaOff();
   };
 
-  const [passDialogVisibility, setPassDialogVisibility] = useState(false);
-  const showPassDialog = () => {
-    setPassDialogVisibility(true);
-  };
-  const hidePassDialog = () => {
-    setPassDialogVisibility(false);
-  };
-
-  const hidePassDialogNNavigate = () => {
-    setPassDialogVisibility(false);
-    props.navigation.navigate('AlterarPass');
-  };
-
-  const showDadosPessoaisDialog = () => {
-    setDialogTitle('Editar Dados Pessoais');
-    dadosPessoaisOn();
-    showDialog();
-  };
-
-  const showDadosMoradaDialog = () => {
-    setDialogTitle('Editar Dados de Morada');
-    dadosMoradaOn();
-    showDialog();
-  };
-
-  /*  const sendToServer = async (formData) => {
+  const sendToServer = async (formData) => {
     setLoading(true);
-    await fetch(`${API_URL}/auth/local/register`, {
+    await fetch(`${API_URL}/.......`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -300,18 +279,43 @@ const EditProfile = (props) => {
       .then(
         (result) => {
           console.log('result', result);
-          setData(result.rows);
-          console.log(data);
-          formSubmitted('yes');
           setLoading(false);
         },
         (err) => {
           console.error('error', err);
-          formSubmitted('no');
           setLoading(false);
         }
       );
-  }; */
+  };
+
+  const forgotPass = async () => {
+    setLoading(true);
+    // const mail = loginContext.loginData.user.entity.email;
+    const mail = 'bedaxo6375@dwgtcm.com';
+    const data = { email: mail };
+    await fetch(`${API_URL}/auth/forgot-password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log('result', result);
+          props.navigation.navigate('AlterarPass');
+          setPassDialogVisibility(false);
+
+          setLoading(false);
+        },
+        (err) => {
+          console.error('error', err);
+          setLoading(false);
+        }
+      );
+  };
 
   const sendDataToServer = () => {
     if (!username || !usersurname) {
@@ -355,6 +359,31 @@ const EditProfile = (props) => {
     sendToServer(dataToSend);
   };
 
+  const [passDialogVisibility, setPassDialogVisibility] = useState(false);
+  const showPassDialog = () => {
+    setPassDialogVisibility(true);
+  };
+  const hidePassDialog = () => {
+    sendDataToServer();
+    setPassDialogVisibility(false);
+  };
+
+  const hidePassDialogNNavigate = () => {
+    forgotPass();
+  };
+
+  const showDadosPessoaisDialog = () => {
+    setDialogTitle('Editar Dados Pessoais');
+    dadosPessoaisOn();
+    showDialog();
+  };
+
+  const showDadosMoradaDialog = () => {
+    setDialogTitle('Editar Dados de Morada');
+    dadosMoradaOn();
+    showDialog();
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -364,6 +393,12 @@ const EditProfile = (props) => {
           </TouchableOpacity>
           <Text style={styles.titlePerf}> Editar Perfil </Text>
         </View>
+
+        {loading && (
+          <View>
+            <ActivityIndicator animating color={Colors.blue800} size="large" />
+          </View>
+        )}
 
         <View>
           <TouchableOpacity onPress={showDadosPessoaisDialog}>

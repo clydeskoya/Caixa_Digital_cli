@@ -106,6 +106,12 @@ const RegisterForm4 = (props) => {
 
   const [checked, setChecked] = useState(false);
 
+  const [verPass, setVerPass] = useState(true);
+  const showPass = () => setVerPass(!verPass);
+
+  const [verPassConfirm, setVerPassConfirm] = useState(true);
+  const showPassConfirm = () => setVerPassConfirm(!verPassConfirm);
+
   const formSubmitted = (confirmation) => {
     switch (confirmation) {
       case 'yes':
@@ -289,9 +295,12 @@ const RegisterForm4 = (props) => {
                 id="pass"
                 name="password1"
                 autoCapitalize="none"
-                secureTextEntry
+                secureTextEntry={verPass}
                 onChangeText={(Pass) => setPassword1(Pass)}
               />
+              <TouchableOpacity onPress={showPass}>
+                <Ionicons name="eye" size={20} />
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -305,9 +314,12 @@ const RegisterForm4 = (props) => {
                 id="pass_confirm"
                 name="password2"
                 autoCapitalize="none"
-                secureTextEntry
+                secureTextEntry={verPassConfirm}
                 onChangeText={(Pass) => setPassword(Pass)}
               />
+              <TouchableOpacity onPress={showPassConfirm}>
+                <Ionicons name="eye" size={20} />
+              </TouchableOpacity>
             </View>
           </View>
 
