@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { List } from 'react-native-paper';
+import { Picker } from '@react-native-community/picker';
 
 const styles = StyleSheet.create({
   container: {
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
 });
 
 const Definicoes = (props) => {
-  const [portugues, setPortugues] = useState(true);
-  const [ativado, setAtivado] = useState(true);
+  const [selectedIdioma, setSelectedIdioma] = useState('Portugues');
+  const [selectedNotificacoes, setSelectedNotificacoes] = useState('Ativado');
 
   return (
     <>
@@ -73,46 +73,28 @@ const Definicoes = (props) => {
             <Text style={styles.text}> Idioma</Text>
           </View>
 
-          {portugues && (
-            <List.Section>
-              <List.Accordion title="Português" theme={{ colors: { primary: '#D6CFCF' } }}>
-                <List.Item title="Português" onPress={() => setPortugues(true)} />
-                <List.Item title="Inglês" onPress={() => setPortugues(false)} />
-              </List.Accordion>
-            </List.Section>
-          )}
-
-          {!portugues && (
-            <List.Section>
-              <List.Accordion title="Inglês" theme={{ colors: { primary: '#D6CFCF' } }}>
-                <List.Item title="Português" onPress={() => setPortugues(true)} />
-                <List.Item title="Inglês" onPress={() => setPortugues(false)} />
-              </List.Accordion>
-            </List.Section>
-          )}
+          <Picker
+            selectedValue={selectedIdioma}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => setSelectedIdioma(itemValue)}
+          >
+            <Picker.Item label="Português" value="pt" />
+            <Picker.Item label="Inglês" value="en" />
+          </Picker>
 
           <View style={styles.inputRow1}>
             <Ionicons name="notifications" size={23} />
             <Text style={styles.text}> Notificações</Text>
           </View>
 
-          {ativado && (
-            <List.Section>
-              <List.Accordion title="Ativado" theme={{ colors: { primary: '#D6CFCF' } }}>
-                <List.Item title="Ativado" onPress={() => setAtivado(true)} />
-                <List.Item title="Desativado" onPress={() => setAtivado(false)} />
-              </List.Accordion>
-            </List.Section>
-          )}
-
-          {!ativado && (
-            <List.Section>
-              <List.Accordion title="Desativado" theme={{ colors: { primary: '#D6CFCF' } }}>
-                <List.Item title="Ativado" onPress={() => setAtivado(true)} />
-                <List.Item title="Desativado" onPress={() => setAtivado(false)} />
-              </List.Accordion>
-            </List.Section>
-          )}
+          <Picker
+            selectedValue={selectedNotificacoes}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => setSelectedNotificacoes(itemValue)}
+          >
+            <Picker.Item label="Ativado" value="ativ" />
+            <Picker.Item label="Desativado" value="desativ" />
+          </Picker>
 
           <View style={styles.inputRow1}>
             <Ionicons name="phone-portrait-outline" size={23} />

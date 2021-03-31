@@ -2,10 +2,10 @@ import React from 'react';
 import { Stack } from '../../common/stack';
 // eslint-disable-next-line import/no-cycle
 import Home from './Home';
-import correspondenciaEnviada from '../correspondenciaEnviada';
-import correspondenciaRecebida from '../correspondenciaRecebida';
+import correspondenciaEnviada from './correspondenciaEnviada';
+import correspondenciaRecebida from './correspondenciaRecebida';
 // eslint-disable-next-line import/named
-import reservasMarcadas from '../reservasMarcadas';
+import reservasMarcadas from './reservasMarcadas';
 // eslint-disable-next-line import/no-cycle
 
 const HomeStack = () => (

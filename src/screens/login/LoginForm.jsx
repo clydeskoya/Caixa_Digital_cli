@@ -8,8 +8,8 @@ import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [email, setEmail] = useState('irina');
+  const [pass, setPass] = useState('123456');
   const [loading, setLoading] = useState(false);
 
   const [visible, setVisible] = useState(false);
@@ -96,25 +96,8 @@ const LoginForm = (props) => {
           />
         </View>
 
-        <Provider>
-          <View>
-            <Portal>
-              <Dialog visible={visible} dismissable={false}>
-                <Dialog.Title>Erro!</Dialog.Title>
-                <Dialog.Content>
-                  <Paragraph>Algo de inesperado ocorreu. Por favor tente mais tarde!</Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                  <Button color="#1C4670" onPress={hideDialog}>
-                    OK{' '}
-                  </Button>
-                </Dialog.Actions>
-              </Dialog>
-            </Portal>
-          </View>
-        </Provider>
-
-        <TouchableOpacity onPress={login}>
+        {/* <TouchableOpacity onPress={login}> */}
+        <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
           <View style={styles.bottomActions}>
             <Text style={styles.textLogin}> Login </Text>
           </View>
@@ -125,6 +108,24 @@ const LoginForm = (props) => {
           <Text style={styles.textRegister}>Registe-se</Text>
         </TouchableOpacity>
       </View>
+
+      <Provider>
+        <View>
+          <Portal>
+            <Dialog visible={visible} dismissable={false}>
+              <Dialog.Title>Erro!</Dialog.Title>
+              <Dialog.Content>
+                <Paragraph>Algo de inesperado ocorreu. Por favor tente mais tarde!</Paragraph>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button color="#1C4670" onPress={hideDialog}>
+                  OK{' '}
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
+      </Provider>
     </ScrollView>
   );
 };

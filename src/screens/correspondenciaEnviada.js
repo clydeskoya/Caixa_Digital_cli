@@ -1,17 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import moment from 'moment';
-import dataFromServer from './notifications/dataFromServer';
-import {
-  getIsCorrespondenciasEmTransito,
-  getIsCorrespondenciasEntreguesAClientesComApp,
-} from '../common/businesslogic';
-import { API_URL } from '../common/constants/api';
-import { diffDates } from './notifications/helper';
-import ButtonNotificationAction from './notifications/ButtonNotificationAction';
-import serverResponse from './login/serverResponse';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   header: {
@@ -29,7 +20,7 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    // justifyContent: 'flex-start',
   },
   scrollView: {
     backgroundColor: '#278AB0',
@@ -38,13 +29,14 @@ const styles = StyleSheet.create({
   },
 
   cardStilo: {
-    width: '80%',
-    height: '20%',
+    width: 280,
+    height: '100%',
     borderRadius: 40,
     borderWidth: 4,
     borderColor: '#D6CFCF',
-    flexDirection: 'column',
+    //   marginTop: '5%',
     alignItems: 'center',
+    justifyContent: 'center',
   },
 
   text: {
@@ -53,83 +45,27 @@ const styles = StyleSheet.create({
   },
 
   inputRow: {
-    flexDirection: 'row',
-    marginHorizontal: '6%',
-    // justifyContent:'flex-start',
-    width: '80%',
-
-    justifyContent: 'space-between',
-  },
-  badgeStyle: {
-    backgroundColor: '#1DC690',
-    alignSelf: 'flex-start',
-    marginTop: '-1.5%',
-    marginLeft: '-1.5%',
+    marginTop: '5%',
+    marginLeft: '5%',
+    justifyContent: 'flex-start',
   },
 });
 
-const correspondenciaEnviada = () => {
-  const getIsNewNotification = (date) => {
-    const dateLastLogin = serverResponse.map((row) => row.user.lastLogin);
-    if (moment(date).isAfter(moment(dateLastLogin))) {
-      return true;
-    }
-    return false;
-  };
-
-  const cards = dataFromServer.map((dataEntry) => {
-    if (getIsCorrespondenciasEmTransito(dataEntry)) {
-      return (
-        <Card style={styles.cardStilo}>
-          {getIsNewNotification(dataEntry.created_at) && <Badge size={15} style={styles.badgeStyle} />}
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A correspondência de
-              <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
-              para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi levantada para envio.
-              <Text style={styles.cardTimeText}>
-                {'\n'}
-                {diffDates(dataEntry.created_at)}
-              </Text>
-            </Text>
-          </Card.Content>
-        </Card>
-      );
-    }
-    if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
-      return (
-        <Card style={styles.cardStyle}>
-          {getIsNewNotification(dataEntry.created_at) && <Badge size={15} style={styles.badgeStyle} />}
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA ENTREGUE: {'\n'}</Text>A correspondência de
-              <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
-              para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi entregue ao destinatário.
-              <Text style={styles.cardTimeText}>
-                {'\n'}
-                {diffDates(dataEntry.created_at)}
-              </Text>
-            </Text>
-          </Card.Content>
-        </Card>
-      );
-    }
-    if (!getIsCorrespondenciasEmTransito && !getIsCorrespondenciasEntreguesAClientesComApp) {
-      return <Text style={styles.semNotif}>Sem notificações</Text>;
-    }
-    return null;
-  });
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Correspondência Enviada </Text>
-      </View>
-      {cards}
+const correspondenciaEnviada = (props) => (
+  <View style={styles.container}>
+    <View style={styles.header}>
+      <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Correspondência Enviada </Text>
     </View>
-  );
-};
+    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('detalhesCarta2')}>
+      <Card style={styles.cardStilo}>
+        <Card.Content>
+          <View style={styles.inputRow}>
+            <Title style={styles.text}> GPU - Ben-Hur Fidalgo </Title>
+            <Ionicons name="chevron-forward-outline" size={30} />
+          </View>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
+  </View>
+);
 export default correspondenciaEnviada;
