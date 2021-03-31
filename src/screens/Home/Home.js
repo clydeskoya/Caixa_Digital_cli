@@ -96,7 +96,6 @@ const Home = (props) => {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Reservas</Title>
-
             <Paragraph>15/02/2020 - Locker para envio</Paragraph>
           </Card.Content>
         </Card>
@@ -104,17 +103,5 @@ const Home = (props) => {
     </View>
   );
 };
-
-    <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
-      <Card style={styles.cardStilo}>
-        <Card.Content>
-          <Title style={styles.text}>Reservas</Title>
-
-          <Paragraph>15/02/2020 - Locker para envio</Paragraph>
-        </Card.Content>
-      </Card>
-    </TouchableOpacity>
-  </View>
-);
 
 export default Home;

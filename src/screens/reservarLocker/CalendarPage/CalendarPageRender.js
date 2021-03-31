@@ -19,8 +19,7 @@ const CalendarPage = () => {
 
   let axiosConfig = {
     headers: {
-      // Authorization: `Bearer ${token}`,
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE3MDMxNTE3LCJleHAiOjE2MTk2MjM1MTd9.rp1gOU7Z9fk5CiO3Y7UGLhwv_KhanBKm38b16GQbnNE`,
+      Authorization: `Bearer ${token}`,
     },
   };
 

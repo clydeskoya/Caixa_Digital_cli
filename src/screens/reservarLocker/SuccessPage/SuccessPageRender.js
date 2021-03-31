@@ -18,7 +18,7 @@ const SuccessPage = () => {
           <Text style={styles.text}>Dia 20/02/2021 - Compartimento 1</Text>
         </View>
 
-        <TouchableOpacity /* onPress={() => navigation.navigate('S')} */>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Sair </Text>
           </View>

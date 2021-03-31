@@ -29,7 +29,7 @@ const LoginForm = (props) => {
     }
     setLoading(true);
     try {
-      const { data } = await axios.post('http://localhost:1337/auth/local', {
+      const { data } = await axios.post('http://192.168.68.102:1337/auth/local', {
         identifier: email,
         password: pass,
       });
@@ -96,8 +96,8 @@ const LoginForm = (props) => {
           />
         </View>
 
-        {/* <TouchableOpacity onPress={login}> */}
-        <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
+        <TouchableOpacity onPress={login}>
+        {/* <TouchableOpacity onPress={() => props.navigation.navigate('Home')}> */}
           <View style={styles.bottomActions}>
             <Text style={styles.textLogin}> Login </Text>
           </View>
