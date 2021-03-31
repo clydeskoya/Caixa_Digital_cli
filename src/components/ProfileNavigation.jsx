@@ -4,6 +4,7 @@ import MyQR from '../screens/profile/MyQR';
 import EditProfile from '../screens/profile/EditProfile';
 import Definicoes from '../screens/profile/Definicoes';
 import { Stack } from '../common/stack';
+import AlterarPass from '../screens/profile/AlterarPass';
 
 const ProfileNavigation = () => (
   <Stack.Navigator initialRouteName="Perfil">
@@ -14,6 +15,8 @@ const ProfileNavigation = () => (
     <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
 
     <Stack.Screen name="Definicoes" component={Definicoes} options={{ headerShown: false }} />
+
+    <Stack.Screen name="AlterarPass" component={AlterarPass} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 
