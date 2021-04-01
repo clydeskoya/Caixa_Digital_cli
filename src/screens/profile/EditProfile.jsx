@@ -196,14 +196,13 @@ const styles = StyleSheet.create({
 const EditProfile = (props) => {
   const loginContext = useContext(LoginContext);
 
-  // const name = loginContext.loginData.user.entity.name;
-  // const names = name.split(' ');
+  const { name } = loginContext.loginData.user.entity;
+  const names = name.split(' ');
 
-  // const [username, setUserName] = useState(names[0]);
-  const [username, setUserName] = useState('Alberta');
-  // const [usersurname, setUserSurname] = useState(names[1]);
-  const [usersurname, setUserSurname] = useState('Sorriso');
+  const [username, setUserName] = useState(names[0]);
+  const [usersurname, setUserSurname] = useState(names[1]);
 
+  // depois mudar para o que se recebe do server
   const [street, setStreet] = useState('Rua António Janeiro');
   const [door, setDoor] = useState('1');
   const [floor, setFloor] = useState('3D');
@@ -215,30 +214,6 @@ const EditProfile = (props) => {
   const [dialogTitle, setDialogTitle] = useState('');
 
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    async function fetchData() {
-      const zip = postalCode.slice(0, 4);
-      const code = postalCode.slice(5, 8);
-      await fetch(`https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`)
-        .then(
-          (res) => res.json(),
-          (error) => console.error(error)
-        )
-        .then(
-          (result) => {
-            console.log('result', result);
-            setLocality(prop('value', result));
-          },
-          (error) => console.error(error)
-        );
-    }
-    if (REGEX_POSTAL_CODE.test(postalCode)) {
-      fetchData();
-    } else if (locality.length) {
-      setLocality('');
-    }
-  }, [postalCode]);
 
   const [dadosPessoais, setDadosPessoais] = useState(false);
   const dadosPessoaisOn = () => setDadosPessoais(true);
@@ -265,13 +240,65 @@ const EditProfile = (props) => {
     dadosMoradaOff();
   };
 
+  const [passDialogVisibility, setPassDialogVisibility] = useState(false);
+  const showPassDialog = () => {
+    setPassDialogVisibility(true);
+  };
+  const hidePassDialog = () => {
+    setPassDialogVisibility(false);
+  };
+
+  const hidePassDialogNNavigate = () => {
+    forgotPass();
+  };
+
+  const showDadosPessoaisDialog = () => {
+    setDialogTitle('Editar Dados Pessoais');
+    dadosPessoaisOn();
+    showDialog();
+  };
+
+  const showDadosMoradaDialog = () => {
+    setDialogTitle('Editar Dados de Morada');
+    dadosMoradaOn();
+    showDialog();
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const zip = postalCode.slice(0, 4);
+      const code = postalCode.slice(5, 8);
+      await fetch(`https://www.ctt.pt/feecom/app/open/common/postalcodesearch.jspx?cp4=${zip}&cp3=${code}`)
+        .then(
+          (res) => res.json(),
+          (error) => console.error(error)
+        )
+        .then(
+          (result) => {
+            console.log('result', result);
+            setLocality(prop('value', result));
+          },
+          (error) => console.error(error)
+        );
+    }
+    if (REGEX_POSTAL_CODE.test(postalCode)) {
+      fetchData();
+    } else if (locality.length) {
+      setLocality('');
+    }
+  }, [postalCode]);
+
   const sendToServer = async (formData) => {
     setLoading(true);
-    await fetch(`${API_URL}/.......`, {
-      method: 'POST',
+    const token = loginContext.loginData.jwt;
+    const idUser = loginContext.loginData.user.id;
+
+    await fetch(`${API_URL}/users/${idUser}`, {
+      method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(formData),
     })
@@ -307,7 +334,6 @@ const EditProfile = (props) => {
           console.log('result', result);
           props.navigation.navigate('AlterarPass');
           setPassDialogVisibility(false);
-
           setLoading(false);
         },
         (err) => {
@@ -357,31 +383,6 @@ const EditProfile = (props) => {
       city,
     };
     sendToServer(dataToSend);
-  };
-
-  const [passDialogVisibility, setPassDialogVisibility] = useState(false);
-  const showPassDialog = () => {
-    setPassDialogVisibility(true);
-  };
-  const hidePassDialog = () => {
-    sendDataToServer();
-    setPassDialogVisibility(false);
-  };
-
-  const hidePassDialogNNavigate = () => {
-    forgotPass();
-  };
-
-  const showDadosPessoaisDialog = () => {
-    setDialogTitle('Editar Dados Pessoais');
-    dadosPessoaisOn();
-    showDialog();
-  };
-
-  const showDadosMoradaDialog = () => {
-    setDialogTitle('Editar Dados de Morada');
-    dadosMoradaOn();
-    showDialog();
   };
 
   return (
