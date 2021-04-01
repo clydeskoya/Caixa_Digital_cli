@@ -202,16 +202,21 @@ const EditProfile = (props) => {
   const [username, setUserName] = useState(names[0]);
   const [usersurname, setUserSurname] = useState(names[1]);
 
-  // depois mudar para o que se recebe do server
-  const [street, setStreet] = useState('Rua António Janeiro');
-  const [door, setDoor] = useState('1');
-  const [floor, setFloor] = useState('3D');
-  const [postalCode, setPostalColde] = useState('2735-272');
-  const [locality, setLocality] = useState('');
-  const [city, setCity] = useState('Lisboa');
-  const [phone, setPhoneNumber] = useState('999888777');
+  const [street, setStreet] = useState(loginContext.loginData.user.entity.address.street);
+  const [door, setDoor] = useState(loginContext.loginData.user.entity.address.door);
+  const [floor, setFloor] = useState(loginContext.loginData.user.entity.address.floor);
+  const [postalCode, setPostalColde] = useState(loginContext.loginData.user.entity.address.postalCode);
+  const [locality, setLocality] = useState(loginContext.loginData.user.entity.address.locality);
+  const [city, setCity] = useState(loginContext.loginData.user.entity.address.city);
+  const [phone, setPhoneNumber] = useState(loginContext.loginData.user.entity.phoneNumber);
 
   const [dialogTitle, setDialogTitle] = useState('');
+
+  const [dialogTitle1, setDialogTitle1] = useState('');
+  const [dialogContent, setDialogContent] = useState('');
+  const [successDialogVisibility, setSuccessDialogVisibility] = useState(false);
+  const showSuccessDialog = () => setSuccessDialogVisibility(true);
+  const hideSuccessDialog = () => setSuccessDialogVisibility(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -307,10 +312,16 @@ const EditProfile = (props) => {
         (result) => {
           console.log('result', result);
           setLoading(false);
+          setDialogTitle1('Sucesso!');
+          setDialogContent('Os seus dados foram alterados com sucesso!');
+          showSuccessDialog();
         },
         (err) => {
           console.error('error', err);
           setLoading(false);
+          setDialogTitle1('Erro!');
+          setDialogContent('Algo de inesperado ocorreu. Por favor tente mais tarde!');
+          showSuccessDialog();
         }
       );
   };
@@ -567,6 +578,21 @@ const EditProfile = (props) => {
                 </Button>
                 <Button color="#1C4670" onPress={hidePassDialog}>
                   Cancelar{' '}
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
+        <View>
+          <Portal>
+            <Dialog visible={successDialogVisibility} dismissable={false}>
+              <Dialog.Title>{dialogTitle1}</Dialog.Title>
+              <Dialog.Content>
+                <Text>{dialogContent}</Text>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button color="#1C4670" onPress={hideSuccessDialog}>
+                  OK{' '}
                 </Button>
               </Dialog.Actions>
             </Dialog>
