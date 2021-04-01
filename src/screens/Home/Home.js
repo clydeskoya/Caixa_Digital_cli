@@ -52,7 +52,8 @@ const Home = (props) => {
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
   useEffect(() => {
-    fetch(`${API_URL}/orders/user`, {
+    /* fetch(`${API_URL}/orders/user`, { */
+      fetch(`http://192.168.68.102:1337/orders/user`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

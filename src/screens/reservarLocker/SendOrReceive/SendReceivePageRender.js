@@ -5,37 +5,13 @@ import { RadioButton } from 'react-native-paper';
 import Header from '../../../components/HeaderReservarLocker';
 
 const SendReceivePage = () => {
-  const [checked, setChecked] = React.useState('first');
+  
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.maindiv}>
-        <View style={styles.viewT}>
-          <Text style={styles.title}>Qual a finalidade da reserva?</Text>
-
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%', marginTop: '4%' }}>
-            <RadioButton
-              value="first"
-              status={checked === 'first' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('first')}
-            />
-            <View style={styles.radiotext}>
-              <Text style={styles.Simpletext}>Envio de correspondências</Text>
-            </View>
-          </View>
-
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%' }}>
-            <RadioButton
-              value="second"
-              status={checked === 'second' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('second')}
-            />
-            <View style={styles.radiotext}>
-              <Text style={styles.Simpletext}>Recebimento de correspondências</Text>
-            </View>
-          </View>
-        </View>
+        
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('ReservationInfo')}>
             <View style={styles.viewStyle}>
