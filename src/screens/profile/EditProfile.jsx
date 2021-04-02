@@ -26,13 +26,6 @@ const styles = StyleSheet.create({
     marginBottom: '2.5%',
   },
 
-  container3: {
-    // marginVertical: '5%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '2.5%',
-  },
-
   TextInputStyle: {
     height: '65%',
     width: '45%',
@@ -41,29 +34,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 
-  TextInputStyle1: {
-    textAlign: 'left',
-    width: '100%',
-    marginBottom: '3%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-    textAlignVertical: 'top',
-  },
-
   inputRow: {
     textAlign: 'left',
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: '2.5%',
     paddingBottom: '6.5%',
-  },
-
-  inputRow1: {
-    textAlign: 'left',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: '2.5%',
-    width: '100%',
   },
 
   header: {
@@ -158,39 +134,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: '2.5%',
   },
-
-  buttonOK: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    height: 40,
-    marginVertical: '5%',
-    backgroundColor: '#1C4670',
-    borderRadius: 45,
-    marginLeft: '17%',
-  },
-
-  buttonSair: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    height: 40,
-    backgroundColor: '#D6CFCF',
-    borderRadius: 45,
-    marginLeft: '17%',
-  },
-
-  buttonTextOK: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-
-  buttonTextSair: {
-    color: 'black',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
 });
 
 const EditProfile = (props) => {
@@ -201,7 +144,6 @@ const EditProfile = (props) => {
 
   const [username, setUserName] = useState(names[0]);
   const [usersurname, setUserSurname] = useState(names[1]);
-
   const [street, setStreet] = useState(loginContext.loginData.user.entity.address.street);
   const [door, setDoor] = useState(loginContext.loginData.user.entity.address.door);
   const [floor, setFloor] = useState(loginContext.loginData.user.entity.address.floor);
@@ -328,8 +270,8 @@ const EditProfile = (props) => {
 
   const forgotPass = async () => {
     setLoading(true);
-    // const mail = loginContext.loginData.user.entity.email;
-    const mail = 'bedaxo6375@dwgtcm.com';
+    const mail = loginContext.loginData.user.entity.email;
+    //const mail = 'bedaxo6375@dwgtcm.com';
     const data = { email: mail };
     await fetch(`${API_URL}/auth/forgot-password`, {
       method: 'POST',
