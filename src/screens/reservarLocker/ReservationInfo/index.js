@@ -1,61 +1,167 @@
 import React from 'react';
-import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity, TextInput } from 'react-native';
+import {
+  MaskedViewComponent,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Header from '../../../components/HeaderReservarLocker';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Header from '../../../components/Header';
 import { findLastIndex } from 'ramda';
 
 const ReservationInfo = () => {
   const navigation = useNavigation();
   const [Nome, onChangeNome] = React.useState('');
-  const [Morada, onChangeMorada] = React.useState('');
+  const [Number, onChangeNumber] = React.useState('');
+  const [Street, onChangeStreet] = React.useState('');
+  const [Floor, onChangeFloor] = React.useState('');
+  const [Door, onChangeDoor] = React.useState('');
+  const [City, onChangeCity] = React.useState('');
   const [Postal, onChangePostal] = React.useState(null);
   const [Peso, onChangePeso] = React.useState(null);
   const [Description, onChangeDescription] = React.useState('');
   return (
-    <View style={styles.mainView}>
-      <Header />
-      <Text style={styles.title}>Nome completo do destinatário</Text>
-      <TextInput style={styles.input} onChangeText={onChangeNome} value={Nome} />
-      <Text style={styles.title}>Morada completa</Text>
-      <TextInput style={styles.input} onChangeText={onChangeMorada} value={Morada} />
-      <Text style={styles.title}>Código Postal</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangePostal}
-        value={Postal}
-        placeholder=""
-        keyboardType="numeric"
-      />
-      <Text style={styles.title}>Peso (kg)</Text>
+    <ScrollView>
+      <View style={styles.rowHeader}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Text>
+            <Ionicons name="arrow-back" size={30} style={styles.icon} />
+            {/* Go Back */}
+          </Text>
+        </TouchableOpacity>
 
-      <TextInput
-        style={styles.inputSmall}
-        onChangeText={onChangePeso}
-        value={Peso}
-        placeholder=""
-        keyboardType="numeric"
-      />
-
-      <Text style={styles.title}>Descrição</Text>
-      <TextInput style={styles.inputFullBorder} onChangeText={onChangeDescription} value={Description} />
-      <TouchableOpacity onPress={() => navigation.navigate('PaymentReservarLocker')}>
-        <View style={styles.viewStyle}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Seguinte</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ScanQrCode');
+          }}
+        >
+          <View style={styles.viewStyle}>
+            <Ionicons name="scan-outline" size={30} />
+            <Text style={styles.textT}>Scan Locker</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.mainView}>
+        <Text style={styles.firsttitle}>Nome completo</Text>
+        <TextInput style={styles.input} onChangeText={onChangeNome} value={Nome} />
+        <Text style={styles.title}>Número Telemóvel</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+          value={Number}
+          placeholder=""
+          keyboardType="numeric"
+        />
+        <Text style={styles.title}>Rua</Text>
+        <TextInput style={styles.input} onChangeText={onChangeStreet} value={Street} />
+        <View style={styles.row}>
+          <View style={styles.tile}>
+            <Text style={styles.title}>Andar</Text>
+            <TextInput
+              style={styles.inputSmall}
+              onChangeText={onChangeFloor}
+              value={Floor}
+              placeholder=""
+              keyboardType="numeric"
+            />
+          </View>
+          <View style={styles.tile}>
+            <Text style={styles.title}>Porta</Text>
+            <TextInput
+              style={styles.inputSmall}
+              onChangeText={onChangeDoor}
+              value={Door}
+              placeholder=""
+              keyboardType="numeric"
+            />
           </View>
         </View>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.row}>
+          <View style={styles.tile}>
+            <Text style={styles.title}>Cidade</Text>
+            <TextInput style={styles.inputSmall} onChangeText={onChangeCity} value={City} />
+          </View>
+          <View style={styles.tile}>
+            <Text style={styles.title}>Código Postal</Text>
+            <TextInput
+              style={styles.inputSmall}
+              onChangeText={onChangePostal}
+              value={Postal}
+              placeholder=""
+              keyboardType="numeric"
+            />
+          </View>
+        </View>
+        <Text style={styles.title}>Peso (kg)</Text>
+        <TextInput
+          style={styles.inputSmallLonely}
+          onChangeText={onChangePeso}
+          value={Peso}
+          placeholder=""
+          keyboardType="numeric"
+        />
+        <Text style={styles.title}>Descrição</Text>
+        <TextInput style={styles.inputFullBorder} onChangeText={onChangeDescription} value={Description} />
+        <TouchableOpacity
+          onPress={() => {
+            console.log(Number);
+            navigation.navigate('CalendarReservarLocker', {
+              checked: 'send',
+              nome: `${Nome}`,
+              number: `${Number}`,
+              street: `${Street}`,
+              floor: `${Floor}`,
+              door: `${Door}`,
+              city: `${City}`,
+              postal: `${Postal}`,
+              peso: `${Peso}`,
+              description: `${Description}`,
+            });
+          }}
+        >
+          <View style={styles.viewStyle}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Seguinte</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   mainView: {
     marginHorizontal: 10,
+    marginVertical: 20,
+  },
+  rowHeader: {
+    marginTop: 50,
+    marginLeft: 20,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title: {
+    fontSize: 17.5,
+    fontWeight: 'bold',
+  },
+  tile: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: 20,
+  },
+  firsttitle: {
+    marginTop: 30,
     fontSize: 17.5,
     fontWeight: 'bold',
   },
@@ -85,15 +191,17 @@ const styles = StyleSheet.create({
     marginBottom: '5%',
   },
   inputSmall: {
-    width: '10%',
-    height: '5%',
-
     borderBottomWidth: 1,
-    marginBottom: '5%',
+    marginHorizontal: '10%',
+  },
+  inputSmallLonely: {
+    width: '10%',
+    marginHorizontal: 10,
+    borderBottomWidth: 1,
+    marginBottom: 20,
   },
   inputFullBorder: {
     height: 100,
-
     borderWidth: 1,
     marginBottom: '10%',
   },

@@ -69,7 +69,7 @@ const AppBase = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="SucessReservarLocker"
+              name="SuccessReservarLocker"
               component={SucessReservarLocker}
               options={{ headerShown: false }}
             />

@@ -1,20 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { TouchableOpacity, MaskedViewComponent, StyleSheet, Text, ScrollView, View, Button } from 'react-native';
-import { RadioButton } from 'react-native-paper';
+
 import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 import axios from 'axios';
 import { withTheme } from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useNavigationParam } from '@react-navigation/native';
 import { API_URL } from '../../../common/constants/api';
 import { LoginContext } from '../../../common/loginHelper/responseData';
 import Header from '../../../components/HeaderReservarLocker';
+import { path } from 'ramda';
 
-const CalendarPage = () => {
+function CalendarPage(props) {
   let date;
   const navigation = useNavigation();
   const [selectedDate, setSelectedDate] = useState('');
-  const [checked, setChecked] = useState('send');
+
   const [erro, setErro] = useState('Selecione data');
 
   const loginContext = useContext(LoginContext);
@@ -29,14 +30,39 @@ const CalendarPage = () => {
   const reservar = async () => {
     try {
       if (selectedDate >= moment().utcOffset('+00:00').format('YYYY-MM-DD')) {
-        const { data } = await axios.post(
-          `${API_URL}/orders`,
-          { dateRequested: `${selectedDate}`, orderType: `${checked}` },
-          axiosConfig
-        );
+        if (props.route.params.checked == 'send') {
+          const { data } = await axios.post(
+            `${API_URL}/orders`,
+            {
+              dateRequested: selectedDate,
+              orderType: path(['route', 'params', 'checked'], props),
+              phoneNumber: path(['route', 'params', 'number'], props),
+              street: path(['route', 'params', 'street'], props),
+              floor: path(['route', 'params', 'floor'], props),
+              door: path(['route', 'params', 'door'], props),
+              city: path(['route', 'params', 'city'], props),
+              postalCode: path(['route', 'params', 'postal'], props),
+              weight: path(['route', 'params', 'peso'], props),
+              price: '11.23',
+              locality: 'LISBOA',
+              description: path(['route', 'params', 'description'], props),
+            },
+            axiosConfig
+          );
+          console.log(data);
+        } else {
+          const { data1 } = await axios.post(
+            `${API_URL}/orders`,
+            {
+              dateRequested: selectedDate,
+              orderType: path(['route', 'params', 'checked'], props)
+            },
+            axiosConfig
+          );
+          console.log(data1);
+        }
+
         setErro('Reservado');
-        console.log(selectedDate);
-        console.log(data);
       } else {
         setErro('A data selecionada encontra-se ultrapassada');
       }
@@ -104,7 +130,7 @@ const CalendarPage = () => {
           <View style={styles.buttonRow}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('SendReceiveReservarLocker');
+                navigation.navigate('SuccessReservarLocker');
                 setSelectedDate('');
                 setErro('Selecione data');
               }}
@@ -138,35 +164,10 @@ const CalendarPage = () => {
             <Text>{erro}</Text>
           </View>
         ) : null}
-        <View style={styles.viewT}>
-          <Text style={styles.title}>Qual a finalidade da reserva?</Text>
-
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%', marginTop: '4%' }}>
-            <RadioButton
-              value="send"
-              status={checked === 'send' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('send')}
-            />
-            <View style={styles.radiotext}>
-              <Text style={styles.Simpletext}>Envio de correspondências</Text>
-            </View>
-          </View>
-
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%' }}>
-            <RadioButton
-              value="receive"
-              status={checked === 'receive' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('receive')}
-            />
-            <View style={styles.radiotext}>
-              <Text style={styles.Simpletext}>Recebimento de correspondências</Text>
-            </View>
-          </View>
-        </View>
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   viewT: {

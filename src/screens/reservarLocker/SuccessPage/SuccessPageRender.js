@@ -6,14 +6,14 @@ import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Header from '../../../components/HeaderReservarLocker';
 
-const SuccessPage = () => {
+const SuccessPage = ({props}) => {
   const navigation = useNavigation();
   return (
     <View style= {styles.container}>
       <Header />
       <View style={styles.maindiv}>
         <View style={styles.boxwradius}>
-          <Text style={styles.title}>Reserva para envio de correspondências efetuada com sucesso.</Text>
+          <Text style={styles.title}>Reserva efetuada com sucesso.</Text>
           <Ionicons name="checkbox" color="#1DC690" size={40} />
           <Text style={styles.text}>Dia 20/02/2021 - Compartimento 1</Text>
         </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   boxwradius: {
     marginTop: '20%',
     width: '80%',
-    height: '48%',
+    height: '40%',
     borderRadius: 15,
     borderWidth: 5,
     borderColor: '#D6CFCF',
