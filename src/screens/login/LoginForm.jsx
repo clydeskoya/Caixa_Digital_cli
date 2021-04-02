@@ -9,8 +9,8 @@ import { LoginContext } from '../../common/loginHelper/responseData';
 import { API_URL } from '../../common/constants/api';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('irina');
-  const [pass, setPass] = useState('123456');
+  const [email, setEmail] = useState('atadjo@gmail.com');
+  const [pass, setPass] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
 
   const [visible, setVisible] = useState(false);

@@ -19,6 +19,7 @@ import { styles } from './styles';
 const correspondenciaRecebida = () => {
   const cards = dataFromServer.map((dataEntry) => {
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
+
     if (getIsRecebimentosPorLevantar(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
