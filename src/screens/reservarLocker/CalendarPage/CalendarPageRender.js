@@ -6,6 +6,7 @@ import moment from 'moment';
 import axios from 'axios';
 import { withTheme } from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
+import { API_URL } from '../../../common/constants/api';
 import { LoginContext } from '../../../common/loginHelper/responseData';
 import Header from '../../../components/HeaderReservarLocker';
 
@@ -29,7 +30,7 @@ const CalendarPage = () => {
     try {
       if (selectedDate >= moment().utcOffset('+00:00').format('YYYY-MM-DD')) {
         const { data } = await axios.post(
-          'http://192.168.68.102:1337/orders',
+          `${API_URL}/orders`,
           { dateRequested: `${selectedDate}`, orderType: `${checked}` },
           axiosConfig
         );
@@ -62,7 +63,7 @@ const CalendarPage = () => {
       <View style={styles.container}>
         <Header />
         <Calendar
-        style={{marginTop: 20}}
+          style={{ marginTop: 20 }}
           markedDates={{
             [selectedDate]: {
               selected: true,

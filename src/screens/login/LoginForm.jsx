@@ -4,6 +4,7 @@ import axios from 'axios';
 import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, ActivityIndicator, Dialog, Portal, Provider, Paragraph, Button } from 'react-native-paper';
+import { API_URL } from '../../common/constants/api';
 import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
 
@@ -29,7 +30,7 @@ const LoginForm = (props) => {
     }
     setLoading(true);
     try {
-      const { data } = await axios.post('http://192.168.68.102:1337/auth/local', {
+      const { data } = await axios.post(`${API_URL}/auth/local`, {
         identifier: email,
         password: pass,
       });
@@ -97,7 +98,7 @@ const LoginForm = (props) => {
         </View>
 
         <TouchableOpacity onPress={login}>
-        {/* <TouchableOpacity onPress={() => props.navigation.navigate('Home')}> */}
+          {/* <TouchableOpacity onPress={() => props.navigation.navigate('Home')}> */}
           <View style={styles.bottomActions}>
             <Text style={styles.textLogin}> Login </Text>
           </View>
