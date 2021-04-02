@@ -8,8 +8,8 @@ import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('irina');
-  const [pass, setPass] = useState('123456');
+  const [email, setEmail] = useState('atadjo@gmail.com');
+  const [pass, setPass] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
 
   const [visible, setVisible] = useState(false);
