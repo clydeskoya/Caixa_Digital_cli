@@ -7,6 +7,7 @@ import { withTheme } from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 import { LoginContext } from '../../../common/loginHelper/responseData';
 import Header from '../../../components/HeaderReservarLocker';
+import { API_URL } from '../../../common/constants/api';
 
 const CalendarPage = () => {
   let date;
@@ -17,7 +18,7 @@ const CalendarPage = () => {
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
 
-  let axiosConfig = {
+  const axiosConfig = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -27,14 +28,13 @@ const CalendarPage = () => {
     try {
       if (selectedDate >= moment().utcOffset('+00:00').format('YYYY-MM-DD')) {
         const { data } = await axios.post(
-          'http://192.168.68.102:1337/orders',
+          `${API_URL}/orders`,
           { dateRequested: `${selectedDate}`, orderType: 'send' },
           axiosConfig
         );
         setErro('Reservado');
         console.log(selectedDate);
         console.log(data);
-        
       } else {
         setErro('A data selecionada encontra-se ultrapassada');
       }
