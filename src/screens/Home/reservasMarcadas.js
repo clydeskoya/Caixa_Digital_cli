@@ -21,7 +21,9 @@ import { styles } from './styles';
 
 const reservasMarcadas = () => {
   const cards = dataFromServer.map((dataEntry) => {
+    
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
+    const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD')
     const type = dataEntry.orderType;
     if (getIsReservaEnvio(dataEntry)) {
       return (
@@ -53,6 +55,7 @@ const reservasMarcadas = () => {
     }
     if (getIsReservaRecebimentoNaoPago(dataEntry)) {
       return (
+
         <Card style={styles.cardStilo}>
           <Card.Content style={styles.cardContent}>
           <TouchableOpacity>
@@ -85,7 +88,7 @@ const reservasMarcadas = () => {
           <Card.Content>
             <TouchableOpacity>
               <View style={styles.inputRow}>
-                <Text style={{ fontWeight: 'bold' }}> Depositada: {dataEntry.updated_at.format('YYYY-MM-DD')}</Text>
+                <Text style={{ fontWeight: 'bold' }}> Depositada: {dateUp}</Text>
                 <Ionicons name="chevron-forward-outline" size={30} />
               </View>
             </TouchableOpacity>
@@ -123,12 +126,12 @@ const reservasMarcadas = () => {
     }
     if (
       !getIsCorrespondenciasEmTransito(dataEntry) &&
-      !getIsCorrespondenciasEntreguesAClientesComApp(dataEntry) &&
-      !getIsReservaRecebimentoPrePago(dataEntry) &&
-      !getIsCorrespondenciasEmEspera(dataEntry) &&
-      !getIsRecebimentosPorLevantar(dataEntry) &&
-      !getIsReservaRecebimentoNaoPago(dataEntry) &&
-      !getIsReservaEnvio(dataEntry)
+      !getIsCorrespondenciasEntreguesAClientesComApp &&
+      !getIsReservaRecebimentoPrePago &&
+      !getIsCorrespondenciasEmEspera &&
+      !getIsRecebimentosPorLevantar &&
+      !getIsReservaRecebimentoNaoPago &&
+      !getIsReservaEnvio
     ) {
       return <Text>Sem notificações</Text>;
     }

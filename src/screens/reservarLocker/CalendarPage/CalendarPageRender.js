@@ -50,7 +50,7 @@ const CalendarPage = () => {
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error.message', error.message);
-        setErro('Impossível requisitar avalibilidade');
+        setErro('Impossível requisitar disponibilidade');
       }
     }
     console.log(erro);
