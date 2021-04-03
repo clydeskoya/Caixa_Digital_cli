@@ -343,41 +343,45 @@ const RegisterForm4 = (props) => {
             </View>
           </TouchableOpacity>
         </View>
+      </ScrollView>
 
-        <Provider>
-          <View>
-            <Portal>
-              <Dialog visible={visible} dismissable={false}>
-                <Dialog.Title>{dialogTextTitle}</Dialog.Title>
-                <Dialog.Content>
-                  <Paragraph>{dialogTextContent}</Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                  <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
-                    OK{' '}
-                  </Button>
-                </Dialog.Actions>
-              </Dialog>
-            </Portal>
-          </View>
+      <Provider>
+        <View>
+          <Portal>
+            <Dialog visible={visible} dismissable={false}>
+              <Dialog.Title>{dialogTextTitle}</Dialog.Title>
+              <Dialog.Content>
+                <Paragraph>{dialogTextContent}</Paragraph>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button color="#1C4670" onPress={(hideDialog, () => props.navigation.navigate('LoginForm'))}>
+                  OK{' '}
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
 
-          <View>
-            <Portal>
-              <Dialog visible={visib} dismissable={false}>
+        <View>
+          <Portal>
+            <Dialog visible={visib} dismissable={false}>
+              <ScrollView>
                 <Dialog.Title>Termos e condições ABAJI</Dialog.Title>
                 <Dialog.Content>
-                  <Paragraph>{terms}</Paragraph>
+                  <ScrollView>
+                    <Paragraph>{terms}</Paragraph>
+                  </ScrollView>
                 </Dialog.Content>
                 <Dialog.Actions>
                   <Button color="#1C4670" onPress={() => hideTermsDialog()}>
                     OK{' '}
                   </Button>
                 </Dialog.Actions>
-              </Dialog>
-            </Portal>
-          </View>
-        </Provider>
-      </ScrollView>
+              </ScrollView>
+            </Dialog>
+          </Portal>
+        </View>
+      </Provider>
     </>
   );
 };

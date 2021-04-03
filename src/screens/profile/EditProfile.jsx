@@ -230,7 +230,7 @@ const EditProfile = (props) => {
     }
     if (REGEX_POSTAL_CODE.test(postalCode)) {
       fetchData();
-    } else if (locality.length) {
+    } else if (prop('length', locality)) {
       setLocality('');
     }
   }, [postalCode]);
@@ -238,9 +238,9 @@ const EditProfile = (props) => {
   const sendToServer = async (formData) => {
     setLoading(true);
     const token = loginContext.loginData.jwt;
-    const idUser = loginContext.loginData.user.id;
+    const url = dadosPessoais ? `${API_URL}/entities` : `${API_URL}/addresses`;
 
-    await fetch(`${API_URL}/users/${idUser}`, {
+    await fetch(url, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -266,12 +266,14 @@ const EditProfile = (props) => {
           showSuccessDialog();
         }
       );
+
+    dadosPessoaisOff();
+    dadosMoradaOff();
   };
 
   const forgotPass = async () => {
     setLoading(true);
     const mail = loginContext.loginData.user.entity.email;
-    //const mail = 'bedaxo6375@dwgtcm.com';
     const data = { email: mail };
     await fetch(`${API_URL}/auth/forgot-password`, {
       method: 'POST',
@@ -297,45 +299,54 @@ const EditProfile = (props) => {
   };
 
   const sendDataToServer = () => {
-    if (!username || !usersurname) {
-      Alert.alert('Escreva o seu nome');
-      return;
+    if (dadosPessoais) {
+      if (!username || !usersurname) {
+        Alert.alert('Escreva o seu nome');
+        return;
+      }
+      if (!phone) {
+        Alert.alert('Indique o seu número de telemóvel');
+        return;
+      }
+
+      const dataToSend = {
+        name: `${username} ${usersurname}`,
+        phoneNumber: phone,
+      };
+
+      sendToServer(dataToSend);
+    } else if (dadosMorada) {
+      if (!street) {
+        Alert.alert('Indique a sua rua');
+        return;
+      }
+      if (!door || !door.match(REGEX_ONLY_NUMBERS)) {
+        Alert.alert('Número de porta inválido');
+        return;
+      }
+      if (!floor) {
+        Alert.alert('Indique o seu andar');
+        return;
+      }
+      if (!postalCode || !postalCode.match(REGEX_POSTAL_CODE)) {
+        Alert.alert('Código postal inválido');
+        return;
+      }
+      if (!city) {
+        Alert.alert('Selecione a sua cidade');
+        return;
+      }
+
+      const dataToSend = {
+        street,
+        door,
+        floor,
+        postalCode,
+        locality,
+        city,
+      };
+      sendToServer(dataToSend);
     }
-    if (!phone) {
-      Alert.alert('Indique o seu número de telemóvel');
-      return;
-    }
-    if (!street) {
-      Alert.alert('Indique a sua rua');
-      return;
-    }
-    if (!door || !door.match(REGEX_ONLY_NUMBERS)) {
-      Alert.alert('Número de porta inválido');
-      return;
-    }
-    if (!floor) {
-      Alert.alert('Indique o seu andar');
-      return;
-    }
-    if (!postalCode || !postalCode.match(REGEX_POSTAL_CODE)) {
-      Alert.alert('Código postal inválido');
-      return;
-    }
-    if (!city) {
-      Alert.alert('Selecione a sua cidade');
-      return;
-    }
-    const dataToSend = {
-      name: `${username} ${usersurname}`,
-      phoneNumber: phone,
-      street,
-      door,
-      floor,
-      postalCode,
-      locality,
-      city,
-    };
-    sendToServer(dataToSend);
   };
 
   return (

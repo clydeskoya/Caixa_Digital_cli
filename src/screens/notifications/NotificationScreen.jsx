@@ -75,10 +75,17 @@ const Notification = (props) => {
     return false;
   };
 
+/*   const isBeforeToday = dateRequestedRaw => {
+    return differenceInCalendarDays(new Date(), new Date(dateRequestedRaw))> 0;
+  };
+
+  const getDifferenceInCalendarDays = (date1, date2) => {
+    return differenceInCalendarDays(new Date(date1), new Date(date2));
+  }; */
+
   const cards = dataFromServer.map((dataEntry) => {
     console.log('hey there', dataEntry);
     if (getIsReservaEnvio(dataEntry)) {
-      console.log('hellllooooo');
       const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
       const isNotification = date === moment(new Date()).format('YYYY-MM-DD');
       // if (newNot(dataEntry.created_at)) {
