@@ -26,11 +26,13 @@ const reservasMarcadas = () => {
     if (getIsReservaEnvio(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text> Reserva para envio: ${date} </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text>
-            </Text>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Reserva para envio: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -38,11 +40,13 @@ const reservasMarcadas = () => {
     if (getIsReservaRecebimentoPrePago(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text> Reserva para recebimento: ${date} </Text>
-              <Text>Pago</Text>
-            </Text>
+          <Card.Content>
+          <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Recebimento pago: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -51,10 +55,12 @@ const reservasMarcadas = () => {
       return (
         <Card style={styles.cardStilo}>
           <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text> Reserva para recebimento: ${date} </Text>
-              <Text>Por pagar</Text>
-            </Text>
+          <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Recebimento por pagar: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -62,11 +68,13 @@ const reservasMarcadas = () => {
     if (getIsRecebimentosPorLevantar(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text> Reserva para recebimento: ${date} </Text>
-              <Text>Por levantar</Text>
-            </Text>
+          <Card.Content>
+          <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Recebimento por levantar: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -74,11 +82,13 @@ const reservasMarcadas = () => {
     if (getIsCorrespondenciasEmEspera(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text> Reserva para envio: ${date} </Text>
-              <Text>No locker</Text>
-            </Text>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Depositada: {dataEntry.updated_at.format('YYYY-MM-DD')}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -86,11 +96,13 @@ const reservasMarcadas = () => {
     if (getIsCorrespondenciasEmTransito(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text> Reserva para envio: ${date} </Text>
-              <Text>Prestes a ser entregue</Text>
-            </Text>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Em trânsito: {date}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -98,11 +110,13 @@ const reservasMarcadas = () => {
     if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text> Reserva para envio: ${date} </Text>
-              <Text>Já entregue</Text>
-            </Text>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Entregue: {date}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );

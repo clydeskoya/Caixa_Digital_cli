@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
+import { once } from 'ramda';
 import dataFromServer from '../notifications/dataFromServer';
 import {
   getIsCorrespondenciasEmTransito,
@@ -22,12 +23,14 @@ const correspondenciaRecebida = () => {
 
     if (getIsRecebimentosPorLevantar(dataEntry)) {
       return (
-        <Card style={styles.cardStilo}>
+        <Card>
           <Card.Content>
-            <View style={styles.inputRow}>
-              <Text style={{ fontWeight: 'bold' }}> {`Descrição e emissor  ${date}`}</Text>
-              <Ionicons name="chevron-forward-outline" size={30} />
-            </View>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Por levantar: {date}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -36,15 +39,18 @@ const correspondenciaRecebida = () => {
       return (
         <Card style={styles.cardStilo}>
           <Card.Content>
-            <View style={styles.inputRow}>
-              <Text style={{ fontWeight: 'bold' }}> {`Descrição e emissor  ${date}`}</Text>
-              <Ionicons name="chevron-forward-outline" size={30} />
-            </View>
+          <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Recebida: {dataEntry.updated_at.format('YYYY-MM-DD')}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
     }
-    if (!getIsRecebimentosPorLevantar && !getIsCorrespondenciasLevantadas) {
+    if (!getIsRecebimentosPorLevantar(dataEntry) && !getIsCorrespondenciasLevantadas(dataEntry)) {
+      console.log('tamos ai');
       return <Text>Sem notificações</Text>;
     }
     return null;
