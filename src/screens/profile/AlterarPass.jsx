@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: '5%',
     lineHeight: 23,
+    textAlign: 'justify',
   },
 
   titlePerf: {

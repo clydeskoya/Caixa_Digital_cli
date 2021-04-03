@@ -193,7 +193,7 @@ const RegisterForm4 = (props) => {
     }
 
     const dataToSend = {
-      identifier: email,
+      email,
       password: pass,
       user_type: 'client',
     };
@@ -225,7 +225,7 @@ const RegisterForm4 = (props) => {
       bi: form3Values[0],
       phoneNumber: form3Values[1],
       nif: form3Values[2],
-      identifier: email,
+      email,
       password: pass,
       user_type: 'client',
     };

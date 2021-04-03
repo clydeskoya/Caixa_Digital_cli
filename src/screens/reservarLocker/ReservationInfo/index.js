@@ -11,11 +11,10 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import { path, prop } from 'ramda';
-import { LoginContext } from '../../../common/loginHelper/responseData';
+import { path, prop, findLastIndex } from 'ramda';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Header from '../../../components/Header';
-import { findLastIndex } from 'ramda';
+import { LoginContext } from '../../../common/loginHelper/responseData';
+import Header from '../../../components/HeaderReservarLocker';
 
 const getFirst4DigitsOfPostalCode = (arg) => {
   if (prop('length', arg)) {
@@ -101,6 +100,7 @@ const ReservationInfo = () => {
         }
       }
     };
+
     // condição para pedir // validar isto melhor talvez
     console.log('Peso:', Peso);
     console.log('Typeof Peso:', typeof Peso);
@@ -125,130 +125,168 @@ const ReservationInfo = () => {
   }, [Peso, first4PCDigitUser, postalCodeReceiver]);
   return (
     <ScrollView>
-      <View style={styles.rowHeader}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
             <Ionicons name="arrow-back" size={30} style={styles.icon} />
-            {/* Go Back */}
-          </Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('ScanQrCode');
-          }}
-        >
-          <View style={styles.viewStyle}>
-            <Ionicons name="scan-outline" size={30} />
-            <Text style={styles.textT}>Scan Locker</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.mainView}>
-        <Text style={styles.firsttitle}>Nome completo</Text>
-        <TextInput style={styles.input} onChangeText={onChangeNome} value={Nome} />
-        <Text style={styles.title}>Número Telemóvel</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeNumber}
-          value={Number}
-          placeholder=""
-          keyboardType="numeric"
-        />
-        <Text style={styles.title}>Rua</Text>
-        <TextInput style={styles.input} onChangeText={onChangeStreet} value={Street} />
-        <View style={styles.row}>
-          <View style={styles.tile}>
-            <Text style={styles.title}>Andar</Text>
+          <Text style={styles.titlePerf}> Dados de envio </Text>
+
+          {/* <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ScanQrCode');
+            }}
+          >
+            <View style={styles.viewStyle}>
+              <Ionicons name="scan-outline" size={30} />
+              <Text style={styles.textT}>Scan Locker</Text>
+            </View>
+          </TouchableOpacity> */}
+        </View>
+
+        {/* <View style={styles.mainView}> */}
+        <View style={styles.container2}>
+          <Text style={styles.title1}>Nome do destinatário</Text>
+
+          <TextInput
+            style={styles.TextInputStyle}
+            onChangeText={onChangeNome}
+            placeholder="Nome e Apelido"
+            value={Nome}
+          />
+        </View>
+
+        <View style={styles.container2}>
+          <Text style={styles.title1}> Telemóvel</Text>
+          <TextInput
+            style={styles.TextInputStyle}
+            onChangeText={onChangeNumber}
+            value={Number}
+            placeholder="Número de telemóvel"
+            keyboardType="numeric"
+          />
+        </View>
+
+        <View style={styles.container2}>
+          <Text style={styles.title1}>Rua, Andar, Porta</Text>
+
+          <View style={styles.inputRow}>
             <TextInput
-              style={styles.inputSmall}
+              type="text"
+              placeholder="Rua"
+              style={styles.TextInputStyleStreet}
+              onChangeText={onChangeStreet}
+              value={Street}
+            />
+
+            <TextInput
+              placeholder="Andar"
+              keyboardType="numeric"
+              style={styles.TextInputStyleFloor}
               onChangeText={onChangeFloor}
               value={Floor}
-              placeholder=""
-              keyboardType="numeric"
             />
-          </View>
-          <View style={styles.tile}>
-            <Text style={styles.title}>Porta</Text>
+
             <TextInput
-              style={styles.inputSmall}
+              placeholder="Porta"
+              keyboardType="numeric"
+              style={styles.TextInputStyleDoor}
               onChangeText={onChangeDoor}
               value={Door}
-              placeholder=""
-              keyboardType="numeric"
             />
           </View>
         </View>
-        <View style={styles.row}>
-          <View style={styles.tile}>
-            <Text style={styles.title}>Código Postal</Text>
-            <View style={styles.row}>
-              <TextInput
-                style={styles.inputSmall}
-                onChangeText={onChangePostalReceiver}
-                value={postalCodeReceiver}
-                placeholder=""
-                keyboardType="numeric"
-              />
-              <Text>_</Text>
-              <TextInput
-                style={styles.inputSmall}
-                onChangeText={onChangePostal2}
-                value={Postal2}
-                placeholder=""
-                keyboardType="numeric"
-              />
-            </View>
-          </View>
-          <View style={styles.tile}>
-            <Text style={styles.title}>Cidade</Text>
-            <TextInput style={styles.inputCity} onChangeText={onChangeCity} value={City} />
-          </View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.tile}>
-            <Text style={styles.title}>Peso (kg)</Text>
+
+        <View style={styles.container2}>
+          {/* <View style={styles.row}> */}
+          {/* <View style={styles.tile}> */}
+          <Text style={styles.title1}>Código Postal</Text>
+          <View style={styles.inputRow}>
             <TextInput
               style={styles.inputSmall}
+              onChangeText={onChangePostalReceiver}
+              value={postalCodeReceiver}
+              placeholder="0000"
+              keyboardType="numeric"
+            />
+            <Text> _{'  '}</Text>
+            <TextInput
+              style={styles.inputSmall}
+              onChangeText={onChangePostal2}
+              value={Postal2}
+              placeholder="000"
+              keyboardType="numeric"
+            />
+            {/* </View> */}
+            {/* </View> */}
+            {/* <View style={styles.tile}> */}
+            {/* <Text style={styles.title1}>Cidade</Text> */}
+            <TextInput style={styles.inputCity} onChangeText={onChangeCity} value={City} placeholder="Localidade" />
+            {/* meti localidade porque no figma está assim e era o que este campo deveria representar, aliás nem era preciso
+            pedir ao user que indique se temos como ir buscar a localidade através do código postal, como tínhamos
+            acordado */}
+          </View>
+          {/* </View> */}
+        </View>
+
+        <View style={styles.container2}>
+          {/* <View style={styles.tile}> */}
+          <Text style={styles.title1}>Peso (kg)</Text>
+          <View style={styles.inputRow}>
+            <TextInput
+              style={styles.TextInputStyleWeight}
               onChangeText={onChangePeso}
               value={Peso}
               placeholder=""
               keyboardType="numeric"
             />
-          </View>
-          <View style={styles.priceTile}>
+            {/* </View> */}
+            {/* <View style={styles.priceTile}> */}
+            {/* </View> */}
             <Text style={styles.priceText}>Preço: {precoCtt}</Text>
           </View>
         </View>
-        <Text style={styles.title}>Descrição</Text>
-        <TextInput style={styles.inputFullBorder} onChangeText={onChangeDescription} value={Description} />
-        <TouchableOpacity
-          onPress={() => {
-            getPrice();
-            navigation.navigate('CalendarReservarLocker', {
-              checked: 'send',
-              nome: `${Nome}`,
-              number: `${Number}`,
-              street: `${Street}`,
-              floor: `${Floor}`,
-              door: `${Door}`,
-              city: `${City}`,
-              postal: `${postalCodeReceiver}`,
-              peso: `${Peso}`,
-              description: `${Description}`,
-            });
-          }}
-        >
-          <View style={styles.viewStyle}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Seguinte</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+
+        <View style={styles.container2}>
+          <Text style={styles.title1}>Descrição</Text>
+          <TextInput
+            style={styles.inputFullBorder}
+            placeholder="  Breve descrição da corrrespondência"
+            onChangeText={onChangeDescription}
+            value={Description}
+          />
+        </View>
+
+        <View style={styles.buttonOK}>
+          <TouchableOpacity
+            onPress={() => {
+              getPrice();
+              navigation.navigate('CalendarReservarLocker', {
+                checked: 'send',
+                nome: `${Nome}`,
+                number: `${Number}`,
+                street: `${Street}`,
+                floor: `${Floor}`,
+                door: `${Door}`,
+                city: `${City}`,
+                postal: `${postalCodeReceiver}`,
+                peso: `${Peso}`,
+                description: `${Description}`,
+              });
+            }}
+          >
+            {/* <View style={styles.viewStyle}>
+              <View style={styles.button}> */}
+            <Text style={styles.buttonText}>Seguinte</Text>
+            {/*  </View>
+            </View> */}
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -282,9 +320,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   priceText: {
-    fontSize: 20,
-    color: 'green',
+    fontSize: 17,
+    color: '#1DC690',
     fontWeight: 'bold',
+    marginLeft: '40%',
   },
   firsttitle: {
     marginTop: 30,
@@ -311,17 +350,34 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+
+  buttonOK: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 250,
+    height: 40,
+    marginVertical: '10%',
+    backgroundColor: '#1C4670',
+    borderRadius: 45,
+    alignSelf: 'center',
+  },
+
   input: {
     height: '5%',
     borderBottomWidth: 1,
     marginBottom: '5%',
   },
   inputSmall: {
-    width: 50,
+    width: '12%',
     borderBottomWidth: 1,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
   },
-  inputCity: { width: 100, borderBottomWidth: 1, marginHorizontal: 10 },
+  inputCity: {
+    width: '25%',
+    borderBottomWidth: 1,
+    // marginHorizontal: 10
+    marginLeft: '10%',
+  },
   inputSmallLonely: {
     width: '10%',
     marginHorizontal: 10,
@@ -330,8 +386,88 @@ const styles = StyleSheet.create({
   },
   inputFullBorder: {
     height: 100,
+    width: '100%',
     borderWidth: 1,
-    marginBottom: '10%',
+    marginBottom: '5%',
+    marginTop: '7%',
+    textAlign: 'justify',
+    textAlignVertical: 'top',
+  },
+  container: {
+    backgroundColor: '#fff',
+    height: '100%',
+  },
+  container2: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    padding: '5%',
+  },
+  inputRow: {
+    textAlign: 'left',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: '2.5%',
+  },
+
+  title1: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  TextInputStyleStreet: {
+    textAlign: 'left',
+    width: '50%',
+    marginBottom: '3%',
+    marginRight: '5%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleDoor: {
+    textAlign: 'left',
+    width: '20%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleFloor: {
+    textAlign: 'left',
+    width: '20%',
+    marginRight: '5%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyle: {
+    textAlign: 'left',
+    width: '97%',
+    marginBottom: '3%',
+    marginLeft: '2%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+  TextInputStyleWeight: {
+    textAlign: 'left',
+    // height: '65%',
+    width: '20%',
+    // marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+  titlePerf: {
+    color: 'black',
+    fontSize: 22,
+    marginLeft: '5%',
+    fontWeight: 'bold',
+  },
+  header: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    marginTop: '7%',
+    padding: '5%',
   },
 });
 

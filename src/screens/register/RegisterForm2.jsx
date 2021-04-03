@@ -10,11 +10,11 @@ const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
 
 const RegisterForm2 = (props) => {
   const [street, setStreet] = useState('Rua António Janeiro');
-  const [door, setDoor] = useState('1');
-  const [floor, setFloor] = useState('3D');
+  const [door, setDoor] = useState('D');
+  const [floor, setFloor] = useState('3');
   const [postalCode, setPostalColde] = useState('2735-272');
   const [locality, setLocality] = useState('');
-  const [city, setCity] = useState('Lisboa');
+  const [city, setCity] = useState('lisboa');
   const [country, setCountry] = useState('Portugal');
 
   const counterContext2 = useContext(CounterContext2);
@@ -24,8 +24,9 @@ const RegisterForm2 = (props) => {
       Alert.alert('Indique a sua rua');
       return;
     }
-    if (!door || !door.match(REGEX_ONLY_NUMBERS)) {
-      Alert.alert('Número de porta inválido');
+    // if (!door || !door.match(REGEX_ONLY_NUMBERS)) {
+    if (!door) {
+      Alert.alert('Indique o seu número de porta');
       return;
     }
     if (!floor) {
@@ -110,6 +111,15 @@ const RegisterForm2 = (props) => {
               />
 
               <TextInput
+                value={floor}
+                type="text"
+                placeholder="Andar"
+                style={styles.TextInputStyleFloor}
+                name="floor"
+                onChangeText={(Floor) => setFloor(Floor)}
+              />
+
+              <TextInput
                 value={door}
                 type="text"
                 placeholder="Porta"
@@ -117,15 +127,6 @@ const RegisterForm2 = (props) => {
                 name="door"
                 keyboardType="numeric"
                 onChangeText={(Door) => setDoor(Door)}
-              />
-
-              <TextInput
-                value={floor}
-                type="text"
-                placeholder="Andar"
-                style={styles.TextInputStyleFloor}
-                name="floor"
-                onChangeText={(Floor) => setFloor(Floor)}
               />
             </View>
           </View>
@@ -156,11 +157,11 @@ const RegisterForm2 = (props) => {
                 style={styles.TextInputStyleCity}
                 onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
               >
-                <Picker.Item label="Lisboa" value="Lisboa" />
-                <Picker.Item label="Porto" value="Porto" />
-                <Picker.Item label="Algarve" value="Algarve" />
-                <Picker.Item label="Braga" value="Braga" />
-                <Picker.Item label="Coimbra" value="Coimbra" />
+                <Picker.Item label="Lisboa" value="lisboa" />
+                <Picker.Item label="Porto" value="porto" />
+                <Picker.Item label="Algarve" value="algarve" />
+                <Picker.Item label="Braga" value="braga" />
+                <Picker.Item label="Coimbra" value="coimbra" />
               </Picker>
             </View>
           </View>
@@ -244,7 +245,6 @@ const styles = StyleSheet.create({
   TextInputStyleDoor: {
     textAlign: 'left',
     width: '20%',
-    marginRight: '5%',
     marginBottom: '3%',
     borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
@@ -253,6 +253,7 @@ const styles = StyleSheet.create({
   TextInputStyleFloor: {
     textAlign: 'left',
     width: '20%',
+    marginRight: '5%',
     marginBottom: '3%',
     borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
