@@ -2763,6 +2763,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.0.tgz#19524334bad47ccd99793936b67f9be0860fe835"
+  integrity sha512-UUf/S3eeczXBjHPpSnrZ1ZyxH3KmLW8nVYFUWIZA/dixYMIQr7l94yYKxaAkmPk7HO9dlT6gFqAPZC02tTdfQw==
+
 cli-cursor@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
@@ -6758,6 +6763,13 @@ react-dom@^17.0.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.1"
+
+react-flipcard@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-flipcard/-/react-flipcard-0.2.1.tgz#7d439c5755e5a58d81ddea0c8ff0712c3d8e8048"
+  integrity sha1-fUOcV1XlpY2B3eoMj/BxLD2OgEg=
+  dependencies:
+    classnames "^2.2.0"
 
 react-hook-form-resolvers@^0.0.1:
   version "0.0.1"
