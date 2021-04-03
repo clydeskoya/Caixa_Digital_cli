@@ -5,60 +5,135 @@ import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
 import dataFromServer from '../notifications/dataFromServer';
 import {
+  getIsCorrespondenciasEmEspera,
   getIsCorrespondenciasEmTransito,
   getIsCorrespondenciasEntreguesAClientesComApp,
+  getIsRecebimentosPorLevantar,
   getIsReservaEnvio,
+  getIsReservaRecebimentoNaoPago,
   getIsReservaRecebimentoPrePago,
 } from '../../common/businesslogic';
 import { API_URL } from '../../common/constants/api';
 import { diffDates } from '../notifications/helper';
 import ButtonNotificationAction from '../notifications/ButtonNotificationAction';
-import serverResponse from '../login/serverResponse';
+
 import { styles } from './styles';
 
 const reservasMarcadas = () => {
-  const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
   const cards = dataFromServer.map((dataEntry) => {
+    
+    const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
+    const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD')
+    const type = dataEntry.orderType;
     if (getIsReservaEnvio(dataEntry)) {
       return (
         <Card style={styles.cardStilo}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA LEVANTADA: {'\n'}</Text>A correspondência de
-              <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
-              para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi levantada para envio.
-              <Text style={styles.cardTimeText}>
-                {'\n'}
-                {diffDates(dataEntry.created_at)}
-              </Text>
-            </Text>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Reserva para envio: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
     }
     if (getIsReservaRecebimentoPrePago(dataEntry)) {
       return (
-        <Card style={styles.cardStyle}>
-          <Card.Content style={styles.cardContent}>
-            <Text style={styles.cardContentText}>
-              <Text style={{ fontWeight: 'bold' }}> CORRESPONDÊNCIA ENTREGUE: {'\n'}</Text>A correspondência de
-              <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.depositedAt}</Text> <Text> </Text>
-              para <Text> </Text>
-              <Text style={styles.cardContentText2}>{dataEntry.to}</Text> foi entregue ao destinatário.
-              <Text style={styles.cardTimeText}>
-                {'\n'}
-                {diffDates(dataEntry.created_at)}
-              </Text>
-            </Text>
+        <Card style={styles.cardStilo}>
+          <Card.Content>
+          <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Recebimento pago: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
     }
-    if (!getIsCorrespondenciasEmTransito && !getIsCorrespondenciasEntreguesAClientesComApp) {
-      return <Text style={styles.semNotif}>Sem notificações</Text>;
+    if (getIsReservaRecebimentoNaoPago(dataEntry)) {
+      return (
+
+        <Card style={styles.cardStilo}>
+          <Card.Content style={styles.cardContent}>
+          <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Recebimento por pagar: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+    }
+    if (getIsRecebimentosPorLevantar(dataEntry)) {
+      return (
+        <Card style={styles.cardStilo}>
+          <Card.Content>
+          <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Recebimento por levantar: {date} </Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+    }
+    if (getIsCorrespondenciasEmEspera(dataEntry)) {
+      return (
+        <Card style={styles.cardStilo}>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Depositada: {dateUp}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+    }
+    if (getIsCorrespondenciasEmTransito(dataEntry)) {
+      return (
+        <Card style={styles.cardStilo}>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Em trânsito: {date}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+    }
+    if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
+      return (
+        <Card style={styles.cardStilo}>
+          <Card.Content>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Entregue: {date}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
+          </Card.Content>
+        </Card>
+      );
+    }
+    if (
+      !getIsCorrespondenciasEmTransito(dataEntry) &&
+      !getIsCorrespondenciasEntreguesAClientesComApp &&
+      !getIsReservaRecebimentoPrePago &&
+      !getIsCorrespondenciasEmEspera &&
+      !getIsRecebimentosPorLevantar &&
+      !getIsReservaRecebimentoNaoPago &&
+      !getIsReservaEnvio
+    ) {
+      return <Text>Sem notificações</Text>;
     }
     return null;
   });

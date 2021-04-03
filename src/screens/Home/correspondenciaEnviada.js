@@ -20,10 +20,12 @@ const correspondenciaEnviada = () => {
       return (
         <Card style={styles.cardStilo}>
           <Card.Content>
-            <View style={styles.inputRow}>
-              <Text style={{ fontWeight: 'bold' }}> {`Descrição e .toString}  ${date}`}</Text>
-              <Ionicons name="chevron-forward-outline" size={30} />
-            </View>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Em trânsito: {date}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -32,10 +34,12 @@ const correspondenciaEnviada = () => {
       return (
         <Card style={styles.cardStilo}>
           <Card.Content>
-            <View style={styles.inputRow}>
-              <Text style={{ fontWeight: 'bold' }}> {`Descrição e destinatário  ${date}`}</Text>
-              <Ionicons name="chevron-forward-outline" size={30} />
-            </View>
+            <TouchableOpacity>
+              <View style={styles.inputRow}>
+                <Text style={{ fontWeight: 'bold' }}> Entregue: {dataEntry.updated_at.format('YYYY-MM-DD')}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </View>
+            </TouchableOpacity>
           </Card.Content>
         </Card>
       );
@@ -45,8 +49,10 @@ const correspondenciaEnviada = () => {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <View style={styles.inputRow}>
-              <Text style={{ fontWeight: 'bold' }}> {`Descrição e destinatário  ${date}`}</Text>
-              <Ionicons name="chevron-forward-outline" size={30} />
+              <TouchableOpacity>
+                <Text style={{ fontWeight: 'bold' }}> {`Depositada por levantar:  ${date}`}</Text>
+                <Ionicons name="chevron-forward-outline" size={30} />
+              </TouchableOpacity>
             </View>
           </Card.Content>
         </Card>

@@ -7,9 +7,10 @@ import { Colors, ActivityIndicator, Dialog, Portal, Provider, Paragraph, Button 
 import { API_URL } from '../../common/constants/api';
 import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
+import { API_URL } from '../../common/constants/api';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('clientsmilley4');
+  const [email, setEmail] = useState('atadjo@gmail.com');
   const [pass, setPass] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
 
