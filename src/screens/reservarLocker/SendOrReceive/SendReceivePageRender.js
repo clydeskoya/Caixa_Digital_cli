@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
+
 import Header from '../../../components/HeaderReservarLocker';
 
 const SendReceivePage = () => {
-  const [checked, setChecked] = React.useState('first');
+  const [checked, setChecked] = useState('send');
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -16,9 +17,9 @@ const SendReceivePage = () => {
 
           <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%', marginTop: '4%' }}>
             <RadioButton
-              value="first"
-              status={checked === 'first' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('first')}
+              value="send"
+              status={checked === 'send' ? 'checked' : 'unchecked'}
+              onPress={() => setChecked('send')}
             />
             <View style={styles.radiotext}>
               <Text style={styles.Simpletext}>Envio de correspondências</Text>
@@ -27,9 +28,9 @@ const SendReceivePage = () => {
 
           <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%' }}>
             <RadioButton
-              value="second"
-              status={checked === 'second' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('second')}
+              value="receive"
+              status={checked === 'receive' ? 'checked' : 'unchecked'}
+              onPress={() => setChecked('receive')}
             />
             <View style={styles.radiotext}>
               <Text style={styles.Simpletext}>Recebimento de correspondências</Text>
@@ -37,7 +38,15 @@ const SendReceivePage = () => {
           </View>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('ReservationInfo')}>
+          <TouchableOpacity
+            onPress={() => {
+              {
+                checked == 'send'
+                  ? navigation.navigate('ReservationInfo')
+                  : navigation.navigate('CalendarReservarLocker', { checked: checked });
+              }
+            }}
+          >
             <View style={styles.viewStyle}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Seguinte</Text>
@@ -89,7 +98,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     height: '100%',
-  }
+  },
 });
 
 export default SendReceivePage;

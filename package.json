@@ -70,7 +70,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-react-native": "^3.10.0",
     "prettier": "^2.2.1",
-    "react-native-credit-card-input": "^0.4.1",
+    "react-native-credit-card-input": "^0.5.5",
     "react-native-keyboard-spacer": "^0.4.1"
   },
   "private": true

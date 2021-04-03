@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // eslint-disable-next-line import/no-cycle
 
 import NotificationScreen from '../notifications/NotificationScreen';
-import ReserveScreen from '../reservarLocker/CalendarPage';
+import ReserveFirstScreen from '../reservarLocker/SendOrReceive';
 // eslint-disable-next-line import/no-cycle
 import HomeStack from './HomeStack';
 import ProfileNavigation from '../../components/ProfileNavigation';
@@ -40,7 +40,7 @@ const TabNavigator = () => (
     }}
   >
     <Tab.Screen name="Início" component={HomeStack} />
-    <Tab.Screen name="Reservar" component={ReserveScreen} />
+    <Tab.Screen name="Reservar" component={ReserveFirstScreen} />
     <Tab.Screen name="Notificações" component={NotificationScreen} />
     <Tab.Screen name="Perfil" component={ProfileNavigation} />
   </Tab.Navigator>

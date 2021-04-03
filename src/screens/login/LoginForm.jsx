@@ -4,12 +4,12 @@ import axios from 'axios';
 import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, ActivityIndicator, Dialog, Portal, Provider, Paragraph, Button } from 'react-native-paper';
+import { API_URL } from '../../common/constants/api';
 import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
-import { API_URL } from '../../common/constants/api';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('atadjo@gmail.com');
+  const [email, setEmail] = useState('clientsmilley4');
   const [pass, setPass] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
 
