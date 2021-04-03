@@ -9,7 +9,7 @@ import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('atadjo@gmail.com');
+  const [email, setEmail] = useState('clientsmilley4');
   const [pass, setPass] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
 

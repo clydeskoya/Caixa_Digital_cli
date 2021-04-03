@@ -9,12 +9,12 @@ import Header from '../../../components/HeaderReservarLocker';
 function PaymentPage() {
   const navigation = useNavigation();
 
-  Stripe.setOptionsAsync({
+  /* Stripe.setOptionsAsync({
     publishableKey: 'pk_test_51IUdQ5LbLB9ED9AWswPvcdu6TKAwDEGoRSwzhVOoyRcJFz36NchUvdYWt7jaH0R8y5XdHt7zNprb5fAKVySPxFBQ007bWMDejH', // Your key
     androidPayMode: 'test', // [optional] used to set wallet environment (AndroidPay)
     merchantId: 'your_merchant_id', // [optional] used for payments with ApplePay
   });
-
+ */
   const params = {
     // mandatory
     number: '4242424242424242',
@@ -47,7 +47,7 @@ function PaymentPage() {
       <Text>One time payment card</Text>
       <View style={{ height: 20 }} />
       <CreditCardInput requiresName onChange={(cardData) => this.setState({ cardData })} />
-      <TouchableOpacity onPress={() => navigation.navigate('SucessReservarLocker')}>
+      <TouchableOpacity onPress={() => navigation.navigate('SuccessReservarLocker')}>
         <ButtonNext>
           <Text style={styles.buttonText}>Seguinte</Text>
         </ButtonNext>
