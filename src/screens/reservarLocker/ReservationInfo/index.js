@@ -194,7 +194,7 @@ const ReservationInfo = () => {
 
             <TextInput
               placeholder="Porta"
-              keyboardType="numeric"
+              // keyboardType="numeric"
               style={styles.TextInputStyleDoor}
               onChangeText={onChangeDoor}
               value={Door}

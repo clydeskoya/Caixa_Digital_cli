@@ -9,10 +9,10 @@ const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
 
 const RegisterForm2 = (props) => {
-  const [street, setStreet] = useState('Rua António Janeiro');
-  const [door, setDoor] = useState('D');
-  const [floor, setFloor] = useState('3');
-  const [postalCode, setPostalColde] = useState('2735-272');
+  const [street, setStreet] = useState('');
+  const [door, setDoor] = useState('');
+  const [floor, setFloor] = useState('');
+  const [postalCode, setPostalColde] = useState('');
   const [locality, setLocality] = useState('');
   const [city, setCity] = useState('lisboa');
   const [country, setCountry] = useState('Portugal');
@@ -116,6 +116,7 @@ const RegisterForm2 = (props) => {
                 placeholder="Andar"
                 style={styles.TextInputStyleFloor}
                 name="floor"
+                keyboardType="numeric"
                 onChangeText={(Floor) => setFloor(Floor)}
               />
 
@@ -125,7 +126,6 @@ const RegisterForm2 = (props) => {
                 placeholder="Porta"
                 style={styles.TextInputStyleDoor}
                 name="door"
-                keyboardType="numeric"
                 onChangeText={(Door) => setDoor(Door)}
               />
             </View>

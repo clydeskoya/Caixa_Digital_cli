@@ -57,9 +57,9 @@ const ProfileScreen = (props) => {
     <View style={styles.container}>
       <View style={styles.nameNCircle}>
         <View style={styles.circle}>
-          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> AS </Text>
+          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> JP </Text>
         </View>
-        <Text style={styles.name}> Alberta Sorriso</Text>
+        <Text style={styles.name}> José Pereira</Text>
       </View>
 
       <TouchableOpacity onPress={() => props.navigation.navigate('EditProfile')}>

@@ -80,7 +80,7 @@ const Home = (props) => {
           <Card.Content>
             <Title style={styles.text}>Correspondência Recebida</Title>
 
-            <Paragraph>Finanças - Autoridade Tributária</Paragraph>
+            {/* <Paragraph>Finanças - Autoridade Tributária</Paragraph> */}
           </Card.Content>
         </Card>
       </TouchableOpacity>
@@ -89,7 +89,7 @@ const Home = (props) => {
           <Card.Content>
             <Title style={styles.text}>Correspondência Enviada</Title>
 
-            <Paragraph>GPU - Ben-Hur Fidalgo</Paragraph>
+            <Paragraph>Envio de prenda de aniversário ao João</Paragraph>
           </Card.Content>
         </Card>
       </TouchableOpacity>
@@ -97,7 +97,7 @@ const Home = (props) => {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Reservas</Title>
-            <Paragraph>15/02/2020 - Locker para envio</Paragraph>
+            <Paragraph>06/04/2021 - Locker para envio {'\n'}04/04/2021 - Locker para recebimento</Paragraph>
           </Card.Content>
         </Card>
       </TouchableOpacity>

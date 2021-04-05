@@ -6,10 +6,10 @@ import moment from 'moment';
 import axios from 'axios';
 import { withTheme } from 'styled-components/native';
 import { useNavigation, useNavigationParam } from '@react-navigation/native';
+import { path } from 'ramda';
 import { API_URL } from '../../../common/constants/api';
 import { LoginContext } from '../../../common/loginHelper/responseData';
 import Header from '../../../components/HeaderReservarLocker';
-import { path } from 'ramda';
 
 function CalendarPage(props) {
   let date;
@@ -21,7 +21,7 @@ function CalendarPage(props) {
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
 
-  let axiosConfig = {
+  const axiosConfig = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -55,7 +55,7 @@ function CalendarPage(props) {
             `${API_URL}/orders`,
             {
               dateRequested: selectedDate,
-              orderType: path(['route', 'params', 'checked'], props)
+              orderType: path(['route', 'params', 'checked'], props),
             },
             axiosConfig
           );
@@ -78,7 +78,7 @@ function CalendarPage(props) {
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log('Error.message', error.message);
-        setErro('Impossível requisitar avalibilidade');
+        setErro('Impossível requisitar disponibilidade');
       }
     }
     console.log(erro);

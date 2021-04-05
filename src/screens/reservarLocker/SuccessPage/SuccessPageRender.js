@@ -15,7 +15,7 @@ const SuccessPage = ({props}) => {
         <View style={styles.boxwradius}>
           <Text style={styles.title}>Reserva efetuada com sucesso.</Text>
           <Ionicons name="checkbox" color="#1DC690" size={40} />
-          <Text style={styles.text}>Dia 20/02/2021 - Compartimento 1</Text>
+          <Text style={styles.text}>Dia 04/04/2021 - Compartimento 1</Text>
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>

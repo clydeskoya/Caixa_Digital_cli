@@ -15,7 +15,8 @@ function Scanner() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`${data}`);
+    // alert(`${data}`);
+    alert('QR Code lido com sucesso');
   };
 
   if (hasPermission === null) {

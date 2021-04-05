@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
 });
 
 const RegisterForm1 = (props) => {
-  const [username, setUserName] = useState('Irina');
-  const [usersurname, setUserSurname] = useState('Fernandes');
-  const [dateofbirth, setUserDateofbitrh] = useState('07/11/1998');
+  const [username, setUserName] = useState('');
+  const [usersurname, setUserSurname] = useState('');
+  const [dateofbirth, setUserDateofbitrh] = useState('');
   const [gender, setGender] = useState('Feminino');
 
   const radioProps = [
