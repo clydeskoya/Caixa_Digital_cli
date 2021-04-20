@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import QRCode from 'react-native-qrcode-svg';
-import data from './data';
+import { LoginContext } from '../../common/loginHelper/responseData';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,14 +49,16 @@ const styles = StyleSheet.create({
 });
 
 const MyQR = (props) => {
-  const dataa = `${data.map((dataEntry) => dataEntry.street)} ${data.map((dataEntry) => dataEntry.door)} ${data.map(
-    (dataEntry) => dataEntry.floor
-  )} ${data.map((dataEntry) => dataEntry.postalCode)} ${data.map((dataEntry) => dataEntry.locality)} ${data.map(
-    (dataEntry) => dataEntry.city
-  )}, ${data.map((dataEntry) => dataEntry.country)}
-   ${data.map((dataEntry) => dataEntry.names.id1)}`;
+  const loginContext = useContext(LoginContext);
+  const { address } = loginContext.loginData.user.entity;
+  const { name } = loginContext.loginData.user.entity;
 
-  console.log(dataa);
+  const city0 = address.city.charAt(0).toUpperCase();
+  console.log(city0);
+  const city = city0 + address.city.slice(1, address.city.length);
+
+  const dataa = `${address.street} ${address.door} ${address.floor} ${address.postalCode} ${address.locality} ${city}, ${address.country}
+   ${name}`;
 
   return (
     <>
@@ -71,11 +73,10 @@ const MyQR = (props) => {
         <View style={styles.boxSimple}>
           <QRCode value={dataa} />
           <Text style={styles.text}>
-            {data.map((dataEntry) => dataEntry.street)} {data.map((dataEntry) => dataEntry.door)}{' '}
-            {data.map((dataEntry) => dataEntry.floor)}
-            {'\n'} {data.map((dataEntry) => dataEntry.postalCode)} {data.map((dataEntry) => dataEntry.locality)}
-            {'\n'} {data.map((dataEntry) => dataEntry.city)}, {data.map((dataEntry) => dataEntry.country)}
-            {'\n'} {data.map((dataEntry) => dataEntry.names.id1)}{' '}
+            {address.street} {address.door} {address.floor}
+            {'\n'} {address.postalCode} {address.locality}
+            {'\n'} {city}, Portugal
+            {'\n'} {name}{' '}
           </Text>
         </View>
       </View>

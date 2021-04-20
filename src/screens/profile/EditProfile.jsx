@@ -440,7 +440,7 @@ const EditProfile = (props) => {
                 {dadosMorada && (
                   <>
                     <View style={styles.container2}>
-                      <Text style={styles.title1}>Rua, Nº de Porta, Andar</Text>
+                      <Text style={styles.title1}>Rua, Andar, Apartamento</Text>
                       <View style={styles.inputRow}>
                         <TextInput
                           value={street}
@@ -452,22 +452,22 @@ const EditProfile = (props) => {
                         />
 
                         <TextInput
-                          value={door}
-                          type="text"
-                          placeholder="Porta"
-                          style={styles.TextInputStyleDoor}
-                          name="door"
-                          keyboardType="numeric"
-                          onChangeText={(Door) => setDoor(Door)}
-                        />
-
-                        <TextInput
                           value={floor}
                           type="text"
                           placeholder="Andar"
                           style={styles.TextInputStyleFloor}
                           name="floor"
                           onChangeText={(Floor) => setFloor(Floor)}
+                        />
+
+                        <TextInput
+                          value={door}
+                          type="text"
+                          placeholder="Apartamento"
+                          style={styles.TextInputStyleDoor}
+                          name="door"
+                          keyboardType="numeric"
+                          onChangeText={(Door) => setDoor(Door)}
                         />
                       </View>
                     </View>
