@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-function HeaderReserve() {
+function HeaderReserve(props) {
   const navigation = useNavigation();
   return (
     <View style={styles.row}>
@@ -18,17 +18,18 @@ function HeaderReserve() {
           {/* Go Back */}
         </Text>
       </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('ScanQrCode');
-        }}
-      >
-        <View style={styles.viewStyle}>
-          <Ionicons name="scan-outline" size={30} />
-          <Text style={styles.textT}>Scan Locker</Text>
-        </View>
-      </TouchableOpacity>
+      {!!props.scanLocker ? (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ScanQrCode');
+          }}
+        >
+          <View style={styles.viewStyle}>
+            <Ionicons name="scan-outline" size={30} />
+            <Text style={styles.textT}>Scan Locker</Text>
+          </View>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 }

@@ -87,7 +87,7 @@ function CalendarPage(props) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Header />
+        <Header scanLocker={true} />
         <Calendar
           style={{ marginTop: 20 }}
           markedDates={{
