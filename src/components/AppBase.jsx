@@ -49,7 +49,7 @@ const AppBase = () => {
       </NavigationContainer>  */}
       <LoginContext.Provider value={{ loginData: state, loginDispatch: dispatch }}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="SplashScreen">
+          <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
             <Stack.Screen

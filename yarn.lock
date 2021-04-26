@@ -6826,7 +6826,7 @@ react-native-calendars@^1.1254.0:
     react-native-swipe-gestures "^1.0.5"
     xdate "^0.8.0"
 
-react-native-credit-card-input@^0.4.1:
+react-native-credit-card-input@^0.5.5:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/react-native-credit-card-input/-/react-native-credit-card-input-0.4.1.tgz#e62dd1a9beeab6787e5373ba23b93831cbf5f3de"
   integrity sha1-5i3Rqb7qtnh+U3O6I7k4Mcv1894=
