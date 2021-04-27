@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { MaskedViewComponent, Text, View, Button, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
 
 import Header from '../../../components/HeaderReservarLocker';
-
+import { styles } from './styles';
 const SendReceivePage = () => {
   const [checked, setChecked] = useState('send');
   const navigation = useNavigation();
@@ -43,7 +43,7 @@ const SendReceivePage = () => {
               {
                 checked == 'send'
                   ? navigation.navigate('ReservationInfo')
-                  : navigation.navigate('CalendarReservarLocker', { checked: checked });
+                  : navigation.navigate('CalendarReservarLocker', { checked });
               }
             }}
           >
@@ -58,47 +58,5 @@ const SendReceivePage = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  maindiv: {
-    marginTop: '20%',
-  },
-  title: {
-    fontSize: 17.5,
-    fontWeight: 'bold',
-  },
-  Simpletext: {
-    fontSize: 16,
-  },
-  button: {
-    alignItems: 'center',
-    width: 250,
-    height: 40,
-    justifyContent: 'center',
-    marginTop: '50%',
-    backgroundColor: '#1c4670',
-    borderRadius: 45,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  radiotext: {
-    marginVertical: '1.8%',
-  },
-  viewStyle: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewT: {
-    marginLeft: '6%',
-  },
-  container: {
-    backgroundColor: '#fff',
-    height: '100%',
-  },
-});
 
 export default SendReceivePage;
