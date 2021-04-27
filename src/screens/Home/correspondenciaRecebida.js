@@ -1,22 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { View, Text } from 'react-native';
 import moment from 'moment';
-import { once } from 'ramda';
 import dataFromServer from '../notifications/dataFromServer';
-import {
-  getIsCorrespondenciasEmTransito,
-  getIsCorrespondenciasEntreguesAClientesComApp,
-  getIsCorrespondenciasLevantadas,
-  getIsRecebimentosPorLevantar,
-} from '../../common/businesslogic';
-import { API_URL } from '../../common/constants/api';
-import { diffDates } from '../notifications/helper';
-import ButtonNotificationAction from '../notifications/ButtonNotificationAction';
-import serverResponse from '../login/serverResponse';
+import { getIsCorrespondenciasLevantadas } from '../../common/businesslogic';
 import { styles } from './styles';
-import Cartao from './Cartao';
+import Cartao from '../../components/Cartao';
 
 const correspondenciaRecebida = () => {
   const cards = dataFromServer.map((dataEntry) => {

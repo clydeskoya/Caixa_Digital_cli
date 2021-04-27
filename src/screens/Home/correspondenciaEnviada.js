@@ -12,7 +12,7 @@ import {
 } from '../../common/businesslogic';
 
 import { styles } from './styles';
-import Cartao from './Cartao';
+import Cartao from '../../components/Cartao';
 
 const correspondenciaEnviada = () => {
   const cards = dataFromServer.map((dataEntry) => {
@@ -36,7 +36,7 @@ const correspondenciaEnviada = () => {
     ) {
       return <Text>Sem notificações</Text>;
     }
-    console.log(dataEntry);
+
     return null;
   });
   return (

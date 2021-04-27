@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
-import { Card } from 'react-native-paper';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text } from 'react-native';
+
 import moment from 'moment';
 import dataFromServer from '../notifications/dataFromServer';
 import {
@@ -15,7 +14,7 @@ import {
 } from '../../common/businesslogic';
 
 import { styles } from './styles';
-import Cartao from './Cartao';
+import Cartao from '../../components/Cartao';
 
 const reservasMarcadas = () => {
   const cards = dataFromServer.map((dataEntry) => {
@@ -51,7 +50,7 @@ const reservasMarcadas = () => {
       !getIsReservaRecebimentoNaoPago &&
       !getIsReservaEnvio
     ) {
-      return <Text>Sem notificações</Text>;
+      return <Text>Ainda sem reservas efetuadas</Text>;
     }
     return null;
   });

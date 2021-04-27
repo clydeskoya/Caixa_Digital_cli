@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // eslint-disable-next-line import/no-cycle
 
 import NotificationScreen from '../notifications/NotificationScreen';
-import ReserveFirstScreen from '../reservarLocker/SendOrReceive';
+import ReserveNavigator from '../reservarLocker/ReserveNavigator';
 // eslint-disable-next-line import/no-cycle
 import HomeStack from './HomeStack';
 import ProfileNavigation from '../../components/ProfileNavigation';
@@ -22,7 +22,7 @@ const TabNavigator = () => (
 
         if (route.name === 'Início') {
           iconName = focused ? 'ios-home' : 'ios-home-outline';
-        } else if (route.name === 'Reservar') {
+        } else if (route.name === 'Locker') {
           iconName = focused ? 'ios-business' : 'ios-business-outline';
         } else if (route.name === 'Notificações') {
           iconName = focused ? 'ios-notifications' : 'ios-notifications-outline';
@@ -40,7 +40,7 @@ const TabNavigator = () => (
     }}
   >
     <Tab.Screen name="Início" component={HomeStack} />
-    <Tab.Screen name="Reservar" component={ReserveFirstScreen} />
+    <Tab.Screen name="Locker" component={ReserveNavigator} />
     <Tab.Screen name="Notificações" component={NotificationScreen} />
     <Tab.Screen name="Perfil" component={ProfileNavigation} />
   </Tab.Navigator>
