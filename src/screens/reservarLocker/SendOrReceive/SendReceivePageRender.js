@@ -40,7 +40,7 @@ const SendReceivePage = () => {
         <View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('CalendarReservarLocker', { checked: checked });
+              navigation.navigate('ReservationInfo');
             }}
           >
             <View style={styles.viewStyle}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import  Header  from './HeaderReservarLocker';
 
 function Scanner() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -27,25 +28,22 @@ function Scanner() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
+      <Header scanLocker={false} />
       <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={styles.scan} />
       {scanned && <Button title="Tap to Scan Again" onPress={() => setScanned(false)} />}
     </View>
   );
 }
 const styles = StyleSheet.create({
-  header: {
-    marginTop: 20,
-    fontSize: 22,
+  container: {
+    height: '100%',
+    backgroundColor: '#fff',
   },
   scan: {
-    height: '100%',
+    marginTop: 20,
+    height: '80%',
     width: '100%',
-  },
-  container: {
-    width: '100%',
-    height: '10%',
-    backgroundColor: 'green',
   },
   textr: {
     color: 'white',
