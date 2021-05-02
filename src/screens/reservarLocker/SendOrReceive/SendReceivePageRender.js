@@ -11,97 +11,44 @@ const SendReceivePage = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Header scanLocker={false}/>
+      <Header scanLocker={false} />
       <View style={styles.maindiv}>
         <View style={styles.viewT}>
-          <Text style={styles.title}>Qual a finalidade da reserva?</Text>
-
           <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%', marginTop: '4%' }}>
             <RadioButton
-              value="deposit"
-              status={why === 'deposit' ? 'checked' : 'unchecked'}
-              onPress={() => setWhy('deposit')}
+              value="send"
+              status={checked === 'send' ? 'checked' : 'unchecked'}
+              onPress={() => setChecked('send')}
             />
             <View style={styles.radiotext}>
-              <Text style={styles.Simpletext}>Depositar encomenda</Text>
+              <Text style={styles.Simpletext}>Envio de correspondências</Text>
             </View>
           </View>
 
           <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%' }}>
             <RadioButton
-              value="withdraw"
-              status={why === 'withdraw' ? 'checked' : 'unchecked'}
-              onPress={() => setWhy('withdraw')}
+              value="receive"
+              status={checked === 'receive' ? 'checked' : 'unchecked'}
+              onPress={() => setChecked('receive')}
             />
             <View style={styles.radiotext}>
-              <Text style={styles.Simpletext}>Levantar encomenda</Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%' }}>
-            <RadioButton
-              value="reserve"
-              status={why === 'reserve' ? 'checked' : 'unchecked'}
-              onPress={() => setWhy('reserve')}
-            />
-            <View style={styles.radiotext}>
-              <Text style={styles.Simpletext}>Reservar locker</Text>
+              <Text style={styles.Simpletext}>Recebimento de correspondências</Text>
             </View>
           </View>
         </View>
-        {why === 'reserve' ? (
-          <View style={styles.viewT}>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%', marginTop: '4%' }}>
-              <RadioButton
-                value="send"
-                status={checked === 'send' ? 'checked' : 'unchecked'}
-                onPress={() => setChecked('send')}
-              />
-              <View style={styles.radiotext}>
-                <Text style={styles.Simpletext}>Envio de correspondências</Text>
-              </View>
-            </View>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: '5%' }}>
-              <RadioButton
-                value="receive"
-                status={checked === 'receive' ? 'checked' : 'unchecked'}
-                onPress={() => setChecked('receive')}
-              />
-              <View style={styles.radiotext}>
-                <Text style={styles.Simpletext}>Recebimento de correspondências</Text>
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('CalendarReservarLocker', { checked: checked });
+            }}
+          >
+            <View style={styles.viewStyle}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>Seguinte</Text>
               </View>
             </View>
-          </View>
-        ) : null}
-        <View>
-          {why === 'reserve' ? (
-            <TouchableOpacity
-              onPress={() => {
-                {
-                  checked == 'send'
-                    ? navigation.navigate('ReservationInfo')
-                    : navigation.navigate('CalendarReservarLocker', { checked: checked });
-                }
-              }}
-            >
-              <View style={styles.viewStyle}>
-                <View style={styles.button}>
-                  <Text style={styles.buttonText}>Seguinte</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('ScanQrCode');
-              }}
-            >
-              <View style={styles.viewStyle}>
-                <Ionicons name="scan-outline" size={80} />
-                <Text style={styles.textT}>Scan Locker</Text>
-              </View>
-            </TouchableOpacity>
-          )}
+          </TouchableOpacity>
         </View>
       </View>
     </View>

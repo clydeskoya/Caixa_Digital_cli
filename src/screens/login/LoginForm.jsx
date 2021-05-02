@@ -9,8 +9,8 @@ import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [email, setEmail] = useState('clientsmilley4@gmail.com');
+  const [pass, setPass] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
 
   const [visible, setVisible] = useState(false);
@@ -119,7 +119,7 @@ const LoginForm = (props) => {
               </Dialog.Content>
               <Dialog.Actions>
                 <Button color="#1C4670" onPress={hideDialog}>
-                  OK{' '}
+                  OK
                 </Button>
               </Dialog.Actions>
             </Dialog>
