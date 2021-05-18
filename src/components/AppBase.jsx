@@ -10,6 +10,7 @@ import ReservationInfo from '../screens/reservarLocker/ReservationInfo';
 import PaymentReservarLocker from '../screens/reservarLocker/PaymentPage';
 import SucessReservarLocker from '../screens/reservarLocker/SuccessPage';
 import ScanQrCode from './ScanQrCode';
+import ScanSuccess from './ScanSuccess';
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 import ProfileNavigation from './ProfileNavigation';
 import { LoginContext, loginReducer, loginReducerInitialState } from '../common/loginHelper/responseData';
@@ -18,8 +19,7 @@ const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
   const [state, dispatch] = useReducer(loginReducer, loginReducerInitialState);
 
-  return (
-    <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
+  return (    <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
       {/*   <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
@@ -74,6 +74,7 @@ const AppBase = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="ScanQrCode" component={ScanQrCode} options={{ headerShown: false }} />
+            <Stack.Screen name="ScanSuccess" component={ScanSuccess} options={{ headerShown: false }} />
             <Stack.Screen name="Perfil" component={ProfileNavigation} options={{ headerShown: false }} />
             <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
           </Stack.Navigator>

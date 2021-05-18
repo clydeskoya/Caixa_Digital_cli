@@ -26,19 +26,23 @@ export default function App() {
     try {
       if (REGEX_CODE.test(data)) {
         const dcode = base64.decode(data);
-        const postalLocker = dcode.split('"')[5];
+        const dataParsed = JSON.parse(dcode);
         const loginContext = useContext(LoginContext);
+         if(dataParsed.postalCode===loginContext.loginData.user.entity.postalCode){
+            console.log("deu certo");  
+            setScanned(true);
+           // navigation.navigate()
+          }
 
-        const postalUser = loginContext.loginData.user.entity.postalCode;
-        //   if(postalLocker===postalUser || user tem pelo menos umaorder de envio para esse locker){
-
-        //  }
-
-        // console.log(postalCode);
-        // if(postalLocker.equals())
-      } else {
-        alert('Este código não identifica nenhum locker');
-      }
+        }
+       } catch (error) {
+          alert('O código QR não está associado a nenhum locker');
+        }
+          
+        
+         console.log(postalCode);
+  
+   
 
       //  throw
 
@@ -47,11 +51,8 @@ export default function App() {
 
       // navega para ecra de seleçao de encomenda com as respetivas opções: orders to send e identifier(code)
       // extra!!!! no ecra de selecao de encomenda, caso o orders tenha apenas um elemento, passa logo para ecra de colocação de encomenda que chama o servidor com uma orderToSend e identifier
-    } catch (error) {
-      alert('Algo correu mal tente novamente');
-    }
-    setScanned(true);
-  };
+
+    
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
