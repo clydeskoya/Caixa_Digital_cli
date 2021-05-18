@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState, useContext } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
@@ -11,52 +12,22 @@ import {
 } from '../../common/businesslogic';
 
 import { styles } from './styles';
+import Cartao from '../../components/Cartao';
 
 const correspondenciaEnviada = () => {
   const cards = dataFromServer.map((dataEntry) => {
     const date = moment(dataEntry.updated_at).format('YYYY-MM-DD');
     const names = ['SAMS Sintra', 'Finanças', 'Miguel'];
+
     if (getIsCorrespondenciasEmTransito(dataEntry)) {
-      return (
-        <Card style={styles.cardStilo}>
-          <Card.Content>
-            <TouchableOpacity>
-              <View style={styles.inputRow}>
-                <Text style={{ fontWeight: 'bold' }}> Em trânsito: {date}</Text>
-                <Ionicons name="chevron-forward-outline" size={30} />
-              </View>
-            </TouchableOpacity>
-          </Card.Content>
-        </Card>
-      );
+      return <Cartao text={`Em trânsito: ${date}`} />;
     }
+
     if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
-      return (
-        <Card style={styles.cardStilo}>
-          <Card.Content>
-            <TouchableOpacity>
-              <View style={styles.inputRow}>
-                <Text style={{ fontWeight: 'bold' }}> Entregue: {dataEntry.updated_at.format('YYYY-MM-DD')}</Text>
-                <Ionicons name="chevron-forward-outline" size={30} />
-              </View>
-            </TouchableOpacity>
-          </Card.Content>
-        </Card>
-      );
+      return <Cartao text={`Entregue: ${date}`} />;
     }
     if (getIsCorrespondenciasEmEspera(dataEntry)) {
-      return (
-        <Card style={styles.cardStilo}>
-          <Card.Content>
-            <View style={styles.inputRow}>
-              <TouchableOpacity>
-                <Text style={{ fontWeight: 'bold' }}> {`Depositada por levantar:  ${date}`}</Text>
-                <Ionicons name="chevron-forward-outline" size={30} />
-              </TouchableOpacity>
-            </View>
-          </Card.Content>
-        </Card>
-      );
+      return <Cartao text={`Depositada por levantar:  ${date}`} />;
     }
     if (
       !getIsCorrespondenciasEmTransito &&
@@ -65,7 +36,7 @@ const correspondenciaEnviada = () => {
     ) {
       return <Text>Sem notificações</Text>;
     }
-    console.log(dataEntry);
+
     return null;
   });
   return (

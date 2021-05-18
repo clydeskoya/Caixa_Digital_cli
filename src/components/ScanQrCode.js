@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+/* eslint-disable no-undef */
+import React, { useState, useEffect, useContext } from 'react';
+import { Image, Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import Constants from 'expo-constants';
+import { useNavigation } from '@react-navigation/core';
+import base64 from 'react-native-base64';
+import { LoginContext } from '../common/loginHelper/responseData';
 
-function Scanner() {
+const { width } = Dimensions.get('window');
+const qrSize = width * 0.7;
+const REGEX_CODE = /[A-Za-z0-9+/=]/;
+export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -14,9 +23,34 @@ function Scanner() {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
+    try {
+      if (REGEX_CODE.test(data)) {
+        const dcode = base64.decode(data);
+        const postalLocker = dcode.split('"')[5];
+        const loginContext = useContext(LoginContext);
+
+        const postalUser = loginContext.loginData.user.entity.postalCode;
+        //   if(postalLocker===postalUser || user tem pelo menos umaorder de envio para esse locker){
+
+        //  }
+
+        // console.log(postalCode);
+        // if(postalLocker.equals())
+      } else {
+        alert('Este código não identifica nenhum locker');
+      }
+
+      //  throw
+
+      // se A != B fazer throw locker apropriado
+      // extrair reservas de envio por depositar das orders do user
+
+      // navega para ecra de seleçao de encomenda com as respetivas opções: orders to send e identifier(code)
+      // extra!!!! no ecra de selecao de encomenda, caso o orders tenha apenas um elemento, passa logo para ecra de colocação de encomenda que chama o servidor com uma orderToSend e identifier
+    } catch (error) {
+      alert('Algo correu mal tente novamente');
+    }
     setScanned(true);
-    // alert(`${data}`);
-    alert('QR Code lido com sucesso');
   };
 
   if (hasPermission === null) {
@@ -27,44 +61,54 @@ function Scanner() {
   }
 
   return (
-    <View>
-      <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={styles.scan} />
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+      }}
+    >
+      <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={[StyleSheet.absoluteFillObject, styles.container]}
+      >
+        <Text style={styles.description}>Scaneie o locker</Text>
+        <Image style={styles.qr} source={require('../img/qr.png')} />
+        <Text onPress={() => navigation.goBack()} style={styles.cancel}>
+          Cancelar
+        </Text>
+      </BarCodeScanner>
       {scanned && <Button title="Tap to Scan Again" onPress={() => setScanned(false)} />}
     </View>
   );
 }
+
 const styles = StyleSheet.create({
-  header: {
-    marginTop: 20,
-    fontSize: 22,
-  },
-  scan: {
-    height: '100%',
-    width: '100%',
-  },
   container: {
-    width: '100%',
-    height: '10%',
-    backgroundColor: 'green',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+    padding: 8,
   },
-  textr: {
+  qr: {
+    marginTop: '20%',
+    marginBottom: '20%',
+    width: qrSize,
+    height: qrSize,
+  },
+  description: {
+    fontSize: width * 0.09,
+    marginTop: '10%',
+    textAlign: 'center',
+    width: '70%',
     color: 'white',
-    marginVertical: 5,
-    fontSize: 22,
   },
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  red: {
-    color: 'red',
-  },
-  barCodeView: {
-    width: '100%',
-    height: '50%',
-    marginBottom: 40,
+  cancel: {
+    fontSize: width * 0.05,
+    textAlign: 'center',
+    width: '70%',
+    color: 'white',
   },
 });
-
-export default Scanner;

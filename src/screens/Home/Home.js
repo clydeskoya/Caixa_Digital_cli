@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { API_URL } from '../../common/constants/api';
@@ -53,7 +53,7 @@ const Home = (props) => {
   const token = loginContext.loginData.jwt;
   useEffect(() => {
     /* fetch(`${API_URL}/orders/user`, { */
-      fetch(`${API_URL}/orders/user`, {
+    fetch(`${API_URL}/orders/user`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -79,8 +79,6 @@ const Home = (props) => {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Correspondência Recebida</Title>
-
-            {/* <Paragraph>Finanças - Autoridade Tributária</Paragraph> */}
           </Card.Content>
         </Card>
       </TouchableOpacity>
@@ -88,8 +86,6 @@ const Home = (props) => {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Correspondência Enviada</Title>
-
-            <Paragraph>Envio de prenda de aniversário ao João</Paragraph>
           </Card.Content>
         </Card>
       </TouchableOpacity>
@@ -97,7 +93,6 @@ const Home = (props) => {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Reservas</Title>
-            <Paragraph>06/04/2021 - Locker para envio {'\n'}04/04/2021 - Locker para recebimento</Paragraph>
           </Card.Content>
         </Card>
       </TouchableOpacity>
