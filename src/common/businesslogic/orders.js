@@ -22,7 +22,7 @@ export const getIsCorrespondenciasEntreguesAClientesComApp = (dataArg) =>
   dataArg.orderType === 'send' &&
   dataArg.isDeposited === true &&
   dataArg.isWithdrawn === true &&
-  dataArg.matching_receive_order === true;
+  !!dataArg.matching_receive_order === true;
 
 export const getIsCorrespondenciasLevantadas = (dataArg) =>
   dataArg.orderType === 'receive' &&

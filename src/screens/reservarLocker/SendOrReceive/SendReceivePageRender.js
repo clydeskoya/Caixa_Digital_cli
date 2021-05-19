@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { MaskedViewComponent, Text, View, Button, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Header from '../../../components/HeaderReservarLocker';
-
+import { styles } from './styles';
 const SendReceivePage = () => {
   const [why, setWhy] = useState('deposit');
   const [checked, setChecked] = useState('send');
@@ -55,55 +55,6 @@ const SendReceivePage = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  maindiv: {
-    marginTop: '20%',
-  },
-  viewStyle: {
-    alignItems: 'center',
-    marginRight: 20,
-  },
-  textT: {
-    fontSize: 30,
-    backgroundColor: 'rgba(214, 207, 207, 0.6)',
-    borderRadius: 5,
-  },
-  title: {
-    fontSize: 17.5,
-    fontWeight: 'bold',
-  },
-  Simpletext: {
-    fontSize: 16,
-  },
-  button: {
-    alignItems: 'center',
-    width: 250,
-    height: 40,
-    justifyContent: 'center',
-    marginTop: '50%',
-    backgroundColor: '#1c4670',
-    borderRadius: 45,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  radiotext: {
-    marginVertical: '1.8%',
-  },
-  viewStyle: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewT: {
-    marginLeft: '6%',
-  },
-  container: {
-    backgroundColor: '#fff',
-    height: '100%',
-  },
-});
+
 
 export default SendReceivePage;

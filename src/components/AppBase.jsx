@@ -4,7 +4,6 @@ import SplashScreen from '../screens/SplashScreen';
 import Auth from '../../Auth';
 import { Stack } from '../common/stack';
 import TabNavigator from '../screens/Home/TabNavigator';
-
 import { CounterContext2, formReducerInitialState2, registerFormReducer2 } from '../common/formHelper/form.register2';
 import ProfileNavigation from './ProfileNavigation';
 import { LoginContext, loginReducer, loginReducerInitialState } from '../common/loginHelper/responseData';
@@ -13,8 +12,7 @@ const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
   const [state, dispatch] = useReducer(loginReducer, loginReducerInitialState);
 
-  return (
-    <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
+  return (    <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
       {/*   <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />

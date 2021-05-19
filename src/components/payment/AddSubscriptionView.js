@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import PaymentFormView from './PaymentFormView';
+// import PaymentFormView from './PaymentFormView';
 /**
  * The class renders a view with PaymentFormView
  */
@@ -19,9 +19,9 @@ export default class AddSubscriptionView extends React.Component {
           <View style={styles.textWrapper}>
             <Text style={styles.infoText}>Subscription Plan: $10/month</Text>
           </View> */}
-          <View style={styles.cardFormWrapper}>
+          {/* <View style={styles.cardFormWrapper}>
             <PaymentFormView {...this.props} />
-          </View>
+          </View> */}
         </ScrollView>
         {/* Scrolls to the payment form */}
         <KeyboardSpacer
