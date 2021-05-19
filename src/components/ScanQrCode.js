@@ -10,79 +10,6 @@ import { LoginContext } from '../common/loginHelper/responseData';
 const { width } = Dimensions.get('window');
 const qrSize = width * 0.7;
 const REGEX_CODE = /[A-Za-z0-9+/=]/;
-export default function App() {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  const handleBarCodeScanned = ({ type, data }) => {
-    try {
-      if (REGEX_CODE.test(data)) {
-        const dcode = base64.decode(data);
-        const dataParsed = JSON.parse(dcode);
-        const loginContext = useContext(LoginContext);
-         if(dataParsed.postalCode===loginContext.loginData.user.entity.postalCode){
-            console.log("deu certo");  
-            setScanned(true);
-           // navigation.navigate()
-          }
-
-        }
-       } catch (error) {
-          alert('O código QR não está associado a nenhum locker');
-        }
-          
-        
-         console.log(postalCode);
-  
-   
-
-      //  throw
-
-      // se A != B fazer throw locker apropriado
-      // extrair reservas de envio por depositar das orders do user
-
-      // navega para ecra de seleçao de encomenda com as respetivas opções: orders to send e identifier(code)
-      // extra!!!! no ecra de selecao de encomenda, caso o orders tenha apenas um elemento, passa logo para ecra de colocação de encomenda que chama o servidor com uma orderToSend e identifier
-
-    
-
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-      }}
-    >
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={[StyleSheet.absoluteFillObject, styles.container]}
-      >
-        <Text style={styles.description}>Scaneie o locker</Text>
-        <Image style={styles.qr} source={require('../img/qr.png')} />
-        <Text onPress={() => navigation.goBack()} style={styles.cancel}>
-          Cancelar
-        </Text>
-      </BarCodeScanner>
-      {scanned && <Button title="Tap to Scan Again" onPress={() => setScanned(false)} />}
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -113,3 +40,72 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+export default function App() {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    try {
+      if (REGEX_CODE.test(data)) {
+        const dcode = base64.decode(data);
+        const dataParsed = JSON.parse(dcode);
+        const loginContext = useContext(LoginContext);
+        if (dataParsed.postalCode === loginContext.loginData.user.entity.postalCode) {
+          console.log('deu certo');
+          setScanned(true);
+          // navigation.navigate()
+        }
+      }
+    } catch (error) {
+      alert('O código QR não está associado a nenhum locker');
+    }
+
+    console.log(postalCode);
+
+    //  throw
+
+    // se A != B fazer throw locker apropriado
+    // extrair reservas de envio por depositar das orders do user
+
+    // navega para ecra de seleçao de encomenda com as respetivas opções: orders to send e identifier(code)
+    // extra!!!! no ecra de selecao de encomenda, caso o orders tenha apenas um elemento, passa logo para ecra de colocação de encomenda que chama o servidor com uma orderToSend e identifier
+
+    if (hasPermission === null) {
+      return <Text>Requesting for camera permission</Text>;
+    }
+    if (hasPermission === false) {
+      return <Text>No access to camera</Text>;
+    }
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+      }}
+    >
+      <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={[StyleSheet.absoluteFillObject, styles.container]}
+      >
+        <Text style={styles.description}>Scaneie o locker</Text>
+        <Image style={styles.qr} source={require('../img/qr.png')} />
+        <Text onPress={() => navigation.goBack()} style={styles.cancel}>
+          Cancelar
+        </Text>
+      </BarCodeScanner>
+      {scanned && <Button title="Tap to Scan Again" onPress={() => setScanned(false)} />}
+    </View>
+  );
+}

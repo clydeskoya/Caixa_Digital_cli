@@ -8,6 +8,134 @@ import { CounterContext2 } from '../../common/formHelper/form.register2';
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
 
+const styles = StyleSheet.create({
+  header: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '8%',
+    width: '50%',
+    height: '7%',
+    backgroundColor: '#1DC690',
+    borderRadius: 45,
+  },
+
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '5%',
+  },
+
+  container2: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginBottom: '2.5%',
+  },
+
+  TextInputStyle: {
+    textAlign: 'left',
+    width: '100%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleCity: {
+    textAlign: 'left',
+    width: '100%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleStreet: {
+    textAlign: 'left',
+    width: '50%',
+    marginBottom: '3%',
+    marginRight: '5%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleDoor: {
+    textAlign: 'left',
+    width: '20%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleFloor: {
+    textAlign: 'left',
+    width: '20%',
+    marginRight: '5%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  TextInputStyleZipcode: {
+    textAlign: 'left',
+    width: '22%',
+    marginBottom: '3%',
+    borderBottomColor: '#726F6F',
+    borderBottomWidth: 1,
+  },
+
+  inputRow: {
+    textAlign: 'left',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: '2.5%',
+  },
+
+  title: {
+    fontWeight: 'bold',
+    fontSize: 17,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    padding: '2%',
+    paddingBottom: '6.5%',
+  },
+
+  title1: {
+    fontWeight: 'bold',
+    fontSize: 13,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+
+  titleLocality: {
+    fontSize: 12.5,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    textAlign: 'left',
+    flexDirection: 'row',
+    padding: '2.5%',
+    marginRight: '41%',
+  },
+
+  goBack: {
+    alignSelf: 'flex-start',
+    marginTop: '7%',
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  buttonOK: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 250,
+    height: 40,
+    marginVertical: '10%',
+    backgroundColor: '#1C4670',
+    borderRadius: 45,
+  },
+});
+
 const RegisterForm2 = (props) => {
   const [street, setStreet] = useState('');
   const [door, setDoor] = useState('');
@@ -155,7 +283,7 @@ const RegisterForm2 = (props) => {
                 selectedValue={city}
                 // style={{ height: 50, width: 150 }}
                 style={styles.TextInputStyleCity}
-                onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
+                onValueChange={(itemValue) => setCity(itemValue)}
               >
                 <Picker.Item label="Lisboa" value="lisboa" />
                 <Picker.Item label="Porto" value="porto" />
@@ -193,131 +321,3 @@ const RegisterForm2 = (props) => {
 };
 
 export default RegisterForm2;
-
-const styles = StyleSheet.create({
-  header: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '8%',
-    width: '50%',
-    height: '7%',
-    backgroundColor: '#1DC690',
-    borderRadius: 45,
-  },
-
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '5%',
-  },
-
-  container2: {
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    marginBottom: '2.5%',
-  },
-
-  TextInputStyle: {
-    textAlign: 'left',
-    width: '100%',
-    marginBottom: '3%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-  },
-
-  TextInputStyleCity: {
-    textAlign: 'left',
-    width: '100%',
-    marginBottom: '3%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-  },
-
-  TextInputStyleStreet: {
-    textAlign: 'left',
-    width: '50%',
-    marginBottom: '3%',
-    marginRight: '5%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-  },
-
-  TextInputStyleDoor: {
-    textAlign: 'left',
-    width: '20%',
-    marginBottom: '3%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-  },
-
-  TextInputStyleFloor: {
-    textAlign: 'left',
-    width: '20%',
-    marginRight: '5%',
-    marginBottom: '3%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-  },
-
-  TextInputStyleZipcode: {
-    textAlign: 'left',
-    width: '22%',
-    marginBottom: '3%',
-    borderBottomColor: '#726F6F',
-    borderBottomWidth: 1,
-  },
-
-  inputRow: {
-    textAlign: 'left',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: '2.5%',
-  },
-
-  title: {
-    fontWeight: 'bold',
-    fontSize: 17,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    padding: '2%',
-    paddingBottom: '6.5%',
-  },
-
-  title1: {
-    fontWeight: 'bold',
-    fontSize: 13,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-  },
-
-  titleLocality: {
-    fontSize: 12.5,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
-    textAlign: 'left',
-    flexDirection: 'row',
-    padding: '2.5%',
-    marginRight: '41%',
-  },
-
-  goBack: {
-    alignSelf: 'flex-start',
-    marginTop: '7%',
-  },
-
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-
-  buttonOK: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    height: 40,
-    marginVertical: '10%',
-    backgroundColor: '#1C4670',
-    borderRadius: 45,
-  },
-});
