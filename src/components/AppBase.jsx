@@ -21,33 +21,6 @@ const AppBase = () => {
 
   return (
     <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
-      {/*   <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
-          <Stack.Screen
-            name="CalendarReservarLocker"
-            component={CalendarReservarLocker}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="SendReceiveReservarLocker"
-            component={SendReceiveReservarLocker}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="ReservationInfo" component={ReservationInfo} options={{ headerShown: false }} />
-          <Stack.Screen
-            name="PaymentReservarLocker"
-            component={PaymentReservarLocker}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="SucessReservarLocker" component={SucessReservarLocker} options={{ headerShown: false }} />
-          <Stack.Screen name="ScanQrCode" component={ScanQrCode} options={{ headerShown: false }} />
-
-          <Stack.Screen name="Perfil" component={ProfileNavigation} options={{ headerShown: false }} />
-          <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
-        </Stack.Navigator>
-      </NavigationContainer>  */}
       <LoginContext.Provider value={{ loginData: state, loginDispatch: dispatch }}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="SplashScreen">

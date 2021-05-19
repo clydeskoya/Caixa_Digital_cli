@@ -9,8 +9,8 @@ import { styles } from './styles';
 import { LoginContext } from '../../common/loginHelper/responseData';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [email, setEmail] = useState('atadjo@gmail.com');
+  const [pass, setPass] = useState('strapiPassword');
   const [loading, setLoading] = useState(false);
 
   const [visible, setVisible] = useState(false);
@@ -64,7 +64,7 @@ const LoginForm = (props) => {
         </View>
         {loading && (
           <View>
-            <ActivityIndicator animating color={Colors.blue800} size="large" />
+            <ActivityIndicator animating color={Colors.blue800} size="medium" />
           </View>
         )}
         <View style={styles.inputRow}>
