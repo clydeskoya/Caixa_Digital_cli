@@ -34,4 +34,27 @@ function HeaderReserve(props) {
   );
 }
 
+const styles = StyleSheet.create({
+  row: {
+    marginTop: 50,
+    marginLeft: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  icon: {
+    marginTop: 10,
+    marginRight: 30,
+  },
+  viewStyle: {
+    alignItems: 'center',
+    marginRight: 20,
+  },
+  textT: {
+    fontSize: 10,
+    backgroundColor: 'rgba(214, 207, 207, 0.6)',
+    borderRadius: 5,
+  },
+});
+
 export default HeaderReserve;
