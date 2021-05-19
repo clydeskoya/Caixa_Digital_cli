@@ -19,7 +19,8 @@ const AppBase = () => {
   const [state2, dispatch2] = useReducer(registerFormReducer2, formReducerInitialState2);
   const [state, dispatch] = useReducer(loginReducer, loginReducerInitialState);
 
-  return (    <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
+  return (
+    <CounterContext2.Provider value={{ formData: state2, formDispatch: dispatch2 }}>
       {/*   <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />

@@ -1,9 +1,10 @@
-import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView, Alert } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TextInput, View, ScrollView, Alert, Modal } from 'react-native';
 import { prop } from 'ramda';
 import React, { useState, useContext, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Picker } from '@react-native-community/picker';
 import { CounterContext2 } from '../../common/formHelper/form.register2';
+import Loader from '../../../Loader';
 
 const REGEX_POSTAL_CODE = /^\d{4}-\d{3}?$/;
 const REGEX_ONLY_NUMBERS = /^[0-9]+$/;
@@ -134,7 +135,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C4670',
     borderRadius: 45,
   },
+
+  modalBackground: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#00000040',
+  },
 });
+
+const possibleAddressConflict = (doorsArray) => Array.isArray(doorsArray) && doorsArray.length > 1;
 
 const RegisterForm2 = (props) => {
   const [street, setStreet] = useState('');
@@ -208,10 +219,51 @@ const RegisterForm2 = (props) => {
       setLocality('');
     }
   }, [postalCode]);
+  const [possibleDoors, setPossibleDoors] = useState([]);
+  useEffect(() => {
+    // Rua + Andar + Porta + CodigoPostal + Cidade
+    if (street && floor && door && postalCode && locality && city && !possibleDoors.length) {
+      console.log('set conflicting doors list');
+      setPossibleDoors([
+        { id: 0, door: 'Esquina-Frente' },
+        { id: 1, door: 'E' },
+        { id: null, door },
+      ]);
+    }
+  }, [street, floor, door, postalCode, locality, city, possibleDoors]);
+  const [showAddressConflictModal, setShowAddressConflictModal] = useState(false);
+  useEffect(() => {
+    if (possibleAddressConflict(possibleDoors)) {
+      console.log('opening modal');
+      setShowAddressConflictModal(true);
+    }
+  }, [possibleDoors]);
+
+  // a porta no andar que introduziu corresponde a algum destes endereços já existentes ?
 
   return (
     <>
       <ScrollView>
+        <Modal
+          transparent
+          animationType="slide"
+          visible={showAddressConflictModal}
+          onRequestClose={() => {
+            setShowAddressConflictModal(false);
+            console.log('close modal');
+          }}
+        >
+          <View style={styles.modalBackground}>
+            <View style={styles.activityIndicatorWrapper}>
+              <Text style={styles.title}>BLABLABLA</Text>
+              <View style={styles.buttonOK}>
+                <TouchableOpacity onPress={saveNnavigate}>
+                  <Text style={styles.buttonText}> Não Listado </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
         <View style={styles.container}>
           <View style={styles.goBack}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
