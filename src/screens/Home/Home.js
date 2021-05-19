@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-
+import axios from 'axios';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { API_URL } from '../../common/constants/api';
@@ -47,49 +47,77 @@ const styles = StyleSheet.create({
 //   if (this.state.newRating===""){ alert("try again"); }
 //   else { props.navigation.navigate('correspondenciaRecebida') }
 const Home = (props) => {
-  const [dataFromServer, setDataFromServer] = useState([]);
+  const [dataFromServer, setDataFromServer] = useState('EMPTY');
+  const [send, setSend] = useState([]);
+  const [receive, setReceive] = useState([]);
+  const [reserva, setReserva] = useState([]);
 
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
-  useEffect(() => {
-    /* fetch(`${API_URL}/orders/user`, { */
-    fetch(`${API_URL}/orders/user`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log('result', result);
-          setDataFromServer(result);
-          console.log('dataUseState', dataFromServer.entries());
-          // dataFromServer.push(result.rows);
+  const ordersSend = [];
+  const ordersReceive = [];
+  const ordersReservation = [];
+
+  const orders = async () => {
+    try {
+      const { data } = await axios.get(`${API_URL}/orders/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        (err) => {
-          console.error('error', err);
+      });
+      const orderlist = data.entries();
+      for (order of orderlist) {
+        console.log('NEWORDER', order);
+        console.log('ORDERSTATUS', order[1].orderType);
+        console.log('ORDERSTATUS', order[1].isDeposited);
+        console.log('ORDERSTATUS', order[1].isWithdrawn);
+        if (order[1].orderType == 'send' && order[1].isDeposited) {
+          console.log('ENVIADA');
+          send.push(order[1]);
         }
-      );
-  }, []);
+        if (order[1].orderType == 'receive' && order[1].isWithdrawn) {
+          console.log('RECEBIDA');
+          receive.push(order[1]);
+        }
+        if (!order[1].isDeposited && !order[1].isWithdrawn) {
+          console.log('RESERVA');
+          reserva.push(order[1]);
+        }
+      }
+      setDataFromServer(orderlist);
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
+
+  if (dataFromServer == 'EMPTY') {
+    orders();
+  }
+
   return (
     <View style={styles.container}>
       <Header />
-      <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaRecebida')}>
+      <TouchableOpacity
+        activeOpacity={0.1}
+        onPress={() => props.navigation.navigate('correspondenciaRecebida', { receive })}
+      >
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Correspondência Recebida</Title>
           </Card.Content>
         </Card>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('correspondenciaEnviada')}>
+      <TouchableOpacity
+        activeOpacity={0.1}
+        onPress={() => props.navigation.navigate('correspondenciaEnviada', { send })}
+      >
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Correspondência Enviada</Title>
           </Card.Content>
         </Card>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas')}>
+      <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('reservasMarcadas', { reserva })}>
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Reservas</Title>

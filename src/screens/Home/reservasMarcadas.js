@@ -16,7 +16,8 @@ import {
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
 
-const reservasMarcadas = () => {
+function reservasMarcadas(props) {
+  console.log('reservas', JSON.stringify(props.route.params.reserva));
   const cards = dataFromServer.map((dataEntry) => {
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
     const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
@@ -62,5 +63,5 @@ const reservasMarcadas = () => {
       {cards}
     </View>
   );
-};
+}
 export default reservasMarcadas;
