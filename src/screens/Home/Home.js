@@ -66,6 +66,7 @@ const Home = (props) => {
         },
       });
       const orderlist = data.entries();
+      // eslint-disable-next-line no-restricted-syntax
       for (order of orderlist) {
         console.log('NEWORDER', order);
         console.log('ORDERSTATUS', order[1].orderType);
