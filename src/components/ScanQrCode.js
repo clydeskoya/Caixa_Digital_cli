@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/core';
 import base64 from 'react-native-base64';
 import { prop } from 'ramda';
 import { LoginContext } from '../common/loginHelper/responseData';
+import ScanSuccess from './ScanSuccess';
 
 const { width } = Dimensions.get('window');
 const qrSize = width * 0.7;
@@ -65,8 +66,7 @@ export default function App() {
         if (postalCodeParsed === postalCodeLogin) {
           setScanned(true);
 
-          alert('deu certo mano mas ainda não tens reservas');
-           navigation.navigate(ScanSuccess);
+          navigation.navigate('ScanSuccess');
         } else {
           setScanned(true);
           alert('O locker não está associado à sua conta!');

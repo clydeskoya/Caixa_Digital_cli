@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title } from 'react-native-paper';
 import { API_URL } from '../../common/constants/api';
 import { LoginContext } from '../../common/loginHelper/responseData';
 import { Header } from '../../components/Header';
