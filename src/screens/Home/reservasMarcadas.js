@@ -16,11 +16,13 @@ import { styles } from './styles';
 import Cartao from '../../components/Cartao';
 import dataFromServer from '../notifications/dataFromServer';
 
-function reservasMarcadas(props) {
-  console.log('reservas', JSON.stringify(props.route.params.reserva));
-  const cards = dataFromServer.map((dataEntry) => {
-    const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
-    const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
+const reservasMarcadas = (props) => {
+  const now = moment(new Date()).format('YYYY-MM-DD');
+  const cards = props.route.params.reserva.map((reserva) => {
+    const date = moment(reserva.dateRequested).format('YYYY-MM-DD');
+    const dateUp = moment(reserva.updated_at).format('YYYY-MM-DD');
+    console.log('tem reserva');
+
     if (getIsReservaEnvio(dataEntry)) {
       return <Cartao text={`Reserva de Envio: ${date}`} />;
     }
@@ -63,5 +65,5 @@ function reservasMarcadas(props) {
       {cards}
     </View>
   );
-}
+};
 export default reservasMarcadas;

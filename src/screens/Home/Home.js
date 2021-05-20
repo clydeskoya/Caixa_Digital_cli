@@ -69,6 +69,19 @@ const Home = (props) => {
         },
         (err) => {
           console.error('error', err);
+      });
+      const orderlist = data.entries();
+      // eslint-disable-next-line no-restricted-syntax
+      for (order of orderlist) {
+        if (order[1].orderType == 'send' && order[1].isDeposited) {
+          setSend(order[1]);
+        }
+        if (order[1].orderType == 'receive' && order[1].isWithdrawn) {
+          setReceive(order[1]);
+        }
+        if (!order[1].isDeposited && !order[1].isWithdrawn) {
+          console.log('RESERVA');
+          setReserva(order[1]);
         }
       );
   }, []);
