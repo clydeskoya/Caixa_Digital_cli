@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import moment from 'moment';
-import dataFromServer from '../notifications/dataFromServer';
 import {
   getIsCorrespondenciasEmEspera,
   getIsCorrespondenciasEmTransito,
@@ -15,8 +14,10 @@ import {
 
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
+import dataFromServer from '../notifications/dataFromServer';
 
-const reservasMarcadas = () => {
+function reservasMarcadas(props) {
+  console.log('reservas', JSON.stringify(props.route.params.reserva));
   const cards = dataFromServer.map((dataEntry) => {
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
     const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
@@ -62,5 +63,5 @@ const reservasMarcadas = () => {
       {cards}
     </View>
   );
-};
+}
 export default reservasMarcadas;

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function App() {
+export default function App(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const navigation = useNavigation();
@@ -63,7 +63,17 @@ export default function App() {
         if (dataParsed.postalCode === loginContext.loginData.user.entity.postalCode) {
           console.log('deu certo');
           setScanned(true);
-          // navigation.navigate()
+          if (props.route.params.type === 'enviar') {
+            navigation.navigate('ScanSuccess', { type: 'enviar' });
+            console.log('type:', props.route.params.type);
+          } else if (props.route.params === 'receber') {
+            console.log('type:', props.route.params.type);
+            navigation.navigate('ScanSuccess', { type: 'receber' });
+            console.log(props.route.params.type);
+          }
+        } else {
+          setScanned(true);
+          alert('O locker não está associado à sua conta!');
         }
       }
     } catch (error) {
