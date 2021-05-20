@@ -5,6 +5,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/core';
 import base64 from 'react-native-base64';
+import { prop } from 'ramda';
 import { LoginContext } from '../common/loginHelper/responseData';
 
 const { width } = Dimensions.get('window');
@@ -53,16 +54,17 @@ export default function App() {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const loginContext = useContext(LoginContext);
+  const handleBarCodeScanned = ({ data }) => {
     try {
       if (REGEX_CODE.test(data)) {
         const dcode = base64.decode(data);
         const dataParsed = JSON.parse(dcode);
-        const loginContext = useContext(LoginContext);
-
-        if (dataParsed.postalCode === loginContext.loginData.user.entity.postalCode) {
-          console.log('deu certo');
+        const postalCodeLogin = loginContext.loginData.user.entity.address.postalCode;
+        const postalCodeParsed = prop('postalCode', dataParsed);
+        if (postalCodeParsed === postalCodeLogin) {
           setScanned(true);
+
           navigation.navigate('ScanSuccess');
         } else {
           setScanned(true);
@@ -71,9 +73,9 @@ export default function App() {
       }
     } catch (error) {
       alert('O código QR não está associado a nenhum locker');
+      console.log('erro do catch', error);
     }
 
-    console.log(postalCode);
     if (hasPermission === null) {
       return <Text>Requesting for camera permission</Text>;
     }

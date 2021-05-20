@@ -14,7 +14,10 @@ import {
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
 
-const correspondenciaEnviada = () => {
+const correspondenciaEnviada = (route, navigation) => {
+  console.log('entrei');
+  const orders = route.params;
+  console.log(orders,'Aqui tao as enviadas')
   const cards = dataFromServer.map((dataEntry) => {
     const date = moment(dataEntry.updated_at).format('YYYY-MM-DD');
     const names = ['SAMS Sintra', 'Finanças', 'Miguel'];
