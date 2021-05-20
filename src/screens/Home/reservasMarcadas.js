@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import moment from 'moment';
-import dataFromServer from '../notifications/dataFromServer';
 import {
   getIsCorrespondenciasEmEspera,
   getIsCorrespondenciasEmTransito,
@@ -15,6 +14,7 @@ import {
 
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
+import dataFromServer from '../notifications/dataFromServer';
 
 function reservasMarcadas(props) {
   console.log('reservas', JSON.stringify(props.route.params.reserva));

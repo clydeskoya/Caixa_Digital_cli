@@ -68,16 +68,11 @@ const Home = (props) => {
       const orderlist = data.entries();
       // eslint-disable-next-line no-restricted-syntax
       for (order of orderlist) {
-        console.log('NEWORDER', order);
-        console.log('ORDERSTATUS', order[1].orderType);
-        console.log('ORDERSTATUS', order[1].isDeposited);
-        console.log('ORDERSTATUS', order[1].isWithdrawn);
         if (order[1].orderType == 'send' && order[1].isDeposited) {
-          console.log('ENVIADA');
+         
           send.push(order[1]);
         }
         if (order[1].orderType == 'receive' && order[1].isWithdrawn) {
-          console.log('RECEBIDA');
           receive.push(order[1]);
         }
         if (!order[1].isDeposited && !order[1].isWithdrawn) {
@@ -85,13 +80,17 @@ const Home = (props) => {
           reserva.push(order[1]);
         }
       }
+
       setDataFromServer(orderlist);
+      console.log(send, 'OS SENDS');
+      console.log(receive, 'OS ENVIADOS');
+      console.log(reserva, 'AS RESERVAS')
     } catch (error) {
       console.error('error', error);
     }
   };
 
-  if (dataFromServer == 'EMPTY') {
+  if (dataFromServer === 'EMPTY') {
     orders();
   }
 

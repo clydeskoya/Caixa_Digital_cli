@@ -6,7 +6,9 @@ import { getIsCorrespondenciasLevantadas } from '../../common/businesslogic';
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
 
-const correspondenciaRecebida = () => {
+const correspondenciaRecebida = (route, navigation) => {
+  const orders = route.params;
+  console.log(orders,'Aqui tao as receives')
   const cards = dataFromServer.map((dataEntry) => {
     const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
 
