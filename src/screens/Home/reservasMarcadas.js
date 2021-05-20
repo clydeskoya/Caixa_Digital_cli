@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import moment from 'moment';
 import {
@@ -15,13 +15,15 @@ import {
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
 import dataFromServer from '../notifications/dataFromServer';
+import { prop } from 'ramda';
 
 function reservasMarcadas(props) {
   console.log('reservas', JSON.stringify(props.route.params.reserva));
-  const cards = dataFromServer.map((dataEntry) => {
+  const cards = props.route.params.reserva.map((dataEntry) => {
+    console.log('xxx', JSON.stringify(dataEntry));
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
     const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
-    if (getIsReservaEnvio(dataEntry)) {
+    /* if (getIsReservaEnvio(dataEntry)) {
       return <Cartao text={`Reserva de Envio: ${date}`} />;
     }
     if (getIsReservaRecebimentoPrePago(dataEntry)) {
@@ -39,10 +41,10 @@ function reservasMarcadas(props) {
     if (getIsCorrespondenciasEmTransito(dataEntry)) {
       return <Cartao text={`Em Trânsito: ${date}`} />;
     }
-    if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
-      return <Cartao text={`Entregue: ${date}`} />;
-    }
-    if (
+    if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) { */
+    return <Cartao key={prop('id', dataEntry)} text={`Entregue: ${date}`} />;
+    /*   } */
+    /* if (
       !getIsCorrespondenciasEmTransito &&
       !getIsCorrespondenciasEntreguesAClientesComApp &&
       !getIsReservaRecebimentoPrePago &&
@@ -52,15 +54,15 @@ function reservasMarcadas(props) {
       !getIsReservaEnvio
     ) {
       return <Text>Ainda sem reservas efetuadas</Text>;
-    }
-    return null;
+    } */
+    /*  return null; */
   });
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Reservas </Text>
       </View>
-      {cards}
+      <View style={{ display: 'flex', flexDirection: 'column' }}>{cards}</View>
     </View>
   );
 }

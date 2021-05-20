@@ -68,17 +68,18 @@ const Home = (props) => {
       const orderlist = data.entries();
       // eslint-disable-next-line no-restricted-syntax
       for (order of orderlist) {
-        if (order[1].orderType == 'send' && order[1].isDeposited) {
-         
+       /*  if (order[1].orderType == 'send' && order[1].isDeposited) {
+          console.log('send');
           send.push(order[1]);
         }
         if (order[1].orderType == 'receive' && order[1].isWithdrawn) {
+          console.log('Recieve');
           receive.push(order[1]);
         }
-        if (!order[1].isDeposited && !order[1].isWithdrawn) {
+        if (!order[1].isDeposited && !order[1].isWithdrawn) { */
           console.log('RESERVA');
           reserva.push(order[1]);
-        }
+       /*  } */
       }
 
       setDataFromServer(orderlist);
