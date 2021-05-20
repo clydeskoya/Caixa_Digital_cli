@@ -28,7 +28,7 @@ module.exports = {
       },
     ],
     'linebreak-style': ['error', 'windows'],
-    //'eslint eol-last': ['error', 'always'],
+    // eslint eol-last': ['error', 'always'],
     // 'files.eol': ['\n'],
     'react/jsx-filename-extension': [
       'warn',

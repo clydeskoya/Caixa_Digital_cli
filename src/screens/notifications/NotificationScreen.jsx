@@ -56,8 +56,6 @@ const Notification = (props) => {
           console.log('result', result);
           setDataFromServer(result);
           console.log('dataUseState', dataFromServer.entries());
-          // dataFromServer = result;
-          //  console.log('dataUseState', dataFromServer);
         },
         (err) => {
           console.error('error', err);
