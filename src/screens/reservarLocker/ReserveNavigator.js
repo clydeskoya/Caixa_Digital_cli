@@ -4,10 +4,9 @@ import SendOrReceive from './SendOrReceive';
 import CalendarPage from './CalendarPage';
 import ReservationInfo from './ReservationInfo';
 import PaymentPage from './PaymentPage';
-import OptionScreen from './OptionScreen'
+import OptionScreen from './OptionScreen';
 import { Stack } from '../../common/stack';
-import ScanQRCode from '../../components/ScanQrCode'
-
+import ScanQRCode from '../../components/ScanQrCode';
 
 const ReserveNavigation = () => (
   <Stack.Navigator initialRouteName="OptionScreen">

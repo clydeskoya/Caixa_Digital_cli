@@ -44,6 +44,7 @@ module.exports = {
     'react/prop-types': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
+    'no-undef': 'error',
   },
 };
 // https://edusutil.medium.com/eslint-with-prettier-settings-for-react-native-ce13d2aaf500

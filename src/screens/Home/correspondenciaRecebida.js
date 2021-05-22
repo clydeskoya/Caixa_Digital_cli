@@ -1,22 +1,17 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import moment from 'moment';
-import dataFromServer from '../notifications/dataFromServer';
+import { prop } from 'ramda';
 import { getIsCorrespondenciasLevantadas } from '../../common/businesslogic';
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
 
-const correspondenciaRecebida = (route, navigation) => {
-  const orders = route.params;
-  console.log(orders,'Aqui tao as receives')
-  const cards = dataFromServer.map((dataEntry) => {
+const correspondenciaRecebida = (props) => {
+  const cards = props.route.params.send.map((dataEntry) => {
     const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
 
     if (getIsCorrespondenciasLevantadas(dataEntry)) {
-      return <Cartao text={`Recebida: ${dateUp}`} />;
-    }
-    if (!getIsCorrespondenciasLevantadas(dataEntry)) {
-      return <Text>Sem notificações</Text>;
+      return <Cartao key={prop('id', dataEntry)} text={`Recebida: ${dateUp}`} />;
     }
     return null;
   });

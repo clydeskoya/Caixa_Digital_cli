@@ -1,61 +1,32 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 
 import moment from 'moment';
 
+import { prop } from 'ramda';
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
-import dataFromServer from '../notifications/dataFromServer';
-import { prop } from 'ramda';
 
 function reservasMarcadas(props) {
-  console.log('reservas', JSON.stringify(props.route.params.reserva));
+  const today = moment(new Date()).format('YYYY-MM-DD');
   const cards = props.route.params.reserva.map((dataEntry) => {
-    console.log('xxx', JSON.stringify(dataEntry));
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
-    const today =
-    /* if (getIsReservaEnvio(dataEntry)) {
-      return <Cartao text={`Reserva de Envio: ${date}`} />;
+    if (date === today) {
+      return <Cartao key={prop('id', dataEntry)} text={`Reserva para hoje : ${date}`} />;
     }
-    if (getIsReservaRecebimentoPrePago(dataEntry)) {
-      return <Cartao text={`Recebimento Pago: ${dateUp}`} />;
+    if (date !== today) {
+      return <Cartao key={prop('id', dataEntry)} text={`Reserva para : ${date}`} />;
     }
-    if (getIsReservaRecebimentoNaoPago(dataEntry)) {
-      return <Cartao text={`Recebimento por Pagar: ${dateUp}`} />;
-    }
-    if (getIsRecebimentosPorLevantar(dataEntry)) {
-      return <Cartao text={`Recebimento por Levantar: ${dateUp}`} />;
-    }
-    if (getIsCorrespondenciasEmEspera(dataEntry)) {
-      return <Cartao text={`Depositada: ${dateUp}`} />;
-    }
-    if (getIsCorrespondenciasEmTransito(dataEntry)) {
-      return <Cartao text={`Em Trânsito: ${date}`} />;
-    }
-    if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) { */
-    if(date===)
-      return <Cartao key={prop('id', dataEntry)} text={`Entregue: ${date}`} />;
-    /*   } */
-    /* if (
-      !getIsCorrespondenciasEmTransito &&
-      !getIsCorrespondenciasEntreguesAClientesComApp &&
-      !getIsReservaRecebimentoPrePago &&
-      !getIsCorrespondenciasEmEspera &&
-      !getIsRecebimentosPorLevantar &&
-      !getIsReservaRecebimentoNaoPago &&
-      !getIsReservaEnvio
-    ) {
-      return <Text>Ainda sem reservas efetuadas</Text>;
-    } */
-    /*  return null; */
   });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Reservas </Text>
       </View>
-      <View style={{ display: 'flex', flexDirection: 'column' }}>{cards}</View>
-    </View>
+      <View showsVerticalScrollIndicator={false} scrollEnabled>
+        {cards}
+      </View>
+    </SafeAreaView>
   );
 }
 export default reservasMarcadas;

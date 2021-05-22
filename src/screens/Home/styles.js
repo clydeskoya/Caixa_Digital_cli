@@ -12,16 +12,13 @@ export const styles = StyleSheet.create({
     marginTop: '15%',
   },
   container: {
-    flex: 3,
+    flex: 1,
     height: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
   },
   scrollView: {
     backgroundColor: '#278AB0',
-    width: '340',
-    height: '125',
   },
 
   cardStilo: {
@@ -31,21 +28,20 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: '#D6CFCF',
     flexDirection: 'column',
-    justifyContent: 'center',
-
     marginBottom: '10%',
   },
 
   text: {
     fontSize: 13,
     alignSelf: 'flex-start',
+    textAlign: 'center',
   },
 
   inputRow: {
     flexDirection: 'row',
     marginHorizontal: '6%',
     justifyContent: 'space-between',
-    width: '90%',
+    width: '98%',
   },
   badgeStyle: {
     backgroundColor: '#1DC690',
