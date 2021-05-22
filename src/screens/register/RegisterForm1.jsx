@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
   },
   TextInputStyleDate: {
     // /* height: "65%",*/
-    width: '25%',
-    marginLeft: '4%',
+    width: '40%',
     borderBottomColor: '#726F6F',
     borderBottomWidth: 1,
+    alignSelf: 'center'
   },
   inputRow: {
     textAlign: 'left',
@@ -173,6 +173,7 @@ const RegisterForm1 = (props) => {
               placeholder="Nome próprio"
               style={styles.TextInputStyleName}
               name="username"
+              textAlign="center"
               onChangeText={(UserName) => setUserName(UserName)}
             />
 
@@ -192,7 +193,7 @@ const RegisterForm1 = (props) => {
               <TextInput
                 value={dateofbirth}
                 type="text"
-                placeholder="01/01/2000"
+                placeholder="DD/MM/AAAA"
                 style={styles.TextInputStyleDate}
                 name="dateofbirth"
                 onChangeText={(dateofbirthArg) => setUserDateofbitrh(dateofbirthArg)}
