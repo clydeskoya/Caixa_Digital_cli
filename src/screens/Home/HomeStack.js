@@ -6,6 +6,7 @@ import correspondenciaEnviada from './correspondenciaEnviada';
 import correspondenciaRecebida from './correspondenciaRecebida';
 // eslint-disable-next-line import/named
 import reservasMarcadas from './reservasMarcadas';
+/* import ScanQrCode from '../../components/ScanQrCode'; */
 // eslint-disable-next-line import/no-cycle
 
 const HomeStack = () => (
@@ -17,6 +18,7 @@ const HomeStack = () => (
     <Stack.Screen name="correspondenciaRecebida" component={correspondenciaRecebida} options={{ headerShown: false }} />
 
     <Stack.Screen name="reservasMarcadas" component={reservasMarcadas} options={{ headerShown: false }} />
+    {/* <Stack.Screen name="ScanQrCode" component={ScanQrCode} options={{ headerShown: false }} /> */}
   </Stack.Navigator>
 );
 
