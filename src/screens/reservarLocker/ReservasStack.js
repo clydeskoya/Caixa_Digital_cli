@@ -15,15 +15,6 @@ import Home from './ReservasHome';
 const HomeStack = () => (
   <Stack.Navigator initialRouteName="Home">
     <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-    {/*  
-            
-           
-            <Stack.Screen
-              name="PaymentReservarLocker"
-              component={PaymentReservarLocker}
-              options={{ headerShown: false }}
-            />
-            */}
     <Stack.Screen
       name="SendReceiveReservarLocker"
       component={SendReceiveReservarLocker}

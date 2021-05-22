@@ -27,8 +27,8 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    'linebreak-style': ['error', 'unix'],
-    // 'linebreak-style': ['error', 'windows'],
+    // 'linebreak-style': ['error', 'unix'],
+    'linebreak-style': ['error', 'windows'],
     // 'eslint eol-last': ['error', 'always'],
     // 'files.eol': ['\n'],
     'react/jsx-filename-extension': [
@@ -44,6 +44,7 @@ module.exports = {
     'react/prop-types': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
+    'no-undef': 'error',
   },
 };
 // https://edusutil.medium.com/eslint-with-prettier-settings-for-react-native-ce13d2aaf500

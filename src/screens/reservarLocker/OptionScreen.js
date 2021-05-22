@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Card, Title } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -53,14 +52,14 @@ const OptionScreen = () => {
           </Card.Content>
         </Card>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.1} onPress={() => navigation.navigate('ScanQRCode')}>
+      <TouchableOpacity activeOpacity={0.1} onPress={() => navigation.navigate('ScanQRCode', { type: 'receber' })}>
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Levantar Encomenda</Title>
           </Card.Content>
         </Card>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.1} onPress={() => navigation.navigate('ScanQRCode')}>
+      <TouchableOpacity activeOpacity={0.1} onPress={() => navigation.navigate('ScanQRCode', { type: 'enviar' })}>
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Depositar Encomenda</Title>

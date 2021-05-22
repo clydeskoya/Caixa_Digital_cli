@@ -12,7 +12,6 @@ const reservasMarcadas = (props) => {
   const navigation = useNavigation();
   const today = moment(new Date()).format('YYYY-MM-DD');
   const cards = props.route.params.reserva.map((dataEntry) => {
-    console.log('xxx', JSON.stringify(dataEntry));
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
     /* if (getIsReservaEnvio(dataEntry)) {
       return <Cartao text={`Reserva de Envio: ${date}`} />;

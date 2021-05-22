@@ -32,13 +32,14 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: 13,
     alignSelf: 'flex-start',
+    textAlign: 'center',
   },
 
   inputRow: {
     flexDirection: 'row',
     marginHorizontal: '6%',
     justifyContent: 'space-between',
-    width: '90%',
+    width: '98%',
   },
   badgeStyle: {
     backgroundColor: '#1DC690',
