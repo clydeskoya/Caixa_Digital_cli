@@ -1,28 +1,19 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 
 import moment from 'moment';
-import {
-  getIsCorrespondenciasEmEspera,
-  getIsCorrespondenciasEmTransito,
-  getIsCorrespondenciasEntreguesAClientesComApp,
-  getIsRecebimentosPorLevantar,
-  getIsReservaEnvio,
-  getIsReservaRecebimentoNaoPago,
-  getIsReservaRecebimentoPrePago,
-} from '../../common/businesslogic';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { prop } from 'ramda';
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
-import dataFromServer from '../notifications/dataFromServer';
-import { prop } from 'ramda';
+import { useNavigation } from '@react-navigation/native';
 
-function reservasMarcadas(props) {
-  console.log('reservas', JSON.stringify(props.route.params.reserva));
+const reservasMarcadas = (props) => {
+  const navigation = useNavigation();
+  const today = moment(new Date()).format('YYYY-MM-DD');
   const cards = props.route.params.reserva.map((dataEntry) => {
     console.log('xxx', JSON.stringify(dataEntry));
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
-    const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
     /* if (getIsReservaEnvio(dataEntry)) {
       return <Cartao text={`Reserva de Envio: ${date}`} />;
     }
@@ -33,37 +24,50 @@ function reservasMarcadas(props) {
       return <Cartao text={`Recebimento por Pagar: ${dateUp}`} />;
     }
     if (getIsRecebimentosPorLevantar(dataEntry)) {
-      return <Cartao text={`Recebimento por Levantar: ${dateUp}`} />;
+      return <Cartao text={`Recebimento por Levantar: ${dateUp}`} />; */
+    if (date === today) {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ScanQrCode', { id: dataEntry.id });
+          }}
+        >
+          <Cartao key={prop('id', dataEntry)} text={`Reserva para hoje : ${date}`} />
+        </TouchableOpacity>
+      );
     }
-    if (getIsCorrespondenciasEmEspera(dataEntry)) {
-      return <Cartao text={`Depositada: ${dateUp}`} />;
+    if (date !== today) {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ScanQrCode', { id: dataEntry.id });
+          }}
+        >
+          <Cartao key={prop('id', dataEntry)} text={`Reserva para : ${date}`} />
+        </TouchableOpacity>
+      );
     }
-    if (getIsCorrespondenciasEmTransito(dataEntry)) {
-      return <Cartao text={`Em Trânsito: ${date}`} />;
-    }
-    if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) { */
-    return <Cartao key={prop('id', dataEntry)} text={`Entregue: ${date}`} />;
-    /*   } */
-    /* if (
-      !getIsCorrespondenciasEmTransito &&
-      !getIsCorrespondenciasEntreguesAClientesComApp &&
-      !getIsReservaRecebimentoPrePago &&
-      !getIsCorrespondenciasEmEspera &&
-      !getIsRecebimentosPorLevantar &&
-      !getIsReservaRecebimentoNaoPago &&
-      !getIsReservaEnvio
-    ) {
-      return <Text>Ainda sem reservas efetuadas</Text>;
-    } */
-    /*  return null; */
   });
+
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.header}>
-        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Reservas </Text>
+        <View style={{ width: 150, backgroundColor: '#1DC690', borderRadius: 15, alignItems: 'center' }}>
+          <Text
+            style={{
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: 22,
+            }}
+          >
+            Reservas
+          </Text>
+        </View>
       </View>
-      <View style={{ display: 'flex', flexDirection: 'column' }}>{cards}</View>
-    </View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.cardDiv}>{cards}</ScrollView>
+      </SafeAreaView>
+    </>
   );
-}
+};
 export default reservasMarcadas;
