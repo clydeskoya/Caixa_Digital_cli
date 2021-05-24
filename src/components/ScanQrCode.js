@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Image, Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Constants from 'expo-constants';
-
+import { useNavigation } from '@react-navigation/native';
 import base64 from 'react-native-base64';
 import { prop } from 'ramda';
 import axios from 'axios';
@@ -14,6 +14,7 @@ const qrSize = width * 0.7;
 const REGEX_CODE = /[A-Za-z0-9+/=]/;
 
 const ScanQrCode = () => {
+  const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -45,12 +46,14 @@ const ScanQrCode = () => {
             axiosConfig
           );
           setScanned(true);
+          navigation.navigate('ScanQrSuccess'/* , { id: dataEntry.id } */);
         } catch (error) {
           console.error('deu errado');
           setScanned(true);
         }
       }
     } catch (error) {
+      navigation.navigate('ScanQrSuccess'/* , { id: dataEntry.id } */);
       alert('O código QR não está associado a nenhum locker');
       console.log('erro do catch', error);
       // console.log(postalCodeLogin);
@@ -63,6 +66,7 @@ const ScanQrCode = () => {
     if (hasPermission === false) {
       return <Text>No access to camera</Text>;
     }
+   
   };
 
   return (
