@@ -35,7 +35,7 @@ const LoginForm = (props) => {
         password: pass,
       });
       if (data.jwt) {
-        console.log('data', data);
+       // console.log('data', data);
         loginContext.loginDispatch(data);
         setLoading(false);
         props.navigation.navigate('Home');

@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
 });
 
 const Home = (props) => {
+  const [pedido, setPedido] = useState('false');
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
   const [ordersSent, setOrdersSent] = useState([]);
@@ -53,11 +54,14 @@ const Home = (props) => {
   useEffect(() => {
     const orders = async () => {
       try {
+        console.log('entrei');
         const { data: orderlist } = await axios.get(`${API_URL}/orders/user`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log('obtive resposta');
+
         // .then((res) => {
         //   const orders2 = res.data;
         //   console.log('orders', orders2);
@@ -66,7 +70,7 @@ const Home = (props) => {
           setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
           setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
           setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
-          console.log('fui buscar as orders', ordersAsReservation);
+          console.log('fui buscar as orders', orderlist.length, Date.now());
         } else {
           console.error('deu merda');
         }

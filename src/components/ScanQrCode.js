@@ -30,16 +30,16 @@ const ScanQrCode = () => {
       if (REGEX_CODE.test(data)) {
         const dcode = base64.decode(data);
         const dataParsed = JSON.parse(dcode);
-      try {
-      //  await axios.post(`${API_URL}/orders/sendPackage`, {
-      //     id: props.route.params.id
-      //     });
-      //  console.log(data1);
-        setScanned(true);
-      } catch (error) {
-        
-      }
-       
+        try {
+          await axios.post(`${API_URL}/orders/sendPackage`, {
+            id: props.route.params.id,
+          });
+          setScanned(true);
+        } catch (error) {
+          console.error('deu errado');
+          setScanned(true);
+        }
+
         // const postalCodeLogin = loginContext.loginData.user.entity.address.postalCode;
         const postalCodeParsed = prop('postalCode', dataParsed);
         // if (postalCodeParsed === postalCodeLogin) {
