@@ -62,11 +62,11 @@ const Home = (props) => {
         //   const orders2 = res.data;
         //   console.log('orders', orders2);
         // });
-        console.log('orderlist', orderlist);
         if (Array.isArray(orderlist)) {
           setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
           setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
           setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
+          console.log('fui buscar as orders', ordersAsReservation);
         } else {
           console.error('deu merda');
         }

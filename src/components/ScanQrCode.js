@@ -6,8 +6,8 @@ import Constants from 'expo-constants';
 
 import base64 from 'react-native-base64';
 import { prop } from 'ramda';
-import { LoginContext } from '../common/loginHelper/responseData';
 import axios from 'axios';
+import { LoginContext } from '../common/loginHelper/responseData';
 
 const { width } = Dimensions.get('window');
 const qrSize = width * 0.7;
@@ -25,27 +25,29 @@ const ScanQrCode = () => {
   }, []);
 
   const loginContext = useContext(LoginContext);
-  const handleBarCodeScanned = ({ data }) => {
+  const handleBarCodeScanned = async ({ data }) => {
     try {
       if (REGEX_CODE.test(data)) {
         const dcode = base64.decode(data);
         const dataParsed = JSON.parse(dcode);
-       
-        const  {data1}  = await axios.post(`${API_URL}/orders/sendPackage`, {
-          id: props.route.params.id
-        });
-        console.log(data1);
+      try {
+      //  await axios.post(`${API_URL}/orders/sendPackage`, {
+      //     id: props.route.params.id
+      //     });
+      //  console.log(data1);
         setScanned(true);
-        //const postalCodeLogin = loginContext.loginData.user.entity.address.postalCode;
+      } catch (error) {
+        
+      }
+       
+        // const postalCodeLogin = loginContext.loginData.user.entity.address.postalCode;
         const postalCodeParsed = prop('postalCode', dataParsed);
         // if (postalCodeParsed === postalCodeLogin) {
         //   setScanned(true);
-        
-         
+
         // } else {
         //   setScanned(true);
         //   alert('O locker não está associado à sua conta!');
-       
 
         // }
       }

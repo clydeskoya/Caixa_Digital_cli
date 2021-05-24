@@ -42,7 +42,7 @@ const reservasMarcadas = (props) => {
             navigation.navigate('ScanQrCode', { id: dataEntry.id });
           }}
         >
-          <Cartao key={prop('id', dataEntry)} text={`Reserva para : ${date}`} />
+          <Cartao key={prop('id', dataEntry)} text={`Reserva com id: ${dataEntry.id} para  : ${date}`} />
         </TouchableOpacity>
       );
     }
