@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 });
 
 const Home = (props) => {
-  const [pedido, setPedido] = useState('false');
+  const [pedido, setPedido] = useState(false);
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
   const [ordersSent, setOrdersSent] = useState([]);
@@ -65,15 +65,27 @@ const Home = (props) => {
       if (Array.isArray(orderlist)) {
         setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
         setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
-        setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
-        console.log('fui buscar as orders', ordersAsReservation.length, Date.now());
+        setOrdersAsReservation(
+          orderlist.filter((order) => {
+            if (order.id === 61) {
+              console.log('order', order);
+            }
+            return !order.isWithdrawn && !order.isDeposited;
+          })
+        );
+        console.log('fui buscar as orders', orderlist.length, Date.now());
       } else {
         console.error('deu merda');
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setPedido(true);
     }
   };
+  if (!pedido) {
+    orders();
+  }
 
   return (
     <View style={styles.container}>
@@ -92,7 +104,9 @@ const Home = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.1}
-        onPress={() => props.navigation.navigate('correspondenciaEnviada', { send: ordersReceived })}
+        onPress={() =>
+          orders().then(() => props.navigation.navigate('correspondenciaEnviada', { send: ordersReceived }))
+        }
       >
         <Card style={styles.cardStilo}>
           <Card.Content>

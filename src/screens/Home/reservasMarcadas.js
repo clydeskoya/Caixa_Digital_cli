@@ -13,38 +13,28 @@ const reservasMarcadas = (props) => {
   const today = moment(new Date()).format('YYYY-MM-DD');
   const cards = props.route.params.reserva.map((dataEntry) => {
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
-    /* if (getIsReservaEnvio(dataEntry)) {
-      return <Cartao text={`Reserva de Envio: ${date}`} />;
-    }
-    if (getIsReservaRecebimentoPrePago(dataEntry)) {
-      return <Cartao text={`Recebimento Pago: ${dateUp}`} />;
-    }
-    if (getIsReservaRecebimentoNaoPago(dataEntry)) {
-      return <Cartao text={`Recebimento por Pagar: ${dateUp}`} />;
-    }
-    if (getIsRecebimentosPorLevantar(dataEntry)) {
-      return <Cartao text={`Recebimento por Levantar: ${dateUp}`} />; */
     if (date === today) {
       return (
         <TouchableOpacity
+          key={prop('id', dataEntry.id)}
           onPress={() => {
             navigation.navigate('ScanQrCode', { id: dataEntry.id });
           }}
         >
-          <Cartao key={prop('id', dataEntry)} text={`Reserva para hoje : ${date}`} />
-        </TouchableOpacity>
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('ScanQrCode', { id: dataEntry.id });
-          }}
-        >
-          <Cartao key={prop('id', dataEntry)} text={`Reserva com id: ${dataEntry.id} para  : ${date}`} />
+          <Cartao text={`Reserva para hoje : ${date}`} />
         </TouchableOpacity>
       );
     }
+    return (
+      <TouchableOpacity
+        key={prop('id', dataEntry.id)}
+        onPress={() => {
+          navigation.navigate('ScanQrCode', { id: dataEntry.id });
+        }}
+      >
+        <Cartao text={`Reserva com id: ${dataEntry.id} para  : ${date}`} />
+      </TouchableOpacity>
+    );
   });
 
   return (

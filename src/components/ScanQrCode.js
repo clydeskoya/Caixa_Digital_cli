@@ -25,31 +25,30 @@ const ScanQrCode = () => {
   }, []);
 
   const loginContext = useContext(LoginContext);
+  const token = loginContext.loginData.jwt;
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const handleBarCodeScanned = async ({ data }) => {
     try {
       if (REGEX_CODE.test(data)) {
         const dcode = base64.decode(data);
         const dataParsed = JSON.parse(dcode);
         try {
-          await axios.post(`${API_URL}/orders/sendPackage`, {
-            id: props.route.params.id,
-          });
+          await axios.post(
+            `${API_URL}/orders/sendPackage`,
+            {
+              id: props.route.params.id,
+            },
+            axiosConfig
+          );
           setScanned(true);
         } catch (error) {
           console.error('deu errado');
           setScanned(true);
         }
-
-        // const postalCodeLogin = loginContext.loginData.user.entity.address.postalCode;
-        const postalCodeParsed = prop('postalCode', dataParsed);
-        // if (postalCodeParsed === postalCodeLogin) {
-        //   setScanned(true);
-
-        // } else {
-        //   setScanned(true);
-        //   alert('O locker não está associado à sua conta!');
-
-        // }
       }
     } catch (error) {
       alert('O código QR não está associado a nenhum locker');
