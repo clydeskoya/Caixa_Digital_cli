@@ -96,7 +96,7 @@ const Notification = (props) => {
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
-              Tem uma reserva de envio para hoje:
+              Tem uma reserva de envio para:
               <Text style={styles.cardContentText2}> {date} </Text>
               <Text style={styles.cardTimeText}>
                 {'\n'}
@@ -127,7 +127,7 @@ const Notification = (props) => {
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
-              Tem uma reserva de recebimento para hoje:
+              Tem uma reserva de recebimento para:
               <Text style={styles.cardContentText2}> {date} </Text>
               <Text style={styles.cardTimeText}>
                 {'\n'}

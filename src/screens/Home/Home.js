@@ -62,15 +62,11 @@ const Home = (props) => {
         });
         console.log('obtive resposta');
 
-        // .then((res) => {
-        //   const orders2 = res.data;
-        //   console.log('orders', orders2);
-        // });
         if (Array.isArray(orderlist)) {
           setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
           setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
           setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
-          console.log('fui buscar as orders', orderlist.length, Date.now());
+          console.log('fui buscar as orders', ordersAsReservation.length, Date.now());
         } else {
           console.error('deu merda');
         }

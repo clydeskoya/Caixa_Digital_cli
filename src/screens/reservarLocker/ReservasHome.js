@@ -6,12 +6,11 @@ import { Header } from '../../components/Header';
 function ReservasHome(props) {
   return (
     <View style={styles.maindiv}>
-        <Header />
+      <Header />
       <TouchableOpacity activeOpacity={0.1} onPress={() => props.navigation.navigate('SendReceiveReservarLocker')}>
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Nova Reserva</Title>
-           
           </Card.Content>
         </Card>
       </TouchableOpacity>
@@ -19,7 +18,6 @@ function ReservasHome(props) {
         <Card style={styles.cardStilo}>
           <Card.Content>
             <Title style={styles.text}>Scanear Locker</Title>
-            <Paragraph>06/04/2021 - Locker para envio {'\n'}04/04/2021 - Locker para recebimento</Paragraph>
           </Card.Content>
         </Card>
       </TouchableOpacity>
@@ -43,6 +41,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: '#2C8DB2',
     alignSelf: 'center',
+    alignItems: 'center',
   },
 });
 export default ReservasHome;

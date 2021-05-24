@@ -4,9 +4,9 @@ import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import moment from 'moment';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { prop } from 'ramda';
+import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
-import { useNavigation } from '@react-navigation/native';
 
 const reservasMarcadas = (props) => {
   const navigation = useNavigation();
