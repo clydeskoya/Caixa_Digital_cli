@@ -9,6 +9,8 @@ import reservasMarcadas from './reservasMarcadas';
 /* import ScanQrCode from '../../components/ScanQrCode'; */
 // eslint-disable-next-line import/no-cycle
 import ScanQrCode from '../../components/ScanQrCode';
+import ScanQrSuccess from '../../components/SuccessScan';
+
 
 const HomeStack = () => (
   <Stack.Navigator initialRouteName="Home">
@@ -20,6 +22,7 @@ const HomeStack = () => (
 
     <Stack.Screen name="reservasMarcadas" component={reservasMarcadas} options={{ headerShown: false }} />
     <Stack.Screen name="ScanQrCode" component={ScanQrCode} options={{ headerShown: false }} />
+    <Stack.Screen name="ScanQrSuccess" component={ScanQrSuccess} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 
