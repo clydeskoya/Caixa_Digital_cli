@@ -3,17 +3,17 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Image, Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Constants from 'expo-constants';
-
 import base64 from 'react-native-base64';
 import { prop } from 'ramda';
 import axios from 'axios';
+import { API_URL } from '../common/constants/api';
 import { LoginContext } from '../common/loginHelper/responseData';
 
 const { width } = Dimensions.get('window');
 const qrSize = width * 0.7;
 const REGEX_CODE = /[A-Za-z0-9+/=]/;
 
-const ScanQrCode = () => {
+const ScanQrCode = (props) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -35,7 +35,8 @@ const ScanQrCode = () => {
     try {
       if (REGEX_CODE.test(data)) {
         const dcode = base64.decode(data);
-        const dataParsed = JSON.parse(dcode);
+        // const dataParsed = JSON.parse(dcode);
+        console.log(props.route.params.id, 'plicas');
         try {
           await axios.post(
             `${API_URL}/orders/sendPackage`,
@@ -53,7 +54,7 @@ const ScanQrCode = () => {
     } catch (error) {
       alert('O código QR não está associado a nenhum locker');
       console.log('erro do catch', error);
-      // console.log(postalCodeLogin);
+   
       console.log(postalCodeParsed);
     }
 
