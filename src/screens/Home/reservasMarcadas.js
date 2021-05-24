@@ -34,8 +34,7 @@ const reservasMarcadas = (props) => {
           <Cartao key={prop('id', dataEntry)} text={`Reserva para hoje : ${date}`} />
         </TouchableOpacity>
       );
-    }
-    if (date !== today) {
+    } else {
       return (
         <TouchableOpacity
           onPress={() => {

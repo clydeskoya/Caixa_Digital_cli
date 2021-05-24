@@ -50,39 +50,43 @@ const Home = (props) => {
   const [ordersSent, setOrdersSent] = useState([]);
   const [ordersReceived, setOrdersReceived] = useState([]);
   const [ordersAsReservation, setOrdersAsReservation] = useState([]);
-  useEffect(() => {
-    const orders = async () => {
-      try {
-        const { data: orderlist } = await axios.get(`${API_URL}/orders/user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        // .then((res) => {
-        //   const orders2 = res.data;
-        //   console.log('orders', orders2);
-        // });
-        if (Array.isArray(orderlist)) {
-          setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
-          setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
-          setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
-          console.log('fui buscar as orders', ordersAsReservation);
-        } else {
-          console.error('deu merda');
-        }
-      } catch (error) {
-        console.error(error);
+
+  const orders = async () => {
+    try {
+      const { data: orderlist } = await axios.get(`${API_URL}/orders/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // .then((res) => {
+      //   const orders2 = res.data;
+      //   console.log('orders', orders2);
+      // });
+      if (Array.isArray(orderlist)) {
+        setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
+        setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
+        setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
+        console.log('reservas', orderlist.length());
+        console.log('sent', JSON.stringify(ordersSent));
+        console.log('received', JSON.stringify(ordersReceived));
+      } else {
+        console.error('deu merda');
       }
-    };
-    orders();
-  }, []);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  /* orders(); */
 
   return (
     <View style={styles.container}>
       <Header />
       <TouchableOpacity
         activeOpacity={0.1}
-        onPress={() => props.navigation.navigate('correspondenciaRecebida', { receive: ordersSent })}
+        onPress={() => {
+          orders().then(props.navigation.navigate('correspondenciaRecebida', { receive: ordersSent }));
+        }}
       >
         <Card style={styles.cardStilo}>
           <Card.Content>
@@ -102,7 +106,9 @@ const Home = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.1}
-        onPress={() => props.navigation.navigate('reservasMarcadas', { reserva: ordersAsReservation })}
+        onPress={() =>
+          orders().then(() => props.navigation.navigate('reservasMarcadas', { reserva: ordersAsReservation }))
+        }
       >
         <Card style={styles.cardStilo}>
           <Card.Content>
