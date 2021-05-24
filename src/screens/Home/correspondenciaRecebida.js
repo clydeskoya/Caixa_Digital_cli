@@ -2,18 +2,14 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import moment from 'moment';
 import { prop } from 'ramda';
-import { getIsCorrespondenciasLevantadas } from '../../common/businesslogic';
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
 
 const correspondenciaRecebida = (props) => {
-  const cards = props.route.params.send.map((dataEntry) => {
+  const cards = props.route.params.receive.map((dataEntry) => {
     const dateUp = moment(dataEntry.updated_at).format('YYYY-MM-DD');
 
-    if (getIsCorrespondenciasLevantadas(dataEntry)) {
-      return <Cartao key={prop('id', dataEntry)} text={`Recebida: ${dateUp}`} />;
-    }
-    return null;
+    return <Cartao key={prop('id', dataEntry)} text={`Recebida: ${dateUp}`} />;
   });
   return (
     <View style={styles.container}>

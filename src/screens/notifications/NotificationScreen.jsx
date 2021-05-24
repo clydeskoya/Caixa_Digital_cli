@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Badge, Colors } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
+import { prop } from 'ramda';
 import notificationStyles from './styles';
 // import dataFromServer from './dataFromServer';
 import serverResponse from '../login/serverResponse';
@@ -75,7 +76,7 @@ const Notification = (props) => {
     return false;
   };
 
-/*   const isBeforeToday = dateRequestedRaw => {
+  /*   const isBeforeToday = dateRequestedRaw => {
     return differenceInCalendarDays(new Date(), new Date(dateRequestedRaw))> 0;
   };
 
@@ -90,12 +91,12 @@ const Notification = (props) => {
       const isNotification = date === moment(new Date()).format('YYYY-MM-DD');
       // if (newNot(dataEntry.created_at)) {
       return (
-        <Card style={styles.cardStyle}>
+        <Card key={prop('id', dataEntry)} style={styles.cardStyle}>
           {isNotification && <Badge size={15} style={styles.badgeStyle} />}
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
-              Tem uma reserva de envio para hoje:
+              Tem uma reserva de envio para:
               <Text style={styles.cardContentText2}> {date} </Text>
               <Text style={styles.cardTimeText}>
                 {'\n'}
@@ -121,12 +122,12 @@ const Notification = (props) => {
       const isNotification = date === moment(new Date()).format('YYYY-MM-DD');
       // if (newNot(dataEntry.created_at)) {
       return (
-        <Card style={styles.cardStyle}>
+        <Card key={prop('id', dataEntry)} style={styles.cardStyle}>
           {isNotification && <Badge size={15} style={styles.badgeStyle} />}
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
               <Text style={{ fontWeight: 'bold' }}> LEMBRETE: {'\n'}</Text>
-              Tem uma reserva de recebimento para hoje:
+              Tem uma reserva de recebimento para:
               <Text style={styles.cardContentText2}> {date} </Text>
               <Text style={styles.cardTimeText}>
                 {'\n'}
@@ -150,7 +151,7 @@ const Notification = (props) => {
       const isPaymentDueNotification = Math.abs(duration.asDays()) === 1;
       // if (newNot(dataEntry.created_at)) {
       return (
-        <Card style={styles.cardStyle}>
+        <Card key={prop('id', dataEntry)} style={styles.cardStyle}>
           {isPaymentDueNotification && <Badge size={15} style={styles.badgeStyle} />}
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
@@ -173,7 +174,7 @@ const Notification = (props) => {
     if (getIsRecebimentosPorLevantar(dataEntry)) {
       // shouldRenderBadge, textTitle,
       return (
-        <Card style={styles.cardStyle}>
+        <Card key={prop('id', dataEntry)} style={styles.cardStyle}>
           {getIsNewNotification(dataEntry.created_at) && <Badge size={15} style={styles.badgeStyle} />}
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
@@ -192,7 +193,7 @@ const Notification = (props) => {
     }
     if (getIsCorrespondenciasEmTransito(dataEntry)) {
       return (
-        <Card style={styles.cardStyle}>
+        <Card key={prop('id', dataEntry)} style={styles.cardStyle}>
           {getIsNewNotification(dataEntry.created_at) && <Badge size={15} style={styles.badgeStyle} />}
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>
@@ -213,7 +214,7 @@ const Notification = (props) => {
     }
     if (getIsCorrespondenciasEntreguesAClientesComApp(dataEntry)) {
       return (
-        <Card style={styles.cardStyle}>
+        <Card key={prop('id', dataEntry)} style={styles.cardStyle}>
           {getIsNewNotification(dataEntry.created_at) && <Badge size={15} style={styles.badgeStyle} />}
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardContentText}>

@@ -12,6 +12,8 @@ import {
 
 import { styles } from './styles';
 import Cartao from '../../components/Cartao';
+import { SafeAreaView } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const correspondenciaEnviada = (props) => {
   const cards = props.route.params.send.map((dataEntry) => {
@@ -30,12 +32,24 @@ const correspondenciaEnviada = (props) => {
     return null;
   });
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.header}>
-        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}> Correspondência Enviada </Text>
+        <View style={{ width: 250, backgroundColor: '#1DC690', borderRadius: 15, alignItems: 'center' }}>
+          <Text
+            style={{
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: 22,
+            }}
+          >
+            Correspondência Enviada
+          </Text>
+        </View>
       </View>
-      {cards}
-    </View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.cardDiv}>{cards}</ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 export default correspondenciaEnviada;

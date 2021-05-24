@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
 });
 
 const Home = (props) => {
+  const [pedido, setPedido] = useState('false');
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
   const [ordersSent, setOrdersSent] = useState([]);
@@ -53,22 +54,19 @@ const Home = (props) => {
 
   const orders = async () => {
     try {
+      console.log('entrei');
       const { data: orderlist } = await axios.get(`${API_URL}/orders/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      // .then((res) => {
-      //   const orders2 = res.data;
-      //   console.log('orders', orders2);
-      // });
+      console.log('obtive resposta');
+
       if (Array.isArray(orderlist)) {
         setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
         setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
         setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
-        console.log('reservas', orderlist.length());
-        console.log('sent', JSON.stringify(ordersSent));
-        console.log('received', JSON.stringify(ordersReceived));
+        console.log('fui buscar as orders', ordersAsReservation.length, Date.now());
       } else {
         console.error('deu merda');
       }
@@ -76,8 +74,6 @@ const Home = (props) => {
       console.error(error);
     }
   };
-
-  /* orders(); */
 
   return (
     <View style={styles.container}>
