@@ -45,44 +45,56 @@ const styles = StyleSheet.create({
 });
 
 const Home = (props) => {
+  const [pedido, setPedido] = useState(false);
   const loginContext = useContext(LoginContext);
   const token = loginContext.loginData.jwt;
   const [ordersSent, setOrdersSent] = useState([]);
   const [ordersReceived, setOrdersReceived] = useState([]);
   const [ordersAsReservation, setOrdersAsReservation] = useState([]);
-  useEffect(() => {
-    const orders = async () => {
-      try {
-        const { data: orderlist } = await axios.get(`${API_URL}/orders/user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        // .then((res) => {
-        //   const orders2 = res.data;
-        //   console.log('orders', orders2);
-        // });
-        console.log('orderlist', orderlist);
-        if (Array.isArray(orderlist)) {
-          setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
-          setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
-          setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
-        } else {
-          console.error('deu merda');
-        }
-      } catch (error) {
-        console.error(error);
+
+  const orders = async () => {
+    try {
+      console.log('entrei');
+      const { data: orderlist } = await axios.get(`${API_URL}/orders/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('obtive resposta');
+
+      if (Array.isArray(orderlist)) {
+        setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
+        setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
+        setOrdersAsReservation(
+          orderlist.filter((order) => {
+            if (order.id === 61) {
+              console.log('order', order);
+            }
+            return !order.isWithdrawn && !order.isDeposited;
+          })
+        );
+        console.log('fui buscar as orders', orderlist.length, Date.now());
+      } else {
+        console.error('deu merda');
       }
-    };
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setPedido(true);
+    }
+  };
+  if (!pedido) {
     orders();
-  }, []);
+  }
 
   return (
     <View style={styles.container}>
       <Header />
       <TouchableOpacity
         activeOpacity={0.1}
-        onPress={() => props.navigation.navigate('correspondenciaRecebida', { receive: ordersSent })}
+        onPress={() => {
+          orders().then(props.navigation.navigate('correspondenciaRecebida', { receive: ordersSent }));
+        }}
       >
         <Card style={styles.cardStilo}>
           <Card.Content>
@@ -92,7 +104,9 @@ const Home = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.1}
-        onPress={() => props.navigation.navigate('correspondenciaEnviada', { send: ordersReceived })}
+        onPress={() =>
+          orders().then(() => props.navigation.navigate('correspondenciaEnviada', { send: ordersReceived }))
+        }
       >
         <Card style={styles.cardStilo}>
           <Card.Content>
@@ -102,7 +116,9 @@ const Home = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.1}
-        onPress={() => props.navigation.navigate('reservasMarcadas', { reserva: ordersAsReservation })}
+        onPress={() =>
+          orders().then(() => props.navigation.navigate('reservasMarcadas', { reserva: ordersAsReservation }))
+        }
       >
         <Card style={styles.cardStilo}>
           <Card.Content>

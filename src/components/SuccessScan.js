@@ -4,19 +4,18 @@ import { MaskedViewComponent, StyleSheet, Text, View, Button, TouchableOpacity }
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Header from '../../../components/HeaderReservarLocker';
+import Header from './HeaderReservarLocker';
 
-const ScanSuccess = ({props}) => {
+const SuccessScan = ({ props }) => {
   const navigation = useNavigation();
-  const type = path(['route', 'params', 'type'], props);
   return (
-    <View style= {styles.container}>
+    <View style={styles.container}>
       <Header />
       <View style={styles.maindiv}>
         <View style={styles.boxwradius}>
-          <Text style={styles.title}>Reserva efetuada com sucesso.</Text>
+          <Text style={styles.title}>Scan efetuado com sucesso.</Text>
           <Ionicons name="checkbox" color="#1DC690" size={40} />
-          <Text style={styles.text}>Dia 04/04/2021 - Compartimento 1</Text>
+          <Text style={styles.text}>Locker aberto</Text>
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     height: '100%',
-  }
+  },
 });
 
-export default ScanSuccess;
+export default SuccessScan;

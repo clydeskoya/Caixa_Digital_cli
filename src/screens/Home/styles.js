@@ -2,33 +2,31 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   header: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '77%',
-    height: '7%',
-    backgroundColor: '#1DC690',
-    borderRadius: 15,
+    width: '100%',
     marginBottom: '10%',
     marginTop: '15%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-  container: {
-    flex: 1,
-    height: '100%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
+
   scrollView: {
     backgroundColor: '#278AB0',
   },
-
+  container: {
+    height: '100%',
+    backgroundColor: '#fff',
+  },
+  cardDiv: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   cardStilo: {
-    width: '80%',
-    height: '8%',
     borderRadius: 40,
     borderWidth: 4,
     borderColor: '#D6CFCF',
-    flexDirection: 'column',
-    marginBottom: '10%',
+
+    margin: 20,
   },
 
   text: {
