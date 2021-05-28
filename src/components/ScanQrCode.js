@@ -39,7 +39,7 @@ const ScanQrCode = (props) => {
     try {
       if (REGEX_CODE.test(data) && !scanned) {
         const dcode = base64.decode(data);
-        // const dataParsed = JSON.parse(dcode);
+        const dataParsed = JSON.parse(dcode);
         console.log('idlocker', JSON.stringify(props));
         try {
           await axios.post(
@@ -56,7 +56,6 @@ const ScanQrCode = (props) => {
         }
       }
     } catch (error) {
-      alert('O código QR não está associado a nenhum locker');
       console.log('erro do catch', error);
     }
 

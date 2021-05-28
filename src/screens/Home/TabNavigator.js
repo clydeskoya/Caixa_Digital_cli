@@ -22,7 +22,7 @@ const TabNavigator = () => (
 
         if (route.name === 'Início') {
           iconName = focused ? 'ios-home' : 'ios-home-outline';
-        } else if (route.name === 'Locker') {
+        } else if (route.name === 'Reservar') {
           iconName = focused ? 'ios-business' : 'ios-business-outline';
         } else if (route.name === 'Notificações') {
           iconName = focused ? 'ios-notifications' : 'ios-notifications-outline';
@@ -40,7 +40,7 @@ const TabNavigator = () => (
     }}
   >
     <Tab.Screen name="Início" component={HomeStack} />
-    <Tab.Screen name="Locker" component={ReserveFirstScreen} />
+    <Tab.Screen name="Reservar" component={ReserveFirstScreen} />
     <Tab.Screen name="Notificações" component={NotificationScreen} />
     <Tab.Screen name="Perfil" component={ProfileNavigation} />
   </Tab.Navigator>

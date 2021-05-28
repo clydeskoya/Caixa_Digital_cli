@@ -9,9 +9,7 @@ import { Stack } from '../../common/stack';
 import ScanQRCode from '../../components/ScanQrCode';
 
 const ReserveNavigation = () => (
-  <Stack.Navigator initialRouteName="OptionScreen">
-    <Stack.Screen name="OptionScreen" component={OptionScreen} options={{ headerShown: false }} />
-
+  <Stack.Navigator initialRouteName="SendOrReceive">
     <Stack.Screen name="PaymentPage" component={PaymentPage} options={{ headerShown: false }} />
 
     <Stack.Screen name="ReservationInfo" component={ReservationInfo} options={{ headerShown: false }} />

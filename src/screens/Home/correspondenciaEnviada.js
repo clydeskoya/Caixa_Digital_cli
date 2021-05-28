@@ -34,7 +34,7 @@ const correspondenciaEnviada = (props) => {
   return (
     <>
       <View style={styles.header}>
-        <View style={{ width: 250, backgroundColor: '#1DC690', borderRadius: 15, alignItems: 'center' }}>
+        <View style={{ width: 330, backgroundColor: '#1DC690', borderRadius: 15, alignItems: 'center' }}>
           <Text
             style={{
               color: 'white',

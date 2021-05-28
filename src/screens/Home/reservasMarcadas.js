@@ -11,8 +11,10 @@ import Cartao from '../../components/Cartao';
 const reservasMarcadas = (props) => {
   const navigation = useNavigation();
   const today = moment(new Date()).format('YYYY-MM-DD');
+
   const cards = props.route.params.reserva.map((dataEntry) => {
     const date = moment(dataEntry.dateRequested).format('YYYY-MM-DD');
+
     if (date === today) {
       return (
         <TouchableOpacity
@@ -26,12 +28,7 @@ const reservasMarcadas = (props) => {
       );
     }
     return (
-      <TouchableOpacity
-        key={prop('id', dataEntry.id)}
-        onPress={() => {
-          navigation.navigate('ScanQrCode', { id: dataEntry.id });
-        }}
-      >
+      <TouchableOpacity key={prop('id', dataEntry.id)}>
         <Cartao text={`Reserva com id: ${dataEntry.id} para  : ${date}`} />
       </TouchableOpacity>
     );

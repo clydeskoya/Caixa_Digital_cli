@@ -63,17 +63,11 @@ const Home = (props) => {
       console.log('obtive resposta');
 
       if (Array.isArray(orderlist)) {
+        orderlist.forEach((order) => console.log('qualquer', order?.id));
         setOrdersSent(orderlist.filter((order) => order.orderType === 'send' && order.isDeposited));
-        setOrdersReceived(orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited));
-        setOrdersAsReservation(
-          orderlist.filter((order) => {
-            if (order.id === 61) {
-              console.log('order', order);
-            }
-            return !order.isWithdrawn && !order.isDeposited;
-          })
-        );
-        console.log('fui buscar as orders', orderlist.length, Date.now());
+        const manmbos = orderlist.filter((order) => order.orderType === 'receive' && order.isDeposited);
+        setOrdersReceived(manmbos);
+        setOrdersAsReservation(orderlist.filter((order) => !order.isWithdrawn && !order.isDeposited));
       } else {
         console.error('deu merda');
       }
